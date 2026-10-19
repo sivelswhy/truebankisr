@@ -2160,16 +2160,6 @@
         }
       }
     },
-    "Tap the balance to see how it’s calculated.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Appuie sur le solde pour voir le calcul."
-          }
-        }
-      }
-    },
     "The username and password you use on leumi.co.il.": {
       "localizations": {
         "fr": {
