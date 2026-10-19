@@ -9,10 +9,28 @@ struct SettingsView: View {
     @AppStorage("alertThreshold") private var alertThreshold = 0.0
     @AppStorage("requireFaceID") private var requireFaceID = false
     @AppStorage("hideAmounts") private var hideAmounts = false
+    @AppStorage("firstName") private var firstName = ""
 
     var body: some View {
         NavigationStack {
             Form {
+                Section {
+                    VStack(spacing: 12) {
+                        ProfileAvatar(name: firstName, size: 84)
+                        TextField("Your first name", text: $firstName)
+                            .font(.title2.bold())
+                            .multilineTextAlignment(.center)
+                            .textContentType(.givenName)
+                            .submitLabel(.done)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 6)
+                    .listRowBackground(Color.clear)
+                } footer: {
+                    Text("Used to greet you on the home screen.")
+                        .frame(maxWidth: .infinity)
+                }
+
                 Section {
                     LabeledContent("Bank", value: "Leumi")
                     LabeledContent("Card", value: "Max")
@@ -75,7 +93,7 @@ struct SettingsView: View {
                     }
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {

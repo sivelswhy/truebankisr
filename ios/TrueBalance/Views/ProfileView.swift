@@ -33,12 +33,9 @@ struct ProfileAvatar: View {
     }
 }
 
-/// Name, and card spending over any period.
-struct ProfileView: View {
+/// Card spending over any period, by day or month and by category.
+struct SpendingTab: View {
     @Environment(AppModel.self) private var model
-    @Environment(\.dismiss) private var dismiss
-    @AppStorage("firstName") private var firstName = ""
-    @State private var showingSettings = false
 
     enum Preset: String, CaseIterable, Identifiable {
         case week, month30, thisMonth, lastMonth
@@ -72,46 +69,15 @@ struct ProfileView: View {
     @State private var to = Date.now
 
     var body: some View {
-        NavigationStack {
+        TabScreen(title: String(localized: "Spending")) {
             List {
-                Section {
-                    VStack(spacing: 12) {
-                        ProfileAvatar(name: firstName, size: 84)
-                        TextField("Your first name", text: $firstName)
-                            .font(.title2.bold())
-                            .multilineTextAlignment(.center)
-                            .textContentType(.givenName)
-                            .submitLabel(.done)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 6)
-                    .listRowBackground(Color.clear)
-                } footer: {
-                    Text("Used to greet you on the home screen.")
-                        .frame(maxWidth: .infinity)
-                }
-
-                periodSection
-                summary
-            }
-            .navigationTitle("Profile")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        showingSettings = true
-                    } label: {
-                        Image(systemName: "gearshape")
-                    }
-                    .accessibilityLabel(Text("Settings"))
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") { dismiss() }
+                if model.snapshot == nil {
+                    NoDataView()
+                } else {
+                    periodSection
+                    summary
                 }
             }
-            .sheet(isPresented: $showingSettings) { SettingsView() }
-            .navigationDestination(for: CategoryRoute.self) { CategoryDetailView(route: $0) }
-            .purchaseDestinations()
         }
     }
 
@@ -151,7 +117,7 @@ struct ProfileView: View {
             }
             .disabled(txns.isEmpty)
         } header: {
-            Text("Spending over a period")
+            Text("Period")
         }
     }
 

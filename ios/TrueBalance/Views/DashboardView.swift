@@ -2,191 +2,230 @@ import Charts
 import SwiftUI
 import TrueBalanceCore
 
+/// Signed in: one tab per question. What's really available, what leaves on
+/// the 2nd, what was spent, and the analysis on top of it.
 struct DashboardView: View {
+    enum TabID: Hashable { case balance, charges, spending, insights }
+    @State private var tab: TabID = .balance
+
+    var body: some View {
+        TabView(selection: $tab) {
+            Tab("Balance", systemImage: "shekelsign.circle", value: .balance) { BalanceTab() }
+            Tab("Charges", systemImage: "creditcard", value: .charges) { ChargesTab() }
+            Tab("Spending", systemImage: "chart.bar.xaxis", value: .spending) { SpendingTab() }
+            Tab("Insights", systemImage: "lightbulb", value: .insights) { InsightsTab() }
+        }
+    }
+}
+
+/// What every tab shares: navigation, pull to refresh, the profile button,
+/// hidden amounts, and the purchase / category pages.
+struct TabScreen<Content: View>: View {
     @Environment(AppModel.self) private var model
-    @State private var showingSettings = false
-    @State private var query = ""
-    @State private var searching = false
     @AppStorage("hideAmounts") private var hideAmounts = false
     @AppStorage("firstName") private var firstName = ""
+    @State private var showingSettings = false
+    var title: String
+    @ViewBuilder var content: () -> Content
 
     var body: some View {
         NavigationStack {
-            content(model.snapshot)
-            // No navigation bar: the title and its buttons are the first row and
-            // scroll away with the content (no pinned header, no empty bar).
-            .toolbar(.hidden, for: .navigationBar)
-            .refreshable { await model.refresh() }
-            .sheet(isPresented: $showingSettings) { ProfileView() }
-            .navigationDestination(for: CategoryRoute.self) { route in
-                CategoryDetailView(route: route)
-                    .redacted(reason: hideAmounts ? .privacy : [])
+            content()
+                .navigationTitle(title)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            showingSettings = true
+                        } label: {
+                            ProfileAvatar(name: firstName, size: 32)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel(Text("Profile and settings"))
+                    }
+                }
+                .refreshable { await model.refresh() }
+                .redacted(reason: hideAmounts ? .privacy : [])
+                .sheet(isPresented: $showingSettings) { SettingsView() }
+                .navigationDestination(for: CategoryRoute.self) { route in
+                    CategoryDetailView(route: route)
+                        .redacted(reason: hideAmounts ? .privacy : [])
+                }
+                .purchaseDestinations()
+        }
+    }
+}
+
+/// Refresh progress and errors, at the top of a tab.
+struct RefreshStatusSection: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        if model.isRefreshing {
+            Section {
+                HStack(spacing: 10) {
+                    ProgressView()
+                    Text(Format.progress(model.progressStep))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .contentTransition(.opacity)
+                }
+                .animation(.default, value: model.progressStep)
             }
-            .purchaseDestinations()
+        }
+        if !model.refreshErrors.isEmpty {
+            Section {
+                ForEach(Provider.allCases.filter { model.refreshErrors[$0] != nil }, id: \.self) { p in
+                    BankErrorText(error: model.refreshErrors[p]!, provider: p)
+                        .font(.subheadline)
+                }
+            }
+        }
+    }
+}
+
+/// Before the first refresh.
+struct NoDataView: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        ContentUnavailableView {
+            Label("No data yet", systemImage: "arrow.clockwise")
+        } description: {
+            Text(model.isRefreshing
+                ? Format.progress(model.progressStep)
+                : String(localized: "Pull down to sign in to Leumi and Max."))
+        }
+        .listRowBackground(Color.clear)
+    }
+}
+
+// MARK: - Balance
+
+struct BalanceTab: View {
+    @Environment(AppModel.self) private var model
+    @AppStorage("firstName") private var firstName = ""
+
+    var body: some View {
+        TabScreen(title: Profile.greeting(name: firstName)) {
+            List {
+                RefreshStatusSection()
+                if let s = model.snapshot {
+                    Section {
+                        HeroView(snapshot: s, isDemo: model.isDemo)
+                        if let f = Forecaster.forecast(s), !(f.income.isEmpty && f.debits.isEmpty) {
+                            ForecastRow(forecast: f)
+                        }
+                    }
+                    breakdown(s)
+                    CardsSection(snapshot: s)
+                    Section {
+                    } footer: {
+                        TimelineView(.periodic(from: .now, by: 60)) { _ in
+                            Text("Updated \(s.computedAt.formatted(.relative(presentation: .named)))")
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                } else {
+                    NoDataView()
+                }
+            }
+            .animation(.default, value: model.snapshot)
+            .animation(.default, value: model.isRefreshing)
             .sensoryFeedback(.success, trigger: model.snapshot?.computedAt)
         }
     }
 
-    /// Greeting and profile; scrolls away with the content.
-    private var header: some View {
-        HStack(alignment: .center) {
-            Text(Profile.greeting(name: firstName))
-                .font(.largeTitle.bold())
-                .lineLimit(1)
-                .minimumScaleFactor(0.6)
-                .accessibilityAddTraits(.isHeader)
-            Spacer()
-            Button {
-                showingSettings = true
+    /// Leumi − Max = available.
+    private func breakdown(_ s: Snapshot) -> some View {
+        Section {
+            LabeledContent {
+                Text(s.bankBalance.shekels).privacySensitive()
             } label: {
-                ProfileAvatar(name: firstName, size: 40)
+                Label("Leumi balance", systemImage: "building.columns")
             }
-            .buttonStyle(.borderless)
-            .accessibilityLabel(Text("Profile"))
-        }
-        .listRowBackground(Color.clear)
-        .listRowInsets(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4))
-    }
-
-    @ViewBuilder
-    private func content(_ snapshot: Snapshot?) -> some View {
-        List {
-            header
-
-            if let s = snapshot {
-                loaded(s)
-            } else {
-                ContentUnavailableView {
-                    Label("No data yet", systemImage: "arrow.clockwise")
-                } description: {
-                    Text(model.isRefreshing
-                        ? Format.progress(model.progressStep)
-                        : String(localized: "Pull down to sign in to Leumi and Max."))
-                }
-                .listRowBackground(Color.clear)
-            }
-        }
-        .listStyle(.insetGrouped)
-        .contentMargins(.top, 8, for: .scrollContent)
-        .safeAreaInset(edge: .bottom, alignment: .trailing) {
-            if snapshot != nil {
-                FloatingSearch(query: $query, isOpen: $searching)
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 8)
-            }
-        }
-        .redacted(reason: hideAmounts ? .privacy : [])
-        .animation(.default, value: snapshot)
-        .animation(.default, value: model.isRefreshing)
-    }
-
-    @ViewBuilder
-    private func loaded(_ s: Snapshot) -> some View {
-            if model.isRefreshing {
-                Section {
-                    HStack(spacing: 10) {
-                        ProgressView()
-                        Text(Format.progress(model.progressStep))
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .contentTransition(.opacity)
-                    }
-                    .animation(.default, value: model.progressStep)
-                }
-            }
-
-            if !model.refreshErrors.isEmpty {
-                Section {
-                    ForEach(Provider.allCases.filter { model.refreshErrors[$0] != nil }, id: \.self) { p in
-                        BankErrorText(error: model.refreshErrors[p]!, provider: p)
-                            .font(.subheadline)
-                    }
-                }
-            }
-
-            if !query.isEmpty {
-                searchResults(s)
-            } else {
-                Section {
-                    HeroView(snapshot: s, isDemo: model.isDemo)
-                    if let f = Forecaster.forecast(s), !(f.income.isEmpty && f.debits.isEmpty) {
-                        ForecastRow(forecast: f)
-                    }
-                }
-
-                Section {
-                    LabeledContent {
-                        Text(s.bankBalance.shekels).privacySensitive()
-                    } label: {
-                        Text("Leumi balance")
-                    }
-                    LabeledContent {
-                        Text((-(s.nextCharge?.total ?? 0)).shekels).privacySensitive()
-                    } label: {
-                        if let next = s.nextCharge {
-                            Text("Max · \(Format.day(next.chargeDate))")
-                        } else {
-                            Text("Max")
-                        }
-                    }
-                    LabeledContent {
-                        Text(s.trueBalance.shekels)
-                            .foregroundStyle(s.trueBalance < 0 ? .red : .primary)
-                            .privacySensitive()
-                    } label: {
-                        Text("Available")
-                    }
-                    .fontWeight(.semibold)
-                } footer: {
-                    VStack(alignment: .leading, spacing: 4) {
-                        if s.upcoming.count > 1 {
-                            Text("With later installments already committed: \(s.trueBalanceAllKnown.shekels)")
-                        }
-                        let converted = s.upcoming.flatMap(\.txns).filter(\.isConvertedEstimate).count
-                        if converted > 0 {
-                            Text("Includes \(converted) foreign-currency charge(s) converted at the Bank of Israel rate (estimate).")
-                        }
-                        if !s.ignoredForeign.isEmpty {
-                            Text("\(s.ignoredForeign.count) foreign-currency charge(s) not included.")
-                        }
-                    }
-                }
-                .monospacedDigit()
-
-                CardsSection(snapshot: s)
-
-                if s.upcoming.count > 1 {
-                    UpcomingDebitsChart(upcoming: s.upcoming)
-                }
-
-                ForEach(s.upcoming) { charge in
-                    Section {
-                        ForEach(charge.txns) { t in
-                            NavigationLink(value: TxnRoute(txn: t)) { TransactionRow(txn: t) }
-                        }
-                    } header: {
-                        HStack {
-                            Text("Debited \(Format.day(charge.chargeDate))")
-                            Spacer()
-                            Text(charge.total.shekels).monospacedDigit().privacySensitive()
-                        }
-                    }
-                }
-
+            LabeledContent {
+                Text((-(s.nextCharge?.total ?? 0)).shekels).privacySensitive()
+            } label: {
                 if let next = s.nextCharge {
-                    CategoryBreakdownSection(txns: next.txns, caption: String(localized: "Debited \(Format.day(next.chargeDate))"))
-                }
-
-                InsightsSection(snapshot: s)
-
-                Section {
-                } footer: {
-                    TimelineView(.periodic(from: .now, by: 60)) { _ in
-                        Text("Updated \(s.computedAt.formatted(.relative(presentation: .named)))")
-                    }
-                    .frame(maxWidth: .infinity)
+                    Label("Max · \(Format.day(next.chargeDate))", systemImage: "creditcard")
+                } else {
+                    Label("Max", systemImage: "creditcard")
                 }
             }
+            LabeledContent {
+                Text(s.trueBalance.shekels)
+                    .foregroundStyle(s.trueBalance < 0 ? .red : .primary)
+                    .privacySensitive()
+            } label: {
+                Label("Available", systemImage: "equal.circle")
+            }
+            .fontWeight(.semibold)
+        } header: {
+            Text("Calculation")
+        } footer: {
+            VStack(alignment: .leading, spacing: 4) {
+                if s.upcoming.count > 1 {
+                    Text("With later installments already committed: \(s.trueBalanceAllKnown.shekels)")
+                }
+                let converted = s.upcoming.flatMap(\.txns).filter(\.isConvertedEstimate).count
+                if converted > 0 {
+                    Text("Includes \(converted) foreign-currency charge(s) converted at the Bank of Israel rate (estimate).")
+                }
+                if !s.ignoredForeign.isEmpty {
+                    Text("\(s.ignoredForeign.count) foreign-currency charge(s) not included.")
+                }
+            }
+        }
+        .monospacedDigit()
+    }
+}
+
+// MARK: - Charges
+
+/// What Max will take from Leumi: by debit date, by category, searchable.
+struct ChargesTab: View {
+    @Environment(AppModel.self) private var model
+    @State private var query = ""
+
+    var body: some View {
+        TabScreen(title: String(localized: "Charges")) {
+            List {
+                RefreshStatusSection()
+                if let s = model.snapshot {
+                    if !query.trimmingCharacters(in: .whitespaces).isEmpty {
+                        searchResults(s)
+                    } else if s.upcoming.isEmpty {
+                        ContentUnavailableView("Nothing to debit", systemImage: "checkmark.circle",
+                                               description: Text("No Max charge is waiting to be debited."))
+                            .listRowBackground(Color.clear)
+                    } else {
+                        if s.upcoming.count > 1 {
+                            UpcomingDebitsChart(upcoming: s.upcoming)
+                        }
+                        if let next = s.nextCharge {
+                            CategoryBreakdownSection(txns: next.txns, caption: String(localized: "Debited \(Format.day(next.chargeDate))"))
+                        }
+                        ForEach(s.upcoming) { charge in
+                            Section {
+                                ForEach(charge.txns) { t in
+                                    NavigationLink(value: TxnRoute(txn: t)) { TransactionRow(txn: t) }
+                                }
+                            } header: {
+                                HStack {
+                                    Text("Debited \(Format.day(charge.chargeDate))")
+                                    Spacer()
+                                    Text(charge.total.shekels).monospacedDigit().privacySensitive()
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    NoDataView()
+                }
+            }
+            .searchable(text: $query, prompt: Text("Search charges"))
+            .autocorrectionDisabled()
+        }
     }
 
     /// Every upcoming charge whose merchant or category matches the search.
@@ -210,97 +249,6 @@ struct DashboardView: View {
                 let total = matches.reduce(0) { $0 - $1.1.chargedAmount }
                 Text("Total: \(total.shekels)").privacySensitive()
             }
-        }
-    }
-}
-
-/// Magnifying glass floating bottom-right in Liquid Glass; tapping it morphs
-/// into a search field.
-private struct FloatingSearch: View {
-    @Binding var query: String
-    @Binding var isOpen: Bool
-    @FocusState private var focused: Bool
-    @Namespace private var glass
-
-    var body: some View {
-        container {
-            HStack(spacing: 10) {
-                if isOpen {
-                    HStack(spacing: 8) {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundStyle(.secondary)
-                        TextField("Search charges", text: $query)
-                            .focused($focused)
-                            .submitLabel(.search)
-                            .autocorrectionDisabled()
-                        if !query.isEmpty {
-                            Button {
-                                query = ""
-                            } label: {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundStyle(.tertiary)
-                            }
-                            .buttonStyle(.plain)
-                            .accessibilityLabel(Text("Clear"))
-                        }
-                    }
-                    .padding(.horizontal, 16)
-                    .frame(height: 50)
-                    .glass(id: "field", in: glass, shape: .capsule)
-
-                    Button {
-                        withAnimation(.bouncy) {
-                            isOpen = false
-                            query = ""
-                        }
-                    } label: {
-                        Image(systemName: "xmark")
-                            .font(.body.weight(.semibold))
-                            .frame(width: 50, height: 50)
-                    }
-                    .buttonStyle(.plain)
-                    .glass(id: "button", in: glass, shape: .circle)
-                    .accessibilityLabel(Text("Cancel"))
-                } else {
-                    Button {
-                        withAnimation(.bouncy) { isOpen = true }
-                        focused = true
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                            .font(.title3.weight(.semibold))
-                            .frame(width: 56, height: 56)
-                    }
-                    .buttonStyle(.plain)
-                    .glass(id: "button", in: glass, shape: .circle)
-                    .accessibilityLabel(Text("Search charges"))
-                }
-            }
-        }
-        .onChange(of: isOpen) { _, open in focused = open }
-    }
-
-    @ViewBuilder
-    private func container(@ViewBuilder _ content: () -> some View) -> some View {
-        if #available(iOS 26, *) {
-            GlassEffectContainer(spacing: 10) { content() }
-        } else {
-            content()
-        }
-    }
-}
-
-private extension View {
-    /// Liquid Glass on iOS 26+, frosted material before.
-    @ViewBuilder
-    func glass(id: String, in namespace: Namespace.ID, shape: some Shape) -> some View {
-        if #available(iOS 26, *) {
-            self.contentShape(shape)
-                .glassEffect(.regular.interactive(), in: shape)
-                .glassEffectID(id, in: namespace)
-        } else {
-            self.contentShape(shape)
-                .background(.regularMaterial, in: shape)
-                .shadow(color: .black.opacity(0.15), radius: 10, y: 4)
         }
     }
 }
