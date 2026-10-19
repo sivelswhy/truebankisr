@@ -190,3 +190,41 @@ public enum LeumiParser {
         )
     }
 }
+
+/// The account holder's first name, from whatever the sites show. Neither site
+/// documents it, so this looks for likely fields and greetings.
+public enum HolderName {
+    /// First string under a key like "FirstName" anywhere in a JSON document.
+    public static func fromJSON(_ data: Data) -> String? {
+        guard let json = try? JSONSerialization.jsonObject(with: data) else { return nil }
+        let preferred = ["firstname", "first_name", "privatename", "givenname"]
+        func search(_ value: Any) -> String? {
+            if let dict = value as? [String: Any] {
+                for (key, v) in dict where preferred.contains(key.lowercased()) {
+                    if let name = clean(v as? String) { return name }
+                }
+                for v in dict.values { if let found = search(v) { return found } }
+            } else if let array = value as? [Any] {
+                for v in array { if let found = search(v) { return found } }
+            }
+            return nil
+        }
+        return search(json)
+    }
+
+    /// "שלום נחמיה" / "שלום, Dana" / "Hello Dana" in a page's text.
+    public static func fromGreeting(_ text: String) -> String? {
+        let pattern = #"(?:שלום|hello|hi)[,\s]+([\p{L}][\p{L}'\-]{1,20})"#
+        guard let re = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive),
+              let m = re.firstMatch(in: text, range: NSRange(text.startIndex..., in: text)),
+              let r = Range(m.range(at: 1), in: text) else { return nil }
+        return clean(String(text[r]))
+    }
+
+    /// Capitalised first word; nil for empty or placeholder values.
+    static func clean(_ raw: String?) -> String? {
+        guard let word = raw?.trimmingCharacters(in: .whitespacesAndNewlines).split(separator: " ").first,
+              word.count >= 2, word.allSatisfy({ $0.isLetter || $0 == "-" || $0 == "'" }) else { return nil }
+        return word.prefix(1).uppercased() + word.dropFirst().lowercased()
+    }
+}

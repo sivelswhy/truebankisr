@@ -85,3 +85,15 @@ import Testing
     #expect(txn.cardLast4 == "1234")
     #expect(txn.merchantAddress == "Dizengoff 50, Tel Aviv")
 }
+
+@Test func holderNameFromJSON() {
+    let json = #"{"Result":{"UserCards":{"Cards":[{"Last4Digits":"4580"}]},"UserData":{"FirstName":"  DANA ","LastName":"Levi"}}}"#
+    #expect(HolderName.fromJSON(Data(json.utf8)) == "Dana")
+    #expect(HolderName.fromJSON(Data(#"{"Result":{"FirstName":""}}"#.utf8)) == nil)
+}
+
+@Test func holderNameFromGreeting() {
+    #expect(HolderName.fromGreeting("דף הבית\nשלום נחמיה\nהחשבון שלי") == "נחמיה")
+    #expect(HolderName.fromGreeting("Hello, dana!") == "Dana")
+    #expect(HolderName.fromGreeting("כניסה לחשבון") == nil)
+}

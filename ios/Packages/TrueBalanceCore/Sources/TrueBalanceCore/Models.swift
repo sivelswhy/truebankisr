@@ -64,11 +64,14 @@ public struct Account: Codable, Hashable, Sendable {
     public var accountNumber: String
     public var balance: Double?
     public var txns: [Txn]
+    /// The holder's first name, when the site shows it.
+    public var holderName: String?
 
-    public init(accountNumber: String, balance: Double? = nil, txns: [Txn]) {
+    public init(accountNumber: String, balance: Double? = nil, txns: [Txn], holderName: String? = nil) {
         self.accountNumber = accountNumber
         self.balance = balance
         self.txns = txns
+        self.holderName = holderName
     }
 }
 
@@ -96,6 +99,8 @@ public struct Snapshot: Codable, Hashable, Sendable {
     /// Every card purchase fetched (debited or not), newest first, for
     /// merchant history and spending over a period. Nil in older snapshots.
     public var history: [Txn]?
+    /// The holder's first name as shown by Max or Leumi, if found.
+    public var holderFirstName: String?
 }
 
 public enum Israel {

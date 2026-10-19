@@ -39,6 +39,7 @@ enum MaxScraper {
         defer { driver.close() }
         do {
             try await login(driver, credentials)
+            let holder = await holderName(driver)
             var txns: [Txn] = []
             driver.step("Max: reading transactions")
             for month in months(back: monthsBack, ahead: monthsAhead) {
@@ -46,7 +47,7 @@ enum MaxScraper {
                 guard status == 200 else { continue }
                 txns += try MaxParser.parseMonth(body)
             }
-            return Account(accountNumber: "max", txns: txns)
+            return Account(accountNumber: "max", txns: txns, holderName: holder)
         } catch let error as BankError {
             throw error
         } catch let t as WebDriver.Timeout {
@@ -90,6 +91,15 @@ enum MaxScraper {
         throw BankError.extraVerification
     }
 
+    /// From the personal area's data, else the page's "שלום …" greeting.
+    private static func holderName(_ d: WebDriver) async -> String? {
+        if let (status, body) = try? await d.fetch("\(base)/api/registered/getHomePageData"), status == 200,
+           let name = HolderName.fromJSON(body) {
+            return name
+        }
+        return HolderName.fromGreeting(await d.bodyText())
+    }
+
     static func months(back: Int, ahead: Int, now: Date = .now) -> [Date] {
         let cal = Israel.calendar
         let start = cal.date(from: cal.dateComponents([.year, .month], from: now))!
@@ -122,7 +132,14 @@ enum LeumiScraper {
         defer { driver.close() }
         do {
             try await login(driver, credentials)
-            return try await account(driver, since: since)
+            let holder = HolderName.fromGreeting(await driver.bodyText())
+            var result = try await account(driver, since: since)
+            if let holder {
+                result.holderName = holder
+            } else {
+                result.holderName = HolderName.fromGreeting(await driver.bodyText())
+            }
+            return result
         } catch let error as BankError {
             throw error
         } catch let t as WebDriver.Timeout {
@@ -230,8 +247,10 @@ enum Banks {
         let windowStart = MaxScraper.months(back: monthsBack, ahead: 0).first!
         let purchases = PurchaseCache.merge(cached: cached ?? [], fresh: cardAccount.txns, refetchedFrom: windowStart)
         PurchaseCacheStore.save(purchases)
-        return try TrueBalance.compute(bank: bankAccount, cards: [Account(accountNumber: cardAccount.accountNumber, txns: purchases)],
-                                       billingDay: billingDay)
+        var snapshot = try TrueBalance.compute(bank: bankAccount, cards: [Account(accountNumber: cardAccount.accountNumber, txns: purchases)],
+                                               billingDay: billingDay)
+        snapshot.holderFirstName = cardAccount.holderName ?? bankAccount.holderName
+        return snapshot
     }
 }
 
