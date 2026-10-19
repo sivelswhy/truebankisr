@@ -51,6 +51,12 @@ ios/
 Product → Archive → Distribute App → *Release Testing / Ad Hoc* produces a real
 `.ipa` you can install on registered devices.
 
+## Unsigned IPA (like CI)
+
+`ios/build-ipa.sh` builds the app unsigned and writes `dist/TrueBalance.ipa`,
+to sign and install with your usual tool. CI also publishes one per commit on
+`main` as a GitHub release.
+
 ## Staying signed in
 
 Credentials are stored in the Keychain with
