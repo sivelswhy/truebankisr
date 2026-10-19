@@ -1,0 +1,42 @@
+name: TrueBalance
+options:
+  bundleIdPrefix: il.truebalance
+  deploymentTarget:
+    iOS: "18.0"
+  developmentLanguage: en
+packages:
+  TrueBalanceCore:
+    path: Packages/TrueBalanceCore
+targets:
+  TrueBalance:
+    type: application
+    platform: iOS
+    sources:
+      - TrueBalance
+    dependencies:
+      - package: TrueBalanceCore
+    info:
+      path: TrueBalance/Info.plist
+      properties:
+        CFBundleDisplayName: True Balance
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations: [en, fr]
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UIBackgroundModes: [fetch]
+        BGTaskSchedulerPermittedIdentifiers: [il.truebalance.refresh]
+        ITSAppUsesNonExemptEncryption: false
+        NSFaceIDUsageDescription: Unlock True Balance to see your balance.
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: il.truebalance.app
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "6.0"
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+        LOCALIZATION_PREFERS_STRING_CATALOGS: "YES"
+        SWIFT_EMIT_LOC_STRINGS: "YES"

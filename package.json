@@ -1,0 +1,26 @@
+{
+  "name": "truebankisr",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Real-time 'true balance' for an Israeli bank account: bank balance minus credit card charges not yet debited.",
+  "scripts": {
+    "dev": "next dev -H 127.0.0.1",
+    "build": "next build",
+    "start": "next start -H 127.0.0.1",
+    "test": "node --test lib/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "israeli-bank-scrapers": "6.12.2",
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5.9"
+  },
+  "type": "module"
+}
