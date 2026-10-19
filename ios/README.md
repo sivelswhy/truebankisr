@@ -60,6 +60,17 @@ refreshes when you open it if the data is more than 15 minutes old, and asks
 iOS for a background refresh about once an hour (iOS decides when). If the
 true balance goes below zero, you get a notification.
 
+## Siri, Shortcuts and widget
+
+- **Siri / Shortcuts**: "Hey Siri, what's my true balance in True Balance?"
+  (FR: « Dis Siri, quel est mon vrai solde dans True Balance ? ») and
+  "… daily budget". Answers from the last refresh; the iPhone must be unlocked.
+- **Widget** (home and lock screen): a separate extension that reads what the
+  app writes into an App Group (`APP_GROUP_ID` in `project.yml`, default
+  `group.il.truebalance.app`). If you change the bundle ID, change the group
+  too. Without the App Group (signing that refuses it), the app works and the
+  widget just asks to open the app.
+
 ## Tests
 
 ```sh

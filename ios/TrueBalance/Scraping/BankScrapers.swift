@@ -26,6 +26,19 @@ struct ScrapeFailure: Error {
     var errors: [Provider: BankError]
 }
 
+/// What Max gives besides the purchases.
+struct MaxData {
+    var account: Account
+    var cards: [CardInfo]
+}
+
+/// What Leumi gives besides the current account. Nil = couldn't be read this time.
+struct LeumiData {
+    var account: Account
+    var savings: [SavingsAccount]?
+    var foreign: [ForeignAccount]?
+}
+
 // MARK: - Max (port of israeli-bank-scrapers/src/scrapers/max.ts)
 
 @MainActor
@@ -34,12 +47,14 @@ enum MaxScraper {
     static let api = "https://onlinelcapi.max.co.il"
 
     /// A year back gives the profile and merchant pages their history.
-    static func scrape(_ credentials: Credentials, visible: Bool = false, monthsBack: Int = 12, monthsAhead: Int = 3) async throws(BankError) -> Account {
+    static func scrape(_ credentials: Credentials, visible: Bool = false, monthsBack: Int = 12, monthsAhead: Int = 3) async throws(BankError) -> MaxData {
         let driver = WebDriver(visible: visible)
         defer { driver.close() }
         do {
             try await login(driver, credentials)
-            let holder = await holderName(driver)
+            let home = try? await driver.fetch("\(base)/api/registered/getHomePageData")
+            let homeData = home?.status == 200 ? home?.body : nil
+            let holder = await holderName(driver, homeData: homeData)
             var txns: [Txn] = []
             driver.step("Max: reading transactions")
             for month in months(back: monthsBack, ahead: monthsAhead) {
@@ -47,7 +62,8 @@ enum MaxScraper {
                 guard status == 200 else { continue }
                 txns += try MaxParser.parseMonth(body)
             }
-            return Account(accountNumber: "max", txns: txns, holderName: holder)
+            return MaxData(account: Account(accountNumber: "max", txns: txns, holderName: holder),
+                           cards: homeData.map(ExtraParsers.maxCards) ?? [])
         } catch let error as BankError {
             throw error
         } catch let t as WebDriver.Timeout {
@@ -92,11 +108,8 @@ enum MaxScraper {
     }
 
     /// From the personal area's data, else the page's "שלום …" greeting.
-    private static func holderName(_ d: WebDriver) async -> String? {
-        if let (status, body) = try? await d.fetch("\(base)/api/registered/getHomePageData"), status == 200,
-           let name = HolderName.fromJSON(body) {
-            return name
-        }
+    private static func holderName(_ d: WebDriver, homeData: Data?) async -> String? {
+        if let name = homeData.flatMap(HolderName.fromJSON) { return name }
         return HolderName.fromGreeting(await d.bodyText())
     }
 
@@ -127,14 +140,20 @@ enum LeumiScraper {
     static let invalidFormatMessage = "יש להקליד 6-12"
     static let blockedMessage = "המנוי חסום"
 
-    static func scrape(_ credentials: Credentials, since: Date, visible: Bool = false) async throws(BankError) -> Account {
+    static let savingsURL = "\(base)/uiapiproxy/v1/digital-retails/mobile/accounts/1/Deposits?operationList=true"
+    static let foreignURL = "\(base)/eBanking/ForeignCurrency/DisplayForeignAccountsActivity.aspx"
+
+    static func scrape(_ credentials: Credentials, since: Date, visible: Bool = false) async throws(BankError) -> LeumiData {
         let driver = WebDriver(captureURLPattern: "UC_SO_27_GetBusinessAccountTrx", visible: visible)
         defer { driver.close() }
         do {
             try await login(driver, credentials)
             var result = try await account(driver, since: since)
             result.holderName = await holderName(driver)
-            return result
+            // Extras: a failure here never fails the refresh.
+            let savings = await self.savings(driver)
+            let foreign = try? await withDeadline(90) { try await foreignAccounts(driver, since: since) }
+            return LeumiData(account: result, savings: savings, foreign: foreign)
         } catch let error as BankError {
             throw error
         } catch let t as WebDriver.Timeout {
@@ -185,6 +204,55 @@ enum LeumiScraper {
         return HolderName.fromGreeting(await d.bodyText())
     }
 
+    /// Deposits and savings (same endpoint as the JS scraper).
+    private static func savings(_ d: WebDriver) async -> [SavingsAccount]? {
+        d.step("Leumi: reading savings")
+        guard let (status, body) = try? await d.fetch(savingsURL), status == 200 else { return nil }
+        return ExtraParsers.leumiSavings(body)
+    }
+
+    /// Foreign-currency accounts: an older ASP.NET page with one account per
+    /// option of a drop-down (port of leumi-forex.ts, balances only).
+    private static func foreignAccounts(_ d: WebDriver, since: Date) async throws -> [ForeignAccount] {
+        d.step("Leumi: reading foreign-currency accounts")
+        try await d.load(foreignURL)
+        try await Task.sleep(for: .seconds(4))
+        let select = "#ddlAccounts_m_ddl"
+        guard (try? await d.waitForElement(select, timeout: 15)) != nil else { return [] } // none
+        let values = try await d.eval("""
+            return Array.from(document.querySelectorAll(s + ' option'), o => o.value).filter(v => !!v);
+            """, ["s": select]) as? [String] ?? []
+        let f = DateFormatter()
+        f.dateFormat = "dd/MM/yy"
+        f.timeZone = Israel.timeZone
+        var out: [ForeignAccount] = []
+        for value in values {
+            // Mark the page: the submit reloads it, which clears the mark.
+            try await d.eval("""
+                const set = (sel, v) => { const e = document.querySelector(sel); e.value = v; e.dispatchEvent(new Event('change', { bubbles: true })); };
+                set('#ddlAccounts_m_ddl', a);
+                set('#ddlTransactionPeriod', '3');
+                window.__tbMark = Date.now();
+                """, ["a": value])
+            try await d.fill("#dtFromDate_textBox", f.string(from: since))
+            try await d.click("#btnDisplayDates")
+            try await d.waitFor("foreign activity", timeout: 30, condition: """
+                const done = !window.__tbMark || Date.now() - window.__tbMark > 8000;
+                return done && !!document.querySelector('#ctlActivityTable, #NOINFORMATIONREGIONSERVERSIDEERROR');
+                """)
+            let page = try await d.eval("""
+                const text = s => { const e = document.querySelector(s); return e ? e.innerText.trim() : ''; };
+                const rows = Array.from(document.querySelectorAll('#ctlActivityTable tr:not(.header)'),
+                    tr => Array.from(tr.querySelectorAll('td'), td => td.innerText.trim()));
+                return { currency: text('#lblCurrencyVal'), opening: text('#lblOpeningBalanceVal'), rows };
+                """) as? [String: Any]
+            guard let page, let currency = ExtraParsers.leumiCurrency(page["currency"] as? String ?? ""), currency != "ILS" else { continue }
+            let balance = ExtraParsers.leumiForeignBalance(rows: page["rows"] as? [[String]] ?? [], opening: page["opening"] as? String ?? "")
+            if balance != 0 { out.append(ForeignAccount(currency: currency, balance: balance)) }
+        }
+        return out
+    }
+
     /// Opens the transactions screen and filters from `since`; the balance comes
     /// with the filtered transactions response.
     private static func account(_ d: WebDriver, since: Date) async throws -> Account {
@@ -229,8 +297,10 @@ enum Banks {
         // With older purchases cached, only the recent months need downloading.
         let cached = PurchaseCacheStore.load()
         let monthsBack = cached == nil ? 12 : 2
-        let b: Result<Account, BankError>
-        let c: Result<Account, BankError>
+        // The official rates don't need a login: fetched alongside.
+        let rates = Task { await FXRates.current() }
+        let b: Result<LeumiData, BankError>
+        let c: Result<MaxData, BankError>
         if visible {
             // One page on screen at a time.
             b = await capture { () async throws(BankError) in try await LeumiScraper.scrape(leumi, since: since, visible: true) }
@@ -246,16 +316,20 @@ enum Banks {
         var errors: [Provider: BankError] = [:]
         if case .failure(let e) = b { errors[.leumi] = e }
         if case .failure(let e) = c { errors[.max] = e }
-        guard errors.isEmpty, case .success(let bankAccount) = b, case .success(let cardAccount) = c else {
+        guard errors.isEmpty, case .success(let leumiData) = b, case .success(let maxData) = c else {
             throw ScrapeFailure(errors: errors)
         }
+        let bankAccount = leumiData.account, cardAccount = maxData.account
         let windowStart = MaxScraper.months(back: monthsBack, ahead: 0).first!
         let purchases = PurchaseCache.merge(cached: cached ?? [], fresh: cardAccount.txns, refetchedFrom: windowStart)
         PurchaseCacheStore.save(purchases)
         var snapshot = try TrueBalance.compute(bank: bankAccount, cards: [Account(accountNumber: cardAccount.accountNumber, txns: purchases)],
-                                               billingDay: billingDay)
+                                               billingDay: billingDay, fxRates: await rates.value)
         // Leumi's header shows the name reliably; Max is the fallback.
         snapshot.holderFirstName = bankAccount.holderName ?? cardAccount.holderName
+        snapshot.cards = maxData.cards.isEmpty ? nil : maxData.cards
+        snapshot.savings = leumiData.savings
+        snapshot.foreignAccounts = leumiData.foreign
         return snapshot
     }
 }
@@ -263,4 +337,35 @@ enum Banks {
 @MainActor
 private func capture<T>(_ body: () async throws(BankError) -> T) async -> Result<T, BankError> {
     do { return .success(try await body()) } catch { return .failure(error) }
+}
+
+/// Runs `op`, giving up (throwing) after `seconds`.
+@MainActor
+private func withDeadline<T: Sendable>(_ seconds: TimeInterval, _ op: @escaping @MainActor () async throws -> T) async throws -> T {
+    try await withThrowingTaskGroup(of: T.self) { group in
+        group.addTask { try await op() }
+        group.addTask {
+            try await Task.sleep(for: .seconds(seconds))
+            throw WebDriver.Timeout(what: "deadline")
+        }
+        defer { group.cancelAll() }
+        return try await group.next()!
+    }
+}
+
+/// Bank of Israel official rates (shekels per unit), kept for when it's unreachable.
+enum FXRates {
+    static let url = URL(string: "https://boi.org.il/PublicApi/GetExchangeRates")!
+
+    static func current() async -> [String: Double] {
+        if let (data, response) = try? await URLSession.shared.data(from: url),
+           (response as? HTTPURLResponse)?.statusCode == 200 {
+            let rates = ExtraParsers.boiRates(data)
+            if !rates.isEmpty {
+                UserDefaults.standard.set(rates, forKey: "fxRates")
+                return rates
+            }
+        }
+        return UserDefaults.standard.dictionary(forKey: "fxRates") as? [String: Double] ?? [:]
+    }
 }

@@ -48,6 +48,7 @@ struct SettingsView: View {
                 Section {
                     Toggle("Lock with Face ID", isOn: $requireFaceID)
                     Toggle("Hide amounts", isOn: $hideAmounts)
+                        .onChange(of: hideAmounts) { model.updateWidgets() }
                 } header: {
                     Text("Privacy")
                 }

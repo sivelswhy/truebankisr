@@ -141,10 +141,16 @@ struct TransactionDetailView: View {
                     Text(txn.description)
                         .font(.title2.bold())
                         .multilineTextAlignment(.center)
-                    Text((-txn.chargedAmount).formatted(.currency(code: txn.chargedCurrency)))
+                    Text((txn.isConvertedEstimate ? "≈ " : "") + (-txn.chargedAmount).formatted(.currency(code: txn.chargedCurrency)))
                         .font(.system(.largeTitle, design: .rounded, weight: .bold))
                         .monospacedDigit()
                         .privacySensitive()
+                    if let original = txn.originalAmount, let currency = txn.originalCurrency {
+                        Text("\((-original).formatted(.currency(code: currency))) at the Bank of Israel rate")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .privacySensitive()
+                    }
                     HStack(spacing: 6) {
                         Text(txn.date.formatted(.dateTime.weekday(.wide).day().month(.wide).year()))
                         if txn.status == .pending {
@@ -179,6 +185,8 @@ struct TransactionDetailView: View {
                     ? String(localized: "Next debit")
                     : txn.processedDate.formatted(.dateTime.day().month(.wide).year()))
             }
+
+            NoteSection(txnID: txn.id)
 
             if let item = location.item {
                 LocationSection(item: item, source: location.source, address: txn.merchantAddress)

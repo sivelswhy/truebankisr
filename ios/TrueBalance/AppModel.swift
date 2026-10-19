@@ -3,6 +3,7 @@ import Foundation
 import Observation
 import TrueBalanceCore
 import UserNotifications
+import WidgetKit
 
 @MainActor
 @Observable
@@ -20,6 +21,10 @@ final class AppModel {
     private(set) var isDemo: Bool
     /// Last scraper step while signing in or refreshing (see `Format.progress`).
     private(set) var progressStep: String?
+    /// Notes and tags on purchases, by purchase id.
+    private(set) var notes: [String: PurchaseNote] = NotesStore.load()
+    /// Monthly budget per category key.
+    private(set) var budgets: [String: Double] = BudgetStore.load()
 
     /// Notify when the true balance goes below this (0 = only when overdrawn).
     static var alertThreshold: Double { UserDefaults.standard.double(forKey: "alertThreshold") }
@@ -31,6 +36,29 @@ final class AppModel {
         phase = signedIn ? .signedIn : .signedOut
         snapshot = signedIn ? (demo ? DemoData.snapshot() : SnapshotStore.load()) : nil
         WebDriver.onStep = { [weak self] step in self?.progressStep = step }
+        updateWidgets()
+    }
+
+    // MARK: Notes and budgets
+
+    func setNote(_ note: PurchaseNote, for id: String) {
+        notes[id] = note.isEmpty ? nil : note
+        NotesStore.save(notes)
+    }
+
+    /// Tags used so far, most used first, for quick picking.
+    var knownTags: [String] {
+        let counts = notes.values.flatMap(\.tags).reduce(into: [:]) { $0[$1, default: 0] += 1 }
+        return counts.keys.sorted { counts[$0]! != counts[$1]! ? counts[$0]! > counts[$1]! : $0 < $1 }
+    }
+
+    func setBudget(_ limit: Double, for category: String) {
+        budgets[category] = limit > 0 ? limit : nil
+        BudgetStore.save(budgets)
+    }
+
+    var budgetProgress: [BudgetProgress] {
+        Budgets.progress(limits: budgets, history: allPurchases)
     }
 
     // MARK: Sign in / out
@@ -64,6 +92,10 @@ final class AppModel {
         Keychain.delete()
         SnapshotStore.delete()
         PurchaseCacheStore.delete()
+        NotesStore.delete()
+        notes = [:]
+        WidgetData.save(nil)
+        WidgetCenter.shared.reloadAllTimelines()
         UserDefaults.standard.removeObject(forKey: "demo")
         BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: Self.refreshTaskID)
         isDemo = false
@@ -114,6 +146,18 @@ final class AppModel {
         }
         // Once per crossing, not on every refresh while it stays low.
         if new.trueBalance < threshold && !wasBelow && !isDemo { notifyLowBalance(new, threshold: threshold) }
+        if !isDemo { notifyBudgets() }
+        updateWidgets()
+    }
+
+    /// Shares the essentials with the widgets and asks them to redraw.
+    func updateWidgets() {
+        guard let s = snapshot else { return }
+        WidgetData.save(WidgetData(
+            trueBalance: s.trueBalance, nextChargeDay: s.nextCharge?.chargeDate, nextChargeTotal: s.nextCharge?.total,
+            dailyBudget: TrueBalance.dailyBudget(s), updatedAt: s.computedAt,
+            hideAmounts: UserDefaults.standard.bool(forKey: "hideAmounts"), isDemo: isDemo))
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     // MARK: Background
@@ -134,6 +178,26 @@ final class AppModel {
 
     private func requestNotificationPermission() async {
         _ = try? await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound])
+    }
+
+    /// Once per category, level (80 %, 100 %) and month.
+    private func notifyBudgets() {
+        let month = String(Israel.day(.now).prefix(7))
+        var sent = Set(UserDefaults.standard.stringArray(forKey: "budgetAlertsSent") ?? []).filter { $0.hasPrefix(month) }
+        for p in budgetProgress {
+            guard let level = p.alertLevel, sent.insert("\(month)|\(p.category)|\(level)").inserted else { continue }
+            // Going straight past 100 % doesn't also send the 80 % one later.
+            if level == 100 { sent.insert("\(month)|\(p.category)|80") }
+            let content = UNMutableNotificationContent()
+            let name = Format.categoryName(p.category)
+            let limit = p.limit.formatted(.currency(code: "ILS").precision(.fractionLength(0)))
+            content.title = level == 100
+                ? String(localized: "\(name) budget used up")
+                : String(localized: "\(name): 80% of the budget used")
+            content.body = String(localized: "\(p.spent.shekels) spent this month out of \(limit).")
+            UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: "budget-\(p.category)", content: content, trigger: nil))
+        }
+        UserDefaults.standard.set(Array(sent), forKey: "budgetAlertsSent")
     }
 
     /// Warns when the true balance goes below the chosen threshold (or zero).

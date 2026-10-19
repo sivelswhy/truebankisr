@@ -89,3 +89,35 @@ enum PurchaseCacheStore {
         try? FileManager.default.removeItem(at: url)
     }
 }
+
+/// Notes and tags on purchases, by purchase id. Only on this iPhone.
+enum NotesStore {
+    private static var url: URL {
+        URL.applicationSupportDirectory.appending(path: "notes.json")
+    }
+
+    static func load() -> [String: PurchaseNote] {
+        guard let data = try? Data(contentsOf: url) else { return [:] }
+        return (try? JSONDecoder().decode([String: PurchaseNote].self, from: data)) ?? [:]
+    }
+
+    static func save(_ notes: [String: PurchaseNote]) {
+        try? FileManager.default.createDirectory(at: .applicationSupportDirectory, withIntermediateDirectories: true)
+        try? JSONEncoder().encode(notes).write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+    }
+
+    static func delete() {
+        try? FileManager.default.removeItem(at: url)
+    }
+}
+
+/// Monthly budget per category key, in ILS.
+enum BudgetStore {
+    static func load() -> [String: Double] {
+        UserDefaults.standard.dictionary(forKey: "budgets") as? [String: Double] ?? [:]
+    }
+
+    static func save(_ limits: [String: Double]) {
+        UserDefaults.standard.set(limits.filter { $0.value > 0 }, forKey: "budgets")
+    }
+}

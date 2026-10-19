@@ -139,13 +139,15 @@ public enum MaxParser {
         return Installments(number: numbers[0], total: numbers[1])
     }
 
+    /// ISO 4217 numeric → letter code (the ones Bank of Israel publishes).
+    static let currencies: [Int: String] = [
+        840: "USD", 978: "EUR", 826: "GBP", 756: "CHF", 392: "JPY", 124: "CAD", 36: "AUD",
+        752: "SEK", 578: "NOK", 208: "DKK", 710: "ZAR", 400: "JOD", 818: "EGP", 422: "LBP",
+    ]
+
     static func currency(_ id: Int?) -> String {
-        switch id {
-        case 840: "USD"
-        case 978: "EUR"
-        case 376, nil: "ILS"
-        default: "\(id!)"
-        }
+        guard let id, id != 376 else { return "ILS" }
+        return currencies[id] ?? "\(id)"
     }
 }
 
