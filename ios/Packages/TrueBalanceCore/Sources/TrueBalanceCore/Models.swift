@@ -38,6 +38,11 @@ public struct Txn: Codable, Hashable, Identifiable, Sendable {
     /// (negative = expense) and currency. The ILS amount is then an estimate.
     public var originalAmount: Double?
     public var originalCurrency: String?
+    /// Bank movements: Leumi's detail line (e.g. "העברה מאת: …"), the balance
+    /// right after the movement, and the value date when it differs.
+    public var memo: String?
+    public var runningBalance: Double?
+    public var valueDate: Date?
 
     public var isConvertedEstimate: Bool { originalCurrency != nil && originalCurrency != chargedCurrency }
 

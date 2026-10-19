@@ -58,6 +58,23 @@ enum DemoData {
                 Txn(id: "insurance-\(month)", date: ago(22 + back), processedDate: ago(22 + back), chargedAmount: -312.4, description: "הראל ביטוח"),
             ]
         }
+        // A few transfers, with Leumi's detail line.
+        func transfer(_ id: String, _ days: Double, _ amount: Double, _ memo: String) -> Txn {
+            var t = Txn(id: id, date: ago(days), processedDate: ago(days), chargedAmount: amount,
+                        description: amount > 0 ? "העברה מחשבון" : "העברה בנקאית")
+            t.memo = memo
+            return t
+        }
+        bank += [
+            transfer("tr-1", 1, -250, "העברה ל: דנה כהן 12-345-678"),
+            transfer("tr-2", 4, 180, "העברה מאת: יוסי לוי 10-800-02"),
+            transfer("tr-3", 12, -1_200, "העברה ל: ועד הבית 20-512-334"),
+        ]
+        var running = 163.0
+        for i in bank.indices.sorted(by: { bank[$0].date > bank[$1].date }) {
+            bank[i].runningBalance = running
+            running -= bank[i].chargedAmount
+        }
         var snapshot = try! TrueBalance.compute(
             bank: Account(accountNumber: "812-123456", balance: 163, txns: bank),
             cards: [Account(accountNumber: "max", txns: txns)],

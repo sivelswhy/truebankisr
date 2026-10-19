@@ -156,3 +156,26 @@ private let now = iso("2026-10-19T09:00:00Z")
     #expect(MaxParser.currency(nil) == "ILS")
     #expect(MaxParser.currency(999) == "999")
 }
+
+@Test func parsesLeumiMovementDetails() throws {
+    let inner = #"{"BalanceDisplay":"163.53","TodayTransactionsItems":[{"DateUTC":"2026-10-14T21:00:00.003Z","EffectiveDateUTC":"2026-10-14T21:00:00.003Z","Description":"סכום פקת\"ש","Amount":163.53,"RunningBalance":163.53,"ReferenceNumberLong":9105601,"FITID":"202610159105601","AdditionalData":"העברה מאת: BNP PARIBAS - PARIS 10-800-02"}],"HistoryTransactionsItems":null}"#
+    let envelope = try JSONSerialization.data(withJSONObject: ["jsonResp": inner])
+    let account = try LeumiParser.parse(envelope, accountNumber: "x")
+    let t = try #require(account.txns.first)
+    #expect(t.id == "202610159105601")
+    #expect(t.runningBalance == 163.53 && t.valueDate == nil)
+    #expect(BankMovement.kind(t) == .transferIn)
+    #expect(BankMovement.counterparty(t) == "BNP PARIBAS - PARIS 10-800-02")
+}
+
+@Test func classifiesBankMovements() {
+    var out = t("2026-10-10T08:00:00Z", -500, "העברה בנקאית")
+    out.memo = "העברה ל: דנה כהן 12-345-678"
+    #expect(BankMovement.kind(out) == .transferOut)
+    #expect(BankMovement.counterparty(out) == "דנה כהן 12-345-678")
+    #expect(BankMovement.kind(t("2026-10-02T08:00:00Z", -900, "מקס איט פיננ")) == .cardDebit)
+    #expect(BankMovement.kind(t("2026-10-10T08:00:00Z", 9000, "משכורת")) == .income)
+    #expect(BankMovement.kind(t("2026-10-10T08:00:00Z", -50, "BIT")) == .transferOut)
+    let totals = BankMovement.totals([out, t("2026-10-10T08:00:00Z", 9000, "משכורת")])
+    #expect(totals.in == 9000 && totals.out == 500)
+}
