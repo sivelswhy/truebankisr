@@ -136,6 +136,8 @@ struct BalanceTab: View {
                     NoDataView()
                 }
             }
+            // A little air between "Hello" and the balance.
+            .contentMargins(.top, 20, for: .scrollContent)
             .animation(.default, value: model.snapshot)
             .animation(.default, value: model.isRefreshing)
             .sensoryFeedback(.success, trigger: model.snapshot?.computedAt)
