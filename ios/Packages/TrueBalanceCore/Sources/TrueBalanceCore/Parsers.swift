@@ -69,10 +69,40 @@ public enum MaxParser {
 
     public static func parseMonth(_ data: Data) throws -> [Txn] {
         let response = try JSONDecoder().decode(Response.self, from: data)
-        return (response.result?.transactions ?? [])
+        let raws = response.result?.transactions ?? []
+        let extras = undocumentedFields(data, count: raws.count)
+        return zip(raws, extras)
             // Rows without a plan are summary rows, not purchases.
-            .filter { !($0.planName ?? "").isEmpty }
-            .compactMap(map)
+            .filter { raw, _ in !(raw.planName ?? "").isEmpty }
+            .compactMap { raw, extra in
+                var txn = map(raw)
+                txn?.logoURL = extra.logo
+                txn?.merchantAddress = extra.address
+                return txn
+            }
+    }
+
+    /// Max doesn't document a logo or address field; pick them up if they show
+    /// up: an http(s) value under a key mentioning "logo"/"image", and text
+    /// under keys mentioning "address" or "city".
+    static func undocumentedFields(_ data: Data, count: Int) -> [(logo: String?, address: String?)] {
+        let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+        let rows = ((json?["result"] as? [String: Any])?["transactions"] as? [[String: Any]]) ?? []
+        let found = rows.map { row -> (logo: String?, address: String?) in
+            func text(_ keys: [String], url: Bool) -> [String] {
+                row.compactMap { key, value in
+                    let k = key.lowercased()
+                    guard keys.contains(where: k.contains), let v = (value as? String)?.trimmingCharacters(in: .whitespaces),
+                          !v.isEmpty, v.hasPrefix("http") == url else { return nil }
+                    return v
+                }
+            }
+            let logo = text(["logo", "image"], url: true).first
+            // Street first, then city, e.g. "Dizengoff 50, Tel Aviv".
+            let parts = text(["address"], url: false) + text(["city"], url: false)
+            return (logo, parts.isEmpty ? nil : parts.joined(separator: ", "))
+        }
+        return found.count == count ? found : Array(repeating: (nil, nil), count: count)
     }
 
     static func map(_ raw: Raw) -> Txn? {
@@ -96,7 +126,8 @@ public enum MaxParser {
             description: (raw.merchantName ?? "").trimmingCharacters(in: .whitespacesAndNewlines),
             status: payment == nil ? .pending : .completed,
             installments: installments,
-            category: Category.key(forMaxId: raw.categoryId?.value.map { Int($0) })
+            category: Category.key(forMaxId: raw.categoryId?.value.map { Int($0) }),
+            cardLast4: raw.shortCardNumber.flatMap { $0.isEmpty ? nil : String($0.suffix(4)) }
         )
     }
 

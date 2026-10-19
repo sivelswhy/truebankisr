@@ -8,6 +8,7 @@ struct DashboardView: View {
     @State private var query = ""
     @State private var searching = false
     @AppStorage("hideAmounts") private var hideAmounts = false
+    @AppStorage("firstName") private var firstName = ""
 
     var body: some View {
         NavigationStack {
@@ -16,31 +17,37 @@ struct DashboardView: View {
             // scroll away with the content (no pinned header, no empty bar).
             .toolbar(.hidden, for: .navigationBar)
             .refreshable { await model.refresh() }
-            .sheet(isPresented: $showingSettings) { SettingsView() }
+            .sheet(isPresented: $showingSettings) { ProfileView() }
             .navigationDestination(for: CategoryRoute.self) { route in
                 CategoryDetailView(route: route)
-                    .toolbar(.visible, for: .navigationBar) // keeps the back button
                     .redacted(reason: hideAmounts ? .privacy : [])
             }
+            .purchaseDestinations()
             .sensoryFeedback(.success, trigger: model.snapshot?.computedAt)
         }
     }
 
-    /// Title and settings; scrolls away with the content.
+    /// Greeting and profile; scrolls away with the content.
     private var header: some View {
-        HStack {
-            Text("True Balance")
-                .font(.largeTitle.bold())
-                .accessibilityAddTraits(.isHeader)
+        HStack(alignment: .center) {
+            VStack(alignment: .leading, spacing: 0) {
+                Text(Profile.greeting(name: firstName))
+                    .font(.largeTitle.bold())
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                    .accessibilityAddTraits(.isHeader)
+                Text("True Balance")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+            }
             Spacer()
             Button {
                 showingSettings = true
             } label: {
-                Image(systemName: "gearshape")
-                    .font(.title3)
+                ProfileAvatar(name: firstName, size: 40)
             }
             .buttonStyle(.borderless)
-            .accessibilityLabel(Text("Settings"))
+            .accessibilityLabel(Text("Profile"))
         }
         .listRowBackground(Color.clear)
         .listRowInsets(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4))
@@ -150,7 +157,9 @@ struct DashboardView: View {
 
                 ForEach(s.upcoming) { charge in
                     Section {
-                        ForEach(charge.txns) { TransactionRow(txn: $0) }
+                        ForEach(charge.txns) { t in
+                            NavigationLink(value: TxnRoute(txn: t)) { TransactionRow(txn: t) }
+                        }
                     } header: {
                         HStack {
                             Text("Debited \(Format.day(charge.chargeDate))")
@@ -161,7 +170,7 @@ struct DashboardView: View {
                 }
 
                 if let next = s.nextCharge {
-                    CategoryBreakdownSection(charge: next)
+                    CategoryBreakdownSection(txns: next.txns, caption: String(localized: "Debited \(Format.day(next.chargeDate))"))
                 }
 
                 Section {
@@ -187,7 +196,7 @@ struct DashboardView: View {
         } else {
             Section {
                 ForEach(matches, id: \.1.id) { charge, t in
-                    TransactionRow(txn: t, debitDay: charge.chargeDate)
+                    NavigationLink(value: TxnRoute(txn: t)) { TransactionRow(txn: t, debitDay: charge.chargeDate) }
                 }
             } header: {
                 Text("\(matches.count) result(s)")
@@ -434,18 +443,22 @@ struct TransactionRow: View {
     }
 }
 
+/// A category within a list of purchases (a debit, or a period in the profile).
 struct CategoryRoute: Hashable {
     var key: String
-    var charge: UpcomingCharge
+    var txns: [Txn]
+    /// Shown under the list, e.g. "Debited 2 Nov".
+    var caption: String
 }
 
 /// Where the next debit goes: a donut chart (tap a slice) and its legend.
-private struct CategoryBreakdownSection: View {
-    var charge: UpcomingCharge
+struct CategoryBreakdownSection: View {
+    var txns: [Txn]
+    var caption: String
     @State private var selectedAngle: Double?
 
     var body: some View {
-        let totals = Category.totals(charge.txns).filter { $0.total > 0 }
+        let totals = TrueBalanceCore.Category.totals(txns).filter { $0.total > 0 }
         let sum = totals.reduce(0) { $0 + $1.total }
         let selected = selection(in: totals)
         Section {
@@ -489,7 +502,7 @@ private struct CategoryBreakdownSection: View {
             .sensoryFeedback(.selection, trigger: selected?.key)
 
             ForEach(totals) { c in
-                NavigationLink(value: CategoryRoute(key: c.key, charge: charge)) {
+                NavigationLink(value: CategoryRoute(key: c.key, txns: txns, caption: caption)) {
                     HStack(spacing: 12) {
                         CategoryIcon(key: c.key)
                         Text(Format.categoryName(c.key))
@@ -508,7 +521,7 @@ private struct CategoryBreakdownSection: View {
         } header: {
             Text("By category")
         } footer: {
-            Text("Debited \(Format.day(charge.chargeDate))")
+            Text(caption)
         }
     }
 
@@ -524,19 +537,22 @@ private struct CategoryBreakdownSection: View {
     }
 }
 
-private struct CategoryDetailView: View {
+struct CategoryDetailView: View {
     var route: CategoryRoute
 
     var body: some View {
-        let txns = route.charge.txns.filter { ($0.category ?? TrueBalanceCore.Category.uncategorized) == route.key }
+        let txns = route.txns.filter { ($0.category ?? TrueBalanceCore.Category.uncategorized) == route.key }
         List {
             Section {
-                ForEach(txns) { TransactionRow(txn: $0) }
+                ForEach(txns) { t in
+                    NavigationLink(value: TxnRoute(txn: t)) { TransactionRow(txn: t) }
+                }
             } footer: {
-                Text("Debited \(Format.day(route.charge.chargeDate))")
+                Text(route.caption)
             }
         }
         .navigationTitle(Format.categoryName(route.key))
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
     }
 }

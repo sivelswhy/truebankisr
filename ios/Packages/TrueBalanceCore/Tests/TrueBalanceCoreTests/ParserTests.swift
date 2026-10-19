@@ -27,6 +27,9 @@ import Testing
     #expect(txns[0].category == "groceries")
     #expect(Israel.day(txns[0].processedDate) == "2026-11-02")
     #expect(txns[0].status == .completed)
+    #expect(txns[0].cardLast4 == "4580")
+    #expect(txns[0].logoURL == nil)
+    #expect(txns[0].merchantAddress == nil)
 
     #expect(txns[1].installments == Installments(number: 2, total: 3))
     #expect(txns[1].id == "A2_2")
@@ -69,4 +72,16 @@ import Testing
     #expect(account.balance == 163.53)
     #expect(account.txns.first?.chargedAmount == -1050.25)
     #expect(account.txns.first?.id == "77")
+}
+
+@Test func maxLogoIsPickedUpWhenPresent() throws {
+    let json = """
+    {"result":{"transactions":[{"shortCardNumber":"1234","paymentDate":"2026-11-02T00:00:00","purchaseDate":"2026-10-05T00:00:00",
+      "actualPaymentAmount":10,"paymentCurrency":376,"merchantName":"Wolt","planName":"רגילה",
+      "merchantLogoUrl":"https://cdn.example.com/wolt.png","merchantAddress":"Dizengoff 50","merchantCity":"Tel Aviv"}]}}
+    """
+    let txn = try #require(try MaxParser.parseMonth(Data(json.utf8)).first)
+    #expect(txn.logoURL == "https://cdn.example.com/wolt.png")
+    #expect(txn.cardLast4 == "1234")
+    #expect(txn.merchantAddress == "Dizengoff 50, Tel Aviv")
 }

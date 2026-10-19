@@ -33,7 +33,8 @@ enum MaxScraper {
     static let base = "https://www.max.co.il"
     static let api = "https://onlinelcapi.max.co.il"
 
-    static func scrape(_ credentials: Credentials, visible: Bool = false, monthsBack: Int = 2, monthsAhead: Int = 3) async throws(BankError) -> Account {
+    /// A year back gives the profile and merchant pages their history.
+    static func scrape(_ credentials: Credentials, visible: Bool = false, monthsBack: Int = 12, monthsAhead: Int = 3) async throws(BankError) -> Account {
         let driver = WebDriver(visible: visible)
         defer { driver.close() }
         do {

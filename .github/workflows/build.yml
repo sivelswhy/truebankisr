@@ -48,6 +48,7 @@ jobs:
         working-directory: ios
         run: |
           brew install xcodegen
+          cp Local.xcconfig.example Local.xcconfig # no signing team in CI
           xcodegen generate
       - name: Build (unsigned)
         working-directory: ios

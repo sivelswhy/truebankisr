@@ -35,7 +35,8 @@ ios/
 
 ## Build and install on your iPhone
 
-1. `brew install xcodegen` (once), then from `ios/`: `xcodegen generate`
+1. `brew install xcodegen` (once). From `ios/`: `cp Local.xcconfig.example Local.xcconfig`,
+   put your Apple team ID in it, then `xcodegen generate`
 2. Open `TrueBalance.xcodeproj` in Xcode.
 3. Target **TrueBalance → Signing & Capabilities**: pick your **Team** (your
    Apple ID). If the bundle ID `il.truebalance.app` is taken, change it to

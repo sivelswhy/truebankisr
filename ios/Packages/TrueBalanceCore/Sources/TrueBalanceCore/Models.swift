@@ -28,10 +28,22 @@ public struct Txn: Codable, Hashable, Identifiable, Sendable {
     public var installments: Installments?
     /// Stable category key (see `Category`), nil when the source has none.
     public var category: String?
+    /// Last 4 digits of the card it was paid with.
+    public var cardLast4: String?
+    /// Merchant logo, when the card company provides one.
+    public var logoURL: String?
+    /// Merchant address or city, when the card company provides one.
+    public var merchantAddress: String?
+
+    /// Groups purchases from the same merchant ("  SHUFERSAL " = "shufersal").
+    public var merchantKey: String {
+        description.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+    }
 
     public init(
         id: String, date: Date, processedDate: Date, chargedAmount: Double, chargedCurrency: String = "ILS",
-        description: String, status: TxnStatus = .completed, installments: Installments? = nil, category: String? = nil
+        description: String, status: TxnStatus = .completed, installments: Installments? = nil, category: String? = nil,
+        cardLast4: String? = nil, logoURL: String? = nil, merchantAddress: String? = nil
     ) {
         self.id = id
         self.date = date
@@ -42,6 +54,9 @@ public struct Txn: Codable, Hashable, Identifiable, Sendable {
         self.status = status
         self.installments = installments
         self.category = category
+        self.cardLast4 = cardLast4
+        self.logoURL = logoURL
+        self.merchantAddress = merchantAddress
     }
 }
 
@@ -78,6 +93,9 @@ public struct Snapshot: Codable, Hashable, Sendable {
     /// Card transactions not in ILS: shown but not subtracted.
     public var ignoredForeign: [Txn]
     public var computedAt: Date
+    /// Every card purchase fetched (debited or not), newest first, for
+    /// merchant history and spending over a period. Nil in older snapshots.
+    public var history: [Txn]?
 }
 
 public enum Israel {
