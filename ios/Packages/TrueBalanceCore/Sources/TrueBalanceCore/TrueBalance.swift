@@ -47,7 +47,8 @@ public enum TrueBalance {
             trueBalanceAllKnown: round2(balance - allKnown),
             upcoming: upcoming,
             ignoredForeign: ignoredForeign,
-            computedAt: now
+            computedAt: now,
+            history: cards.flatMap(\.txns).sorted { $0.date > $1.date }
         )
     }
 

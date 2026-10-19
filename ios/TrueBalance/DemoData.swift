@@ -14,17 +14,32 @@ enum DemoData {
                 chargedAmount: -amount, description: name, status: status, installments: installments, category: category)
         }
 
-        let txns = [
-            t(14, 412.9, "Shufersal Deal", "groceries"),
-            t(11, 89, "Paz Yellow", "energy"),
-            t(9, 249.9, "IKEA Rishon", "home", installments: .init(number: 1, total: 3)),
-            t(9, 249.9, "IKEA Rishon", "home", month: 2, installments: .init(number: 2, total: 3)),
-            t(9, 249.9, "IKEA Rishon", "home", month: 3, installments: .init(number: 3, total: 3)),
-            t(6, 54, "Aroma Espresso Bar", "restaurants"),
-            t(3, 119.9, "Partner Communications", "telecom"),
-            t(2, 64, "Super-Pharm", "health"),
-            t(0, 38.5, "Rami Levy", "groceries", status: .pending),
+        let main = "4580", second = "1127"
+        func with(_ t: Txn, card: String) -> Txn { var t = t; t.cardLast4 = card; return t }
+        var txns = [
+            with(t(14, 412.9, "Shufersal Deal", "groceries"), card: main),
+            with(t(11, 89, "Paz Yellow", "energy"), card: main),
+            with(t(9, 249.9, "IKEA Rishon", "home", installments: .init(number: 1, total: 3)), card: main),
+            with(t(9, 249.9, "IKEA Rishon", "home", month: 2, installments: .init(number: 2, total: 3)), card: main),
+            with(t(9, 249.9, "IKEA Rishon", "home", month: 3, installments: .init(number: 3, total: 3)), card: main),
+            with(t(6, 54, "Aroma Espresso Bar", "restaurants"), card: second),
+            with(t(3, 119.9, "Partner Communications", "telecom"), card: main),
+            with(t(2, 64, "Super-Pharm", "health"), card: second),
+            with(t(0, 38.5, "Rami Levy", "groceries", status: .pending), card: main),
         ]
+        // Past months, already debited: history for the profile and merchant pages.
+        let past: [(String, String, Double)] = [
+            ("Shufersal Deal", "groceries", 380), ("Aroma Espresso Bar", "restaurants", 42), ("Paz Yellow", "energy", 95),
+            ("Rami Levy", "groceries", 210), ("Partner Communications", "telecom", 119.9), ("Wolt", "restaurants", 86),
+        ]
+        for month in 1...5 {
+            for (i, p) in past.enumerated() {
+                let days = Double(month * 30 + i * 4 + 3)
+                txns.append(with(Txn(id: "\(p.0)-past-\(month)-\(i)", date: ago(days), processedDate: billing(-month + 1),
+                                     chargedAmount: -(p.2 + Double((month * 7 + i * 3) % 25)), description: p.0, category: p.1),
+                                 card: i.isMultiple(of: 3) ? second : main))
+            }
+        }
         return try! TrueBalance.compute(
             bank: Account(accountNumber: "812-123456", balance: 163, txns: []),
             cards: [Account(accountNumber: "max", txns: txns)],

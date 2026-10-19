@@ -18,3 +18,4 @@ ios/TrueBalance.xcodeproj/
 ios/build/
 ios/Payload/
 ios/*.ipa
+ios/Local.xcconfig
