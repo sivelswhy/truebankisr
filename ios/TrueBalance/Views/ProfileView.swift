@@ -127,7 +127,6 @@ struct SpendingTab: View {
         let total = Spending.total(txns)
         let days = max(1, (Israel.calendar.dateComponents([.day], from: Israel.calendar.startOfDay(for: from),
                                                           to: Israel.calendar.startOfDay(for: to)).day ?? 0) + 1)
-        let unit: Calendar.Component = days > 62 ? .month : .day
         Section {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
@@ -148,23 +147,8 @@ struct SpendingTab: View {
             }
 
             if !txns.isEmpty {
-                Chart(Spending.buckets(txns, from: from, to: to, by: unit)) { b in
-                    BarMark(x: .value("Day", b.start, unit: unit), y: .value("Amount", b.total))
-                        .foregroundStyle(Color.accentColor.gradient)
-                        .cornerRadius(3)
-                }
-                .chartYAxis {
-                    AxisMarks(position: .trailing) { v in
-                        AxisGridLine()
-                        AxisValueLabel {
-                            if let n = v.as(Double.self) {
-                                Text(n.formatted(.number.notation(.compactName)))
-                            }
-                        }
-                    }
-                }
-                .frame(height: 150)
-                .padding(.vertical, 6)
+                CumulativeSpendChart(txns: txns, from: from, to: to)
+                    .padding(.vertical, 6)
             }
         } footer: {
             if let oldest = model.allPurchases.last?.date {
@@ -195,5 +179,93 @@ struct SpendingTab: View {
 
     private var periodCaption: String {
         "\(from.formatted(.dateTime.day().month(.abbreviated))) – \(to.formatted(.dateTime.day().month(.abbreviated).year()))"
+    }
+}
+
+/// Running total over the period; touch and hold to read it on a given day.
+private struct CumulativeSpendChart: View {
+    var txns: [Txn]
+    var from: Date
+    var to: Date
+    @State private var selected: Date?
+
+    struct Point: Identifiable {
+        var day: Date
+        var total: Double
+        var id: Date { day }
+    }
+
+    private var points: [Point] {
+        var running = 0.0
+        return Spending.buckets(txns, from: from, to: to, by: .day).map {
+            running += $0.total
+            return Point(day: $0.start, total: (running * 100).rounded() / 100)
+        }
+    }
+
+    var body: some View {
+        let points = points
+        let picked = selected.flatMap { s in
+            points.last { $0.day <= s } ?? points.first
+        }
+        Chart {
+            ForEach(points) { p in
+                AreaMark(x: .value("Day", p.day, unit: .day), y: .value("Total", p.total))
+                    .foregroundStyle(LinearGradient(colors: [Color.accentColor.opacity(0.25), Color.accentColor.opacity(0)],
+                                                    startPoint: .top, endPoint: .bottom))
+                    .interpolationMethod(.monotone)
+                LineMark(x: .value("Day", p.day, unit: .day), y: .value("Total", p.total))
+                    .foregroundStyle(Color.accentColor)
+                    .lineStyle(StrokeStyle(lineWidth: 2.5, lineCap: .round))
+                    .interpolationMethod(.monotone)
+            }
+            if let picked {
+                RuleMark(x: .value("Day", picked.day, unit: .day))
+                    .foregroundStyle(.secondary.opacity(0.5))
+                    .annotation(position: .top, spacing: 4,
+                                overflowResolution: .init(x: .fit(to: .chart), y: .disabled)) {
+                        VStack(spacing: 1) {
+                            Text(picked.total.shekels)
+                                .font(.subheadline.weight(.semibold))
+                                .monospacedDigit()
+                                .privacySensitive()
+                            Text(picked.day.formatted(.dateTime.day().month(.abbreviated)))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(.regularMaterial, in: .rect(cornerRadius: 8))
+                    }
+                PointMark(x: .value("Day", picked.day, unit: .day), y: .value("Total", picked.total))
+                    .foregroundStyle(Color.accentColor)
+                    .symbolSize(60)
+            }
+        }
+        .chartXSelection(value: $selected)
+        .chartGesture { proxy in
+            // Only a touch-and-hold picks a day, so the list still scrolls.
+            LongPressGesture(minimumDuration: 0.25)
+                .sequenced(before: DragGesture(minimumDistance: 0))
+                .onChanged { value in
+                    if case .second(true, let drag?) = value {
+                        proxy.selectXValue(at: drag.location.x)
+                    }
+                }
+                .onEnded { _ in selected = nil }
+        }
+        .sensoryFeedback(.selection, trigger: picked?.day)
+        .chartYAxis {
+            AxisMarks(position: .trailing) { v in
+                AxisGridLine()
+                AxisValueLabel {
+                    if let n = v.as(Double.self) {
+                        Text(n.formatted(.number.notation(.compactName)))
+                    }
+                }
+            }
+        }
+        .frame(height: 170)
+        .padding(.top, 24)
     }
 }
