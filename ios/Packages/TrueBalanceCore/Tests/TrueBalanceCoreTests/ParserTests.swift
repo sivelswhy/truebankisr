@@ -97,3 +97,9 @@ import Testing
     #expect(HolderName.fromGreeting("Hello, dana!") == "Dana")
     #expect(HolderName.fromGreeting("כניסה לחשבון") == nil)
 }
+
+@Test func holderNameFromLeumiHeader() {
+    #expect(HolderName.fromElementText("  נחמיה כהן ") == "נחמיה")
+    #expect(HolderName.fromElementText("Dana,") == "Dana")
+    #expect(HolderName.fromElementText("") == nil)
+}

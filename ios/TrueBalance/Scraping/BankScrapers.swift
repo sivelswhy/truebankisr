@@ -132,13 +132,8 @@ enum LeumiScraper {
         defer { driver.close() }
         do {
             try await login(driver, credentials)
-            let holder = HolderName.fromGreeting(await driver.bodyText())
             var result = try await account(driver, since: since)
-            if let holder {
-                result.holderName = holder
-            } else {
-                result.holderName = HolderName.fromGreeting(await driver.bodyText())
-            }
+            result.holderName = await holderName(driver)
             return result
         } catch let error as BankError {
             throw error
@@ -178,6 +173,16 @@ enum LeumiScraper {
             try await Task.sleep(for: .milliseconds(500))
         }
         throw BankError.timeout(step: "Leumi: waiting for the account page (still on \(URL(string: d.url)?.path ?? d.url))")
+    }
+
+    /// The welcome message in the account pages' header ("שלום <name>").
+    private static func holderName(_ d: WebDriver) async -> String? {
+        let text = try? await d.eval("""
+            const e = document.querySelector('app-welcome-user span.name');
+            return e ? e.textContent : '';
+            """) as? String
+        if let name = HolderName.fromElementText(text) { return name }
+        return HolderName.fromGreeting(await d.bodyText())
     }
 
     /// Opens the transactions screen and filters from `since`; the balance comes
@@ -249,7 +254,8 @@ enum Banks {
         PurchaseCacheStore.save(purchases)
         var snapshot = try TrueBalance.compute(bank: bankAccount, cards: [Account(accountNumber: cardAccount.accountNumber, txns: purchases)],
                                                billingDay: billingDay)
-        snapshot.holderFirstName = cardAccount.holderName ?? bankAccount.holderName
+        // Leumi's header shows the name reliably; Max is the fallback.
+        snapshot.holderFirstName = bankAccount.holderName ?? cardAccount.holderName
         return snapshot
     }
 }
