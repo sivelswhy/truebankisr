@@ -221,6 +221,11 @@ public enum HolderName {
         return clean(String(text[r]))
     }
 
+    /// Text of an element showing the name (e.g. Leumi's header): first word.
+    public static func fromElementText(_ text: String?) -> String? {
+        clean(text?.replacingOccurrences(of: ",", with: " "))
+    }
+
     /// Capitalised first word; nil for empty or placeholder values.
     static func clean(_ raw: String?) -> String? {
         guard let word = raw?.trimmingCharacters(in: .whitespacesAndNewlines).split(separator: " ").first,
