@@ -10,6 +10,11 @@ on:
 permissions:
   contents: write # to publish the IPA on tagged releases
 
+# One build per branch or tag: a newer push cancels the older one.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   web:
     name: Web app
@@ -17,8 +22,8 @@ jobs:
     env:
       PUPPETEER_SKIP_DOWNLOAD: "1" # Chromium is only needed to scrape, not to build
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -31,7 +36,7 @@ jobs:
     name: iPhone app
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Select the latest Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
@@ -56,7 +61,7 @@ jobs:
           mkdir -p Payload
           cp -R build/Build/Products/Release-iphoneos/TrueBalance.app Payload/
           zip -qry TrueBalance.ipa Payload
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: TrueBalance-ipa
           path: ios/TrueBalance.ipa
