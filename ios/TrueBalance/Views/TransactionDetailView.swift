@@ -65,28 +65,24 @@ struct MerchantLogo: View {
     }
 }
 
-/// Card glyph with the last 4 digits, like Wallet.
-struct CardLabel: View {
+/// Card row: generic card icon, two dots in the middle, last 4 digits.
+struct CardRow: View {
     var last4: String?
 
     var body: some View {
-        HStack(spacing: 8) {
-            RoundedRectangle(cornerRadius: 4, style: .continuous)
-                .fill(LinearGradient(colors: [Color(hex: "#0A84FF"), Color(hex: "#0040C8")],
-                                     startPoint: .topLeading, endPoint: .bottomTrailing))
-                .frame(width: 34, height: 22)
-                .overlay(alignment: .bottomLeading) {
-                    Text(verbatim: "max")
-                        .font(.system(size: 7, weight: .heavy))
-                        .foregroundStyle(.white)
-                        .padding(3)
-                }
-            if let last4 {
-                Text(verbatim: "•••• \(last4)").monospacedDigit()
-            } else {
-                Text("Max card")
-            }
+        HStack {
+            Image(systemName: "creditcard")
+                .font(.title3)
+                .foregroundStyle(.secondary)
+            Spacer()
+            Text(verbatim: "••")
+                .foregroundStyle(.secondary)
+            Spacer()
+            Text(verbatim: last4 ?? "––––")
+                .monospacedDigit()
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(last4.map { Text("Card ending in \($0)") } ?? Text("Card"))
     }
 }
 
@@ -172,7 +168,7 @@ struct TransactionDetailView: View {
             }
 
             Section {
-                LabeledContent("Card") { CardLabel(last4: txn.cardLast4) }
+                CardRow(last4: txn.cardLast4)
                 LabeledContent("Category") {
                     HStack(spacing: 8) {
                         Text(Format.categoryName(txn.category))
@@ -308,7 +304,7 @@ struct MerchantHistoryView: View {
                     NavigationLink(value: TxnRoute(txn: t)) { TransactionRow(txn: t) }
                 }
             } footer: {
-                Text("Purchases from the last 12 months.")
+                Text("Purchases saved on this iPhone.")
             }
         }
         .navigationTitle(route.name)

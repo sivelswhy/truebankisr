@@ -63,6 +63,7 @@ final class AppModel {
     func signOut() {
         Keychain.delete()
         SnapshotStore.delete()
+        PurchaseCacheStore.delete()
         UserDefaults.standard.removeObject(forKey: "demo")
         BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: Self.refreshTaskID)
         isDemo = false

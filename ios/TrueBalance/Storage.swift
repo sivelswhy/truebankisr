@@ -64,3 +64,28 @@ enum SnapshotStore {
         try? FileManager.default.removeItem(at: url)
     }
 }
+
+/// Past Max purchases (see `PurchaseCache`), kept across refreshes.
+enum PurchaseCacheStore {
+    private static var url: URL {
+        URL.applicationSupportDirectory.appending(path: "purchases.json")
+    }
+
+    static func load() -> [Txn]? {
+        guard let data = try? Data(contentsOf: url) else { return nil }
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try? decoder.decode([Txn].self, from: data)
+    }
+
+    static func save(_ txns: [Txn]) {
+        try? FileManager.default.createDirectory(at: .applicationSupportDirectory, withIntermediateDirectories: true)
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        try? encoder.encode(txns).write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+    }
+
+    static func delete() {
+        try? FileManager.default.removeItem(at: url)
+    }
+}

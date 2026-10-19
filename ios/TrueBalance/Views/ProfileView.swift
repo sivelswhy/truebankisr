@@ -3,18 +3,10 @@ import SwiftUI
 import TrueBalanceCore
 
 enum Profile {
-    /// "Bonjour, Léa" / "Bonsoir, Léa" / "Good morning, Léa", by the hour.
-    static func greeting(name: String, now: Date = .now) -> String {
-        let hour = Calendar.current.component(.hour, from: now)
+    /// "Bonjour, Léa" / "Hello, Léa".
+    static func greeting(name: String) -> String {
         let n = name.trimmingCharacters(in: .whitespaces)
-        switch (hour, n.isEmpty) {
-        case (5..<12, true): return String(localized: "Good morning")
-        case (5..<12, false): return String(localized: "Good morning, \(n)")
-        case (12..<18, true): return String(localized: "Good afternoon")
-        case (12..<18, false): return String(localized: "Good afternoon, \(n)")
-        case (_, true): return String(localized: "Good evening")
-        case (_, false): return String(localized: "Good evening, \(n)")
-        }
+        return n.isEmpty ? String(localized: "Hello") : String(localized: "Hello, \(n)")
     }
 }
 

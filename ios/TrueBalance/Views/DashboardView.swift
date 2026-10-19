@@ -30,16 +30,11 @@ struct DashboardView: View {
     /// Greeting and profile; scrolls away with the content.
     private var header: some View {
         HStack(alignment: .center) {
-            VStack(alignment: .leading, spacing: 0) {
-                Text(Profile.greeting(name: firstName))
-                    .font(.largeTitle.bold())
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.6)
-                    .accessibilityAddTraits(.isHeader)
-                Text("True Balance")
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(.secondary)
-            }
+            Text(Profile.greeting(name: firstName))
+                .font(.largeTitle.bold())
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+                .accessibilityAddTraits(.isHeader)
             Spacer()
             Button {
                 showingSettings = true

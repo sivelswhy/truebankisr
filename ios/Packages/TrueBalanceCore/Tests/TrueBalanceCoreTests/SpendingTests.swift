@@ -39,3 +39,14 @@ private func buy(_ date: String, _ amount: Double, _ name: String = "Shop", curr
     #expect(s.upcoming.isEmpty) // both already debited
     #expect(s.history?.count == 2)
 }
+
+@Test func cacheKeepsOldPurchasesAndRefreshesRecentOnes() {
+    func t(_ id: String, _ date: String, status: TxnStatus = .completed) -> Txn {
+        Txn(id: id, date: iso(date), processedDate: iso(date), chargedAmount: -1, description: id, status: status)
+    }
+    let cached = [t("old", "2026-03-10T08:00:00Z"), t("pending-tmp", "2026-10-15T08:00:00Z", status: .pending),
+                  t("dup", "2026-10-01T08:00:00Z")]
+    let fresh = [t("A15", "2026-10-15T08:00:00Z"), t("dup", "2026-10-01T08:00:00Z")]
+    let merged = PurchaseCache.merge(cached: cached, fresh: fresh, refetchedFrom: iso("2026-09-01T00:00:00Z"))
+    #expect(merged.map(\.id) == ["A15", "dup", "old"]) // stale pending copy gone, no duplicate, old kept
+}

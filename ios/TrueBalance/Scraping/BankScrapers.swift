@@ -204,17 +204,20 @@ enum Banks {
     static func fetchSnapshot(leumi: Credentials, max: Credentials, billingDay: Int = 2) async throws -> Snapshot {
         let since = Calendar.current.date(byAdding: .month, value: -2, to: .now)!
         let visible = UserDefaults.standard.bool(forKey: "showBankPages")
+        // With older purchases cached, only the recent months need downloading.
+        let cached = PurchaseCacheStore.load()
+        let monthsBack = cached == nil ? 12 : 2
         let b: Result<Account, BankError>
         let c: Result<Account, BankError>
         if visible {
             // One page on screen at a time.
             b = await capture { () async throws(BankError) in try await LeumiScraper.scrape(leumi, since: since, visible: true) }
-            c = await capture { () async throws(BankError) in try await MaxScraper.scrape(max, visible: true) }
+            c = await capture { () async throws(BankError) in try await MaxScraper.scrape(max, visible: true, monthsBack: monthsBack) }
         } else {
             // Both run on the main actor but spend their time awaiting the
             // sites, so they still overlap.
             let bank = Task { await capture { () async throws(BankError) in try await LeumiScraper.scrape(leumi, since: since) } }
-            let card = Task { await capture { () async throws(BankError) in try await MaxScraper.scrape(max) } }
+            let card = Task { await capture { () async throws(BankError) in try await MaxScraper.scrape(max, monthsBack: monthsBack) } }
             (b, c) = (await bank.value, await card.value)
         }
 
@@ -224,7 +227,11 @@ enum Banks {
         guard errors.isEmpty, case .success(let bankAccount) = b, case .success(let cardAccount) = c else {
             throw ScrapeFailure(errors: errors)
         }
-        return try TrueBalance.compute(bank: bankAccount, cards: [cardAccount], billingDay: billingDay)
+        let windowStart = MaxScraper.months(back: monthsBack, ahead: 0).first!
+        let purchases = PurchaseCache.merge(cached: cached ?? [], fresh: cardAccount.txns, refetchedFrom: windowStart)
+        PurchaseCacheStore.save(purchases)
+        return try TrueBalance.compute(bank: bankAccount, cards: [Account(accountNumber: cardAccount.accountNumber, txns: purchases)],
+                                       billingDay: billingDay)
     }
 }
 
