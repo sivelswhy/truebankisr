@@ -405,3 +405,46 @@ public enum BankMovement {
          TrueBalance.round2(-txns.filter { $0.chargedAmount < 0 }.reduce(0) { $0 + $1.chargedAmount }))
     }
 }
+
+/// The other side of a transfer, from Leumi's detail line. Leumi gives no more
+/// than this line ("העברה מאת: NAME BANK-BRANCH-ACCOUNT"), even on its site.
+public struct TransferParty: Hashable, Sendable {
+    public var name: String
+    public var bankCode: Int?
+    public var branch: String?
+    public var account: String?
+
+    /// "BNP PARIBAS - PARIS 10-800-02" → name, bank 10, branch 800, account 02.
+    public static func parse(_ text: String) -> TransferParty {
+        let pattern = try! NSRegularExpression(pattern: #"^(.*?)[\s,]*(\d{1,3})-(\d{1,4})-(\d{1,13})\s*$"#)
+        guard let m = pattern.firstMatch(in: text, range: NSRange(text.startIndex..., in: text)) else {
+            return TransferParty(name: text)
+        }
+        func group(_ i: Int) -> String { Range(m.range(at: i), in: text).map { String(text[$0]) } ?? "" }
+        let name = group(1).trimmingCharacters(in: CharacterSet(charactersIn: " -,"))
+        return TransferParty(name: name.isEmpty ? text : name, bankCode: Int(group(2)), branch: group(3), account: group(4))
+    }
+
+    public var bankName: String? { bankCode.flatMap { IsraeliBanks.names[$0] } }
+}
+
+/// Israeli bank codes (Leumi's own list, `UC_SO_160_GetBankList`).
+public enum IsraeliBanks {
+    public static let names: [Int: String] = [
+        1: "Isracard", 3: "Bank Esh Israel", 4: "Bank Yahav", 6: "Max It Finance", 7: "Industrial Development Bank",
+        8: "Israel Shipping Bank", 9: "Israel Postal Bank", 10: "Bank Leumi", 11: "Discount Bank", 12: "Bank Hapoalim",
+        13: "Union Bank", 14: "Otsar Ha-Hayal", 15: "Ofek Credit Union", 17: "Mercantile Discount", 18: "One Zero",
+        20: "Mizrahi-Tefahot", 21: "Nima Shefa Israel", 22: "Citibank", 23: "HSBC", 24: "Israel American Bank", 26: "UBank",
+        31: "First International Bank", 34: "Arab Israel Bank", 35: "Grow Payments", 39: "State Bank of India",
+        46: "Bank Massad", 47: "Global Remit", 52: "Poalei Agudat Israel Bank", 54: "Bank of Jerusalem",
+        58: "Rewire", 68: "Municipal Bank", 69: "GMT Tech Innovation", 79: "Monox (019)", 94: "Phoenix Gamma",
+        99: "Bank of Israel",
+    ]
+}
+
+extension BankMovement {
+    /// Sender (money in) or recipient (money out), split into its parts.
+    public static func party(_ t: Txn) -> TransferParty? {
+        counterparty(t).map(TransferParty.parse)
+    }
+}

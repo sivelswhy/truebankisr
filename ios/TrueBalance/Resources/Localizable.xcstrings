@@ -415,6 +415,16 @@
         }
       }
     },
+    "Account": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compte"
+          }
+        }
+      }
+    },
     "Accounts": {
       "localizations": {
         "fr": {
@@ -614,6 +624,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Banque Leumi"
+          }
+        }
+      }
+    },
+    "Branch": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agence"
           }
         }
       }
@@ -1508,6 +1528,16 @@
         }
       }
     },
+    "Name": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nom"
+          }
+        }
+      }
+    },
     "Net worth": {
       "localizations": {
         "fr": {
@@ -1838,6 +1868,16 @@
         }
       }
     },
+    "Recipient": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Destinataire"
+          }
+        }
+      }
+    },
     "Reference": {
       "localizations": {
         "fr": {
@@ -1954,6 +1994,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vois ce que tu peux vraiment dépenser : ton solde Leumi moins les dépenses Max encore à venir."
+          }
+        }
+      }
+    },
+    "Sender": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyeur"
           }
         }
       }
@@ -2136,6 +2186,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "L’identifiant et le mot de passe que tu utilises sur max.co.il."
+          }
+        }
+      }
+    },
+    "This is everything Leumi gives about the other side, also on its website.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C’est tout ce que Leumi donne sur l’autre partie, y compris sur son site."
           }
         }
       }

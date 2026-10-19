@@ -179,3 +179,12 @@ private let now = iso("2026-10-19T09:00:00Z")
     let totals = BankMovement.totals([out, t("2026-10-10T08:00:00Z", 9000, "משכורת")])
     #expect(totals.in == 9000 && totals.out == 500)
 }
+
+@Test func transferPartyIsSplit() {
+    let p = TransferParty.parse("BNP PARIBAS - PARIS 10-800-02")
+    #expect(p.name == "BNP PARIBAS - PARIS" && p.bankCode == 10 && p.branch == "800" && p.account == "02")
+    #expect(p.bankName == "Bank Leumi")
+    let q = TransferParty.parse("דנה כהן 12-345-678901")
+    #expect(q.name == "דנה כהן" && q.bankName == "Bank Hapoalim" && q.account == "678901")
+    #expect(TransferParty.parse("PAYBOX").name == "PAYBOX" && TransferParty.parse("PAYBOX").bankCode == nil)
+}
