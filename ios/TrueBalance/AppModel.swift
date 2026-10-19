@@ -107,6 +107,11 @@ final class AppModel {
         let wasBelow = (snapshot?.trueBalance ?? .infinity) < threshold
         snapshot = new
         if !isDemo { SnapshotStore.save(new) }
+        // Fill in the greeting's first name from the bank, unless already set.
+        if let name = new.holderFirstName,
+           (UserDefaults.standard.string(forKey: "firstName") ?? "").trimmingCharacters(in: .whitespaces).isEmpty {
+            UserDefaults.standard.set(name, forKey: "firstName")
+        }
         // Once per crossing, not on every refresh while it stays low.
         if new.trueBalance < threshold && !wasBelow && !isDemo { notifyLowBalance(new, threshold: threshold) }
     }
