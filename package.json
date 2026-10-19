@@ -22,5 +22,6 @@
     "@types/react-dom": "^19",
     "typescript": "^5.9"
   },
-  "type": "module"
+  "type": "module",
+  "license": "PolyForm-Noncommercial-1.0.0"
 }

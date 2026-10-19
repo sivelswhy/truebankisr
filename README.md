@@ -86,3 +86,12 @@ mkdir -p mac_arm-<version> && ditto -x -k <version>-chrome-mac-arm64.zip mac_arm
 ```
 
 Set `SHOW_BROWSER=1` in `.env.local` to watch the logins happen.
+
+## License
+
+[PolyForm Noncommercial 1.0.0](LICENSE.md): free to use, modify and share for
+personal and other noncommercial purposes. **Commercial use is not allowed.**
+Copyright 2026 sivelswhy.
+
+Built on [`israeli-bank-scrapers`](https://github.com/eshaham/israeli-bank-scrapers)
+(MIT); the iPhone login flows are ports of its Leumi and Max scrapers.
