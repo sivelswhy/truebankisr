@@ -7,10 +7,11 @@ struct TxnRoute: Hashable { var txn: Txn }
 struct MerchantRoute: Hashable { var key: String; var name: String }
 
 extension View {
-    /// Purchase detail and merchant history, reachable from any list of purchases.
+    /// Purchase and bank movement details and merchant history, reachable from any list.
     func purchaseDestinations() -> some View {
         navigationDestination(for: TxnRoute.self) { TransactionDetailView(txn: $0.txn) }
             .navigationDestination(for: MerchantRoute.self) { MerchantHistoryView(route: $0) }
+            .navigationDestination(for: BankRoute.self) { BankMovementDetailView(txn: $0.txn) }
     }
 }
 

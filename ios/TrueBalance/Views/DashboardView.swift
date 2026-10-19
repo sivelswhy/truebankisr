@@ -125,6 +125,7 @@ struct BalanceTab: View {
                         Text("Tap the balance to see how it’s calculated.")
                     }
                     recentSection
+                    LeumiSection()
                     Section {
                     } footer: {
                         TimelineView(.periodic(from: .now, by: 60)) { _ in

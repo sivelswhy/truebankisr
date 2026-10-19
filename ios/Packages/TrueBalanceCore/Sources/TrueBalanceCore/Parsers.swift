@@ -164,9 +164,13 @@ public enum LeumiParser {
 
     struct Raw: Decodable {
         var DateUTC: String?
+        var EffectiveDateUTC: String?
         var Description: String?
         var Amount: FlexibleNumber?
+        var RunningBalance: FlexibleNumber?
         var ReferenceNumberLong: FlexibleNumber?
+        var FITID: String?
+        var AdditionalData: String?
     }
 
     public static func parse(_ data: Data, accountNumber: String) throws -> Account {
@@ -182,14 +186,20 @@ public enum LeumiParser {
 
     static func map(_ raw: Raw, _ status: TxnStatus) -> Txn? {
         guard let date = DateParser.parse(raw.DateUTC) else { return nil }
-        return Txn(
-            id: raw.ReferenceNumberLong?.value.map { String(Int64($0)) } ?? UUID().uuidString,
+        var txn = Txn(
+            id: raw.FITID.flatMap { $0.isEmpty ? nil : $0 }
+                ?? raw.ReferenceNumberLong?.value.map { String(Int64($0)) } ?? UUID().uuidString,
             date: date,
             processedDate: date,
             chargedAmount: raw.Amount?.value ?? 0,
-            description: raw.Description ?? "",
+            description: (raw.Description ?? "").trimmingCharacters(in: .whitespacesAndNewlines),
             status: status
         )
+        let memo = raw.AdditionalData?.trimmingCharacters(in: .whitespacesAndNewlines)
+        txn.memo = memo?.isEmpty == false ? memo : nil
+        txn.runningBalance = raw.RunningBalance?.value
+        txn.valueDate = DateParser.parse(raw.EffectiveDateUTC).flatMap { Israel.day($0) == Israel.day(date) ? nil : $0 }
+        return txn
     }
 }
 

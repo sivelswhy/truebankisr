@@ -367,3 +367,41 @@ public enum CSVExport {
             : field
     }
 }
+
+// MARK: - Bank movements
+
+public enum BankMovement {
+    public enum Kind: String, Sendable { case transferIn, transferOut, cardDebit, income, expense }
+
+    /// "העברה מאת: BNP PARIBAS - PARIS 10-800-02" → "BNP PARIBAS - PARIS 10-800-02".
+    static let counterpartyPattern = try! NSRegularExpression(
+        pattern: #"^\s*(?:העברה|העב['׳]?|זיכוי|חיוב)?\s*(?:מאת|מ-|אל|ל-|לטובת|עבור|מ|ל)\s*:\s*(.+)$"#)
+    static let transferPattern = try! NSRegularExpression(pattern: #"העברה|העב['׳]|bit|ביט|paybox|פייבוקס|transfer"#, options: .caseInsensitive)
+
+    public static func isTransfer(_ t: Txn) -> Bool {
+        [t.description, t.memo ?? ""].contains { s in
+            transferPattern.firstMatch(in: s, range: NSRange(s.startIndex..., in: s)) != nil
+        }
+    }
+
+    public static func kind(_ t: Txn) -> Kind {
+        if TrueBalance.isCardDebit(t) { return .cardDebit }
+        if isTransfer(t) { return t.chargedAmount >= 0 ? .transferIn : .transferOut }
+        return t.chargedAmount >= 0 ? .income : .expense
+    }
+
+    /// Who sent or received the money, from Leumi's detail line.
+    public static func counterparty(_ t: Txn) -> String? {
+        guard let memo = t.memo,
+              let m = counterpartyPattern.firstMatch(in: memo, range: NSRange(memo.startIndex..., in: memo)),
+              let r = Range(m.range(at: 1), in: memo) else { return nil }
+        let name = memo[r].trimmingCharacters(in: .whitespaces)
+        return name.isEmpty ? nil : name
+    }
+
+    /// Money in and out over a list of movements (positive numbers).
+    public static func totals(_ txns: [Txn]) -> (in: Double, out: Double) {
+        (TrueBalance.round2(txns.filter { $0.chargedAmount > 0 }.reduce(0) { $0 + $1.chargedAmount }),
+         TrueBalance.round2(-txns.filter { $0.chargedAmount < 0 }.reduce(0) { $0 + $1.chargedAmount }))
+    }
+}
