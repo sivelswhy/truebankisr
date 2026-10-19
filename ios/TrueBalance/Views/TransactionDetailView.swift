@@ -65,21 +65,18 @@ struct MerchantLogo: View {
     }
 }
 
-/// Card row: generic card icon, two dots in the middle, last 4 digits.
+/// "Card" on the left; card icon, two dots and the last 4 digits together on the right.
 struct CardRow: View {
     var last4: String?
 
     var body: some View {
-        HStack {
-            Image(systemName: "creditcard")
-                .font(.title3)
-                .foregroundStyle(.secondary)
-            Spacer()
-            Text(verbatim: "••")
-                .foregroundStyle(.secondary)
-            Spacer()
-            Text(verbatim: last4 ?? "––––")
-                .monospacedDigit()
+        LabeledContent("Card") {
+            HStack(spacing: 6) {
+                Image(systemName: "creditcard")
+                Text(verbatim: "••")
+                Text(verbatim: last4 ?? "––––")
+                    .monospacedDigit()
+            }
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(last4.map { Text("Card ending in \($0)") } ?? Text("Card"))
