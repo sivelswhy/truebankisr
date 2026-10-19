@@ -62,7 +62,7 @@ struct BankMovementRow: View {
         HStack(spacing: 12) {
             BankKindIcon(kind: kind)
             VStack(alignment: .leading, spacing: 2) {
-                Text(BankMovement.counterparty(txn) ?? txn.description)
+                Text(BankMovement.party(txn)?.name ?? txn.description)
                     .lineLimit(1)
                 Text([Format.day(txn.date), kind.label].joined(separator: " · "))
                     .font(.footnote)
@@ -205,7 +205,7 @@ struct BankMovementDetailView: View {
 
     var body: some View {
         let kind = BankMovement.kind(txn)
-        let counterparty = BankMovement.counterparty(txn)
+        let party = BankMovement.party(txn)
         List {
             Section {
                 VStack(spacing: 10) {
@@ -215,7 +215,7 @@ struct BankMovementDetailView: View {
                         .frame(width: 84, height: 84)
                         .background(kind.color.gradient, in: .rect(cornerRadius: 22, style: .continuous))
                         .accessibilityHidden(true)
-                    Text(counterparty ?? txn.description)
+                    Text(party?.name ?? txn.description)
                         .font(.title2.bold())
                         .multilineTextAlignment(.center)
                     Text((txn.chargedAmount > 0 ? "+" : "") + txn.chargedAmount.shekels)
@@ -230,6 +230,30 @@ struct BankMovementDetailView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 8)
                 .listRowBackground(Color.clear)
+            }
+
+            if let party {
+                Section {
+                    LabeledContent("Name") {
+                        Text(party.name).multilineTextAlignment(.trailing).textSelection(.enabled)
+                    }
+                    if let code = party.bankCode {
+                        LabeledContent("Bank") {
+                            Text(party.bankName.map { "\($0) (\(code))" } ?? "\(code)")
+                                .multilineTextAlignment(.trailing)
+                        }
+                    }
+                    if let branch = party.branch {
+                        LabeledContent("Branch") { Text(verbatim: branch).monospacedDigit() }
+                    }
+                    if let account = party.account {
+                        LabeledContent("Account") { Text(verbatim: account).monospacedDigit().textSelection(.enabled) }
+                    }
+                } header: {
+                    Text(txn.chargedAmount >= 0 ? "Sender" : "Recipient")
+                } footer: {
+                    Text("This is everything Leumi gives about the other side, also on its website.")
+                }
             }
 
             Section {
@@ -259,7 +283,7 @@ struct BankMovementDetailView: View {
                 }
             }
         }
-        .navigationTitle(counterparty ?? txn.description)
+        .navigationTitle(party?.name ?? txn.description)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
     }
