@@ -457,72 +457,136 @@ struct ChangeBadge: View {
     }
 }
 
-// MARK: - Insights links on the dashboard
+// MARK: - Insights tab
 
-struct InsightsSection: View {
+/// Month to month, budgets, subscriptions, regular bank movements, net worth.
+struct InsightsTab: View {
     @Environment(AppModel.self) private var model
-    var snapshot: Snapshot
+    @State private var editingBudgets = false
 
     var body: some View {
-        let history = model.allPurchases
-        let subs = Subscriptions.detect(history)
-        let comparison = Spending.compareMonths(history)
-        let budgets = model.budgetProgress
-        let wealth = Wealth.of(snapshot)
+        TabScreen(title: String(localized: "Insights")) {
+            List {
+                if let s = model.snapshot {
+                    let history = model.allPurchases
+                    monthSection(Spending.compareMonths(history))
+                    budgetsSection(model.budgetProgress)
+                    subscriptionsSection(Subscriptions.detect(history))
+                    if let f = Forecaster.forecast(s) {
+                        Section {
+                            NavigationLink {
+                                ForecastView(forecast: f)
+                            } label: {
+                                Label("Salary and regular debits", systemImage: "arrow.left.arrow.right.circle")
+                            }
+                        } header: {
+                            Text("Leumi")
+                        }
+                    }
+                    if s.savings != nil || s.foreignAccounts != nil {
+                        wealthSection(Wealth.of(s))
+                    }
+                } else {
+                    NoDataView()
+                }
+            }
+            .sheet(isPresented: $editingBudgets) { BudgetEditView() }
+        }
+    }
+
+    private func monthSection(_ c: MonthComparison) -> some View {
         Section {
             NavigationLink {
-                MonthComparisonView(comparison: comparison)
+                MonthComparisonView(comparison: c)
             } label: {
-                LabeledContent {
-                    if let change = comparison.change { ChangeBadge(change: change) }
-                } label: {
-                    Label {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("This month vs last month")
-                            Text("\(comparison.thisMonth.wholeShekels) so far").font(.caption).foregroundStyle(.secondary).privacySensitive()
-                        }
-                    } icon: {
-                        Image(systemName: "arrow.left.arrow.right")
-                    }
-                }
-            }
-            NavigationLink {
-                BudgetsView()
-            } label: {
-                LabeledContent {
-                    if let worst = budgets.first {
-                        Text(worst.ratio.formatted(.percent.precision(.fractionLength(0))))
-                            .foregroundStyle(worst.ratio >= 1 ? .red : worst.ratio >= 0.8 ? .orange : .secondary)
+                HStack(alignment: .firstTextBaseline) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(c.thisMonth.wholeShekels)
+                            .font(.system(.title, design: .rounded, weight: .bold))
                             .monospacedDigit()
+                            .privacySensitive()
+                        Text("Last month at the same date: \(c.lastMonthSamePeriod.wholeShekels)")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .privacySensitive()
                     }
+                    Spacer()
+                    if let change = c.change { ChangeBadge(change: change) }
+                }
+                .padding(.vertical, 4)
+            }
+        } header: {
+            Text("This month on Max")
+        }
+    }
+
+    @ViewBuilder
+    private func budgetsSection(_ progress: [BudgetProgress]) -> some View {
+        Section {
+            if progress.isEmpty {
+                Button {
+                    editingBudgets = true
                 } label: {
-                    Label("Budgets", systemImage: "gauge.with.dots.needle.33percent")
+                    Label("Set a monthly budget per category", systemImage: "plus.circle")
+                }
+            } else {
+                ForEach(progress) { BudgetRow(progress: $0) }
+            }
+        } header: {
+            HStack {
+                Text("Budgets")
+                Spacer()
+                if !progress.isEmpty {
+                    Button("Edit") { editingBudgets = true }
+                        .font(.subheadline)
+                        .textCase(nil)
                 }
             }
-            if !subs.isEmpty {
-                NavigationLink {
-                    SubscriptionsView(subscriptions: subs)
-                } label: {
-                    LabeledContent {
-                        Text("\(Subscriptions.monthlyTotal(subs).wholeShekels)/month").monospacedDigit().privacySensitive()
-                    } label: {
-                        Label("\(subs.count) subscription(s)", systemImage: "repeat")
+        } footer: {
+            Text("You’ll get a notification at 80% and 100%.")
+        }
+    }
+
+    @ViewBuilder
+    private func subscriptionsSection(_ subs: [Recurring]) -> some View {
+        if !subs.isEmpty {
+            Section {
+                ForEach(subs.prefix(4)) { sub in
+                    NavigationLink(value: MerchantRoute(key: sub.name.lowercased(), name: sub.name)) {
+                        RecurringRow(item: sub)
                     }
                 }
+                if subs.count > 4 {
+                    NavigationLink("See all \(subs.count)") { SubscriptionsView(subscriptions: subs) }
+                }
+            } header: {
+                HStack {
+                    Text("Subscriptions")
+                    Spacer()
+                    Text("\(Subscriptions.monthlyTotal(subs).wholeShekels)/month")
+                        .monospacedDigit()
+                        .privacySensitive()
+                }
             }
-            if snapshot.savings != nil || snapshot.foreignAccounts != nil {
-                NavigationLink {
-                    WealthView(wealth: wealth)
+        }
+    }
+
+    private func wealthSection(_ w: Wealth) -> some View {
+        Section {
+            NavigationLink {
+                WealthView(wealth: w)
+            } label: {
+                LabeledContent {
+                    Text(w.total.wholeShekels)
+                        .font(.headline)
+                        .monospacedDigit()
+                        .privacySensitive()
                 } label: {
-                    LabeledContent {
-                        Text(wealth.total.wholeShekels).monospacedDigit().privacySensitive()
-                    } label: {
-                        Label("Net worth", systemImage: "building.columns")
-                    }
+                    Label("Current account, savings and foreign currency", systemImage: "building.columns")
                 }
             }
         } header: {
-            Text("Insights")
+            Text("Net worth")
         }
     }
 }

@@ -102,6 +102,7 @@
       }
     },
     "%@ so far": {
+      "extractionState": "stale",
       "localizations": {
         "fr": {
           "stringUnit": {
@@ -123,16 +124,16 @@
     },
     "%@ spent this month out of %@.": {
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ dépensés ce mois-ci sur %2$@."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ spent this month out of %2$@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ dépensés ce mois-ci sur %2$@."
           }
         }
       }
@@ -344,6 +345,7 @@
       }
     },
     "%lld subscription(s)": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "variations": {
@@ -471,16 +473,16 @@
     },
     "After Max on %@, you’ll have %@. Updated %@.": {
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Après Max le %1$@, tu auras %2$@. Mis à jour %3$@."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "After Max on %1$@, you’ll have %2$@. Updated %3$@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après Max le %1$@, tu auras %2$@. Mis à jour %3$@."
           }
         }
       }
@@ -555,6 +557,16 @@
         }
       }
     },
+    "Balance": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solde"
+          }
+        }
+      }
+    },
     "Bank": {
       "localizations": {
         "fr": {
@@ -591,6 +603,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Par catégorie"
+          }
+        }
+      }
+    },
+    "Calculation": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calcul"
           }
         }
       }
@@ -665,7 +687,18 @@
         }
       }
     },
+    "Charges": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prélèvements"
+          }
+        }
+      }
+    },
     "Clear": {
+      "extractionState": "stale",
       "localizations": {
         "fr": {
           "stringUnit": {
@@ -751,6 +784,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Compte courant après les prélèvements Max déjà connus, épargne et comptes en devises au taux du jour de la Banque d’Israël."
+          }
+        }
+      }
+    },
+    "Current account, savings and foreign currency": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compte courant, épargne et devises"
           }
         }
       }
@@ -1145,6 +1188,16 @@
         }
       }
     },
+    "Last month at the same date: %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mois dernier à la même date : %@"
+          }
+        }
+      }
+    },
     "Last month, same days": {
       "localizations": {
         "fr": {
@@ -1167,19 +1220,22 @@
     },
     "Left %@ of %@": {
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reste %1$@ sur %2$@"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Left %1$@ of %2$@"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reste %1$@ sur %2$@"
+          }
         }
       }
+    },
+    "Leumi": {
+      "shouldTranslate": false
     },
     "Leumi balance": {
       "localizations": {
@@ -1361,6 +1417,16 @@
         }
       }
     },
+    "No Max charge is waiting to be debited.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun achat Max en attente de prélèvement."
+          }
+        }
+      }
+    },
     "No budgets yet": {
       "localizations": {
         "fr": {
@@ -1431,6 +1497,16 @@
         }
       }
     },
+    "Nothing to debit": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien à prélever"
+          }
+        }
+      }
+    },
     "Notifications": {
       "localizations": {
         "fr": {
@@ -1481,6 +1557,16 @@
         }
       }
     },
+    "Period": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Période"
+          }
+        }
+      }
+    },
     "Privacy": {
       "localizations": {
         "fr": {
@@ -1507,6 +1593,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Profil"
+          }
+        }
+      }
+    },
+    "Profile and settings": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil et réglages"
           }
         }
       }
@@ -1611,6 +1707,16 @@
         }
       }
     },
+    "Salary and regular debits": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salaire et prélèvements réguliers"
+          }
+        }
+      }
+    },
     "Salary and regular debits included": {
       "localizations": {
         "fr": {
@@ -1641,6 +1747,16 @@
         }
       }
     },
+    "See all %lld": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout voir (%lld)"
+          }
+        }
+      }
+    },
     "See what you can really spend: your Leumi balance minus the Max charges still to come.": {
       "localizations": {
         "fr": {
@@ -1661,6 +1777,16 @@
         }
       }
     },
+    "Set a monthly budget per category": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixer un budget mensuel par catégorie"
+          }
+        }
+      }
+    },
     "Set budgets": {
       "localizations": {
         "fr": {
@@ -1672,6 +1798,7 @@
       }
     },
     "Settings": {
+      "extractionState": "stale",
       "localizations": {
         "fr": {
           "stringUnit": {
@@ -1741,7 +1868,18 @@
         }
       }
     },
+    "Spending": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépenses"
+          }
+        }
+      }
+    },
     "Spending over a period": {
+      "extractionState": "stale",
       "localizations": {
         "fr": {
           "stringUnit": {
@@ -1801,7 +1939,18 @@
         }
       }
     },
+    "This month on Max": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce mois-ci sur Max"
+          }
+        }
+      }
+    },
     "This month vs last month": {
+      "extractionState": "stale",
       "localizations": {
         "fr": {
           "stringUnit": {
@@ -2089,16 +2238,16 @@
     },
     "Your true balance is %@. Updated %@.": {
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ton vrai solde est de %1$@. Mis à jour %2$@."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Your true balance is %1$@. Updated %2$@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton vrai solde est de %1$@. Mis à jour %2$@."
           }
         }
       }
@@ -2139,6 +2288,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tu seras à découvert le jour du prélèvement, sauf si de l’argent arrive avant."
+          }
+        }
+      }
+    },
+    "You’ll get a notification at 80% and 100%.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu seras prévenu à 80 % et à 100 %."
           }
         }
       }
