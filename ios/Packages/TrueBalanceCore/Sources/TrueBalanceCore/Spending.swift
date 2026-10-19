@@ -45,3 +45,18 @@ public enum Spending {
         txns.filter { $0.merchantKey == key }.sorted { $0.date > $1.date }
     }
 }
+
+/// Past card purchases kept on the device, so history grows beyond what one
+/// refresh downloads and refreshes only need the recent months.
+public enum PurchaseCache {
+    /// Cached purchases made before `refetchedFrom`, plus everything just
+    /// fetched (which replaces the cached copy of those months: a pending
+    /// purchase becomes completed, a cancelled one disappears). Newest first.
+    public static func merge(cached: [Txn], fresh: [Txn], refetchedFrom start: Date) -> [Txn] {
+        let first = Israel.day(start)
+        var seen = Set<String>()
+        return (fresh + cached.filter { Israel.day($0.date) < first })
+            .filter { seen.insert($0.id).inserted }
+            .sorted { $0.date > $1.date }
+    }
+}

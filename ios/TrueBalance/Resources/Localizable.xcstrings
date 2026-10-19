@@ -373,6 +373,16 @@
         }
       }
     },
+    "Card ending in %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carte se terminant par %@"
+          }
+        }
+      }
+    },
     "Card spending": {
       "localizations": {
         "fr": {
@@ -583,72 +593,32 @@
         }
       }
     },
-    "Good afternoon": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bonjour"
-          }
-        }
-      }
-    },
-    "Good afternoon, %@": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bonjour, %@"
-          }
-        }
-      }
-    },
-    "Good evening": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bonsoir"
-          }
-        }
-      }
-    },
-    "Good evening, %@": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bonsoir, %@"
-          }
-        }
-      }
-    },
-    "Good morning": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bonjour"
-          }
-        }
-      }
-    },
-    "Good morning, %@": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bonjour, %@"
-          }
-        }
-      }
-    },
     "Heads up: you’ll be overdrawn": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Attention : tu vas être à découvert"
+          }
+        }
+      }
+    },
+    "Hello": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonjour"
+          }
+        }
+      }
+    },
+    "Hello, %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonjour, %@"
           }
         }
       }
@@ -739,16 +709,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Max"
-          }
-        }
-      }
-    },
-    "Max card": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Carte Max"
           }
         }
       }
@@ -913,12 +873,12 @@
         }
       }
     },
-    "Purchases from the last 12 months.": {
+    "Purchases saved on this iPhone.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Achats des 12 derniers mois."
+            "value": "Achats enregistrés sur cet iPhone."
           }
         }
       }
@@ -1033,17 +993,6 @@
         }
       }
     },
-    "Signing in to Leumi and Max. This can take up to a minute.": {
-      "extractionState": "stale",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connexion à Leumi et Max. Ça peut prendre jusqu’à une minute."
-          }
-        }
-      }
-    },
     "Signing in to Leumi…": {
       "localizations": {
         "fr": {
@@ -1060,17 +1009,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Connexion à Max…"
-          }
-        }
-      }
-    },
-    "Signing in to both sites. This can take up to a minute.": {
-      "extractionState": "stale",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connexion aux deux sites. Ça peut prendre jusqu’à une minute."
           }
         }
       }
@@ -1221,17 +1159,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mis à jour %@"
-          }
-        }
-      }
-    },
-    "Updating": {
-      "extractionState": "stale",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mise à jour"
           }
         }
       }
