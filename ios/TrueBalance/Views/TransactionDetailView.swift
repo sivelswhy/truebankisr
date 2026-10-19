@@ -193,12 +193,15 @@ struct TransactionDetailView: View {
                 LocationSection(item: item, source: location.source, address: txn.merchantAddress)
             }
 
-            Section {
-                NavigationLink(value: MerchantRoute(key: txn.merchantKey, name: txn.description)) {
-                    LabeledContent {
-                        Text("\(others.count) purchase(s)")
-                    } label: {
-                        Label("All purchases at \(txn.description)", systemImage: "list.bullet.rectangle")
+            // Only worth a link when there is more than this one purchase.
+            if others.count > 1 {
+                Section {
+                    NavigationLink(value: MerchantRoute(key: txn.merchantKey, name: txn.description)) {
+                        LabeledContent {
+                            Text("\(others.count) purchase(s)")
+                        } label: {
+                            Label("All purchases at \(txn.description)", systemImage: "list.bullet.rectangle")
+                        }
                     }
                 }
             }
