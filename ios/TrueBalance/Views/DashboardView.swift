@@ -7,7 +7,6 @@ struct DashboardView: View {
     @State private var showingSettings = false
     @State private var query = ""
     @State private var searching = false
-    @FocusState private var searchFocused: Bool
     @AppStorage("hideAmounts") private var hideAmounts = false
 
     var body: some View {
@@ -27,59 +26,22 @@ struct DashboardView: View {
         }
     }
 
-    /// Title with search and settings, or the search field while searching.
+    /// Title and settings; scrolls away with the content.
     private var header: some View {
-        HStack(spacing: 16) {
-            if searching {
-                HStack(spacing: 6) {
-                    Image(systemName: "magnifyingglass").foregroundStyle(.secondary)
-                    TextField("Search charges", text: $query)
-                        .focused($searchFocused)
-                        .submitLabel(.search)
-                        .autocorrectionDisabled()
-                    if !query.isEmpty {
-                        Button {
-                            query = ""
-                        } label: {
-                            Image(systemName: "xmark.circle.fill").foregroundStyle(.tertiary)
-                        }
-                        .buttonStyle(.borderless)
-                        .accessibilityLabel(Text("Clear"))
-                    }
-                }
-                .padding(.horizontal, 10)
-                .frame(height: 38)
-                .background(.quaternary.opacity(0.6), in: .rect(cornerRadius: 10, style: .continuous))
-                Button("Cancel") {
-                    withAnimation(.snappy) {
-                        searching = false
-                        query = ""
-                    }
-                }
-                .buttonStyle(.borderless)
-            } else {
-                Text("True Balance")
-                    .font(.largeTitle.bold())
-                    .accessibilityAddTraits(.isHeader)
-                Spacer()
-                Button {
-                    withAnimation(.snappy) { searching = true }
-                    searchFocused = true
-                } label: {
-                    Image(systemName: "magnifyingglass")
-                }
-                .buttonStyle(.borderless)
-                .accessibilityLabel(Text("Search charges"))
-                Button {
-                    showingSettings = true
-                } label: {
-                    Image(systemName: "gearshape")
-                }
-                .buttonStyle(.borderless)
-                .accessibilityLabel(Text("Settings"))
+        HStack {
+            Text("True Balance")
+                .font(.largeTitle.bold())
+                .accessibilityAddTraits(.isHeader)
+            Spacer()
+            Button {
+                showingSettings = true
+            } label: {
+                Image(systemName: "gearshape")
+                    .font(.title3)
             }
+            .buttonStyle(.borderless)
+            .accessibilityLabel(Text("Settings"))
         }
-        .font(.title3)
         .listRowBackground(Color.clear)
         .listRowInsets(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4))
     }
@@ -104,6 +66,13 @@ struct DashboardView: View {
         }
         .listStyle(.insetGrouped)
         .contentMargins(.top, 8, for: .scrollContent)
+        .safeAreaInset(edge: .bottom, alignment: .trailing) {
+            if snapshot != nil {
+                FloatingSearch(query: $query, isOpen: $searching)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 8)
+            }
+        }
         .redacted(reason: hideAmounts ? .privacy : [])
         .animation(.default, value: snapshot)
         .animation(.default, value: model.isRefreshing)
@@ -226,6 +195,97 @@ struct DashboardView: View {
                 let total = matches.reduce(0) { $0 - $1.1.chargedAmount }
                 Text("Total: \(total.shekels)").privacySensitive()
             }
+        }
+    }
+}
+
+/// Magnifying glass floating bottom-right in Liquid Glass; tapping it morphs
+/// into a search field.
+private struct FloatingSearch: View {
+    @Binding var query: String
+    @Binding var isOpen: Bool
+    @FocusState private var focused: Bool
+    @Namespace private var glass
+
+    var body: some View {
+        container {
+            HStack(spacing: 10) {
+                if isOpen {
+                    HStack(spacing: 8) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundStyle(.secondary)
+                        TextField("Search charges", text: $query)
+                            .focused($focused)
+                            .submitLabel(.search)
+                            .autocorrectionDisabled()
+                        if !query.isEmpty {
+                            Button {
+                                query = ""
+                            } label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundStyle(.tertiary)
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel(Text("Clear"))
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .frame(height: 50)
+                    .glass(id: "field", in: glass, shape: .capsule)
+
+                    Button {
+                        withAnimation(.bouncy) {
+                            isOpen = false
+                            query = ""
+                        }
+                    } label: {
+                        Image(systemName: "xmark")
+                            .font(.body.weight(.semibold))
+                            .frame(width: 50, height: 50)
+                    }
+                    .buttonStyle(.plain)
+                    .glass(id: "button", in: glass, shape: .circle)
+                    .accessibilityLabel(Text("Cancel"))
+                } else {
+                    Button {
+                        withAnimation(.bouncy) { isOpen = true }
+                        focused = true
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .font(.title3.weight(.semibold))
+                            .frame(width: 56, height: 56)
+                    }
+                    .buttonStyle(.plain)
+                    .glass(id: "button", in: glass, shape: .circle)
+                    .accessibilityLabel(Text("Search charges"))
+                }
+            }
+        }
+        .onChange(of: isOpen) { _, open in focused = open }
+    }
+
+    @ViewBuilder
+    private func container(@ViewBuilder _ content: () -> some View) -> some View {
+        if #available(iOS 26, *) {
+            GlassEffectContainer(spacing: 10) { content() }
+        } else {
+            content()
+        }
+    }
+}
+
+private extension View {
+    /// Liquid Glass on iOS 26+, frosted material before.
+    @ViewBuilder
+    func glass(id: String, in namespace: Namespace.ID, shape: some Shape) -> some View {
+        if #available(iOS 26, *) {
+            self.contentShape(shape)
+                .glassEffect(.regular.interactive(), in: shape)
+                .glassEffectID(id, in: namespace)
+        } else {
+            self.contentShape(shape)
+                .background(.regularMaterial, in: shape)
+                .shadow(color: .black.opacity(0.15), radius: 10, y: 4)
         }
     }
 }
