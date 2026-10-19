@@ -10,7 +10,7 @@ struct DashboardView: View {
 
     var body: some View {
         TabView(selection: $tab) {
-            Tab("Balance", systemImage: "shekelsign.circle", value: .balance) { BalanceTab() }
+            Tab("Home", systemImage: "house", value: .balance) { BalanceTab() }
             Tab("Charges", systemImage: "creditcard", value: .charges) { ChargesTab() }
             Tab("Spending", systemImage: "chart.bar.xaxis", value: .spending) { SpendingTab() }
             Tab("Insights", systemImage: "lightbulb", value: .insights) { InsightsTab() }
@@ -44,7 +44,6 @@ struct TabScreen<Content: View>: View {
                     }
                 }
                 .refreshable { await model.refresh() }
-                .redacted(reason: hideAmounts ? .privacy : [])
                 .sheet(isPresented: $showingSettings) { SettingsView() }
                 .navigationDestination(for: CategoryRoute.self) { route in
                     CategoryDetailView(route: route)
@@ -52,6 +51,8 @@ struct TabScreen<Content: View>: View {
                 }
                 .purchaseDestinations()
         }
+        // On the stack, so pages opened from the tab are covered too.
+        .redacted(reason: hideAmounts ? .privacy : [])
     }
 }
 
@@ -99,8 +100,9 @@ struct NoDataView: View {
     }
 }
 
-// MARK: - Balance
+// MARK: - Home
 
+/// What's really available (tap it for the calculation), then the latest payments.
 struct BalanceTab: View {
     @Environment(AppModel.self) private var model
     @AppStorage("firstName") private var firstName = ""
@@ -111,13 +113,18 @@ struct BalanceTab: View {
                 RefreshStatusSection()
                 if let s = model.snapshot {
                     Section {
-                        HeroView(snapshot: s, isDemo: model.isDemo)
+                        NavigationLink {
+                            CalculationView()
+                        } label: {
+                            HeroView(snapshot: s, isDemo: model.isDemo)
+                        }
                         if let f = Forecaster.forecast(s), !(f.income.isEmpty && f.debits.isEmpty) {
                             ForecastRow(forecast: f)
                         }
+                    } footer: {
+                        Text("Tap the balance to see how it’s calculated.")
                     }
-                    breakdown(s)
-                    CardsSection(snapshot: s)
+                    recentSection
                     Section {
                     } footer: {
                         TimelineView(.periodic(from: .now, by: 60)) { _ in
@@ -133,6 +140,73 @@ struct BalanceTab: View {
             .animation(.default, value: model.isRefreshing)
             .sensoryFeedback(.success, trigger: model.snapshot?.computedAt)
         }
+    }
+
+    @ViewBuilder
+    private var recentSection: some View {
+        let recent = RecentPurchasesView.purchases(model.allPurchases)
+        Section {
+            if recent.isEmpty {
+                Text("No purchases yet.").foregroundStyle(.secondary)
+            }
+            ForEach(recent.prefix(8)) { t in
+                NavigationLink(value: TxnRoute(txn: t)) { TransactionRow(txn: t) }
+            }
+            if recent.count > 8 {
+                NavigationLink("See all") { RecentPurchasesView() }
+            }
+        } header: {
+            Text("Latest payments")
+        }
+    }
+}
+
+/// Every purchase, newest first, grouped by day.
+struct RecentPurchasesView: View {
+    @Environment(AppModel.self) private var model
+
+    /// One row per purchase: later installments of the same purchase are left out.
+    static func purchases(_ all: [Txn]) -> [Txn] {
+        all.filter { ($0.installments?.number ?? 1) <= 1 }.sorted { $0.date > $1.date }
+    }
+
+    var body: some View {
+        let days = Dictionary(grouping: Self.purchases(model.allPurchases).prefix(300)) { Israel.day($0.date) }
+        List {
+            ForEach(days.keys.sorted(by: >), id: \.self) { day in
+                Section {
+                    ForEach(days[day]!) { t in
+                        NavigationLink(value: TxnRoute(txn: t)) { TransactionRow(txn: t) }
+                    }
+                } header: {
+                    HStack {
+                        Text(Israel.date(fromDay: day)?.formatted(.dateTime.weekday(.wide).day().month(.wide)) ?? day)
+                        Spacer()
+                        Text(Spending.total(days[day]!).shekels).monospacedDigit().privacySensitive()
+                    }
+                }
+            }
+        }
+        .navigationTitle("Latest payments")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
+    }
+}
+
+/// How the true balance is obtained: Leumi − next Max debit, and per card.
+struct CalculationView: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        List {
+            if let s = model.snapshot {
+                breakdown(s)
+                CardsSection(snapshot: s)
+            }
+        }
+        .navigationTitle("Calculation")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
     }
 
     /// Leumi − Max = available.
@@ -160,8 +234,6 @@ struct BalanceTab: View {
                 Label("Available", systemImage: "equal.circle")
             }
             .fontWeight(.semibold)
-        } header: {
-            Text("Calculation")
         } footer: {
             VStack(alignment: .leading, spacing: 4) {
                 if s.upcoming.count > 1 {
