@@ -74,3 +74,13 @@ jobs:
           gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 \
             || gh release create "$GITHUB_REF_NAME" --title "True Balance $GITHUB_REF_NAME" --generate-notes
           gh release upload "$GITHUB_REF_NAME" ios/TrueBalance.ipa --clobber
+      # Every commit on main gets its own release, so the latest IPA is one tap away.
+      - name: Release this commit
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="build-${{ github.run_number }}"
+          git log -1 --format='%B' > notes.md
+          gh release create "$tag" ios/TrueBalance.ipa --target "$GITHUB_SHA" \
+            --title "True Balance build ${{ github.run_number }} (${GITHUB_SHA::7})" --notes-file notes.md --latest
