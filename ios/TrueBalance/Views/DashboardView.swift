@@ -121,8 +121,6 @@ struct BalanceTab: View {
                         if let f = Forecaster.forecast(s), !(f.income.isEmpty && f.debits.isEmpty) {
                             ForecastRow(forecast: f)
                         }
-                    } footer: {
-                        Text("Tap the balance to see how it’s calculated.")
                     }
                     recentSection
                     LeumiSection()
