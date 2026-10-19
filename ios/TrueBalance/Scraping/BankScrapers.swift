@@ -204,6 +204,32 @@ enum LeumiScraper {
         return HolderName.fromGreeting(await d.bodyText())
     }
 
+    /// The "חיפוש מתקדם" button can take a while to appear on the phone, or sit
+    /// behind an interstitial: wait longer, find it by title or text, reload
+    /// once, and say what the page showed if it never comes.
+    private static func openAdvancedSearch(_ d: WebDriver) async throws {
+        let find = """
+            const label = 'חיפוש מתקדם';
+            const b = Array.from(document.querySelectorAll('button')).find(e =>
+                !e.hidden && (e.title === label || (e.innerText || '').trim() === label));
+            """
+        for attempt in 0..<2 {
+            if attempt > 0 {
+                d.step("Leumi: reloading transactions")
+                _ = try? await d.eval("location.reload()")
+                try await Task.sleep(for: .seconds(8))
+            }
+            if (try? await d.waitFor("advanced search button", timeout: 45, condition: find + "return !!b;")) != nil {
+                try await d.eval(find + "b.scrollIntoView({ block: 'center' }); b.click();")
+                return
+            }
+        }
+        let seen = (try? await d.eval("""
+            return document.title + ' | ' + location.hash + ' | ' + (document.body ? document.body.innerText : '').replace(/\\s+/g, ' ').slice(0, 160);
+            """) as? String) ?? ""
+        throw WebDriver.Timeout(what: "Leumi: advanced search button not found. Page: \(seen)")
+    }
+
     /// Deposits and savings (same endpoint as the JS scraper).
     private static func savings(_ d: WebDriver) async -> [SavingsAccount]? {
         d.step("Leumi: reading savings")
@@ -267,8 +293,7 @@ enum LeumiScraper {
             .filter { $0.isNumber || $0 == "-" || $0 == "_" } ?? ""
 
         d.step("Leumi: opening advanced search")
-        try await d.waitForElement(#"button[title="חיפוש מתקדם"]"#)
-        try await d.click(#"button[title="חיפוש מתקדם"]"#)
+        try await openAdvancedSearch(d)
         try await d.waitForElement("bll-radio-button")
         try await d.click("bll-radio-button:not([checked])")
         let from = #"input[formcontrolname="txtInputFrom"]"#
