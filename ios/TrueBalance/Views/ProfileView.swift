@@ -144,6 +144,12 @@ struct ProfileView: View {
                        in: ...to, displayedComponents: .date)
             DatePicker("To", selection: Binding(get: { to }, set: { to = $0; preset = nil }),
                        in: from...Date.now, displayedComponents: .date)
+            let txns = Spending.purchases(model.allPurchases, from: from, to: to)
+            ShareLink(item: CSVFile(name: csvName, text: CSVExport.make(txns, notes: model.notes)),
+                      preview: SharePreview(csvName)) {
+                Label("Export \(txns.count) purchase(s) as CSV", systemImage: "square.and.arrow.up")
+            }
+            .disabled(txns.isEmpty)
         } header: {
             Text("Spending over a period")
         }
@@ -214,6 +220,11 @@ struct ProfileView: View {
             ContentUnavailableView("No purchases", systemImage: "cart", description: Text("Nothing on your Max card in this period."))
                 .listRowBackground(Color.clear)
         }
+    }
+
+    /// "truebalance-2026-10-01_2026-10-19.csv".
+    private var csvName: String {
+        "truebalance-\(Israel.day(from))_\(Israel.day(to)).csv"
     }
 
     private var periodCaption: String {

@@ -109,6 +109,9 @@ struct DashboardView: View {
             } else {
                 Section {
                     HeroView(snapshot: s, isDemo: model.isDemo)
+                    if let f = Forecaster.forecast(s), !(f.income.isEmpty && f.debits.isEmpty) {
+                        ForecastRow(forecast: f)
+                    }
                 }
 
                 Section {
@@ -139,12 +142,18 @@ struct DashboardView: View {
                         if s.upcoming.count > 1 {
                             Text("With later installments already committed: \(s.trueBalanceAllKnown.shekels)")
                         }
+                        let converted = s.upcoming.flatMap(\.txns).filter(\.isConvertedEstimate).count
+                        if converted > 0 {
+                            Text("Includes \(converted) foreign-currency charge(s) converted at the Bank of Israel rate (estimate).")
+                        }
                         if !s.ignoredForeign.isEmpty {
                             Text("\(s.ignoredForeign.count) foreign-currency charge(s) not included.")
                         }
                     }
                 }
                 .monospacedDigit()
+
+                CardsSection(snapshot: s)
 
                 if s.upcoming.count > 1 {
                     UpcomingDebitsChart(upcoming: s.upcoming)
@@ -167,6 +176,8 @@ struct DashboardView: View {
                 if let next = s.nextCharge {
                     CategoryBreakdownSection(txns: next.txns, caption: String(localized: "Debited \(Format.day(next.chargeDate))"))
                 }
+
+                InsightsSection(snapshot: s)
 
                 Section {
                 } footer: {
@@ -384,6 +395,7 @@ private struct UpcomingDebitsChart: View {
 }
 
 struct TransactionRow: View {
+    @Environment(AppModel.self) private var model
     var txn: Txn
     /// Shown when the row is outside its debit section (search results).
     var debitDay: String? = nil
@@ -392,8 +404,16 @@ struct TransactionRow: View {
         HStack(spacing: 12) {
             CategoryIcon(key: txn.category)
             VStack(alignment: .leading, spacing: 2) {
-                Text(txn.description)
-                    .lineLimit(1)
+                HStack(spacing: 4) {
+                    Text(txn.description)
+                        .lineLimit(1)
+                    if model.notes[txn.id] != nil {
+                        Image(systemName: "tag.fill")
+                            .font(.caption2)
+                            .foregroundStyle(Color.accentColor)
+                            .accessibilityLabel(Text("Has a note"))
+                    }
+                }
                 Text(subtitle)
                     .font(.footnote)
                     .foregroundStyle(.secondary)
@@ -401,10 +421,16 @@ struct TransactionRow: View {
             }
             Spacer(minLength: 8)
             VStack(alignment: .trailing, spacing: 2) {
-                Text((-txn.chargedAmount).shekels)
+                Text((txn.isConvertedEstimate ? "≈ " : "") + (-txn.chargedAmount).shekels)
                     .monospacedDigit()
                     .privacySensitive()
-                if txn.status == .pending {
+                if let original = txn.originalAmount, let currency = txn.originalCurrency {
+                    Text((-original).formatted(.currency(code: currency)))
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .monospacedDigit()
+                        .privacySensitive()
+                } else if txn.status == .pending {
                     Text("Pending")
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(.orange)

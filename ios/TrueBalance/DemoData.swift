@@ -32,6 +32,14 @@ enum DemoData {
             ("Shufersal Deal", "groceries", 380), ("Aroma Espresso Bar", "restaurants", 42), ("Paz Yellow", "energy", 95),
             ("Rami Levy", "groceries", 210), ("Partner Communications", "telecom", 119.9), ("Wolt", "restaurants", 86),
         ]
+        // Subscriptions: same amount every month (Netflix is billed in dollars).
+        for month in 0...5 {
+            let netflix = Txn(id: "netflix-\(month)", date: ago(Double(month * 30 + 5)), processedDate: billing(-month + 1),
+                              chargedAmount: -15.49, chargedCurrency: "USD", description: "NETFLIX.COM", category: "leisure")
+            let spotify = Txn(id: "spotify-\(month)", date: ago(Double(month * 30 + 8)), processedDate: billing(-month + 1),
+                              chargedAmount: -19.9, description: "Spotify", category: "leisure")
+            txns += [with(netflix, card: main), with(spotify, card: second)]
+        }
         for month in 1...5 {
             for (i, p) in past.enumerated() {
                 let days = Double(month * 30 + i * 4 + 3)
@@ -40,9 +48,24 @@ enum DemoData {
                                  card: i.isMultiple(of: 3) ? second : main))
             }
         }
-        return try! TrueBalance.compute(
-            bank: Account(accountNumber: "812-123456", balance: 163, txns: []),
+        // Leumi: salary and standing orders, for the forecast.
+        var bank: [Txn] = []
+        for month in 1...3 {
+            let back = Double((month - 1) * 30)
+            bank += [
+                Txn(id: "salary-\(month)", date: ago(24 + back), processedDate: ago(24 + back), chargedAmount: 11_800 + Double(month * 50), description: "משכורת"),
+                Txn(id: "rent-\(month)", date: ago(18 + back), processedDate: ago(18 + back), chargedAmount: -4_900, description: "שכר דירה"),
+                Txn(id: "insurance-\(month)", date: ago(22 + back), processedDate: ago(22 + back), chargedAmount: -312.4, description: "הראל ביטוח"),
+            ]
+        }
+        var snapshot = try! TrueBalance.compute(
+            bank: Account(accountNumber: "812-123456", balance: 163, txns: bank),
             cards: [Account(accountNumber: "max", txns: txns)],
-            now: now)
+            now: now, fxRates: ["USD": 3.11, "EUR": 3.49])
+        snapshot.cards = [CardInfo(last4: main, creditLimit: 15_000, available: 12_480),
+                          CardInfo(last4: second, creditLimit: 5_000, available: 4_620)]
+        snapshot.savings = [SavingsAccount(name: "פיקדון קצר מועד", balance: 25_000)]
+        snapshot.foreignAccounts = [ForeignAccount(currency: "USD", balance: 1_250)]
+        return snapshot
     }
 }

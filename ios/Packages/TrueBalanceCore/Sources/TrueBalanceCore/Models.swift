@@ -34,6 +34,12 @@ public struct Txn: Codable, Hashable, Identifiable, Sendable {
     public var logoURL: String?
     /// Merchant address or city, when the card company provides one.
     public var merchantAddress: String?
+    /// For a foreign-currency charge converted to ILS: the original amount
+    /// (negative = expense) and currency. The ILS amount is then an estimate.
+    public var originalAmount: Double?
+    public var originalCurrency: String?
+
+    public var isConvertedEstimate: Bool { originalCurrency != nil && originalCurrency != chargedCurrency }
 
     /// Groups purchases from the same merchant ("  SHUFERSAL " = "shufersal").
     public var merchantKey: String {
@@ -101,6 +107,13 @@ public struct Snapshot: Codable, Hashable, Sendable {
     public var history: [Txn]?
     /// The holder's first name as shown by Max or Leumi, if found.
     public var holderFirstName: String?
+    /// Leumi current-account movements (for salary and standing-order forecasts).
+    public var bankTxns: [Txn]?
+    public var cards: [CardInfo]?
+    public var savings: [SavingsAccount]?
+    public var foreignAccounts: [ForeignAccount]?
+    /// Shekels per unit (Bank of Israel), used for the conversions above.
+    public var fxRates: [String: Double]?
 }
 
 public enum Israel {

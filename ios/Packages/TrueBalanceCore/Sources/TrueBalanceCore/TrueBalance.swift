@@ -8,20 +8,24 @@ public enum TrueBalance {
     /// Leumi line for the monthly card debit, e.g. "מקס איט פיננ" / "MAX IT".
     static let cardDebitPattern = try! NSRegularExpression(pattern: "מקס|max|לאומי קארד|leumi card", options: .caseInsensitive)
 
-    public static func compute(bank: Account, cards: [Account], now: Date = .now, billingDay: Int = 2) throws -> Snapshot {
+    /// `fxRates` (shekels per unit) converts foreign-currency charges to an
+    /// ILS estimate; charges with no known rate are reported, not subtracted.
+    public static func compute(bank: Account, cards: [Account], now: Date = .now, billingDay: Int = 2,
+                               fxRates: [String: Double] = [:]) throws -> Snapshot {
         guard let balance = bank.balance else { throw MissingBalance() }
         let today = Israel.day(now)
 
         // If the bank already shows today's card debit, that cycle is in the balance.
-        let debitedToday = bank.txns.contains { t in
-            Israel.day(t.date) == today && t.chargedAmount < 0
-                && cardDebitPattern.firstMatch(in: t.description, range: NSRange(t.description.startIndex..., in: t.description)) != nil
-        }
+        let debitedToday = bank.txns.contains { Israel.day($0.date) == today && isCardDebit($0) }
 
         var ignoredForeign: [Txn] = []
         var byDay: [String: [Txn]] = [:]
 
-        for txn in cards.flatMap(\.txns) {
+        // Foreign charges with a known rate become ILS estimates everywhere.
+        let all = cards.flatMap(\.txns).map { t in
+            t.chargedCurrency == "ILS" ? t : fxRates[t.chargedCurrency].map { converted(t, rate: $0) } ?? t
+        }
+        for txn in all {
             if txn.chargedCurrency != "ILS" {
                 ignoredForeign.append(txn)
                 continue
@@ -48,7 +52,9 @@ public enum TrueBalance {
             upcoming: upcoming,
             ignoredForeign: ignoredForeign,
             computedAt: now,
-            history: cards.flatMap(\.txns).sorted { $0.date > $1.date }
+            history: all.sorted { $0.date > $1.date },
+            bankTxns: bank.txns.sorted { $0.date > $1.date },
+            fxRates: fxRates.isEmpty ? nil : fxRates
         )
     }
 
@@ -65,6 +71,22 @@ public enum TrueBalance {
     }
 
     static func round2(_ n: Double) -> Double { (n * 100).rounded() / 100 }
+
+    /// The bank line for the monthly card debit.
+    public static func isCardDebit(_ t: Txn) -> Bool {
+        t.chargedAmount < 0
+            && cardDebitPattern.firstMatch(in: t.description, range: NSRange(t.description.startIndex..., in: t.description)) != nil
+    }
+
+    /// ILS estimate of a foreign-currency charge, keeping the original amount.
+    static func converted(_ t: Txn, rate: Double) -> Txn {
+        var c = t
+        c.originalAmount = t.chargedAmount
+        c.originalCurrency = t.chargedCurrency
+        c.chargedAmount = round2(t.chargedAmount * rate)
+        c.chargedCurrency = "ILS"
+        return c
+    }
 
     /// Whole days from today (Israel) to a YYYY-MM-DD day; 0 on the day itself.
     public static func daysUntil(_ day: String, now: Date = .now) -> Int {

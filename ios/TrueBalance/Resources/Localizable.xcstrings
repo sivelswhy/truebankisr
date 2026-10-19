@@ -1,6 +1,36 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "%@ a year": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ par an"
+          }
+        }
+      }
+    },
+    "%@ account": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compte %@"
+          }
+        }
+      }
+    },
+    "%@ account (not counted, no rate)": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compte %@ (non compté, pas de taux)"
+          }
+        }
+      }
+    },
     "%@ asked for an extra verification step. Sign in once on their website, then try again.": {
       "localizations": {
         "fr": {
@@ -21,6 +51,26 @@
         }
       }
     },
+    "%@ at the Bank of Israel rate": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ au taux de la Banque d’Israël"
+          }
+        }
+      }
+    },
+    "%@ budget used up": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget %@ épuisé"
+          }
+        }
+      }
+    },
     "%@ didn’t accept this username or password.": {
       "localizations": {
         "fr": {
@@ -31,12 +81,88 @@
         }
       }
     },
+    "%@ left": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "reste %@"
+          }
+        }
+      }
+    },
+    "%@ over": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de dépassement"
+          }
+        }
+      }
+    },
+    "%@ so far": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pour l’instant"
+          }
+        }
+      }
+    },
+    "%@ spent": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ dépensés"
+          }
+        }
+      }
+    },
+    "%@ spent this month out of %@.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ dépensés ce mois-ci sur %2$@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ spent this month out of %2$@."
+          }
+        }
+      }
+    },
     "%@ took too long to respond. Try again.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "%@ a mis trop de temps à répondre. Réessaie."
+          }
+        }
+      }
+    },
+    "%@/month": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/mois"
+          }
+        }
+      }
+    },
+    "%@: 80%% of the budget used": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : 80 %% du budget utilisé"
           }
         }
       }
@@ -217,6 +343,46 @@
         }
       }
     },
+    "%lld subscription(s)": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld subscription"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld subscriptions"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld abonnement"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld abonnements"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "30 days": {
       "localizations": {
         "fr": {
@@ -237,12 +403,42 @@
         }
       }
     },
+    "About %@ a day until the debit.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Environ %@ par jour jusqu’au prélèvement."
+          }
+        }
+      }
+    },
     "Accounts": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Comptes"
+          }
+        }
+      }
+    },
+    "Add": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter"
+          }
+        }
+      }
+    },
+    "Add a note (e.g. reimbursed by Dana)": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter une note (ex. remboursé par Dana)"
           }
         }
       }
@@ -269,6 +465,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Après le prélèvement Max du %1$@, ton solde sera de %2$@."
+          }
+        }
+      }
+    },
+    "After Max on %@, you’ll have %@. Updated %@.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après Max le %1$@, tu auras %2$@. Mis à jour %3$@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After Max on %1$@, you’ll have %2$@. Updated %3$@."
           }
         }
       }
@@ -303,6 +515,16 @@
         }
       }
     },
+    "Amounts debited %@.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Montants prélevés le %@."
+          }
+        }
+      }
+    },
     "Automatic refresh": {
       "localizations": {
         "fr": {
@@ -323,6 +545,16 @@
         }
       }
     },
+    "Available after Max": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disponible après Max"
+          }
+        }
+      }
+    },
     "Bank": {
       "localizations": {
         "fr": {
@@ -339,6 +571,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Banque Leumi"
+          }
+        }
+      }
+    },
+    "Budgets": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budgets"
           }
         }
       }
@@ -393,6 +635,16 @@
         }
       }
     },
+    "Cards": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cartes"
+          }
+        }
+      }
+    },
     "Category": {
       "localizations": {
         "fr": {
@@ -403,12 +655,32 @@
         }
       }
     },
+    "Change": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Évolution"
+          }
+        }
+      }
+    },
     "Clear": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Effacer"
+          }
+        }
+      }
+    },
+    "Compared with the same days of last month.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparé aux mêmes jours du mois dernier."
           }
         }
       }
@@ -473,12 +745,32 @@
         }
       }
     },
+    "Current account after the Max debits already known, savings and foreign-currency accounts at today’s Bank of Israel rate.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compte courant après les prélèvements Max déjà connus, épargne et comptes en devises au taux du jour de la Banque d’Israël."
+          }
+        }
+      }
+    },
     "DEMO": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "DÉMO"
+          }
+        }
+      }
+    },
+    "Daily budget": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget du jour"
           }
         }
       }
@@ -563,12 +855,32 @@
         }
       }
     },
+    "Edit": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier"
+          }
+        }
+      }
+    },
     "English and French are available. Choose the app’s language in Settings.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "L’anglais et le français sont disponibles. Choisis la langue de l’app dans Réglages."
+          }
+        }
+      }
+    },
+    "Every month on Leumi": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaque mois sur Leumi"
           }
         }
       }
@@ -583,12 +895,102 @@
         }
       }
     },
+    "Expected on %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prévu le %@"
+          }
+        }
+      }
+    },
+    "Export %lld purchase(s) as CSV": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Export %lld purchase as CSV"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Export %lld purchases as CSV"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Exporter %lld achat en CSV"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Exporter %lld achats en CSV"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Forecast": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prévision"
+          }
+        }
+      }
+    },
     "From": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Du"
+          }
+        }
+      }
+    },
+    "Get daily budget": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obtenir le budget du jour"
+          }
+        }
+      }
+    },
+    "Get true balance": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obtenir le vrai solde"
+          }
+        }
+      }
+    },
+    "Has a note": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A une note"
           }
         }
       }
@@ -643,12 +1045,82 @@
         }
       }
     },
+    "Includes %lld foreign-currency charge(s) converted at the Bank of Israel rate (estimate).": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Includes %lld foreign-currency charge converted at the Bank of Israel rate (estimate)."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Includes %lld foreign-currency charges converted at the Bank of Israel rate (estimate)."
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Inclut %lld achat en devises converti au taux de la Banque d’Israël (estimation)."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Inclut %lld achats en devises convertis au taux de la Banque d’Israël (estimation)."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Including regular debits": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prélèvements réguliers compris"
+          }
+        }
+      }
+    },
+    "Insights": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyse"
+          }
+        }
+      }
+    },
     "Installment": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Échéance"
+          }
+        }
+      }
+    },
+    "Kept on this iPhone only, and included in the CSV export.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gardé uniquement sur cet iPhone, et inclus dans l’export CSV."
           }
         }
       }
@@ -673,12 +1145,58 @@
         }
       }
     },
+    "Last month, same days": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mois dernier, mêmes jours"
+          }
+        }
+      }
+    },
+    "Last month, whole": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mois dernier, en entier"
+          }
+        }
+      }
+    },
+    "Left %@ of %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reste %1$@ sur %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Left %1$@ of %2$@"
+          }
+        }
+      }
+    },
     "Leumi balance": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Solde Leumi"
+          }
+        }
+      }
+    },
+    "Leumi current account": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compte courant Leumi"
           }
         }
       }
@@ -713,6 +1231,26 @@
         }
       }
     },
+    "Max charges from the same merchant, for the same amount, every month. Installment plans aren’t included.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Achats Max chez le même commerçant, du même montant, chaque mois. Les paiements en plusieurs fois ne sont pas inclus."
+          }
+        }
+      }
+    },
+    "Max charges to come": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Achats Max à prélever"
+          }
+        }
+      }
+    },
     "Max is debited today": {
       "localizations": {
         "fr": {
@@ -729,6 +1267,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Achats Max depuis le %@."
+          }
+        }
+      }
+    },
+    "Max purchases since the 1st of the month. Notifications at 80% and 100%.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Achats Max depuis le 1er du mois. Notifications à 80 % et 100 %."
           }
         }
       }
@@ -753,12 +1301,72 @@
         }
       }
     },
+    "Month to month": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mois par mois"
+          }
+        }
+      }
+    },
+    "Monthly amount. Leave empty for no budget.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Montant mensuel. Laisse vide pour ne pas avoir de budget."
+          }
+        }
+      }
+    },
+    "Net worth": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patrimoine"
+          }
+        }
+      }
+    },
+    "New tag": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle étiquette"
+          }
+        }
+      }
+    },
+    "Next around %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prochain vers le %@"
+          }
+        }
+      }
+    },
     "Next debit": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Au prochain prélèvement"
+          }
+        }
+      }
+    },
+    "No budgets yet": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas encore de budget"
           }
         }
       }
@@ -783,6 +1391,36 @@
         }
       }
     },
+    "None": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun"
+          }
+        }
+      }
+    },
+    "Note and tags": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note et étiquettes"
+          }
+        }
+      }
+    },
+    "Nothing left to spread until the debit.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus rien à répartir jusqu’au prélèvement."
+          }
+        }
+      }
+    },
     "Nothing on your Max card in this period.": {
       "localizations": {
         "fr": {
@@ -803,6 +1441,16 @@
         }
       }
     },
+    "Open True Balance once to connect Leumi and Max.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvre True Balance une fois pour connecter Leumi et Max."
+          }
+        }
+      }
+    },
     "Password": {
       "localizations": {
         "fr": {
@@ -819,6 +1467,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "En attente"
+          }
+        }
+      }
+    },
+    "Per month": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Par mois"
           }
         }
       }
@@ -923,12 +1581,52 @@
         }
       }
     },
+    "Regular Leumi movements expected before the debit, detected from the last months: same payer or payee, about the same amount, every month.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mouvements Leumi réguliers attendus avant le prélèvement, repérés sur les derniers mois : même émetteur ou bénéficiaire, à peu près le même montant, chaque mois."
+          }
+        }
+      }
+    },
+    "Reimbursed": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remboursé"
+          }
+        }
+      }
+    },
     "Required": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Obligatoire"
+          }
+        }
+      }
+    },
+    "Salary and regular debits included": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salaire et prélèvements réguliers compris"
+          }
+        }
+      }
+    },
+    "Savings": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Épargne"
           }
         }
       }
@@ -953,12 +1651,42 @@
         }
       }
     },
+    "Set a monthly amount for a category, e.g. groceries ₪1,500. You’ll get a notification at 80% and 100%.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixe un montant mensuel par catégorie, par exemple courses 1 500 ₪. Tu seras prévenu à 80 % et à 100 %."
+          }
+        }
+      }
+    },
+    "Set budgets": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Définir des budgets"
+          }
+        }
+      }
+    },
     "Settings": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Réglages"
+          }
+        }
+      }
+    },
+    "Shared": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partagé"
           }
         }
       }
@@ -1023,6 +1751,26 @@
         }
       }
     },
+    "Subscriptions": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonnements"
+          }
+        }
+      }
+    },
+    "Tag": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étiquette"
+          }
+        }
+      }
+    },
     "The username and password you use on leumi.co.il.": {
       "localizations": {
         "fr": {
@@ -1049,6 +1797,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ce mois-ci"
+          }
+        }
+      }
+    },
+    "This month vs last month": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce mois-ci vs le mois dernier"
           }
         }
       }
@@ -1113,6 +1871,16 @@
         }
       }
     },
+    "True balance": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vrai solde"
+          }
+        }
+      }
+    },
     "Try with sample data": {
       "localizations": {
         "fr": {
@@ -1173,6 +1941,16 @@
         }
       }
     },
+    "Used %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilisé %@"
+          }
+        }
+      }
+    },
     "Used to greet you on the home screen.": {
       "localizations": {
         "fr": {
@@ -1193,6 +1971,16 @@
         }
       }
     },
+    "What you can spend per day until the next Max debit.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce que tu peux dépenser par jour jusqu’au prochain prélèvement Max."
+          }
+        }
+      }
+    },
     "When you open the app, and in the background": {
       "localizations": {
         "fr": {
@@ -1209,6 +1997,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "En comptant les échéances suivantes déjà engagées : %@"
+          }
+        }
+      }
+    },
+    "Work": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro"
           }
         }
       }
@@ -1249,6 +2047,16 @@
         }
       }
     },
+    "Your Leumi balance minus the next Max debit, from the last update.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton solde Leumi moins le prochain prélèvement Max, d’après la dernière mise à jour."
+          }
+        }
+      }
+    },
     "Your credentials are stored in this iPhone’s Keychain and never leave it, except to sign in to Leumi and Max.": {
       "localizations": {
         "fr": {
@@ -1275,6 +2083,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ton vrai solde est de %@."
+          }
+        }
+      }
+    },
+    "Your true balance is %@. Updated %@.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton vrai solde est de %1$@. Mis à jour %2$@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your true balance is %1$@. Updated %2$@."
           }
         }
       }

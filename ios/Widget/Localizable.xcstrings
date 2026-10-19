@@ -1,0 +1,76 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "about %@/day": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "environ %@/jour"
+          }
+        }
+      }
+    },
+    "After Max · %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après Max · %@"
+          }
+        }
+      }
+    },
+    "Open True Balance to connect your accounts.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvre True Balance pour connecter tes comptes."
+          }
+        }
+      }
+    },
+    "Really available": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vraiment disponible"
+          }
+        }
+      }
+    },
+    "True balance": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vrai solde"
+          }
+        }
+      }
+    },
+    "What’s really available after the next Max debit.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce qui est vraiment disponible après le prochain prélèvement Max."
+          }
+        }
+      }
+    },
+    "₪ %@ available": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ₪ disponibles"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
