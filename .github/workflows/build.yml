@@ -1,10 +1,30 @@
 name: Build
 
+# Commits that only touch docs or CI settings don't build (run the workflow
+# by hand from the Actions tab if needed). Tags always build.
 on:
   push:
     branches: [main]
     tags: ["v*"]
+    paths-ignore:
+      - "**.md"
+      - "LICENSE*"
+      - "docs/**"
+      - ".github/**"
+      - "altstore-source.json"
+      - ".gitignore"
+      - ".env.example"
+      - "ios/Local.xcconfig.example"
   pull_request:
+    paths-ignore:
+      - "**.md"
+      - "LICENSE*"
+      - "docs/**"
+      - ".github/**"
+      - "altstore-source.json"
+      - ".gitignore"
+      - ".env.example"
+      - "ios/Local.xcconfig.example"
   workflow_dispatch:
 
 permissions:
@@ -16,8 +36,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # On main, wait 10 minutes before building: a push in the meantime cancels
+  # this run (concurrency above), so a burst of commits gives one build, of
+  # the last one. Tags, pull requests and manual runs start at once.
+  settle:
+    name: Wait for more commits
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait 10 minutes
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: sleep 600
+
   web:
     name: Web app
+    needs: settle
     runs-on: ubuntu-latest
     env:
       PUPPETEER_SKIP_DOWNLOAD: "1" # Chromium is only needed to scrape, not to build
@@ -34,6 +66,7 @@ jobs:
 
   ios:
     name: iPhone app
+    needs: settle
     runs-on: macos-26
     steps:
       - uses: actions/checkout@v7
