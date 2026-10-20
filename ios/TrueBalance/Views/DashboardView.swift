@@ -422,7 +422,7 @@ private struct HeroView: View {
                                 .background(.quaternary, in: .capsule)
                         }
                         Spacer()
-                        Image(systemName: "chevron.right")
+                        Image(systemName: "chevron.forward")
                             .font(.footnote.weight(.semibold))
                             .foregroundStyle(.tertiary)
                     }

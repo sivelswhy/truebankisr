@@ -511,7 +511,7 @@ struct InsightsTab: View {
                             .font(.subheadline.weight(.medium))
                             .foregroundStyle(.secondary)
                         Spacer()
-                        Image(systemName: "chevron.right")
+                        Image(systemName: "chevron.forward")
                             .font(.footnote.weight(.semibold))
                             .foregroundStyle(.tertiary)
                     }
