@@ -26,6 +26,8 @@ struct TrueBalanceApp: App {
                 }
             }
             .environment(model)
+            // Back from a European bank's login (docs/enablebanking.html).
+            .onOpenURL { url in Task { await model.handleOpenURL(url) } }
         }
         .onChange(of: scenePhase) { _, phase in
             switch phase {

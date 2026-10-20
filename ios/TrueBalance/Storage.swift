@@ -121,3 +121,67 @@ enum BudgetStore {
         UserDefaults.standard.set(limits.filter { $0.value > 0 }, forKey: "budgets")
     }
 }
+
+/// One Codable value in the Keychain, this device only (like `Keychain`).
+struct KeychainItem<Value: Codable> {
+    var account: String
+
+    private var base: [String: Any] { [
+        kSecClass as String: kSecClassGenericPassword,
+        kSecAttrService as String: "TrueBalance",
+        kSecAttrAccount as String: account,
+    ] }
+
+    func save(_ value: Value) {
+        guard let data = try? JSONEncoder().encode(value) else { return }
+        SecItemDelete(base as CFDictionary)
+        var query = base
+        query[kSecValueData as String] = data
+        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
+        SecItemAdd(query as CFDictionary, nil)
+    }
+
+    func load() -> Value? {
+        var query = base
+        query[kSecReturnData as String] = true
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
+        var item: CFTypeRef?
+        guard SecItemCopyMatching(query as CFDictionary, &item) == errSecSuccess, let data = item as? Data else { return nil }
+        return try? JSONDecoder().decode(Value.self, from: data)
+    }
+
+    func delete() {
+        SecItemDelete(base as CFDictionary)
+    }
+}
+
+/// Enable Banking: the app key and the bank sessions (secrets), and the last
+/// balances and transactions read (a file, like the snapshot).
+enum EuroStore {
+    static let key = KeychainItem<EnableBankingKey>(account: "enablebanking-key")
+    static let connections = KeychainItem<[EuroConnection]>(account: "enablebanking-sessions")
+
+    private static var url: URL {
+        URL.applicationSupportDirectory.appending(path: "euro-banks.json")
+    }
+
+    static func loadData() -> [EuroBankData] {
+        guard let data = try? Data(contentsOf: url) else { return [] }
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return (try? decoder.decode([EuroBankData].self, from: data)) ?? []
+    }
+
+    static func saveData(_ banks: [EuroBankData]) {
+        try? FileManager.default.createDirectory(at: .applicationSupportDirectory, withIntermediateDirectories: true)
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        try? encoder.encode(banks).write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+    }
+
+    static func deleteAll() {
+        key.delete()
+        connections.delete()
+        try? FileManager.default.removeItem(at: url)
+    }
+}

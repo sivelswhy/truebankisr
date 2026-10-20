@@ -415,6 +415,26 @@
         }
       }
     },
+    "Access expired": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accès expiré"
+          }
+        }
+      }
+    },
+    "Access has expired. Connect the bank again.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’accès a expiré. Reconnectez la banque."
+          }
+        }
+      }
+    },
     "Account": {
       "localizations": {
         "fr": {
@@ -547,6 +567,16 @@
         }
       }
     },
+    "Application ID": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Identifiant de l’application"
+          }
+        }
+      }
+    },
     "Automatic refresh": {
       "localizations": {
         "fr": {
@@ -608,6 +638,16 @@
         }
       }
     },
+    "Balance not available": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solde indisponible"
+          }
+        }
+      }
+    },
     "Bank": {
       "localizations": {
         "fr": {
@@ -624,6 +664,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Banque Leumi"
+          }
+        }
+      }
+    },
+    "Banks": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Banques"
           }
         }
       }
@@ -779,6 +829,16 @@
         }
       }
     },
+    "Connected until %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connectée jusqu’au %@"
+          }
+        }
+      }
+    },
     "Connecting to Leumi and Max…": {
       "localizations": {
         "fr": {
@@ -815,6 +875,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de joindre %@. Vérifie ta connexion et réessaie."
+          }
+        }
+      }
+    },
+    "Couldn’t reach Enable Banking. Check your connection and try again.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de joindre Enable Banking. Vérifiez votre connexion et réessayez."
           }
         }
       }
@@ -939,6 +1009,16 @@
         }
       }
     },
+    "Disconnect": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déconnecter"
+          }
+        }
+      }
+    },
     "Disconnect accounts": {
       "localizations": {
         "fr": {
@@ -985,6 +1065,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Modifier"
+          }
+        }
+      }
+    },
+    "Enable Banking answered with an error (%lld).": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enable Banking a répondu par une erreur (%lld)."
+          }
+        }
+      }
+    },
+    "Enable Banking key": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clé Enable Banking"
           }
         }
       }
@@ -1139,6 +1239,16 @@
         }
       }
     },
+    "Hello Bank, Revolut": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hello Bank, Revolut"
+          }
+        }
+      }
+    },
     "Hello, %@": {
       "localizations": {
         "fr": {
@@ -1175,6 +1285,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Accueil"
+          }
+        }
+      }
+    },
+    "Import the key (.pem)": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer la clé (.pem)"
+          }
+        }
+      }
+    },
+    "Import your Enable Banking key first.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importez d’abord votre clé Enable Banking."
           }
         }
       }
@@ -1648,6 +1778,16 @@
         }
       }
     },
+    "Not connected": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non connectée"
+          }
+        }
+      }
+    },
     "Note and tags": {
       "localizations": {
         "fr": {
@@ -1698,12 +1838,32 @@
         }
       }
     },
+    "OK": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
     "Open True Balance once to connect Leumi and Max.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Ouvre True Balance une fois pour connecter Leumi et Max."
+          }
+        }
+      }
+    },
+    "Other banks": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autres banques"
           }
         }
       }
@@ -1798,6 +1958,16 @@
         }
       }
     },
+    "Pull down to read %@.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tirez vers le bas pour lire %@."
+          }
+        }
+      }
+    },
     "Pull down to sign in to Leumi and Max.": {
       "localizations": {
         "fr": {
@@ -1878,6 +2048,16 @@
         }
       }
     },
+    "Reconnect": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconnecter"
+          }
+        }
+      }
+    },
     "Reference": {
       "localizations": {
         "fr": {
@@ -1908,6 +2088,16 @@
         }
       }
     },
+    "Replace the key": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remplacer la clé"
+          }
+        }
+      }
+    },
     "Required": {
       "localizations": {
         "fr": {
@@ -1934,6 +2124,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Salaire et prélèvements réguliers compris"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer"
           }
         }
       }
@@ -2089,6 +2289,16 @@
         }
       }
     },
+    "Shown in the Enable Banking portal. The key file is usually named after it.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affiché dans le portail Enable Banking. Le fichier de clé porte généralement ce nom."
+          }
+        }
+      }
+    },
     "Shows Leumi and Max on screen during sign-in, so you can see what blocks and finish a step by hand if needed.": {
       "localizations": {
         "fr": {
@@ -2115,6 +2325,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Connexion à Max…"
+          }
+        }
+      }
+    },
+    "Something went wrong": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un problème est survenu"
           }
         }
       }
@@ -2160,6 +2380,36 @@
         }
       }
     },
+    "The .pem file downloaded from the Enable Banking portal. It’s kept in this iPhone’s Keychain.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le fichier .pem téléchargé depuis le portail Enable Banking. Il est conservé dans le trousseau de cet iPhone."
+          }
+        }
+      }
+    },
+    "The bank didn’t give access. Try connecting again.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La banque n’a pas donné l’accès. Réessayez de la connecter."
+          }
+        }
+      }
+    },
+    "The bank limits how often it can be read. Try again later.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La banque limite le nombre de lectures. Réessayez plus tard."
+          }
+        }
+      }
+    },
     "The username and password you use on leumi.co.il.": {
       "localizations": {
         "fr": {
@@ -2186,6 +2436,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "C’est tout ce que Leumi donne sur l’autre partie, y compris sur son site."
+          }
+        }
+      }
+    },
+    "This key file can’t be read. Use the .pem file from the Enable Banking portal.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce fichier de clé est illisible. Utilisez le fichier .pem du portail Enable Banking."
           }
         }
       }
@@ -2267,6 +2527,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Total : %@"
+          }
+        }
+      }
+    },
+    "Transaction": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transaction"
           }
         }
       }
@@ -2501,6 +2771,16 @@
         }
       }
     },
+    "You confirm on the bank’s site or app, then come back here. Access is read only and lasts 180 days.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous confirmez sur le site ou l’app de la banque, puis vous revenez ici. L’accès est en lecture seule et dure 180 jours."
+          }
+        }
+      }
+    },
     "You stay signed in. Your credentials are kept in this iPhone’s Keychain.": {
       "localizations": {
         "fr": {
@@ -2533,6 +2813,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tes identifiants Leumi et Max et le solde enregistré seront supprimés de cet iPhone."
+          }
+        }
+      }
+    },
+    "Your Leumi and Max credentials, the other banks’ access and the saved balances will be deleted from this iPhone.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos identifiants Leumi et Max, l’accès aux autres banques et les soldes enregistrés seront supprimés de cet iPhone."
           }
         }
       }

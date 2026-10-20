@@ -26,6 +26,15 @@ final class AppModel {
     /// Monthly budget per category key.
     private(set) var budgets: [String: Double] = BudgetStore.load()
 
+    /// European banks through Enable Banking, shown apart from the true balance.
+    private(set) var euroKey: EnableBankingKey? = EuroStore.key.load()
+    private(set) var euroConnections: [EuroConnection] = EuroStore.connections.load() ?? []
+    private(set) var euroData: [EuroBankData] = EuroStore.loadData()
+    /// By bank id.
+    private(set) var euroErrors: [String: EnableBankingError] = [:]
+    /// The bank whose session is being created after the redirect.
+    private(set) var connectingEuroBank: String?
+
     /// Notify when the true balance goes below this (0 = only when overdrawn).
     static var alertThreshold: Double { UserDefaults.standard.double(forKey: "alertThreshold") }
 
@@ -94,6 +103,11 @@ final class AppModel {
         PurchaseCacheStore.delete()
         NotesStore.delete()
         notes = [:]
+        EuroStore.deleteAll()
+        euroKey = nil
+        euroConnections = []
+        euroData = []
+        euroErrors = [:]
         WidgetData.save(nil)
         WidgetCenter.shared.reloadAllTimelines()
         UserDefaults.standard.removeObject(forKey: "demo")
@@ -106,7 +120,8 @@ final class AppModel {
 
     // MARK: Refresh
 
-    func refresh() async {
+    /// `manual`: asked for (pull to refresh), not on opening or in the background.
+    func refresh(manual: Bool = true) async {
         guard !isRefreshing else { return }
         if isDemo {
             apply(DemoData.snapshot())
@@ -118,6 +133,7 @@ final class AppModel {
             isRefreshing = false
             progressStep = nil
         }
+        let euro = Task { await refreshEuro(manual: manual) }
         do {
             apply(try await Banks.fetchSnapshot(leumi: stored.leumi, max: stored.max))
             refreshErrors = [:]
@@ -126,12 +142,13 @@ final class AppModel {
         } catch {
             refreshErrors = [.leumi: .unavailable("\(error)")]
         }
+        await euro.value
     }
 
     func refreshIfStale() async {
         guard phase == .signedIn else { return }
         if let at = snapshot?.computedAt, Date.now.timeIntervalSince(at) < Self.staleAfter { return }
-        await refresh()
+        await refresh(manual: false)
     }
 
     private func apply(_ new: Snapshot) {
@@ -160,6 +177,94 @@ final class AppModel {
         WidgetCenter.shared.reloadAllTimelines()
     }
 
+    // MARK: European banks
+
+    /// Automatic refreshes read these banks at most every 6 hours: PSD2 lets
+    /// a bank cap reads made without you at 4 a day.
+    static let euroMinInterval: TimeInterval = 6 * 60 * 60
+
+    /// Checks the key signs before keeping it.
+    func importEuroKey(pem: String, appID: String) throws {
+        let key = EnableBankingKey(appID: appID.trimmingCharacters(in: .whitespacesAndNewlines), privateKeyPEM: pem)
+        _ = try JWT.token(key)
+        EuroStore.key.save(key)
+        euroKey = key
+    }
+
+    /// The bank's page to open; its answer comes back through `handleOpenURL`.
+    func startEuroConnection(_ bank: EuroBank) async throws -> URL {
+        guard let key = euroKey else { throw EnableBankingError.noKey }
+        let state = UUID().uuidString
+        // In UserDefaults: iOS may close the app while the bank's app is open.
+        UserDefaults.standard.set([state, bank.id], forKey: "euroPendingAuth")
+        do {
+            return try await EnableBanking.startAuthorization(bank, state: state, key: key)
+        } catch {
+            throw EnableBankingError.from(error)
+        }
+    }
+
+    /// truebalance://enablebanking?code=…&state=… from docs/enablebanking.html.
+    func handleOpenURL(_ url: URL) async {
+        guard url.scheme == "truebalance", url.host == EnableBanking.callbackHost else { return }
+        let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
+        func value(_ name: String) -> String? { items.first { $0.name == name }?.value }
+        guard let pending = UserDefaults.standard.stringArray(forKey: "euroPendingAuth"), pending.count == 2,
+              let bank = EuroBank.supported.first(where: { $0.id == pending[1] }) else { return }
+        UserDefaults.standard.removeObject(forKey: "euroPendingAuth")
+        guard value("state") == pending[0], let code = value("code"), let key = euroKey else {
+            euroErrors[bank.id] = .notAuthorized(value("error_description") ?? value("error") ?? "no code in the redirect")
+            return
+        }
+        connectingEuroBank = bank.id
+        defer { connectingEuroBank = nil }
+        do {
+            let connection = try await EnableBanking.createSession(code: code, bank: bank, key: key)
+            euroConnections.removeAll { $0.id == bank.id }
+            euroConnections.append(connection)
+            euroConnections.sort { Self.euroOrder($0.bank) < Self.euroOrder($1.bank) }
+            EuroStore.connections.save(euroConnections)
+            euroErrors[bank.id] = nil
+            await refreshEuro(manual: true, only: bank.id)
+        } catch {
+            euroErrors[bank.id] = .from(error)
+        }
+    }
+
+    func disconnectEuroBank(_ bank: EuroBank) async {
+        if let c = euroConnections.first(where: { $0.id == bank.id }), let key = euroKey {
+            await EnableBanking.deleteSession(c.sessionID, key: key)
+        }
+        euroConnections.removeAll { $0.id == bank.id }
+        euroData.removeAll { $0.id == bank.id }
+        euroErrors[bank.id] = nil
+        EuroStore.connections.save(euroConnections)
+        EuroStore.saveData(euroData)
+    }
+
+    /// A failing bank keeps its last data and shows the error.
+    func refreshEuro(manual: Bool, only: String? = nil) async {
+        guard let key = euroKey, !isDemo else { return }
+        for c in euroConnections where only == nil || c.id == only {
+            if !manual, let last = euroData.first(where: { $0.id == c.id })?.updatedAt,
+               Date.now.timeIntervalSince(last) < Self.euroMinInterval { continue }
+            do {
+                let data = try await EnableBanking.fetch(c, key: key)
+                euroData.removeAll { $0.id == c.id }
+                euroData.append(data)
+                euroErrors[c.id] = nil
+            } catch {
+                euroErrors[c.id] = .from(error)
+            }
+        }
+        euroData.sort { Self.euroOrder($0.bank) < Self.euroOrder($1.bank) }
+        EuroStore.saveData(euroData)
+    }
+
+    private static func euroOrder(_ bank: EuroBank) -> Int {
+        EuroBank.supported.firstIndex(of: bank) ?? .max
+    }
+
     // MARK: Background
 
     func scheduleBackgroundRefresh() {
@@ -171,7 +276,7 @@ final class AppModel {
 
     func backgroundRefresh() async {
         scheduleBackgroundRefresh() // keep the chain going
-        await refresh()
+        await refresh(manual: false)
     }
 
     // MARK: Notifications

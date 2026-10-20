@@ -38,6 +38,9 @@ targets:
         BGTaskSchedulerPermittedIdentifiers: [il.truebalance.refresh]
         ITSAppUsesNonExemptEncryption: false
         NSFaceIDUsageDescription: Unlock True Balance to see your balance.
+        CFBundleURLTypes:
+          - CFBundleURLName: il.truebalance
+            CFBundleURLSchemes: [truebalance]
         TBAppGroup: $(APP_GROUP_ID)
     # Your signing team lives in Local.xcconfig (git-ignored), so it survives
     # `xcodegen generate`. Copy Local.xcconfig.example to start.
