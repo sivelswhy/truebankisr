@@ -55,7 +55,8 @@ jobs:
         run: |
           xcodebuild -project TrueBalance.xcodeproj -scheme TrueBalance -configuration Release \
             -destination 'generic/platform=iOS' -derivedDataPath build \
-            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            MARKETING_VERSION="1.0.${{ github.run_number }}" CURRENT_PROJECT_VERSION="${{ github.run_number }}" build
       - name: Package the IPA
         working-directory: ios
         run: |
@@ -84,3 +85,20 @@ jobs:
           git log -1 --format='%B' > notes.md
           gh release create "$tag" ios/TrueBalance.ipa --target "$GITHUB_SHA" \
             --title "True Balance build ${{ github.run_number }} (${GITHUB_SHA::7})" --notes-file notes.md --latest
+      # AltStore / SideStore read this file to offer the new build as an update.
+      - name: Update the AltStore source
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n="${{ github.run_number }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            node ios/altstore-source.mjs "1.0.$n" "$n" ios/TrueBalance.ipa \
+              "https://github.com/${{ github.repository }}/releases/download/build-$n/TrueBalance.ipa" notes.md
+            git add altstore-source.json
+            git commit -qm "AltStore source: build $n [skip ci]"
+            git push -q origin HEAD:main && break
+          done
