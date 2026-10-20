@@ -27,13 +27,13 @@ struct ScrapeFailure: Error {
 }
 
 /// What Max gives besides the purchases.
-struct MaxData {
+struct MaxData: Sendable {
     var account: Account
     var cards: [CardInfo]
 }
 
 /// What Leumi gives besides the current account. Nil = couldn't be read this time.
-struct LeumiData {
+struct LeumiData: Sendable {
     var account: Account
     var savings: [SavingsAccount]?
     var foreign: [ForeignAccount]?
@@ -51,19 +51,9 @@ enum MaxScraper {
         let driver = WebDriver(visible: visible)
         defer { driver.close() }
         do {
-            try await login(driver, credentials)
-            let home = try? await driver.fetch("\(base)/api/registered/getHomePageData")
-            let homeData = home?.status == 200 ? home?.body : nil
-            let holder = await holderName(driver, homeData: homeData)
-            var txns: [Txn] = []
-            driver.step("Max: reading transactions")
-            for month in months(back: monthsBack, ahead: monthsAhead) {
-                let (status, body) = try await driver.fetch(transactionsURL(month))
-                guard status == 200 else { continue }
-                txns += try MaxParser.parseMonth(body)
+            return try await withDeadline(visible ? 900 : 240, "\(driver.currentStep) (gave up after 4 min)") {
+                try await scrapePages(driver, credentials, monthsBack: monthsBack, monthsAhead: monthsAhead)
             }
-            return MaxData(account: Account(accountNumber: "max", txns: txns, holderName: holder),
-                           cards: homeData.map(ExtraParsers.maxCards) ?? [])
         } catch let error as BankError {
             throw error
         } catch let t as WebDriver.Timeout {
@@ -71,6 +61,22 @@ enum MaxScraper {
         } catch {
             throw .unavailable("\(driver.currentStep): \(error)")
         }
+    }
+
+    private static func scrapePages(_ driver: WebDriver, _ credentials: Credentials, monthsBack: Int, monthsAhead: Int) async throws -> MaxData {
+        try await login(driver, credentials)
+        let home = try? await driver.fetch("\(base)/api/registered/getHomePageData")
+        let homeData = home?.status == 200 ? home?.body : nil
+        let holder = await holderName(driver, homeData: homeData)
+        var txns: [Txn] = []
+        driver.step("Max: reading transactions")
+        for month in months(back: monthsBack, ahead: monthsAhead) {
+            let (status, body) = try await driver.fetch(transactionsURL(month))
+            guard status == 200 else { continue }
+            txns += try MaxParser.parseMonth(body)
+        }
+        return MaxData(account: Account(accountNumber: "max", txns: txns, holderName: holder),
+                       cards: homeData.map(ExtraParsers.maxCards) ?? [])
     }
 
     private static func login(_ d: WebDriver, _ c: Credentials) async throws {
@@ -147,13 +153,15 @@ enum LeumiScraper {
         let driver = WebDriver(captureURLPattern: "UC_SO_27_GetBusinessAccountTrx", visible: visible)
         defer { driver.close() }
         do {
-            try await login(driver, credentials)
-            var result = try await account(driver, since: since)
-            result.holderName = await holderName(driver)
-            // Extras: a failure here never fails the refresh.
-            let savings = await self.savings(driver)
-            let foreign = try? await withDeadline(90) { try await foreignAccounts(driver, since: since) }
-            return LeumiData(account: result, savings: savings, foreign: foreign)
+            return try await withDeadline(visible ? 900 : 300, "\(driver.currentStep) (gave up after 5 min)") {
+                try await login(driver, credentials)
+                var result = try await account(driver, since: since)
+                result.holderName = await holderName(driver)
+                // Extras: a failure or a hang here never fails the refresh.
+                let savings = try? await withDeadline(45, "savings") { await self.savings(driver) }
+                let foreign = try? await withDeadline(visible ? 300 : 90, "foreign accounts") { try await foreignAccounts(driver, since: since) }
+                return LeumiData(account: result, savings: savings ?? nil, foreign: foreign)
+            }
         } catch let error as BankError {
             throw error
         } catch let t as WebDriver.Timeout {
@@ -181,14 +189,30 @@ enum LeumiScraper {
         try await d.click("button[type='submit']")
 
         d.step("Leumi: waiting for the account page")
-        let deadline = Date.now.addingTimeInterval(d.visible ? 180 : 60)
+        let start = Date.now
+        let deadline = start.addingTimeInterval(d.visible ? 180 : 75)
+        var resubmitted = false
         while Date.now < deadline {
             if d.url.range(of: "ebanking/SO/SPA.aspx", options: .caseInsensitive) != nil { return }
+            // Accounts moved to Leumi's new site, which this scraper doesn't read yet.
+            if d.url.range(of: "digitalfront", options: .caseInsensitive) != nil {
+                throw BankError.unavailable("Leumi opened its new site (\(URL(string: d.url)?.path ?? d.url)), not supported yet")
+            }
             if await d.exists(#"form input[name="newPwd"]"#) { throw BankError.changePassword }
             let text = await d.bodyText()
             if text.contains(invalidPasswordMessage) || text.contains(invalidFormatMessage) { throw BankError.invalidCredentials }
             if text.contains("was rejected") { throw BankError.unavailable("Leumi firewall rejected the login") }
             if text.contains(blockedMessage) { throw BankError.blocked }
+            // The gate-keeper login page sometimes drops the first submit and
+            // just sits there with the form: fill it and send it once more.
+            if !resubmitted, Date.now.timeIntervalSince(start) > 20, await d.exists(user), await d.exists(pass) {
+                resubmitted = true
+                d.step("Leumi: sending the login form again")
+                try await d.fill(user, c.username)
+                try await d.fill(pass, c.password)
+                try await d.click("button[type='submit']")
+                d.step("Leumi: waiting for the account page")
+            }
             try await Task.sleep(for: .milliseconds(500))
         }
         throw BankError.timeout(step: "Leumi: waiting for the account page (still on \(URL(string: d.url)?.path ?? d.url))")
@@ -362,20 +386,6 @@ enum Banks {
 @MainActor
 private func capture<T>(_ body: () async throws(BankError) -> T) async -> Result<T, BankError> {
     do { return .success(try await body()) } catch { return .failure(error) }
-}
-
-/// Runs `op`, giving up (throwing) after `seconds`.
-@MainActor
-private func withDeadline<T: Sendable>(_ seconds: TimeInterval, _ op: @escaping @MainActor () async throws -> T) async throws -> T {
-    try await withThrowingTaskGroup(of: T.self) { group in
-        group.addTask { try await op() }
-        group.addTask {
-            try await Task.sleep(for: .seconds(seconds))
-            throw WebDriver.Timeout(what: "deadline")
-        }
-        defer { group.cancelAll() }
-        return try await group.next()!
-    }
 }
 
 /// Bank of Israel official rates (shekels per unit), kept for when it's unreachable.
