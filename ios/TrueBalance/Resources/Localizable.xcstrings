@@ -14,6 +14,18 @@
             "state": "translated",
             "value": "%@ בשנה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ в год"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ سنويًا"
+          }
         }
       }
     },
@@ -29,6 +41,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חשבון %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Счёт в %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حساب %@"
           }
         }
       }
@@ -46,6 +70,18 @@
             "state": "translated",
             "value": "חשבון %@ (לא נכלל, אין שער)"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Счёт в %@ (не учтён: нет курса)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حساب %@ (غير محتسب، لا يوجد سعر صرف)"
+          }
         }
       }
     },
@@ -61,6 +97,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ ביקשו שלב אימות נוסף. יש להתחבר פעם אחת באתר שלהם ואז לנסות שוב."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ запросил дополнительную проверку. Войдите один раз на его сайте, затем повторите попытку."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طلب %@ خطوة تحقق إضافية. سجّل الدخول مرة واحدة على موقعه، ثم حاول مجددًا."
           }
         }
       }
@@ -78,6 +126,18 @@
             "state": "translated",
             "value": "%@ מבקשים להחליף סיסמה. יש להחליף אותה באתר שלהם ואז להתחבר שוב."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ просит сменить пароль. Смените его на сайте, затем войдите снова."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يطلب %@ تغيير كلمة المرور. غيّرها على موقعه، ثم سجّل الدخول مجددًا."
+          }
         }
       }
     },
@@ -93,6 +153,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ לפי שער בנק ישראל"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ по курсу Банка Израиля"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ بسعر بنك إسرائيل"
           }
         }
       }
@@ -110,6 +182,18 @@
             "state": "translated",
             "value": "התקציב של %@ נוצל"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бюджет «%@» исчерпан"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نفدت ميزانية %@"
+          }
         }
       }
     },
@@ -125,6 +209,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ לא קיבלו את שם המשתמש או הסיסמה."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ не принял этот логин или пароль."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يقبل %@ اسم المستخدم أو كلمة المرور هذه."
           }
         }
       }
@@ -142,6 +238,18 @@
             "state": "translated",
             "value": "נותרו %@"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Осталось %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متبقٍّ %@"
+          }
         }
       }
     },
@@ -158,6 +266,18 @@
             "state": "translated",
             "value": "חריגה של %@"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перерасход %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجاوز بمقدار %@"
+          }
         }
       }
     },
@@ -173,6 +293,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ דחו את החיבור מהרשת הזאת. זה קורה מחו״ל או דרך VPN: כדאי לכבות את ה-VPN או לנסות רשת אחרת."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ отклонил подключение из этой сети. Так бывает за границей или через VPN: отключите VPN или попробуйте другую сеть."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رفض %@ الاتصال من هذه الشبكة. يحدث هذا من خارج البلاد أو عبر VPN: أوقف الـ VPN أو جرّب شبكة أخرى."
           }
         }
       }
@@ -191,6 +323,18 @@
             "state": "translated",
             "value": "%@ עד עכשיו"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ на сегодня"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ حتى الآن"
+          }
         }
       }
     },
@@ -206,6 +350,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "הוצאו %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрачено %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أُنفق %@"
           }
         }
       }
@@ -229,6 +385,18 @@
             "state": "translated",
             "value": "החודש הוצאו %1$@ מתוך %2$@."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В этом месяце потрачено %1$@ из %2$@."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أُنفق هذا الشهر %1$@ من أصل %2$@."
+          }
         }
       }
     },
@@ -244,6 +412,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ לא הגיבו בזמן. ייתכן שהחיבור איטי או שהאתר עמוס: אפשר לנסות שוב."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ слишком долго не отвечал. Возможно, связь медленная или сайт перегружен: повторите попытку."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استغرق %@ وقتًا طويلًا للرد. قد يكون الاتصال بطيئًا أو الموقع مزدحمًا: حاول مجددًا."
           }
         }
       }
@@ -261,6 +441,18 @@
             "state": "translated",
             "value": "%@ לא הגיבו בזמן. אפשר לנסות שוב."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ слишком долго не отвечал. Повторите попытку."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استغرق %@ وقتًا طويلًا للرد. حاول مجددًا."
+          }
         }
       }
     },
@@ -276,6 +468,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ לחודש"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/мес."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ شهريًا"
           }
         }
       }
@@ -293,6 +497,18 @@
             "state": "translated",
             "value": "%@: נוצלו 80%% מהתקציב"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: использовано 80%% бюджета"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: استُخدم 80%% من الميزانية"
+          }
         }
       }
     },
@@ -308,6 +524,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "האתר של %@ בתחזוקה או לא זמין כרגע. אפשר לנסות שוב מאוחר יותר."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сайт %@ на техобслуживании или сейчас недоступен. Повторите попытку позже."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "موقع %@ قيد الصيانة أو غير متاح حاليًا. حاول لاحقًا."
           }
         }
       }
@@ -369,6 +597,78 @@
                 "stringUnit": {
                   "state": "translated",
                   "value": "%lld בנקים"
+                }
+              }
+            }
+          }
+        },
+        "ru": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld банк"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld банка"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld банков"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld банка"
+                }
+              }
+            }
+          }
+        },
+        "ar": {
+          "variations": {
+            "plural": {
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld بنك"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "بنك واحد"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "بنكان"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld بنوك"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld بنكًا"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld بنك"
                 }
               }
             }
@@ -437,6 +737,78 @@
               }
             }
           }
+        },
+        "ru": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld день до списания"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld дня до списания"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld дней до списания"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld дня до списания"
+                }
+              }
+            }
+          }
+        },
+        "ar": {
+          "variations": {
+            "plural": {
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld يوم حتى الخصم"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "يوم واحد حتى الخصم"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "يومان حتى الخصم"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld أيام حتى الخصم"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld يومًا حتى الخصم"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld يوم حتى الخصم"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -501,6 +873,78 @@
               }
             }
           }
+        },
+        "ru": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld покупка в валюте не учтена."
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld покупки в валюте не учтены."
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld покупок в валюте не учтено."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld покупки в валюте не учтено."
+                }
+              }
+            }
+          }
+        },
+        "ar": {
+          "variations": {
+            "plural": {
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "لم تُحتسب %lld عملية شراء بعملة أجنبية."
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "لم تُحتسب عملية شراء واحدة بعملة أجنبية."
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "لم تُحتسب عمليتا شراء بعملة أجنبية."
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "لم تُحتسب %lld عمليات شراء بعملة أجنبية."
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "لم تُحتسب %lld عملية شراء بعملة أجنبية."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "لم تُحتسب %lld عملية شراء بعملة أجنبية."
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -522,6 +966,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$lld מתוך %2$lld"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld из %2$lld"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld من %2$lld"
           }
         }
       }
@@ -587,6 +1043,78 @@
               }
             }
           }
+        },
+        "ru": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld покупка"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld покупки"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld покупок"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld покупки"
+                }
+              }
+            }
+          }
+        },
+        "ar": {
+          "variations": {
+            "plural": {
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld عملية شراء"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "عملية شراء واحدة"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "عمليتا شراء"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld عمليات شراء"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld عملية شراء"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld عملية شراء"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -647,6 +1175,78 @@
                 "stringUnit": {
                   "state": "translated",
                   "value": "%lld תוצאות"
+                }
+              }
+            }
+          }
+        },
+        "ru": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld результат"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld результата"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld результатов"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld результата"
+                }
+              }
+            }
+          }
+        },
+        "ar": {
+          "variations": {
+            "plural": {
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld نتيجة"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "نتيجة واحدة"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "نتيجتان"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld نتائج"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld نتيجة"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld نتيجة"
                 }
               }
             }
@@ -716,6 +1316,78 @@
               }
             }
           }
+        },
+        "ru": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld подписка"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld подписки"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld подписок"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld подписки"
+                }
+              }
+            }
+          }
+        },
+        "ar": {
+          "variations": {
+            "plural": {
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld اشتراك"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "اشتراك واحد"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "اشتراكان"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld اشتراكات"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld اشتراكًا"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld اشتراك"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -731,6 +1403,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "30 יום"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 дней"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 يومًا"
           }
         }
       }
@@ -748,6 +1432,18 @@
             "state": "translated",
             "value": "7 ימים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 дней"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 أيام"
+          }
         }
       }
     },
@@ -763,6 +1459,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "בערך %@ ליום עד החיוב."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Около %@ в день до списания."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نحو %@ يوميًا حتى الخصم."
           }
         }
       }
@@ -780,6 +1488,18 @@
             "state": "translated",
             "value": "הגישה פגה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступ истёк"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انتهت صلاحية الوصول"
+          }
         }
       }
     },
@@ -795,6 +1515,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "הגישה פגה. יש לחבר את הבנק מחדש."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступ истёк. Подключите банк заново."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انتهت صلاحية الوصول. اربط البنك من جديد."
           }
         }
       }
@@ -812,6 +1544,18 @@
             "state": "translated",
             "value": "חשבון"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Счёт"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحساب"
+          }
         }
       }
     },
@@ -827,6 +1571,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חשבונות"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Счета"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحسابات"
           }
         }
       }
@@ -844,6 +1600,18 @@
             "state": "translated",
             "value": "הוספה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавить"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إضافة"
+          }
         }
       }
     },
@@ -859,6 +1627,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "הוספת בנק"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавить банк"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إضافة بنك"
           }
         }
       }
@@ -876,6 +1656,18 @@
             "state": "translated",
             "value": "הוספת הערה (למשל: דנה החזירה)"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавьте заметку (например, Дана вернула деньги)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أضف ملاحظة (مثلًا: أعادته دانة)"
+          }
         }
       }
     },
@@ -891,6 +1683,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "הכתובת שמסרה מקס."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Адрес указан Максом."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العنوان كما أرسلته ماكس."
           }
         }
       }
@@ -914,6 +1718,18 @@
             "state": "translated",
             "value": "אחרי החיוב של מקס ב-%1$@, היתרה תהיה %2$@."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "После списания Макса %1$@ ваш баланс составит %2$@."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بعد خصم ماكس في %1$@، سيصبح رصيدك %2$@."
+          }
         }
       }
     },
@@ -936,6 +1752,18 @@
             "state": "translated",
             "value": "אחרי מקס ב-%1$@ יישארו %2$@. עודכן %3$@."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "После Макса %1$@ у вас останется %2$@. Обновлено %3$@."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بعد ماكس في %1$@ سيتبقى لك %2$@. آخر تحديث %3$@."
+          }
         }
       }
     },
@@ -951,6 +1779,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "התראה מתחת ל-"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Уведомлять ниже"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نبّهني عند الانخفاض عن"
           }
         }
       }
@@ -968,6 +1808,18 @@
             "state": "translated",
             "value": "הכול"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Все"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الكل"
+          }
         }
       }
     },
@@ -983,6 +1835,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "כל הרכישות ב-%@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Все покупки в %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل المشتريات في %@"
           }
         }
       }
@@ -1000,6 +1864,18 @@
             "state": "translated",
             "value": "סכום"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сумма"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المبلغ"
+          }
         }
       }
     },
@@ -1015,6 +1891,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "סכומים שיחויבו ב-%@."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Суммы к списанию %@."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المبالغ التي تُخصم في %@."
           }
         }
       }
@@ -1032,6 +1920,18 @@
             "state": "translated",
             "value": "כל בנק באירופה ש-Enable Banking תומך בו. מאשרים באתר או באפליקציה של הבנק וחוזרים לכאן. הגישה לקריאה בלבד ונמשכת 180 יום."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Любой европейский банк, который поддерживает Enable Banking. Вы подтверждаете доступ на сайте или в приложении банка и возвращаетесь сюда. Доступ только для чтения и действует 180 дней."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أي بنك في أوروبا يدعمه Enable Banking. تؤكّد على موقع البنك أو تطبيقه ثم تعود إلى هنا. الوصول للقراءة فقط ويدوم 180 يومًا."
+          }
         }
       }
     },
@@ -1047,6 +1947,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מזהה האפליקציה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ID приложения"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "معرّف التطبيق"
           }
         }
       }
@@ -1064,6 +1976,18 @@
             "state": "translated",
             "value": "רענון אוטומטי"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Автообновление"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التحديث التلقائي"
+          }
         }
       }
     },
@@ -1080,6 +2004,18 @@
             "state": "translated",
             "value": "זמין"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступно"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتاح"
+          }
         }
       }
     },
@@ -1095,6 +2031,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "זמין אחרי מקס"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступно после Макса"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتاح بعد ماكس"
+          }
+        }
+      }
+    },
+    "Available in English, French, Hebrew, Russian and Arabic. Choose the app’s language in Settings.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disponible en anglais, français, hébreu, russe et arabe. Choisissez la langue de l’app dans Réglages."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "זמינה באנגלית, בצרפתית, בעברית, ברוסית ובערבית. את שפת האפליקציה בוחרים בהגדרות."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступно на английском, французском, иврите, русском и арабском. Язык приложения выбирается в Настройках."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوفر بالإنجليزية والفرنسية والعبرية والروسية والعربية. اختر لغة التطبيق من الإعدادات."
           }
         }
       }
@@ -1113,6 +2089,18 @@
             "state": "translated",
             "value": "יתרה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Баланс"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الرصيد"
+          }
         }
       }
     },
@@ -1128,6 +2116,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "יתרה %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Баланс %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الرصيد %@"
           }
         }
       }
@@ -1145,6 +2145,18 @@
             "state": "translated",
             "value": "יתרה אחרי"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Баланс после"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الرصيد بعدها"
+          }
         }
       }
     },
@@ -1160,6 +2172,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "היתרה לא זמינה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Баланс недоступен"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الرصيد غير متاح"
           }
         }
       }
@@ -1177,6 +2201,18 @@
             "state": "translated",
             "value": "בנק"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Банк"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البنك"
+          }
         }
       }
     },
@@ -1192,6 +2228,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "בנק לאומי"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Банк Леуми"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنك لئومي"
           }
         }
       }
@@ -1209,6 +2257,18 @@
             "state": "translated",
             "value": "בנקים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Банки"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البنوك"
+          }
         }
       }
     },
@@ -1224,6 +2284,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "סניף"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отделение"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفرع"
           }
         }
       }
@@ -1241,6 +2313,18 @@
             "state": "translated",
             "value": "תקציבים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бюджеты"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الميزانيات"
+          }
         }
       }
     },
@@ -1256,6 +2340,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חשבונות עסקיים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бизнес-счета"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حسابات تجارية"
           }
         }
       }
@@ -1273,6 +2369,18 @@
             "state": "translated",
             "value": "לפי קטגוריה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "По категориям"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حسب الفئة"
+          }
         }
       }
     },
@@ -1288,6 +2396,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "החישוב"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Расчёт"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طريقة الحساب"
           }
         }
       }
@@ -1305,6 +2425,18 @@
             "state": "translated",
             "value": "ביטול"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отменить"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إلغاء"
+          }
         }
       }
     },
@@ -1320,6 +2452,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "כרטיס"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Карта"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البطاقة"
           }
         }
       }
@@ -1337,6 +2481,18 @@
             "state": "translated",
             "value": "כרטיס המסתיים ב-%@"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Карта, оканчивающаяся на %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بطاقة تنتهي بـ %@"
+          }
         }
       }
     },
@@ -1352,6 +2508,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "הוצאות בכרטיס"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Расходы по карте"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مصاريف البطاقة"
           }
         }
       }
@@ -1369,6 +2537,18 @@
             "state": "translated",
             "value": "כרטיסים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Карты"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البطاقات"
+          }
         }
       }
     },
@@ -1384,6 +2564,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "קטגוריה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Категория"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفئة"
           }
         }
       }
@@ -1401,6 +2593,18 @@
             "state": "translated",
             "value": "שינוי"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изменение"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التغيّر"
+          }
         }
       }
     },
@@ -1416,6 +2620,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חיובים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Списания"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخصومات"
           }
         }
       }
@@ -1434,6 +2650,18 @@
             "state": "translated",
             "value": "ניקוי"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Очистить"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مسح"
+          }
         }
       }
     },
@@ -1449,6 +2677,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ניקוי היומן"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Очистить журнал"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مسح السجل"
           }
         }
       }
@@ -1466,6 +2706,18 @@
             "state": "translated",
             "value": "בהשוואה לאותם ימים בחודש שעבר."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "По сравнению с теми же днями прошлого месяца."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مقارنةً بالأيام نفسها من الشهر الماضي."
+          }
         }
       }
     },
@@ -1481,6 +2733,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "התחברות"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подключить"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ربط"
           }
         }
       }
@@ -1498,6 +2762,18 @@
             "state": "translated",
             "value": "מחובר"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подключён"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرتبط"
+          }
         }
       }
     },
@@ -1513,6 +2789,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מחובר עד %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подключён до %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرتبط حتى %@"
           }
         }
       }
@@ -1530,6 +2818,18 @@
             "state": "translated",
             "value": "מתחברים ללאומי ולמקס…"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подключение к Леуми и Максу…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ الاتصال بلئومي وماكس…"
+          }
         }
       }
     },
@@ -1545,6 +2845,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "העתקת הסכום"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скопировать сумму"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نسخ المبلغ"
           }
         }
       }
@@ -1562,6 +2874,18 @@
             "state": "translated",
             "value": "העתקת שם בית העסק"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скопировать продавца"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نسخ اسم التاجر"
+          }
         }
       }
     },
@@ -1577,6 +2901,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "אין גישה ל%@. כדאי לבדוק את החיבור ולנסות שוב."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не удалось связаться с %@. Проверьте подключение и повторите попытку."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّر الوصول إلى %@. تحقّق من الاتصال وحاول مجددًا."
           }
         }
       }
@@ -1594,6 +2930,18 @@
             "state": "translated",
             "value": "אין גישה ל-Enable Banking. כדאי לבדוק את החיבור ולנסות שוב."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не удалось связаться с Enable Banking. Проверьте подключение и повторите попытку."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّر الوصول إلى Enable Banking. تحقّق من الاتصال وحاول مجددًا."
+          }
         }
       }
     },
@@ -1609,6 +2957,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "לא הצלחנו לאמת את זהותך. אפשר לנסות שוב."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не удалось подтвердить вашу личность. Повторите попытку."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّر التحقق من هويتك. حاول مجددًا."
           }
         }
       }
@@ -1626,6 +2986,18 @@
             "state": "translated",
             "value": "מדינה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Страна"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البلد"
+          }
         }
       }
     },
@@ -1641,6 +3013,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חשבון העו״ש אחרי חיובי מקס הידועים, חיסכון וחשבונות מט״ח לפי שער בנק ישראל היום."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Текущий счёт за вычетом уже известных списаний Макса, сбережения и валютные счета по сегодняшнему курсу Банка Израиля."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحساب الجاري بعد خصومات ماكس المعروفة، والتوفير، وحسابات العملات الأجنبية بسعر بنك إسرائيل اليوم."
           }
         }
       }
@@ -1658,6 +3042,18 @@
             "state": "translated",
             "value": "עו״ש, חיסכון ומט״ח"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Текущий счёт, сбережения и валюта"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحساب الجاري والتوفير والعملات الأجنبية"
+          }
         }
       }
     },
@@ -1673,6 +3069,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מותאם"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Свой период"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مخصّص"
           }
         }
       }
@@ -1690,6 +3098,18 @@
             "state": "translated",
             "value": "הדגמה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ДЕМО"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجريبي"
+          }
         }
       }
     },
@@ -1705,6 +3125,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "תקציב יומי"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бюджет на день"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الميزانية اليومية"
           }
         }
       }
@@ -1722,6 +3154,18 @@
             "state": "translated",
             "value": "תאריך"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дата"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التاريخ"
+          }
         }
       }
     },
@@ -1737,6 +3181,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "יום"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "День"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اليوم"
           }
         }
       }
@@ -1754,6 +3210,18 @@
             "state": "translated",
             "value": "חיוב"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Списание"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخصم"
+          }
         }
       }
     },
@@ -1769,6 +3237,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חויב"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Списание"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُخصم"
           }
         }
       }
@@ -1786,6 +3266,18 @@
             "state": "translated",
             "value": "יחויב ב-%@"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Спишется %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُخصم في %@"
+          }
         }
       }
     },
@@ -1801,6 +3293,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "תיאור"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Описание"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوصف"
           }
         }
       }
@@ -1818,6 +3322,18 @@
             "state": "translated",
             "value": "פרטים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подробности"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التفاصيل"
+          }
         }
       }
     },
@@ -1833,6 +3349,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ניתוק"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отключить"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فصل"
           }
         }
       }
@@ -1850,6 +3378,18 @@
             "state": "translated",
             "value": "ניתוק החשבונות"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отключить счета"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فصل الحسابات"
+          }
         }
       }
     },
@@ -1865,6 +3405,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "לנתק את החשבונות?"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отключить счета?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فصل الحسابات؟"
           }
         }
       }
@@ -1882,6 +3434,18 @@
             "state": "translated",
             "value": "ניתוק ומחיקת פרטי ההתחברות"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отключить и удалить данные для входа"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفصل وحذف بيانات الدخول"
+          }
         }
       }
     },
@@ -1897,6 +3461,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "סיום"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Готово"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم"
           }
         }
       }
@@ -1914,6 +3490,18 @@
             "state": "translated",
             "value": "עריכה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изменить"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعديل"
+          }
         }
       }
     },
@@ -1929,6 +3517,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enable Banking החזיר שגיאה (%lld)."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enable Banking вернул ошибку (%lld)."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ردّ Enable Banking بخطأ (%lld)."
           }
         }
       }
@@ -1946,21 +3546,17 @@
             "state": "translated",
             "value": "מפתח Enable Banking"
           }
-        }
-      }
-    },
-    "English, French and Hebrew are available. Choose the app’s language in Settings.": {
-      "localizations": {
-        "fr": {
+        },
+        "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le français, l’anglais et l’hébreu sont disponibles. Choisissez la langue de l’app dans Réglages."
+            "value": "Ключ Enable Banking"
           }
         },
-        "he": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "יש אנגלית, צרפתית ועברית. את שפת האפליקציה בוחרים בהגדרות."
+            "value": "مفتاح Enable Banking"
           }
         }
       }
@@ -1978,6 +3574,18 @@
             "state": "translated",
             "value": "כל חודש בלאומי"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Каждый месяц в Леуми"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل شهر في لئومي"
+          }
         }
       }
     },
@@ -1994,6 +3602,18 @@
             "state": "translated",
             "value": "יציאה מההדגמה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выйти из демо"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخروج من الوضع التجريبي"
+          }
         }
       }
     },
@@ -2009,6 +3629,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "צפי ל-%@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ожидается %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتوقع في %@"
           }
         }
       }
@@ -2074,6 +3706,78 @@
               }
             }
           }
+        },
+        "ru": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Экспортировать %lld покупку в CSV"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Экспортировать %lld покупки в CSV"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Экспортировать %lld покупок в CSV"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Экспортировать %lld покупки в CSV"
+                }
+              }
+            }
+          }
+        },
+        "ar": {
+          "variations": {
+            "plural": {
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "تصدير %lld عملية شراء بصيغة CSV"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "تصدير عملية شراء واحدة بصيغة CSV"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "تصدير عمليتي شراء بصيغة CSV"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "تصدير %lld عمليات شراء بصيغة CSV"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "تصدير %lld عملية شراء بصيغة CSV"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "تصدير %lld عملية شراء بصيغة CSV"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -2089,6 +3793,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ייצוא היומן"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Экспортировать журнал"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصدير السجل"
           }
         }
       }
@@ -2106,6 +3822,18 @@
             "state": "translated",
             "value": "תחזית"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прогноз"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التوقعات"
+          }
         }
       }
     },
@@ -2121,6 +3849,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מ-"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "С"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "من"
           }
         }
       }
@@ -2138,6 +3878,18 @@
             "state": "translated",
             "value": "קבלת התקציב היומי"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Узнать бюджет на день"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض الميزانية اليومية"
+          }
         }
       }
     },
@@ -2153,6 +3905,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "קבלת היתרה האמיתית"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Узнать настоящий баланс"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض الرصيد الحقيقي"
           }
         }
       }
@@ -2170,6 +3934,18 @@
             "state": "translated",
             "value": "יש הערה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Есть заметка"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عليها ملاحظة"
+          }
         }
       }
     },
@@ -2185,6 +3961,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "שימו לב: צפוי מינוס"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Внимание: ожидается минус"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تنبيه: رصيدك سيصبح سالبًا"
           }
         }
       }
@@ -2202,6 +3990,18 @@
             "state": "translated",
             "value": "שלום"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Здравствуйте"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرحبًا"
+          }
         }
       }
     },
@@ -2217,6 +4017,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hello Bank,‏ Revolut"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hello Bank, Revolut"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hello Bank، Revolut"
           }
         }
       }
@@ -2234,6 +4046,18 @@
             "state": "translated",
             "value": "שלום, %@"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Здравствуйте, %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرحبًا، %@"
+          }
         }
       }
     },
@@ -2249,6 +4073,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "הסתרת סכומים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скрывать суммы"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إخفاء المبالغ"
           }
         }
       }
@@ -2266,6 +4102,18 @@
             "state": "translated",
             "value": "הסתרת הסיסמה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скрыть пароль"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إخفاء كلمة المرور"
+          }
         }
       }
     },
@@ -2281,6 +4129,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "בית"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Главная"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الرئيسية"
           }
         }
       }
@@ -2298,6 +4158,18 @@
             "state": "translated",
             "value": "ייבוא המפתח (‎.pem)"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Импортировать ключ (.pem)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استيراد المفتاح (‎.pem)"
+          }
         }
       }
     },
@@ -2314,6 +4186,18 @@
             "state": "translated",
             "value": "קודם צריך לייבא את מפתח Enable Banking."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сначала импортируйте ключ Enable Banking."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استورد مفتاح Enable Banking أولًا."
+          }
         }
       }
     },
@@ -2329,6 +4213,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "נכנס"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приход"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وارد"
           }
         }
       }
@@ -2394,6 +4290,78 @@
               }
             }
           }
+        },
+        "ru": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Включает %lld покупку в валюте, пересчитанную по курсу Банка Израиля (оценка)."
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Включает %lld покупки в валюте, пересчитанные по курсу Банка Израиля (оценка)."
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Включает %lld покупок в валюте, пересчитанных по курсу Банка Израиля (оценка)."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Включает %lld покупки в валюте, пересчитанные по курсу Банка Израиля (оценка)."
+                }
+              }
+            }
+          }
+        },
+        "ar": {
+          "variations": {
+            "plural": {
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "يشمل %lld عملية شراء بعملة أجنبية محوّلة بسعر بنك إسرائيل (تقدير)."
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "يشمل عملية شراء واحدة بعملة أجنبية محوّلة بسعر بنك إسرائيل (تقدير)."
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "يشمل عمليتي شراء بعملة أجنبية محوّلتين بسعر بنك إسرائيل (تقدير)."
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "يشمل %lld عمليات شراء بعملة أجنبية محوّلة بسعر بنك إسرائيل (تقدير)."
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "يشمل %lld عملية شراء بعملة أجنبية محوّلة بسعر بنك إسرائيل (تقدير)."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "يشمل %lld عملية شراء بعملة أجنبية محوّلة بسعر بنك إسرائيل (تقدير)."
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -2409,6 +4377,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "כולל חיובים קבועים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "С учётом регулярных списаний"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع الخصومات الثابتة"
           }
         }
       }
@@ -2426,6 +4406,18 @@
             "state": "translated",
             "value": "תובנות"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Аналитика"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التحليلات"
+          }
         }
       }
     },
@@ -2441,6 +4433,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "תשלום"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Платёж"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "القسط"
           }
         }
       }
@@ -2458,6 +4462,18 @@
             "state": "translated",
             "value": "נשמר רק באייפון הזה, וכלול בייצוא ל-CSV."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Хранится только на этом iPhone и входит в экспорт CSV."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "محفوظة على هذا الـ iPhone فقط، ومضمّنة في تصدير CSV."
+          }
         }
       }
     },
@@ -2473,6 +4489,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "שפה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Язык"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اللغة"
           }
         }
       }
@@ -2490,6 +4518,18 @@
             "state": "translated",
             "value": "החודש שעבר"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прошлый месяц"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشهر الماضي"
+          }
         }
       }
     },
@@ -2505,6 +4545,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "בחודש שעבר באותו תאריך: %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В прошлом месяце на ту же дату: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشهر الماضي في التاريخ نفسه: %@"
           }
         }
       }
@@ -2522,6 +4574,18 @@
             "state": "translated",
             "value": "החודש שעבר, אותם ימים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прошлый месяц, те же дни"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشهر الماضي، الأيام نفسها"
+          }
         }
       }
     },
@@ -2538,6 +4602,18 @@
             "state": "translated",
             "value": "החודש שעבר, כולו"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прошлый месяц, целиком"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشهر الماضي كاملًا"
+          }
         }
       }
     },
@@ -2553,6 +4629,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "תשלומים אחרונים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Последние платежи"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آخر المدفوعات"
           }
         }
       }
@@ -2576,6 +4664,18 @@
             "state": "translated",
             "value": "נותרו %1$@ מתוך %2$@"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Осталось %1$@ из %2$@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متبقٍّ %1$@ من %2$@"
+          }
         }
       }
     },
@@ -2586,6 +4686,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "לאומי"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Леуми"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لئومي"
           }
         }
       }
@@ -2603,6 +4715,18 @@
             "state": "translated",
             "value": "חשבון לאומי"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Счёт в Леуми"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حساب لئومي"
+          }
         }
       }
     },
@@ -2618,6 +4742,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "יתרה בלאומי"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Баланс Леуми"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رصيد لئومي"
           }
         }
       }
@@ -2635,6 +4771,18 @@
             "state": "translated",
             "value": "עו״ש בלאומי"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Текущий счёт в Леуми"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحساب الجاري في لئومي"
+          }
         }
       }
     },
@@ -2650,6 +4798,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "תנועות בלאומי מאז %@."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Операции в Леуми с %@."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حركات لئومي منذ %@."
           }
         }
       }
@@ -2667,6 +4827,18 @@
             "state": "translated",
             "value": "טוען בנקים…"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Загрузка банков…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ تحميل البنوك…"
+          }
         }
       }
     },
@@ -2682,6 +4854,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מיקום"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Место"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الموقع"
           }
         }
       }
@@ -2699,6 +4883,18 @@
             "state": "translated",
             "value": "נעילה עם Face ID"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокировка Face ID"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "القفل بـ Face ID"
+          }
         }
       }
     },
@@ -2714,6 +4910,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "יומן"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Журнал"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السجل"
           }
         }
       }
@@ -2731,6 +4939,18 @@
             "state": "translated",
             "value": "מקס"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Макс"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ماكس"
+          }
         }
       }
     },
@@ -2746,6 +4966,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חיובי מקס מאותו בית עסק, באותו סכום, כל חודש. עסקאות תשלומים לא נכללות."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Списания Макса от одного продавца на одну и ту же сумму каждый месяц. Покупки в рассрочку не учитываются."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خصومات ماكس من التاجر نفسه وبالمبلغ نفسه كل شهر. لا تشمل خطط التقسيط."
           }
         }
       }
@@ -2763,6 +4995,18 @@
             "state": "translated",
             "value": "חיובי מקס הצפויים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Предстоящие списания Макса"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خصومات ماكس القادمة"
+          }
         }
       }
     },
@@ -2778,6 +5022,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חיוב מקס"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Списание Макса"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خصم ماكس"
           }
         }
       }
@@ -2795,6 +5051,18 @@
             "state": "translated",
             "value": "מקס מחייבת היום"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Макс списывает сегодня"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُخصم ماكس اليوم"
+          }
         }
       }
     },
@@ -2810,6 +5078,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "רכישות במקס מאז %@."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Покупки по Максу с %@."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مشتريات ماكس منذ %@."
           }
         }
       }
@@ -2827,6 +5107,18 @@
             "state": "translated",
             "value": "רכישות במקס מתחילת החודש. התראות ב-80% וב-100%."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Покупки по Максу с 1-го числа месяца. Уведомления при 80% и 100%."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مشتريات ماكس منذ أول الشهر. تنبيهات عند 80% و100%."
+          }
         }
       }
     },
@@ -2842,6 +5134,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מקס · %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Макс · %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ماكس · %@"
           }
         }
       }
@@ -2859,6 +5163,18 @@
             "state": "translated",
             "value": "הכנסות"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поступления"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأموال الواردة"
+          }
         }
       }
     },
@@ -2874,6 +5190,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חודש"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Месяц"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشهر"
           }
         }
       }
@@ -2891,6 +5219,18 @@
             "state": "translated",
             "value": "חודש מול חודש"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Месяц к месяцу"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شهرًا بشهر"
+          }
         }
       }
     },
@@ -2906,6 +5246,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "סכום חודשי. להשאיר ריק בלי תקציב."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сумма на месяц. Оставьте пустым, чтобы не задавать бюджет."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مبلغ شهري. اتركه فارغًا لعدم تحديد ميزانية."
           }
         }
       }
@@ -2923,6 +5275,18 @@
             "state": "translated",
             "value": "שם"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Имя"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاسم"
+          }
         }
       }
     },
@@ -2938,6 +5302,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "שווי נקי"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чистые активы"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صافي الثروة"
           }
         }
       }
@@ -2955,6 +5331,18 @@
             "state": "translated",
             "value": "תגית חדשה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Новый тег"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وسم جديد"
+          }
         }
       }
     },
@@ -2970,6 +5358,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חיוב מקס הבא"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Следующее списание Макса"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خصم ماكس القادم"
           }
         }
       }
@@ -2987,6 +5387,18 @@
             "state": "translated",
             "value": "הבא בסביבות %@"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Следующее около %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التالي في حدود %@"
+          }
         }
       }
     },
@@ -3002,6 +5414,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "בחיוב הבא"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Со следующим списанием"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع الخصم القادم"
           }
         }
       }
@@ -3019,6 +5443,18 @@
             "state": "translated",
             "value": "אין חיובי מקס שממתינים לחיוב."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нет покупок по Максу, ожидающих списания."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد مشتريات ماكس بانتظار الخصم."
+          }
         }
       }
     },
@@ -3034,6 +5470,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "עוד אין בנק"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Банков пока нет"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد بنوك بعد"
           }
         }
       }
@@ -3051,6 +5499,18 @@
             "state": "translated",
             "value": "עוד אין תקציבים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бюджетов пока нет"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد ميزانيات بعد"
+          }
         }
       }
     },
@@ -3066,6 +5526,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "עוד אין נתונים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Данных пока нет"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد بيانات بعد"
           }
         }
       }
@@ -3083,6 +5555,18 @@
             "state": "translated",
             "value": "אין חיבור לאינטרנט."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нет подключения к интернету."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد اتصال بالإنترنت."
+          }
         }
       }
     },
@@ -3098,6 +5582,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "אין חיבור לאינטרנט. העדכון יתחדש ברגע שהחיבור יחזור."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нет подключения к интернету. Обновление возобновится, как только связь появится."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد اتصال بالإنترنت. سيُستأنف التحديث فور عودة الاتصال."
           }
         }
       }
@@ -3115,6 +5611,18 @@
             "state": "translated",
             "value": "אין תנועות"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Операций нет"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد حركات"
+          }
         }
       }
     },
@@ -3130,6 +5638,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "אין רכישות"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Покупок нет"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد مشتريات"
           }
         }
       }
@@ -3147,6 +5667,18 @@
             "state": "translated",
             "value": "עוד אין רכישות."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Покупок пока нет."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد مشتريات بعد."
+          }
         }
       }
     },
@@ -3162,6 +5694,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ללא"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нет"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بلا"
           }
         }
       }
@@ -3179,6 +5723,18 @@
             "state": "translated",
             "value": "לא מחובר"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не подключён"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "غير مرتبط"
+          }
         }
       }
     },
@@ -3194,6 +5750,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "הערה ותגיות"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Заметка и теги"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملاحظة والوسوم"
           }
         }
       }
@@ -3211,6 +5779,18 @@
             "state": "translated",
             "value": "לא נשאר מה לחלק עד החיוב."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "До списания распределять нечего."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يتبقَّ ما يُوزَّع حتى الخصم."
+          }
         }
       }
     },
@@ -3226,6 +5806,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "אין רכישות בכרטיס מקס בתקופה הזאת."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "За этот период по карте Макс покупок нет."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا شيء على بطاقة ماكس في هذه الفترة."
           }
         }
       }
@@ -3243,6 +5835,18 @@
             "state": "translated",
             "value": "אין מה לחייב"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Списывать нечего"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا شيء للخصم"
+          }
         }
       }
     },
@@ -3258,6 +5862,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "התראות"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Уведомления"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التنبيهات"
           }
         }
       }
@@ -3275,6 +5891,18 @@
             "state": "translated",
             "value": "אישור"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ОК"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حسنًا"
+          }
         }
       }
     },
@@ -3290,6 +5918,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "כל עוד האפליקציה במצב מוגבל, משותפים רק החשבונות שקושרו בפורטל של Enable Banking."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пока приложение работает в ограниченном режиме, доступны только счета, привязанные на портале Enable Banking."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما دام التطبيق في الوضع المقيّد، لا تُشارك إلا الحسابات التي ربطتها في بوابة Enable Banking."
           }
         }
       }
@@ -3307,6 +5947,18 @@
             "state": "translated",
             "value": "יש לפתוח את True Balance פעם אחת כדי לחבר את לאומי ומקס."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Откройте True Balance один раз, чтобы подключить Леуми и Макс."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "افتح True Balance مرة واحدة لربط لئومي وماكس."
+          }
         }
       }
     },
@@ -3322,6 +5974,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "בנקים נוספים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Другие банки"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوك أخرى"
           }
         }
       }
@@ -3339,6 +6003,18 @@
             "state": "translated",
             "value": "יצא"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Расход"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صادر"
+          }
         }
       }
     },
@@ -3354,6 +6030,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "סיסמה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пароль"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كلمة المرور"
           }
         }
       }
@@ -3371,6 +6059,18 @@
             "state": "translated",
             "value": "ממתין"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В обработке"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قيد المعالجة"
+          }
         }
       }
     },
@@ -3386,6 +6086,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "לחודש"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В месяц"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شهريًا"
           }
         }
       }
@@ -3403,6 +6115,18 @@
             "state": "translated",
             "value": "תקופה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Период"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفترة"
+          }
         }
       }
     },
@@ -3418,6 +6142,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "פרטיות"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Конфиденциальность"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخصوصية"
           }
         }
       }
@@ -3435,6 +6171,18 @@
             "state": "translated",
             "value": "מיקום משוער לפי שם בית העסק. ייתכן שזה סניף אחר."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вероятное место, найденное по названию продавца. Это может быть другой филиал."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "موقع مرجّح، عُثر عليه من اسم التاجر. قد يكون فرعًا آخر."
+          }
         }
       }
     },
@@ -3450,6 +6198,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "פרופיל"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Профиль"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملف الشخصي"
           }
         }
       }
@@ -3467,6 +6227,18 @@
             "state": "translated",
             "value": "פרופיל והגדרות"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Профиль и настройки"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملف الشخصي والإعدادات"
+          }
         }
       }
     },
@@ -3482,6 +6254,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "יש למשוך למטה כדי לקרוא את %@."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потяните вниз, чтобы прочитать %@."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسحب للأسفل لقراءة %@."
           }
         }
       }
@@ -3499,6 +6283,18 @@
             "state": "translated",
             "value": "יש למשוך למטה כדי להתחבר ללאומי ולמקס."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потяните вниз, чтобы войти в Леуми и Макс."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسحب للأسفل لتسجيل الدخول إلى لئومي وماكس."
+          }
         }
       }
     },
@@ -3514,6 +6310,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "רכישות"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Покупки"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشتريات"
           }
         }
       }
@@ -3531,6 +6339,18 @@
             "state": "translated",
             "value": "רכישות שנשמרו באייפון הזה."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Покупки, сохранённые на этом iPhone."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مشتريات محفوظة على هذا الـ iPhone."
+          }
         }
       }
     },
@@ -3546,6 +6366,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "קוראים את היתרה בלאומי…"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Читаем баланс Леуми…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ قراءة رصيدك في لئومي…"
           }
         }
       }
@@ -3563,6 +6395,18 @@
             "state": "translated",
             "value": "קוראים את החיובים במקס…"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Читаем списания Макса…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ قراءة خصومات ماكس…"
+          }
         }
       }
     },
@@ -3578,6 +6422,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "זמין באמת"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Реально доступно"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتاح فعلًا"
           }
         }
       }
@@ -3595,6 +6451,18 @@
             "state": "translated",
             "value": "זמין באמת אחרי מקס ב-%@"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Реально доступно после Макса %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتاح فعلًا بعد ماكس في %@"
+          }
         }
       }
     },
@@ -3610,6 +6478,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מקבל"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Получатель"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المستلم"
           }
         }
       }
@@ -3627,6 +6507,18 @@
             "state": "translated",
             "value": "חיבור מחדש"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Переподключить"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة الربط"
+          }
         }
       }
     },
@@ -3642,6 +6534,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "אסמכתא"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Номер операции"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المرجع"
           }
         }
       }
@@ -3659,6 +6563,18 @@
             "state": "translated",
             "value": "רענון עכשיו"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обновить"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التحديث الآن"
+          }
         }
       }
     },
@@ -3674,6 +6590,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "תנועות קבועות בלאומי שצפויות לפני החיוב, לפי החודשים האחרונים: אותו משלם או מוטב, בערך אותו סכום, כל חודש."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Регулярные операции в Леуми, ожидаемые до списания, найденные по последним месяцам: тот же плательщик или получатель, примерно та же сумма, каждый месяц."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حركات ثابتة في لئومي متوقعة قبل الخصم، مكتشفة من الأشهر الأخيرة: الدافع أو المستفيد نفسه، والمبلغ نفسه تقريبًا، كل شهر."
           }
         }
       }
@@ -3691,6 +6619,18 @@
             "state": "translated",
             "value": "הוחזר"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Возмещено"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مُسترد"
+          }
         }
       }
     },
@@ -3706,6 +6646,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "החלפת המפתח"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Заменить ключ"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استبدال المفتاح"
           }
         }
       }
@@ -3723,6 +6675,18 @@
             "state": "translated",
             "value": "חובה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обязательно"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مطلوب"
+          }
         }
       }
     },
@@ -3738,6 +6702,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "משכורת וחיובים קבועים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зарплата и регулярные списания"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الراتب والخصومات الثابتة"
           }
         }
       }
@@ -3755,6 +6731,18 @@
             "state": "translated",
             "value": "כולל משכורת וחיובים קבועים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "С учётом зарплаты и регулярных списаний"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع الراتب والخصومات الثابتة"
+          }
         }
       }
     },
@@ -3770,6 +6758,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "שמירה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сохранить"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حفظ"
           }
         }
       }
@@ -3787,6 +6787,18 @@
             "state": "translated",
             "value": "חיסכון"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сбережения"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التوفير"
+          }
         }
       }
     },
@@ -3802,6 +6814,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חיפוש בנק"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поиск банка"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البحث عن بنك"
           }
         }
       }
@@ -3819,6 +6843,18 @@
             "state": "translated",
             "value": "חיפוש בחיובים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поиск по списаниям"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البحث في الخصومات"
+          }
         }
       }
     },
@@ -3834,6 +6870,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חיפוש בתנועות"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поиск по операциям"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البحث في الحركات"
           }
         }
       }
@@ -3851,6 +6899,18 @@
             "state": "translated",
             "value": "הצגת הכול"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Все"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض الكل"
+          }
         }
       }
     },
@@ -3866,6 +6926,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "הצגת כל ה-%lld"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Все %lld"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض الكل (%lld)"
           }
         }
       }
@@ -3883,6 +6955,18 @@
             "state": "translated",
             "value": "כמה אפשר באמת להוציא: היתרה בלאומי פחות חיובי מקס שעוד יגיעו."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Узнайте, сколько вы реально можете потратить: баланс Леуми минус ещё не списанные покупки по Максу."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اعرف ما يمكنك إنفاقه فعلًا: رصيدك في لئومي ناقص خصومات ماكس القادمة."
+          }
         }
       }
     },
@@ -3898,6 +6982,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "שולח"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отправитель"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المرسِل"
           }
         }
       }
@@ -3915,6 +7011,18 @@
             "state": "translated",
             "value": "קובעים סכום חודשי לקטגוריה, למשל מכולת ‎₪1,500. תגיע התראה ב-80% וב-100%."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Задайте сумму на месяц для категории, например продукты ₪1,500. Вы получите уведомление при 80% и 100%."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حدّد مبلغًا شهريًا لفئة، مثلًا البقالة ₪1,500. سيصلك تنبيه عند 80% و100%."
+          }
         }
       }
     },
@@ -3931,6 +7039,18 @@
             "state": "translated",
             "value": "קביעת תקציב חודשי לכל קטגוריה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Задать месячный бюджет по категориям"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحديد ميزانية شهرية لكل فئة"
+          }
         }
       }
     },
@@ -3946,6 +7066,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "קביעת תקציבים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Задать бюджеты"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحديد الميزانيات"
           }
         }
       }
@@ -3964,6 +7096,18 @@
             "state": "translated",
             "value": "הגדרות"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Настройки"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإعدادات"
+          }
         }
       }
     },
@@ -3979,6 +7123,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "משותף"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Общее"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مشترك"
           }
         }
       }
@@ -3996,6 +7152,18 @@
             "state": "translated",
             "value": "הצגה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показать"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض"
+          }
         }
       }
     },
@@ -4011,6 +7179,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "הצגת דפי הבנק בזמן ההתחברות"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показывать страницы банков при входе"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض صفحات البنوك أثناء تسجيل الدخول"
           }
         }
       }
@@ -4028,6 +7208,18 @@
             "state": "translated",
             "value": "הצגת הסיסמה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показать пароль"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إظهار كلمة المرور"
+          }
         }
       }
     },
@@ -4043,6 +7235,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מופיע בפורטל של Enable Banking. קובץ המפתח בדרך כלל נקרא בשם הזה."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Указан на портале Enable Banking. Файл ключа обычно называется так же."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يظهر في بوابة Enable Banking. يحمل ملف المفتاح عادةً الاسم نفسه."
           }
         }
       }
@@ -4060,6 +7264,18 @@
             "state": "translated",
             "value": "מציג את לאומי ומקס על המסך בזמן ההתחברות, כדי לראות מה נתקע ולהשלים שלב ידנית אם צריך."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показывает Леуми и Макс на экране во время входа, чтобы видеть, что мешает, и при необходимости пройти шаг вручную."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يعرض لئومي وماكس على الشاشة أثناء تسجيل الدخول، لترى ما يعيق العملية وتُكمل خطوة يدويًا عند الحاجة."
+          }
         }
       }
     },
@@ -4075,6 +7291,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מתחברים ללאומי…"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вход в Леуми…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ تسجيل الدخول إلى لئومي…"
           }
         }
       }
@@ -4092,6 +7320,18 @@
             "state": "translated",
             "value": "מתחברים למקס…"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вход в Макс…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ تسجيل الدخول إلى ماكس…"
+          }
         }
       }
     },
@@ -4108,6 +7348,18 @@
             "state": "translated",
             "value": "משהו השתבש"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Что-то пошло не так"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حدث خطأ ما"
+          }
         }
       }
     },
@@ -4123,6 +7375,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "הוצאות"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Расходы"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المصاريف"
           }
         }
       }
@@ -4141,6 +7405,18 @@
             "state": "translated",
             "value": "הוצאות לאורך תקופה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Расходы за период"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المصاريف خلال فترة"
+          }
         }
       }
     },
@@ -4156,6 +7432,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מינויים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подписки"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاشتراكات"
           }
         }
       }
@@ -4173,6 +7461,18 @@
             "state": "translated",
             "value": "תגית"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тег"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وسم"
+          }
         }
       }
     },
@@ -4188,6 +7488,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "קובץ ה-‎.pem שהורד מהפורטל של Enable Banking. הוא נשמר במחזיק המפתחות של האייפון הזה."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файл .pem, скачанный с портала Enable Banking. Он хранится в связке ключей этого iPhone."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملف ‎.pem الذي نزّلته من بوابة Enable Banking. يُحفظ في سلسلة مفاتيح هذا الـ iPhone."
           }
         }
       }
@@ -4205,6 +7517,18 @@
             "state": "translated",
             "value": "הבנק לא אישר גישה. אפשר לנסות להתחבר שוב."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Банк не предоставил доступ. Попробуйте подключиться снова."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يمنح البنك الوصول. حاول الربط مجددًا."
+          }
         }
       }
     },
@@ -4220,6 +7544,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "הבנק מגביל את מספר הקריאות. אפשר לנסות שוב מאוחר יותר."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Банк ограничивает частоту запросов. Повторите попытку позже."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يحدّ البنك من عدد مرات القراءة. حاول لاحقًا."
           }
         }
       }
@@ -4237,6 +7573,18 @@
             "state": "translated",
             "value": "שם המשתמש והסיסמה של leumi.co.il."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Логин и пароль, которые вы используете на leumi.co.il."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسم المستخدم وكلمة المرور اللذان تستخدمهما في leumi.co.il."
+          }
         }
       }
     },
@@ -4252,6 +7600,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "שם המשתמש והסיסמה של max.co.il."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Логин и пароль, которые вы используете на max.co.il."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسم المستخدم وكلمة المرور اللذان تستخدمهما في max.co.il."
           }
         }
       }
@@ -4269,6 +7629,18 @@
             "state": "translated",
             "value": "זה כל מה שלאומי מוסר על הצד השני, גם באתר שלו."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Это всё, что Леуми сообщает о другой стороне, в том числе на своём сайте."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هذا كل ما يقدّمه لئومي عن الطرف الآخر، وهو ما يظهر على موقعه أيضًا."
+          }
         }
       }
     },
@@ -4284,6 +7656,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "אי אפשר לקרוא את קובץ המפתח. יש להשתמש בקובץ ה-‎.pem מהפורטל של Enable Banking."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не удаётся прочитать файл ключа. Используйте файл .pem с портала Enable Banking."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّرت قراءة ملف المفتاح. استخدم ملف ‎.pem من بوابة Enable Banking."
           }
         }
       }
@@ -4301,6 +7685,18 @@
             "state": "translated",
             "value": "החודש"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Этот месяц"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هذا الشهر"
+          }
         }
       }
     },
@@ -4316,6 +7712,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "החודש במקס"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Этот месяц по Максу"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هذا الشهر على ماكس"
           }
         }
       }
@@ -4334,6 +7742,18 @@
             "state": "translated",
             "value": "החודש מול החודש שעבר"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Этот месяц и прошлый"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هذا الشهر مقابل الشهر الماضي"
+          }
         }
       }
     },
@@ -4349,6 +7769,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "עד"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "По"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إلى"
           }
         }
       }
@@ -4366,6 +7798,18 @@
             "state": "translated",
             "value": "היום"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сегодня"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اليوم"
+          }
         }
       }
     },
@@ -4381,6 +7825,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "תנועה של היום: לאומי עוד עשויים לעדכן אותה."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сегодняшняя операция: Леуми ещё может её изменить."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حركة اليوم: قد يعدّلها لئومي بعد."
           }
         }
       }
@@ -4398,6 +7854,18 @@
             "state": "translated",
             "value": "סה״כ"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Итого"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المجموع"
+          }
         }
       }
     },
@@ -4413,6 +7881,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "סה״כ: %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Итого: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المجموع: %@"
           }
         }
       }
@@ -4430,6 +7910,18 @@
             "state": "translated",
             "value": "תנועה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Операция"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعاملة"
+          }
         }
       }
     },
@@ -4445,6 +7937,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "העברה שהתקבלה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Входящий перевод"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحويل وارد"
           }
         }
       }
@@ -4462,6 +7966,18 @@
             "state": "translated",
             "value": "העברה שנשלחה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Исходящий перевод"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحويل صادر"
+          }
         }
       }
     },
@@ -4477,6 +7993,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "העברות"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Переводы"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التحويلات"
           }
         }
       }
@@ -4494,6 +8022,18 @@
             "state": "translated",
             "value": "פתרון בעיות"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Устранение неполадок"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حل المشكلات"
+          }
         }
       }
     },
@@ -4506,6 +8046,18 @@
           }
         },
         "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "True Balance"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "True Balance"
+          }
+        },
+        "ar": {
           "stringUnit": {
             "state": "translated",
             "value": "True Balance"
@@ -4526,6 +8078,18 @@
             "state": "translated",
             "value": "True Balance נעולה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "True Balance заблокирован"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "True Balance مقفل"
+          }
         }
       }
     },
@@ -4541,6 +8105,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "יומן True Balance"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Журнал True Balance"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سجل True Balance"
           }
         }
       }
@@ -4558,6 +8134,18 @@
             "state": "translated",
             "value": "יתרה אמיתית"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Настоящий баланс"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الرصيد الحقيقي"
+          }
         }
       }
     },
@@ -4573,6 +8161,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ניסיון חוזר"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повторить"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة المحاولة"
           }
         }
       }
@@ -4590,6 +8190,18 @@
             "state": "translated",
             "value": "לנסות עם נתוני דוגמה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Попробовать на примере"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التجربة ببيانات نموذجية"
+          }
         }
       }
     },
@@ -4605,6 +8217,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "פתיחה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Разблокировать"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح القفل"
           }
         }
       }
@@ -4622,6 +8246,18 @@
             "state": "translated",
             "value": "יש לפתוח כדי לראות את היתרה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Разблокируйте, чтобы увидеть баланс"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "افتح القفل لرؤية رصيدك"
+          }
         }
       }
     },
@@ -4637,6 +8273,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חיובים קרובים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Предстоящие списания"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخصومات القادمة"
           }
         }
       }
@@ -4654,6 +8302,18 @@
             "state": "translated",
             "value": "העדכון נכשל"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обновление не удалось"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فشل التحديث"
+          }
         }
       }
     },
@@ -4669,6 +8329,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "עודכן %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обновлено %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آخر تحديث %@"
           }
         }
       }
@@ -4686,6 +8358,18 @@
             "state": "translated",
             "value": "מעדכנים…"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обновление…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ التحديث…"
+          }
         }
       }
     },
@@ -4701,6 +8385,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "נוצלו %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Использовано %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مستخدم %@"
           }
         }
       }
@@ -4718,6 +8414,18 @@
             "state": "translated",
             "value": "משמש לברכה במסך הבית."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Для приветствия на главном экране."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُستخدم لتحيتك في الشاشة الرئيسية."
+          }
         }
       }
     },
@@ -4733,6 +8441,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "שם משתמש"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Логин"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسم المستخدم"
           }
         }
       }
@@ -4750,6 +8470,18 @@
             "state": "translated",
             "value": "תאריך ערך"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дата валютирования"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تاريخ القيمة"
+          }
         }
       }
     },
@@ -4765,6 +8497,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מה האפליקציה עשתה בזמן העדכונים: שלבים, ניסיונות חוזרים, שגיאות. בלי סיסמאות ובלי סכומים. נשאר באייפון עד שמשתפים אותו."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Что приложение делало при обновлении: шаги, повторные попытки, ошибки. Без паролей и сумм. Остаётся на этом iPhone, пока вы им не поделитесь."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما فعله التطبيق أثناء التحديث: الخطوات، وإعادة المحاولات، والأخطاء. بلا كلمات مرور ولا مبالغ. يبقى على هذا الـ iPhone حتى تشاركه."
           }
         }
       }
@@ -4782,6 +8526,18 @@
             "state": "translated",
             "value": "כמה אפשר להוציא ביום עד חיוב מקס הבא."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сколько можно тратить в день до следующего списания Макса."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما يمكنك إنفاقه يوميًا حتى خصم ماكس القادم."
+          }
         }
       }
     },
@@ -4797,6 +8553,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "בפתיחת האפליקציה וברקע"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "При открытии приложения и в фоне"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عند فتح التطبيق وفي الخلفية"
           }
         }
       }
@@ -4814,6 +8582,18 @@
             "state": "translated",
             "value": "כולל תשלומים עתידיים שכבר התחייבת להם: %@"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "С учётом уже взятых будущих платежей: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع الأقساط اللاحقة الملتزم بها: %@"
+          }
         }
       }
     },
@@ -4829,6 +8609,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "עבודה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Работа"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العمل"
           }
         }
       }
@@ -4846,6 +8638,18 @@
             "state": "translated",
             "value": "מאשרים באתר או באפליקציה של הבנק וחוזרים לכאן. הגישה לקריאה בלבד ונמשכת 180 יום."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вы подтверждаете доступ на сайте или в приложении банка и возвращаетесь сюда. Доступ только для чтения и действует 180 дней."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تؤكّد على موقع البنك أو تطبيقه ثم تعود إلى هنا. الوصول للقراءة فقط ويدوم 180 يومًا."
+          }
         }
       }
     },
@@ -4861,6 +8665,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "נשארים מחוברים. פרטי ההתחברות נשמרים במחזיק המפתחות של האייפון הזה."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вход сохраняется. Данные для входа хранятся в связке ключей этого iPhone."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبقى مسجّل الدخول. تُحفظ بيانات دخولك في سلسلة مفاتيح هذا الـ iPhone."
           }
         }
       }
@@ -4884,6 +8700,18 @@
             "state": "translated",
             "value": "החשבון ב%1$@ חסום. יש לפנות ל%2$@."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваш счёт в %1$@ заблокирован. Обратитесь в %2$@."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حسابك في %1$@ محظور. تواصل مع %2$@."
+          }
         }
       }
     },
@@ -4899,6 +8727,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "פרטי ההתחברות ללאומי ולמקס והיתרה השמורה יימחקו מהאייפון הזה."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Данные для входа в Леуми и Макс и сохранённый баланс будут удалены с этого iPhone."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ستُحذف بيانات دخولك إلى لئومي وماكس والرصيد المحفوظ من هذا الـ iPhone."
           }
         }
       }
@@ -4916,6 +8756,18 @@
             "state": "translated",
             "value": "פרטי ההתחברות ללאומי ולמקס, הגישה לבנקים הנוספים והיתרות השמורות יימחקו מהאייפון הזה."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Данные для входа в Леуми и Макс, доступ к другим банкам и сохранённые балансы будут удалены с этого iPhone."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ستُحذف بيانات دخولك إلى لئومي وماكس، والوصول إلى البنوك الأخرى، والأرصدة المحفوظة من هذا الـ iPhone."
+          }
         }
       }
     },
@@ -4931,6 +8783,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "היתרה בלאומי פחות חיוב מקס הבא, לפי העדכון האחרון."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Баланс Леуми минус следующее списание Макса, по последнему обновлению."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رصيدك في لئومي ناقص خصم ماكس القادم، حسب آخر تحديث."
           }
         }
       }
@@ -4948,6 +8812,18 @@
             "state": "translated",
             "value": "פרטי ההתחברות נשמרים במחזיק המפתחות של האייפון ולא יוצאים ממנו, חוץ מההתחברות ללאומי ולמקס."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Данные для входа хранятся в связке ключей этого iPhone и не покидают его, кроме как для входа в Леуми и Макс."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُحفظ بيانات دخولك في سلسلة مفاتيح هذا الـ iPhone ولا تغادره أبدًا، إلا لتسجيل الدخول إلى لئومي وماكس."
+          }
         }
       }
     },
@@ -4964,6 +8840,18 @@
             "state": "translated",
             "value": "השם הפרטי שלך"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваше имя"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسمك الأول"
+          }
         }
       }
     },
@@ -4979,6 +8867,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "היתרה האמיתית שלך היא %@."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваш настоящий баланс: %@."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رصيدك الحقيقي %@."
           }
         }
       }
@@ -5002,6 +8902,18 @@
             "state": "translated",
             "value": "היתרה האמיתית שלך היא %1$@. עודכן %2$@."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваш настоящий баланс: %1$@. Обновлено %2$@."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رصيدك الحقيقي %1$@. آخر تحديث %2$@."
+          }
         }
       }
     },
@@ -5017,6 +8929,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "היתרה האמיתית שלך מתחת ל-%@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваш настоящий баланс ниже %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رصيدك الحقيقي أقل من %@"
           }
         }
       }
@@ -5034,6 +8958,18 @@
             "state": "translated",
             "value": "תגיע התראה אם היתרה האמיתית תרד מתחת לאפס."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вы получите уведомление, если настоящий баланс станет ниже нуля."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيصلك تنبيه إذا انخفض رصيدك الحقيقي عن الصفر."
+          }
         }
       }
     },
@@ -5049,6 +8985,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "תגיע התראה כשהיתרה האמיתית תרד מתחת לסכום הזה."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вы получите уведомление, когда настоящий баланс опустится ниже этой суммы."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيصلك تنبيه عندما ينخفض رصيدك الحقيقي عن هذا المبلغ."
           }
         }
       }
@@ -5066,6 +9014,18 @@
             "state": "translated",
             "value": "ביום החיוב צפוי מינוס, אלא אם ייכנס כסף לפני כן."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В день списания вы уйдёте в минус, если до этого не поступят деньги."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيصبح رصيدك سالبًا يوم الخصم ما لم يصل مال قبل ذلك."
+          }
         }
       }
     },
@@ -5081,6 +9041,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "תגיע התראה ב-80% וב-100%."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вы получите уведомление при 80% и 100%."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيصلك تنبيه عند 80% و100%."
           }
         }
       }
@@ -5098,6 +9070,18 @@
             "state": "translated",
             "value": "מוצגים נתוני דוגמה."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вы используете демонстрационные данные."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تستخدم بيانات نموذجية."
+          }
         }
       }
     },
@@ -5114,6 +9098,18 @@
             "state": "translated",
             "value": "בערך %@ כל אחת"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "около %@ за покупку"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نحو %@ لكل عملية"
+          }
         }
       }
     },
@@ -5129,6 +9125,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "בערך %@ ליום"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "около %@ в день"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نحو %@ يوميًا"
           }
         }
       }
@@ -5154,6 +9162,18 @@
             "state": "translated",
             "value": "טיפוח ויופי"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Красота и уход"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجمال والعناية"
+          }
         }
       }
     },
@@ -5177,6 +9197,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ספרים ודפוס"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Книги и печать"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الكتب والمطبوعات"
           }
         }
       }
@@ -5202,6 +9234,18 @@
             "state": "translated",
             "value": "משיכת מזומן"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Снятие наличных"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سحب نقدي"
+          }
         }
       }
     },
@@ -5225,6 +9269,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "אלקטרוניקה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Электроника"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإلكترونيات"
           }
         }
       }
@@ -5250,6 +9306,18 @@
             "state": "translated",
             "value": "דלק, חשמל וגז"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Топливо, электричество и газ"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوقود والكهرباء والغاز"
+          }
         }
       }
     },
@@ -5273,6 +9341,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "אופנה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Одежда"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأزياء"
           }
         }
       }
@@ -5298,6 +9378,18 @@
             "state": "translated",
             "value": "מטבע חוץ"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Иностранная валюта"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العملات الأجنبية"
+          }
         }
       }
     },
@@ -5321,6 +9413,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "עירייה וממשלה"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Муниципалитет и госуслуги"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البلدية والحكومة"
           }
         }
       }
@@ -5346,6 +9450,18 @@
             "state": "translated",
             "value": "מכולת וסופר"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Продукты"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البقالة"
+          }
         }
       }
     },
@@ -5369,6 +9485,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "בריאות ופארם"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Здоровье и аптека"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الصحة والصيدلية"
           }
         }
       }
@@ -5394,6 +9522,18 @@
             "state": "translated",
             "value": "בית ועשה זאת בעצמך"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дом и ремонт"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المنزل والأدوات"
+          }
         }
       }
     },
@@ -5417,6 +9557,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ביטוח"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Страхование"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التأمين"
           }
         }
       }
@@ -5442,6 +9594,18 @@
             "state": "translated",
             "value": "פנאי וספורט"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Досуг и спорт"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الترفيه والرياضة"
+          }
         }
       }
     },
@@ -5465,6 +9629,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "מוצרי מקס"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Продукты Макса"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "منتجات ماكس"
           }
         }
       }
@@ -5490,6 +9666,18 @@
             "state": "translated",
             "value": "אחר"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Другое"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أخرى"
+          }
         }
       }
     },
@@ -5513,6 +9701,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "חיות מחמד"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Домашние животные"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحيوانات الأليفة"
           }
         }
       }
@@ -5538,6 +9738,18 @@
             "state": "translated",
             "value": "מסעדות וברים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Рестораны и бары"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المطاعم والمقاهي"
+          }
         }
       }
     },
@@ -5561,6 +9773,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "טלפון ואינטרנט"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Связь и интернет"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الهاتف والإنترنت"
           }
         }
       }
@@ -5586,6 +9810,18 @@
             "state": "translated",
             "value": "העברת כספים"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Денежные переводы"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحويل أموال"
+          }
         }
       }
     },
@@ -5609,6 +9845,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "תחבורה ורכב"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Транспорт и авто"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النقل والسيارات"
           }
         }
       }
@@ -5634,6 +9882,18 @@
             "state": "translated",
             "value": "טיסות ונסיעות"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Авиабилеты и поездки"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الطيران والسفر"
+          }
         }
       }
     },
@@ -5658,6 +9918,18 @@
             "state": "translated",
             "value": "ללא קטגוריה"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Без категории"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بلا فئة"
+          }
         }
       }
     },
@@ -5674,6 +9946,18 @@
             "state": "translated",
             "value": "‏iOS מחליט מתי הרענון ברקע רץ. אפשר גם למשוך למטה כדי לרענן בכל רגע."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS сам решает, когда запускать фоновое обновление. Вы также можете в любой момент потянуть вниз, чтобы обновить."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يحدّد iOS موعد التحديث في الخلفية. يمكنك أيضًا السحب للأسفل للتحديث في أي وقت."
+          }
         }
       }
     },
@@ -5681,6 +9965,18 @@
       "shouldTranslate": false,
       "localizations": {
         "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "·"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "·"
+          }
+        },
+        "ar": {
           "stringUnit": {
             "state": "translated",
             "value": "·"
