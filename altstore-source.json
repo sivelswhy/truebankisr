@@ -1,0 +1,34 @@
+{
+  "name": "True Balance",
+  "identifier": "il.truebalance.source",
+  "sourceURL": "https://raw.githubusercontent.com/sivelswhy/truebankisr/main/altstore-source.json",
+  "subtitle": "Your real balance across Leumi and Max.",
+  "description": "AltStore / SideStore source for True Balance. Add it to get one-tap updates of the sideloaded iPhone app.",
+  "iconURL": "https://raw.githubusercontent.com/sivelswhy/truebankisr/main/ios/TrueBalance/Resources/Assets.xcassets/AppIcon.appiconset/icon-1024.png",
+  "website": "https://github.com/sivelswhy/truebankisr",
+  "tintColor": "007AFF",
+  "apps": [
+    {
+      "name": "True Balance",
+      "bundleIdentifier": "il.truebalance.app",
+      "developerName": "sivelswhy",
+      "subtitle": "Your real balance across Leumi and Max.",
+      "localizedDescription": "Shows what you really have left: your Leumi balance minus what Max will charge.",
+      "iconURL": "https://raw.githubusercontent.com/sivelswhy/truebankisr/main/ios/TrueBalance/Resources/Assets.xcassets/AppIcon.appiconset/icon-1024.png",
+      "tintColor": "007AFF",
+      "category": "utilities",
+      "screenshotURLs": [],
+      "versions": [
+        {
+          "version": "1.0.22",
+          "buildVersion": "22",
+          "date": "2026-10-20T15:05:28.895Z",
+          "localizedDescription": "AltStore/SideStore source updated by CI on every main build; builds stamped 1.0.<run>",
+          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-22/TrueBalance.ipa",
+          "size": 1385689,
+          "minOSVersion": "18.0"
+        }
+      ]
+    }
+  ]
+}
