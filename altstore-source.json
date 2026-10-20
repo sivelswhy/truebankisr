@@ -20,6 +20,15 @@
       "screenshotURLs": [],
       "versions": [
         {
+          "version": "1.0.28",
+          "buildVersion": "28",
+          "date": "2026-10-20T16:32:59.421Z",
+          "localizedDescription": "iOS: night-blue background with a soft glow instead of pure black",
+          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-28/TrueBalance.ipa",
+          "size": 1657899,
+          "minOSVersion": "18.0"
+        },
+        {
           "version": "1.0.27",
           "buildVersion": "27",
           "date": "2026-10-20T16:30:35.466Z",
