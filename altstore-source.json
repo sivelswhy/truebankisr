@@ -20,6 +20,15 @@
       "screenshotURLs": [],
       "versions": [
         {
+          "version": "1.0.24",
+          "buildVersion": "24",
+          "date": "2026-10-20T15:50:27.263Z",
+          "localizedDescription": "iOS: a stuck bank page can no longer hang the refresh",
+          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-24/TrueBalance.ipa",
+          "size": 1414625,
+          "minOSVersion": "18.0"
+        },
+        {
           "version": "1.0.23",
           "buildVersion": "23",
           "date": "2026-10-20T15:35:18.330Z",
