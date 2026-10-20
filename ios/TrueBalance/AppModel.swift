@@ -45,6 +45,12 @@ final class AppModel {
         phase = signedIn ? .signedIn : .signedOut
         snapshot = signedIn ? (demo ? DemoData.snapshot() : SnapshotStore.load()) : nil
         WebDriver.onStep = { [weak self] step in self?.progressStep = step }
+        // Back online after a refresh failed for lack of network: try again.
+        Connectivity.shared.onReconnect = { [weak self] in
+            guard let self, self.phase == .signedIn,
+                  self.refreshErrors.values.contains(.offline) || self.euroErrors.values.contains(.offline) else { return }
+            Task { await self.refresh(manual: false) }
+        }
         updateWidgets()
     }
 
@@ -74,6 +80,7 @@ final class AppModel {
 
     /// Signs in to both sites. Credentials are only kept if both accept them.
     func signIn(leumi: Credentials, max: Credentials) async -> [Provider: BankError] {
+        guard Connectivity.shared.isOnline else { return [.leumi: .offline, .max: .offline] }
         defer { progressStep = nil }
         do {
             let snapshot = try await Banks.fetchSnapshot(leumi: leumi, max: max)
@@ -128,6 +135,11 @@ final class AppModel {
             return
         }
         guard let stored = Keychain.load() else { return signOut() }
+        // No point waiting for pages that can't load.
+        guard Connectivity.shared.isOnline else {
+            refreshErrors = [.leumi: .offline, .max: .offline]
+            return
+        }
         isRefreshing = true
         defer {
             isRefreshing = false
@@ -251,7 +263,7 @@ final class AppModel {
 
     /// A failing bank keeps its last data and shows the error.
     func refreshEuro(manual: Bool, only: String? = nil) async {
-        guard let key = euroKey, !isDemo else { return }
+        guard let key = euroKey, !isDemo, Connectivity.shared.isOnline else { return }
         for c in euroConnections where only == nil || c.id == only {
             if !manual, let last = euroData.first(where: { $0.id == c.id })?.updatedAt,
                Date.now.timeIntervalSince(last) < Self.euroMinInterval { continue }

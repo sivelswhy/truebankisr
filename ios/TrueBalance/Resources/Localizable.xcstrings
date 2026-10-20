@@ -101,6 +101,16 @@
         }
       }
     },
+    "%@ refused the connection from this network. This happens from abroad or through a VPN: turn the VPN off or try another network.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a refusé la connexion depuis ce réseau. Cela arrive depuis l’étranger ou via un VPN : désactivez le VPN ou essayez un autre réseau."
+          }
+        }
+      }
+    },
     "%@ so far": {
       "extractionState": "stale",
       "localizations": {
@@ -138,6 +148,16 @@
         }
       }
     },
+    "%@ took too long to respond. The connection may be slow or the site busy: try again.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a mis trop de temps à répondre. La connexion est peut-être lente ou le site surchargé : réessayez."
+          }
+        }
+      }
+    },
     "%@ took too long to respond. Try again.": {
       "localizations": {
         "fr": {
@@ -164,6 +184,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ : 80 %% du budget utilisé"
+          }
+        }
+      }
+    },
+    "%@’s site is under maintenance or unavailable for now. Try again later.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le site de %@ est en maintenance ou indisponible pour le moment. Réessayez plus tard."
           }
         }
       }
@@ -1864,6 +1894,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pas encore de données"
+          }
+        }
+      }
+    },
+    "No internet connection.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas de connexion internet."
+          }
+        }
+      }
+    },
+    "No internet connection. The update will start again as soon as you’re back online.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas de connexion internet. La mise à jour reprendra dès que vous serez de nouveau en ligne."
           }
         }
       }

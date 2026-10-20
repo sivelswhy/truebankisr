@@ -34,8 +34,11 @@ enum Format {
         case .changePassword: String(localized: "\(name) asks you to change your password. Do it on their site, then sign in again.")
         case .blocked: String(localized: "Your \(name) account is blocked. Contact \(name).")
         case .extraVerification: String(localized: "\(name) asked for an extra verification step. Sign in once on their website, then try again.")
-        case .timeout: String(localized: "\(name) took too long to respond. Try again.")
+        case .timeout: String(localized: "\(name) took too long to respond. The connection may be slow or the site busy: try again.")
         case .unavailable: String(localized: "Couldn’t reach \(name). Check your connection and try again.")
+        case .offline: String(localized: "No internet connection. The update will start again as soon as you’re back online.")
+        case .refused: String(localized: "\(name) refused the connection from this network. This happens from abroad or through a VPN: turn the VPN off or try another network.")
+        case .maintenance: String(localized: "\(name)’s site is under maintenance or unavailable for now. Try again later.")
         }
     }
 }
@@ -56,7 +59,7 @@ extension Format {
     static func detail(_ error: BankError) -> String? {
         switch error {
         case .timeout(let step): step
-        case .unavailable(let detail): detail
+        case .unavailable(let detail), .refused(let detail), .maintenance(let detail): detail
         default: nil
         }
     }

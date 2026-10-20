@@ -74,6 +74,9 @@ struct RefreshStatusButton: View {
         } label: {
             if model.isRefreshing {
                 ProgressView()
+            } else if model.isOffline {
+                Image(systemName: "wifi.slash")
+                    .foregroundStyle(.secondary)
             } else {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundStyle(.orange)
@@ -103,9 +106,15 @@ struct RefreshStatusDetails: View {
                 }
                 .animation(.default, value: model.progressStep)
             } else {
-                ForEach(Provider.allCases.filter { model.refreshErrors[$0] != nil }, id: \.self) { p in
-                    BankErrorText(error: model.refreshErrors[p]!, provider: p)
+                if model.isOffline {
+                    Label("No internet connection. The update will start again as soon as you’re back online.",
+                          systemImage: "wifi.slash")
                         .font(.subheadline)
+                } else {
+                    ForEach(Provider.allCases.filter { model.refreshErrors[$0] != nil }, id: \.self) { p in
+                        BankErrorText(error: model.refreshErrors[p]!, provider: p)
+                            .font(.subheadline)
+                    }
                 }
                 ForEach(model.euroErrors.keys.sorted(), id: \.self) { id in
                     VStack(alignment: .leading, spacing: 2) {
@@ -744,5 +753,12 @@ struct CategoryDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .appBackground()
+    }
+}
+
+extension AppModel {
+    /// The last refresh failed only because there was no network.
+    var isOffline: Bool {
+        !refreshErrors.isEmpty && refreshErrors.values.allSatisfy { $0 == .offline }
     }
 }

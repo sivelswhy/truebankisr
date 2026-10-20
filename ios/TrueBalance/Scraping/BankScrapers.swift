@@ -19,6 +19,42 @@ enum BankError: Error, Equatable {
     /// `step`: where it got stuck, for troubleshooting.
     case timeout(step: String)
     case unavailable(String)
+    /// No network on the iPhone.
+    case offline
+    /// The site refused this network (firewall, abroad, VPN); what the page said.
+    case refused(String)
+    /// The site shows a maintenance or "service unavailable" page.
+    case maintenance(String)
+
+    /// Problems with the account itself, which no page diagnosis should hide.
+    var isAboutAccount: Bool {
+        switch self {
+        case .invalidCredentials, .changePassword, .blocked, .extraVerification: true
+        default: false
+        }
+    }
+
+    /// The real reason behind a failed step: no network, a block or
+    /// maintenance page on screen, or else the step that timed out.
+    @MainActor
+    static func diagnosing(_ error: Error, _ d: WebDriver) async -> BankError {
+        if let e = error as? BankError, e.isAboutAccount { return e }
+        if !Connectivity.shared.isOnline || Connectivity.isOffline(error) { return .offline }
+        if let problem = await d.pageProblem() {
+            switch problem {
+            case .refused(let detail): return .refused(detail)
+            case .maintenance(let detail): return .maintenance(detail)
+            }
+        }
+        if let s = error as? WebDriver.HTTPStatus { return .unavailable("HTTP \(s.code) on \(s.host)") }
+        if let e = error as? BankError { return e }
+        if let t = error as? WebDriver.Timeout { return .timeout(step: t.what) }
+        let ns = error as NSError
+        if ns.domain == NSURLErrorDomain && ns.code == NSURLErrorTimedOut {
+            return .timeout(step: "\(d.currentStep): the page didn’t load")
+        }
+        return .unavailable("\(d.currentStep): \(error)")
+    }
 }
 
 /// One failure per site, so the UI can show each next to the right fields.
@@ -54,12 +90,8 @@ enum MaxScraper {
             return try await withDeadline(visible ? 900 : 240, "\(driver.currentStep) (gave up after 4 min)") {
                 try await scrapePages(driver, credentials, monthsBack: monthsBack, monthsAhead: monthsAhead)
             }
-        } catch let error as BankError {
-            throw error
-        } catch let t as WebDriver.Timeout {
-            throw .timeout(step: t.what)
         } catch {
-            throw .unavailable("\(driver.currentStep): \(error)")
+            throw await BankError.diagnosing(error, driver)
         }
     }
 
@@ -162,12 +194,8 @@ enum LeumiScraper {
                 let foreign = try? await withDeadline(visible ? 300 : 90, "foreign accounts") { try await foreignAccounts(driver, since: since) }
                 return LeumiData(account: result, savings: savings ?? nil, foreign: foreign)
             }
-        } catch let error as BankError {
-            throw error
-        } catch let t as WebDriver.Timeout {
-            throw .timeout(step: t.what)
         } catch {
-            throw .unavailable("\(driver.currentStep): \(error)")
+            throw await BankError.diagnosing(error, driver)
         }
     }
 

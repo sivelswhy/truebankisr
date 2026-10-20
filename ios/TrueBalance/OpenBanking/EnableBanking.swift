@@ -134,11 +134,13 @@ enum EnableBankingError: Error, Equatable {
     case rateLimited
     /// The bank login was cancelled or refused.
     case notAuthorized(String)
+    case offline
     case network(String)
     case http(Int, String)
 
     static func from(_ error: Error) -> EnableBankingError {
         if let e = error as? EnableBankingError { return e }
+        if Connectivity.isOffline(error) { return .offline }
         if let e = error as? URLError { return .network(e.localizedDescription) }
         return .http(0, "\(error)")
     }
@@ -151,6 +153,7 @@ enum EnableBankingError: Error, Equatable {
         case .rateLimited: String(localized: "The bank limits how often it can be read. Try again later.")
         case .notAuthorized: String(localized: "The bank didn’t give access. Try connecting again.")
         case .network: String(localized: "Couldn’t reach Enable Banking. Check your connection and try again.")
+        case .offline: String(localized: "No internet connection.")
         case .http(let code, _): String(localized: "Enable Banking answered with an error (\(code)).")
         }
     }
