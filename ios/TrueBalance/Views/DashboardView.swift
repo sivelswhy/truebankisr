@@ -107,10 +107,10 @@ struct RefreshStatusDetails: View {
                     BankErrorText(error: model.refreshErrors[p]!, provider: p)
                         .font(.subheadline)
                 }
-                ForEach(EuroBank.supported.filter { model.euroErrors[$0.id] != nil }) { bank in
+                ForEach(model.euroErrors.keys.sorted(), id: \.self) { id in
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(bank.name).font(.subheadline.weight(.semibold))
-                        EuroErrorText(error: model.euroErrors[bank.id]!)
+                        Text(model.euroBankName(id)).font(.subheadline.weight(.semibold))
+                        EuroErrorText(error: model.euroErrors[id]!)
                     }
                 }
                 Button("Try again", systemImage: "arrow.clockwise") {

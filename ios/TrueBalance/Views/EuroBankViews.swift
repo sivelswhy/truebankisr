@@ -253,13 +253,26 @@ struct EuroBanksSettingsView: View {
             }
 
             Section {
-                ForEach(EuroBank.supported) { bank in
-                    bankRow(bank)
+                ForEach(model.euroConnections) { connection in
+                    bankRow(connection.bank)
                 }
+                // A connection that failed on the way back from the bank.
+                ForEach(model.euroErrors.keys.filter { id in !model.euroConnections.contains { $0.id == id } }.sorted(), id: \.self) { id in
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(model.euroBankName(id))
+                        EuroErrorText(error: model.euroErrors[id]!)
+                    }
+                }
+                NavigationLink {
+                    EuroBankPickerView()
+                } label: {
+                    Label("Add a bank", systemImage: "plus.circle.fill")
+                }
+                .disabled(model.euroKey == nil)
             } header: {
                 Text("Banks")
             } footer: {
-                Text("You confirm on the bank’s site or app, then come back here. Access is read only and lasts 180 days.")
+                Text("Any bank in Europe that Enable Banking supports. You confirm on the bank’s site or app, then come back here. Access is read only and lasts 180 days.")
             }
         }
         .appBackground()
@@ -329,13 +342,8 @@ struct EuroBanksSettingsView: View {
     private func connect(_ bank: EuroBank) {
         startingBank = bank.id
         Task {
-            defer { startingBank = nil }
-            do {
-                openURL(try await model.startEuroConnection(bank))
-            } catch {
-                let e = EnableBankingError.from(error)
-                problem = [e.message, e.detail].compactMap { $0 }.joined(separator: "\n\n")
-            }
+            problem = await model.openEuroConnection(bank, with: openURL)
+            startingBank = nil
         }
     }
 
@@ -362,3 +370,141 @@ struct EuroBanksSettingsView: View {
         }
     }
 }
+
+extension AppModel {
+    /// Opens the bank's login in Safari. Returns what went wrong, if anything.
+    func openEuroConnection(_ bank: EuroBank, with openURL: OpenURLAction) async -> String? {
+        do {
+            openURL(try await startEuroConnection(bank))
+            return nil
+        } catch {
+            let e = EnableBankingError.from(error)
+            return [e.message, e.detail].compactMap { $0 }.joined(separator: "\n\n")
+        }
+    }
+}
+
+/// Every bank Enable Banking supports in one country, searchable.
+struct EuroBankPickerView: View {
+    @Environment(AppModel.self) private var model
+    @Environment(\.openURL) private var openURL
+    @AppStorage("euroCountry") private var country = "FR"
+    @State private var banks: [EuroBank] = []
+    @State private var loading = false
+    @State private var loadError: EnableBankingError?
+    @State private var query = ""
+    @State private var startingBank: String?
+    @State private var problem: String?
+
+    /// Lists already fetched this session, by country.
+    @MainActor private static var cache: [String: [EuroBank]] = [:]
+
+    var body: some View {
+        let q = query.trimmingCharacters(in: .whitespaces)
+        let shown = q.isEmpty ? banks : banks.filter { $0.name.localizedStandardContains(q) }
+        List {
+            Section {
+                Picker("Country", selection: $country) {
+                    ForEach(Self.sortedCountries, id: \.self) { code in
+                        Text(verbatim: "\(EuroBank.flag(code))  \(Self.countryName(code))").tag(code)
+                    }
+                }
+            }
+            if loading {
+                Section {
+                    HStack(spacing: 10) {
+                        ProgressView()
+                        Text("Loading banks…").foregroundStyle(.secondary)
+                    }
+                }
+            } else if let loadError {
+                Section {
+                    EuroErrorText(error: loadError)
+                    Button("Try again") { Task { await load(force: true) } }
+                }
+            } else {
+                Section {
+                    ForEach(shown) { bank in
+                        bankRow(bank)
+                    }
+                } header: {
+                    Text("\(shown.count) bank(s)")
+                } footer: {
+                    Text("Only accounts you linked in the Enable Banking portal are shared while the application is in restricted mode.")
+                }
+            }
+        }
+        .overlay {
+            if !loading, loadError == nil, shown.isEmpty, !q.isEmpty {
+                ContentUnavailableView.search(text: q)
+            }
+        }
+        .searchable(text: $query, prompt: Text("Search banks"))
+        .autocorrectionDisabled()
+        .task(id: country) { await load(force: false) }
+        .navigationTitle("Add a bank")
+        .navigationBarTitleDisplayMode(.inline)
+        .appBackground()
+        .alert("Something went wrong", isPresented: Binding(get: { problem != nil }, set: { if !$0 { problem = nil } })) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(problem ?? "")
+        }
+    }
+
+    private func bankRow(_ bank: EuroBank) -> some View {
+        let connected = model.euroConnections.contains { $0.id == bank.id }
+        return Button {
+            startingBank = bank.id
+            Task {
+                problem = await model.openEuroConnection(bank, with: openURL)
+                startingBank = nil
+            }
+        } label: {
+            HStack(spacing: 12) {
+                EuroBankLogo(bank: bank, size: 32)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(bank.name).foregroundStyle(.primary)
+                    if bank.psuType == "business" {
+                        Text("Business accounts").font(.caption).foregroundStyle(.secondary)
+                    }
+                }
+                Spacer()
+                if startingBank == bank.id {
+                    ProgressView()
+                } else if connected {
+                    Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
+                        .accessibilityLabel(Text("Connected"))
+                }
+            }
+        }
+        .disabled(startingBank != nil)
+    }
+
+    private func load(force: Bool) async {
+        if !force, let cached = Self.cache[country] {
+            banks = cached
+            return
+        }
+        guard let key = model.euroKey else { loadError = .noKey; return }
+        loading = true
+        loadError = nil
+        defer { loading = false }
+        do {
+            let list = try await EnableBanking.banks(country: country, key: key)
+            Self.cache[country] = list
+            banks = list
+        } catch {
+            loadError = .from(error)
+        }
+    }
+
+    private static func countryName(_ code: String) -> String {
+        Locale.current.localizedString(forRegionCode: code) ?? code
+    }
+
+    private static var sortedCountries: [String] {
+        EuroBank.countries.sorted { countryName($0).localizedStandardCompare(countryName($1)) == .orderedAscending }
+    }
+}
+
