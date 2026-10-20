@@ -85,6 +85,16 @@
   }
   .chip[aria-pressed="true"] { color: #fff; background: linear-gradient(var(--accent), color-mix(in srgb, var(--accent) 82%, #000)); }
   .chip:active { transform: scale(0.94); }
+  /* The language menu, as a chip: the system picker opens on tap. */
+  .lang-picker { position: relative; display: inline-flex; align-items: center; border-radius: 999px; background: var(--fill); }
+  .lang-picker svg { position: absolute; inset-inline-start: 11px; width: 16px; height: 16px; fill: var(--secondary); pointer-events: none; }
+  .lang-picker select {
+    appearance: none; -webkit-appearance: none; border: 0; background: transparent; color: var(--label);
+    font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+    padding-block: 6px; padding-inline: 33px 14px; border-radius: 999px;
+  }
+  .lang-picker:active { transform: scale(0.96); }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
   /* Hero */
   .hero { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; padding: 40px 0 72px; }
@@ -202,8 +212,10 @@
   .source code { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; padding: 8px 10px; border-radius: 10px; background: var(--fill); overflow-wrap: anywhere; }
 
   /* Hebrew: no negative tracking, and the chevron points the reading way. */
-  html[lang="he"] h1, html[lang="he"] h2 { letter-spacing: 0; }
+  html[lang="he"] h1, html[lang="he"] h2, html[lang="ar"] h1, html[lang="ar"] h2 { letter-spacing: 0; }
   html[lang="he"] .hero h1 { line-height: 1.12; }
+  html[lang="ar"] .hero h1 { line-height: 1.3; }
+  html[lang="ar"] h2 { line-height: 1.35; }
   [dir="rtl"] .chev { display: inline-block; transform: scaleX(-1); }
 
   footer { border-top: 1px solid var(--separator); padding: 24px 0 48px; color: var(--secondary); font-size: 14px; }
@@ -261,11 +273,17 @@
 <div class="wrap">
   <header class="bar">
     <a class="brand" href="./"><img src="icon.png" alt="" width="32" height="32">True Balance</a>
-    <div class="chips" role="group" aria-label="Language">
-      <button class="chip" type="button" data-lang="en" aria-pressed="true">English</button>
-      <button class="chip" type="button" data-lang="fr" aria-pressed="false">Français</button>
-      <button class="chip" type="button" data-lang="he" aria-pressed="false" lang="he">עברית</button>
-    </div>
+    <label class="lang-picker">
+      <svg aria-hidden="true"><use href="#i-globe"/></svg>
+      <span class="visually-hidden" data-i18n="language">Language</span>
+      <select id="lang">
+        <option value="en" lang="en">English</option>
+        <option value="fr" lang="fr">Français</option>
+        <option value="he" lang="he">עברית</option>
+        <option value="ru" lang="ru">Русский</option>
+        <option value="ar" lang="ar">العربية</option>
+      </select>
+    </label>
   </header>
 
   <main>
@@ -278,7 +296,7 @@
           <a class="button secondary" href="sidestore://source?url=https://raw.githubusercontent.com/sivelswhy/truebankisr/main/altstore-source.json" data-i18n="sidestore">Add to SideStore</a>
           <a class="button secondary" href="https://github.com/sivelswhy/truebankisr/releases/latest/download/TrueBalance.ipa" data-i18n="ipa">Download the IPA</a>
         </div>
-        <p class="note" data-i18n="note">Free, for iPhone with iOS 18 or later. English and French.</p>
+        <p class="note" data-i18n="note">Free, for iPhone with iOS 18 or later. In English, French, Hebrew, Russian and Arabic.</p>
       </div>
 
       <div class="phone" aria-label="The True Balance home screen" role="img" data-i18n-aria="phoneLabel">
@@ -414,7 +432,8 @@
       h1: "Ce que vous pouvez vraiment dépenser.",
       lede: "Max prélève tout le 2 du mois, alors votre solde Leumi paraît plus gros qu’il n’est. True Balance affiche <strong>votre solde Leumi moins les débits Max encore à venir</strong>, sur votre iPhone, en un seul chiffre.",
       altstore: "Ajouter à AltStore", sidestore: "Ajouter à SideStore", ipa: "Télécharger l’IPA",
-      note: "Gratuit, pour iPhone sous iOS 18 ou plus récent. En français et en anglais.",
+      note: "Gratuit, pour iPhone sous iOS 18 ou plus récent. En français, anglais, hébreu, russe et arabe.",
+    language: "Langue",
       phoneLabel: "L’écran d’accueil de True Balance",
       hello: "Bonjour, Dana", really: "Vraiment disponible", days: "12 jours avant le prélèvement", perday: "environ 442 ₪/jour",
       leumi: "Solde Leumi", maxon: "Max · 2 nov.", updated: "Mis à jour il y a 2 min", latest: "Derniers paiements",
@@ -465,7 +484,8 @@
     h1: "כמה אפשר באמת להוציא.",
     lede: "מקס מחייבת הכול ב-2 לחודש, ולכן היתרה בלאומי נראית גדולה ממה שהיא. True Balance מציגה <strong>את היתרה בלאומי פחות חיובי מקס שעוד יגיעו</strong>, באייפון, במספר אחד.",
     altstore: "הוספה ל-AltStore", sidestore: "הוספה ל-SideStore", ipa: "הורדת קובץ ה-IPA",
-    note: "בחינם, לאייפון עם iOS 18 ומעלה. בעברית, באנגלית ובצרפתית.",
+    note: "בחינם, לאייפון עם iOS 18 ומעלה. בעברית, באנגלית, בצרפתית, ברוסית ובערבית.",
+    language: "שפה",
     phoneLabel: "מסך הבית של True Balance",
     initial: "ד", hello: "שלום, דנה", really: "זמין באמת", days: "12 ימים עד החיוב", perday: "בערך ‎442 ₪ ליום",
     leumi: "יתרה בלאומי", maxon: "מקס · 2 בנוב׳", updated: "עודכן לפני 2 דק׳", latest: "תשלומים אחרונים",
@@ -512,6 +532,107 @@
     "f-license": "חינם לשימוש לא מסחרי (<a href=\"https://github.com/sivelswhy/truebankisr/blob/main/LICENSE.md\">PolyForm Noncommercial</a>). מבוססת על <a href=\"https://github.com/eshaham/israeli-bank-scrapers\">israeli-bank-scrapers</a>.",
   };
 
+  strings.ru = {
+    h1: "Сколько вы реально можете потратить.",
+    lede: "Макс списывает всё 2-го числа, поэтому баланс в Леуми кажется больше, чем он есть. True Balance показывает <strong>баланс Леуми минус ещё не списанные покупки по Максу</strong> — на iPhone, одним числом.",
+    altstore: "Добавить в AltStore", sidestore: "Добавить в SideStore", ipa: "Скачать IPA",
+    note: "Бесплатно, для iPhone с iOS 18 и новее. На английском, французском, иврите, русском и арабском.",
+    language: "Язык", phoneLabel: "Главный экран True Balance",
+    initial: "Д", hello: "Здравствуйте, Дана", really: "Реально доступно", days: "12 дней до списания", perday: "около ₪442 в день",
+    leumi: "Баланс Леуми", maxon: "Макс · 2 нояб.", updated: "Обновлено 2 мин назад", latest: "Последние платежи",
+    groceries: "Сегодня · Продукты", cafe: "Вчера · Рестораны", fuel: "19 окт. · Топливо",
+    tHome: "Главная", tCharges: "Списания", tSpending: "Расходы", tInsights: "Аналитика",
+    calcTitle: "Одно вычитание, которое делают за вас.",
+    calcIntro: "Приложение входит в Леуми и Макс, складывает все покупки по карте, которые ещё не списаны со счёта, и вычитает их из баланса.",
+    maxDebit: "Макс, спишется 2 нояб.",
+    calcWhy: "Покупки в обработке тоже учитываются. Будущие платежи по рассрочке и покупки в валюте показаны отдельно, по курсу Банка Израиля.",
+    insideTitle: "Всё, что стоит за этим числом.",
+    insideIntro: "Четыре вкладки — как вопросы, которые мы действительно задаём о своих деньгах.",
+    f1: "Сколько дней до списания Макса и сколько это оставляет на день",
+    f2: "Последние платежи и операции в Леуми, с подробностями переводов",
+    f3: "Ваши европейские счета, в отдельном разделе",
+    f4: "Следующее списание по категориям — коснитесь сектора, чтобы увидеть покупки",
+    f5: "Все предстоящие списания, включая рассрочку",
+    f6: "Поиск по продавцу или категории",
+    f7: "Любой период в виде нарастающего итога, который можно листать пальцем",
+    f8: "История каждого продавца, заметки и теги к покупкам",
+    f9: "Экспорт в CSV для Numbers или Excel",
+    f10: "Месячные бюджеты по категориям с уведомлениями при 80% и 100%",
+    f11: "Подписки, зарплата и регулярные списания — найдены за вас",
+    f12: "Этот месяц в сравнении с прошлым и ваши чистые активы",
+    privateTitle: "Работает на вашем iPhone. Только там.",
+    privateIntro: "Сервера True Balance не существует. Приложение само делает то, что вы сделали бы в Safari.",
+    p1: "Оно входит в Леуми и Макс прямо на телефоне, в скрытом браузере",
+    p2: "Данные для входа хранятся в связке ключей этого iPhone и никуда не синхронизируются",
+    p3: "Блокировка Face ID и переключатель, скрывающий все суммы",
+    p4: "Открытый код: <a href=\"https://github.com/sivelswhy/truebankisr\">посмотреть на GitHub</a>",
+    euroTitle: "И ваши европейские счета.",
+    euroIntro: "Hello Bank, Revolut, BNP Paribas, N26 и ещё около 2700 банков в 29 странах — через открытый банкинг с <a href=\"https://enablebanking.com\">Enable Banking</a>. Только чтение, бесплатно, показываются отдельно от настоящего баланса, с суммой в шекелях.",
+    euroGuide: "Инструкция по настройке (на английском)",
+    installTitle: "Установка за несколько минут.",
+    installIntro: "True Balance нет в App Store. AltStore и SideStore устанавливают его с вашим собственным Apple ID и обновляют.",
+    s1: "Установите <a href=\"https://altstore.io\">AltStore</a> или <a href=\"https://sidestore.io\">SideStore</a> на iPhone",
+    s1n: "Достаточно бесплатного Apple ID.",
+    s2: "Добавьте источник True Balance",
+    s2n: "Кнопками выше или вставив этот адрес в разделе Sources.",
+    s3: "Установите True Balance, откройте и войдите в Леуми и Макс",
+    s3n: "Или сначала попробуйте на демонстрационных данных.",
+    copy: "Копировать", copied: "Скопировано",
+    "f-personal": "Только для личного использования. True Balance читает ваши собственные счета с вашими собственными данными для входа. Приложение не связано ни с банком Леуми, ни с Максом, ни с Enable Banking.",
+    "f-license": "Бесплатно для некоммерческого использования (<a href=\"https://github.com/sivelswhy/truebankisr/blob/main/LICENSE.md\">PolyForm Noncommercial</a>). Основано на <a href=\"https://github.com/eshaham/israeli-bank-scrapers\">israeli-bank-scrapers</a>.",
+  };
+
+  strings.ar = {
+    h1: "ما يمكنك إنفاقه فعلًا.",
+    lede: "تخصم ماكس كل شيء في الثاني من الشهر، لذا يبدو رصيدك في لئومي أكبر مما هو عليه. يعرض True Balance <strong>رصيدك في لئومي ناقص خصومات ماكس القادمة</strong>، على الـ iPhone، برقم واحد.",
+    altstore: "إضافة إلى AltStore", sidestore: "إضافة إلى SideStore", ipa: "تنزيل ملف IPA",
+    note: "مجاني، لأجهزة iPhone بنظام iOS 18 أو أحدث. بالعربية والعبرية والإنجليزية والفرنسية والروسية.",
+    language: "اللغة", phoneLabel: "الشاشة الرئيسية في True Balance",
+    initial: "د", hello: "مرحبًا، دانة", really: "المتاح فعلًا", days: "12 يومًا حتى الخصم", perday: "نحو ‎₪442 يوميًا",
+    leumi: "رصيد لئومي", maxon: "ماكس · 2 نوفمبر", updated: "آخر تحديث قبل دقيقتين", latest: "آخر المدفوعات",
+    m1: "شوفرسال ديل", m2: "أروما إسبريسو بار", m3: "باز",
+    groceries: "اليوم · البقالة", cafe: "أمس · المطاعم", fuel: "19 أكتوبر · الوقود",
+    tHome: "الرئيسية", tCharges: "الخصومات", tSpending: "المصاريف", tInsights: "التحليلات",
+    calcTitle: "عملية طرح واحدة، تُنجز عنك.",
+    calcIntro: "يسجّل التطبيق الدخول إلى لئومي وماكس، ويجمع كل مشتريات البطاقة التي لم تُخصم من حسابك بعد، ثم يطرحها من رصيدك.",
+    maxDebit: "ماكس، يُخصم في 2 نوفمبر",
+    calcWhy: "المشتريات قيد المعالجة محتسبة أيضًا. تظهر الأقساط اللاحقة والمشتريات بالعملات الأجنبية جانبًا، محوّلة بسعر بنك إسرائيل.",
+    insideTitle: "كل ما يحيط بهذا الرقم.",
+    insideIntro: "أربعة تبويبات، مثل الأسئلة التي نطرحها فعلًا عن أموالنا.",
+    f1: "الأيام المتبقية حتى خصم ماكس، وما يتبقى لك يوميًا",
+    f2: "آخر المدفوعات وحركات لئومي، مع تفاصيل التحويلات",
+    f3: "حساباتك الأوروبية، في قسم خاص بها",
+    f4: "الخصم القادم حسب الفئة، المس جزءًا لترى مشترياته",
+    f5: "كل الخصومات القادمة، بما فيها الأقساط",
+    f6: "البحث حسب التاجر أو الفئة",
+    f7: "أي فترة، كمجموع تراكمي تتصفحه بإصبعك",
+    f8: "سجل كل تاجر، وملاحظات ووسوم على المشتريات",
+    f9: "التصدير إلى CSV لـ Numbers أو Excel",
+    f10: "ميزانيات شهرية لكل فئة، مع تنبيهات عند 80% و100%",
+    f11: "الاشتراكات والراتب والخصومات الثابتة، تُكتشف عنك",
+    f12: "هذا الشهر مقارنةً بالشهر الماضي، وصافي ثروتك",
+    privateTitle: "يعمل على الـ iPhone الخاص بك. هناك فقط.",
+    privateIntro: "لا يوجد خادم لـ True Balance. يقوم التطبيق بنفسه بما كنت ستفعله في Safari.",
+    p1: "يسجّل الدخول إلى لئومي وماكس على الهاتف، في متصفح مخفي",
+    p2: "تبقى بيانات دخولك في سلسلة مفاتيح هذا الـ iPhone، دون أي مزامنة",
+    p3: "قفل بـ Face ID ومفتاح لإخفاء كل المبالغ",
+    p4: "مفتوح المصدر: <a href=\"https://github.com/sivelswhy/truebankisr\">اقرأ الشيفرة على GitHub</a>",
+    euroTitle: "وحساباتك الأوروبية أيضًا.",
+    euroIntro: "Hello Bank وRevolut وBNP Paribas وN26 ونحو 2700 بنك آخر في 29 دولة، عبر الخدمات المصرفية المفتوحة مع <a href=\"https://enablebanking.com\">Enable Banking</a>. للقراءة فقط، مجانًا، وتُعرض منفصلة عن الرصيد الحقيقي مع ما يعادلها بالشيكل.",
+    euroGuide: "دليل الإعداد (بالإنجليزية)",
+    installTitle: "ثبّته في بضع دقائق.",
+    installIntro: "‏True Balance غير موجود في App Store. يثبّته AltStore وSideStore بمعرّف Apple الخاص بك ويحدّثانه.",
+    s1: "ثبّت <a href=\"https://altstore.io\">AltStore</a> أو <a href=\"https://sidestore.io\">SideStore</a> على الـ iPhone",
+    s1n: "يكفي معرّف Apple مجاني.",
+    s2: "أضف مصدر True Balance",
+    s2n: "بالأزرار أعلاه، أو بلصق هذا العنوان في Sources.",
+    s3: "ثبّت True Balance وافتحه وسجّل الدخول إلى لئومي وماكس",
+    s3n: "أو جرّبه أولًا ببيانات نموذجية.",
+    copy: "نسخ", copied: "تم النسخ",
+    "f-personal": "للاستخدام الشخصي فقط. يقرأ True Balance حساباتك أنت ببيانات دخولك أنت. لا علاقة له ببنك لئومي ولا بماكس ولا بـ Enable Banking.",
+    "f-license": "مجاني للاستخدام غير التجاري (<a href=\"https://github.com/sivelswhy/truebankisr/blob/main/LICENSE.md\">PolyForm Noncommercial</a>). مبني على <a href=\"https://github.com/eshaham/israeli-bank-scrapers\">israeli-bank-scrapers</a>.",
+  };
+
   // English is in the page itself: keep it to switch back.
   const english = {};
   document.querySelectorAll("[data-i18n]").forEach(el => english[el.dataset.i18n] = el.textContent);
@@ -525,28 +646,29 @@
   function apply(next) {
     lang = next;
     document.documentElement.lang = lang;
-    document.documentElement.dir = lang === "he" ? "rtl" : "ltr";
+    document.documentElement.dir = lang === "he" || lang === "ar" ? "rtl" : "ltr";
     document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = t(el.dataset.i18n));
     document.querySelectorAll("[data-i18n-html]").forEach(el => el.innerHTML = t(el.dataset.i18nHtml));
     document.querySelectorAll("[data-i18n-aria]").forEach(el => el.setAttribute("aria-label", t(el.dataset.i18nAria)));
     // Amounts the way the app writes them in each language.
-    const money = new Intl.NumberFormat({ fr: "fr-FR", he: "he-IL" }[lang] || "en-US", { style: "currency", currency: "ILS" });
+    // Arabic in Israel writes Western digits.
+    const money = new Intl.NumberFormat({ fr: "fr-FR", he: "he-IL", ru: "ru-RU", ar: "ar-IL-u-nu-latn" }[lang] || "en-US", { style: "currency", currency: "ILS" });
     document.querySelectorAll("[data-money]").forEach(el => {
       const v = Number(el.dataset.money);
       el.textContent = (v < 0 ? "− " : "") + money.format(Math.abs(v));
     });
-    document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    document.getElementById("lang").value = lang;
   }
 
   let saved = null;
   try { saved = localStorage.getItem("lang"); } catch {}
-  const device = (navigator.language || "").toLowerCase();
-  apply(saved || (device.startsWith("fr") ? "fr" : device.startsWith("he") || device.startsWith("iw") ? "he" : "en"));
+  const device = (navigator.language || "").toLowerCase().replace(/^iw/, "he").slice(0, 2);
+  apply(saved || (["fr", "he", "ru", "ar"].includes(device) ? device : "en"));
 
-  document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => {
-    apply(b.dataset.lang);
+  document.getElementById("lang").addEventListener("change", e => {
+    apply(e.target.value);
     try { localStorage.setItem("lang", lang); } catch {}
-  }));
+  });
 
   document.getElementById("copy").addEventListener("click", async e => {
     try {
