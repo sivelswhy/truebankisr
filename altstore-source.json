@@ -20,6 +20,15 @@
       "screenshotURLs": [],
       "versions": [
         {
+          "version": "1.0.32",
+          "buildVersion": "32",
+          "date": "2026-10-20T22:16:49.643Z",
+          "localizedDescription": "iOS: on-device log of refresh steps and errors, exportable from settings and the status popover",
+          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-32/TrueBalance.ipa",
+          "size": 1753141,
+          "minOSVersion": "18.0"
+        },
+        {
           "version": "1.0.30",
           "buildVersion": "30",
           "date": "2026-10-20T16:46:33.437Z",
