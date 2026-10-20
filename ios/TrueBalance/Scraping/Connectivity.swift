@@ -26,6 +26,7 @@ final class Connectivity {
     private func update(_ online: Bool) {
         let wasOnline = isOnline
         isOnline = online
+        if online != wasOnline { Log.add("[network] \(online ? "online" : "offline")") }
         if online && !wasOnline { onReconnect?() }
     }
 

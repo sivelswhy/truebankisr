@@ -91,7 +91,9 @@ enum MaxScraper {
                 try await scrapePages(driver, credentials, monthsBack: monthsBack, monthsAhead: monthsAhead)
             }
         } catch {
-            throw await BankError.diagnosing(error, driver)
+            let e = await BankError.diagnosing(error, driver)
+            Log.add("[error] Max: \(e) (from \(error))")
+            throw e
         }
     }
 
@@ -195,7 +197,9 @@ enum LeumiScraper {
                 return LeumiData(account: result, savings: savings ?? nil, foreign: foreign)
             }
         } catch {
-            throw await BankError.diagnosing(error, driver)
+            let e = await BankError.diagnosing(error, driver)
+            Log.add("[error] Leumi: \(e) (from \(error))")
+            throw e
         }
     }
 

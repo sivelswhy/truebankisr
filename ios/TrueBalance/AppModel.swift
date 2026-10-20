@@ -137,13 +137,18 @@ final class AppModel {
         guard let stored = Keychain.load() else { return signOut() }
         // No point waiting for pages that can't load.
         guard Connectivity.shared.isOnline else {
+            Log.add("[refresh] skipped: offline")
             refreshErrors = [.leumi: .offline, .max: .offline]
             return
         }
         isRefreshing = true
+        Log.add("[refresh] start (\(manual ? "manual" : "automatic"))")
+        let started = Date.now
         defer {
             isRefreshing = false
             progressStep = nil
+            Log.add("[refresh] end after \(Int(Date.now.timeIntervalSince(started))) s, "
+                    + (refreshErrors.isEmpty ? "ok" : "errors: \(refreshErrors.keys.map(\.rawValue).sorted())"))
         }
         let euro = Task { await refreshEuro(manual: manual) }
         do {
@@ -230,6 +235,7 @@ final class AppModel {
         defaults.removeObject(forKey: "euroPendingBank")
         guard value("state") == state, let code = value("code"), let key = euroKey else {
             euroErrors[bank.id] = .notAuthorized(value("error_description") ?? value("error") ?? "no code in the redirect")
+            Log.add("[euro] \(bank.id): not authorized (\(value("error") ?? "no code"))")
             return
         }
         connectingEuroBank = bank.id
@@ -244,9 +250,11 @@ final class AppModel {
             }
             EuroStore.connections.save(euroConnections)
             euroErrors[bank.id] = nil
+            Log.add("[euro] \(bank.id): connected, \(connection.accounts.count) account(s)")
             await refreshEuro(manual: true, only: bank.id)
         } catch {
             euroErrors[bank.id] = .from(error)
+            Log.add("[error] \(bank.id) session: \(euroErrors[bank.id]!) (from \(error))")
         }
     }
 
@@ -274,6 +282,7 @@ final class AppModel {
                 euroErrors[c.id] = nil
             } catch {
                 euroErrors[c.id] = .from(error)
+                Log.add("[error] \(c.id): \(euroErrors[c.id]!) (from \(error))")
             }
         }
         let order = euroConnections.map(\.id)

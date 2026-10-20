@@ -122,10 +122,16 @@ struct RefreshStatusDetails: View {
                         EuroErrorText(error: model.euroErrors[id]!)
                     }
                 }
-                Button("Try again", systemImage: "arrow.clockwise") {
-                    Task { await model.refresh() }
+                HStack {
+                    Button("Try again", systemImage: "arrow.clockwise") {
+                        Task { await model.refresh() }
+                    }
+                    .buttonStyle(.bordered)
+                    ShareLink(item: LogFile(header: LogFile.header(model: model)), preview: SharePreview("True Balance log")) {
+                        Label("Log", systemImage: "doc.text")
+                    }
+                    .buttonStyle(.bordered)
                 }
-                .buttonStyle(.bordered)
             }
             if let at = model.snapshot?.computedAt {
                 Text("Updated \(at.formatted(.relative(presentation: .named)))")
