@@ -20,6 +20,15 @@
       "screenshotURLs": [],
       "versions": [
         {
+          "version": "1.0.30",
+          "buildVersion": "30",
+          "date": "2026-10-20T16:46:33.437Z",
+          "localizedDescription": "iOS: connect any European bank Enable Banking supports, with a setup guide",
+          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-30/TrueBalance.ipa",
+          "size": 1704837,
+          "minOSVersion": "18.0"
+        },
+        {
           "version": "1.0.29",
           "buildVersion": "29",
           "date": "2026-10-20T16:39:26.438Z",
