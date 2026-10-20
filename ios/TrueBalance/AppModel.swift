@@ -196,7 +196,8 @@ final class AppModel {
         guard let key = euroKey else { throw EnableBankingError.noKey }
         let state = UUID().uuidString
         // In UserDefaults: iOS may close the app while the bank's app is open.
-        UserDefaults.standard.set([state, bank.id], forKey: "euroPendingAuth")
+        UserDefaults.standard.set(state, forKey: "euroPendingState")
+        UserDefaults.standard.set(try? JSONEncoder().encode(bank), forKey: "euroPendingBank")
         do {
             return try await EnableBanking.startAuthorization(bank, state: state, key: key)
         } catch {
@@ -209,10 +210,13 @@ final class AppModel {
         guard url.scheme == "truebalance", url.host == EnableBanking.callbackHost else { return }
         let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
         func value(_ name: String) -> String? { items.first { $0.name == name }?.value }
-        guard let pending = UserDefaults.standard.stringArray(forKey: "euroPendingAuth"), pending.count == 2,
-              let bank = EuroBank.supported.first(where: { $0.id == pending[1] }) else { return }
-        UserDefaults.standard.removeObject(forKey: "euroPendingAuth")
-        guard value("state") == pending[0], let code = value("code"), let key = euroKey else {
+        let defaults = UserDefaults.standard
+        guard let state = defaults.string(forKey: "euroPendingState"),
+              let bank = defaults.data(forKey: "euroPendingBank").flatMap({ try? JSONDecoder().decode(EuroBank.self, from: $0) })
+        else { return }
+        defaults.removeObject(forKey: "euroPendingState")
+        defaults.removeObject(forKey: "euroPendingBank")
+        guard value("state") == state, let code = value("code"), let key = euroKey else {
             euroErrors[bank.id] = .notAuthorized(value("error_description") ?? value("error") ?? "no code in the redirect")
             return
         }
@@ -220,9 +224,12 @@ final class AppModel {
         defer { connectingEuroBank = nil }
         do {
             let connection = try await EnableBanking.createSession(code: code, bank: bank, key: key)
-            euroConnections.removeAll { $0.id == bank.id }
-            euroConnections.append(connection)
-            euroConnections.sort { Self.euroOrder($0.bank) < Self.euroOrder($1.bank) }
+            // Reconnecting keeps the bank's place in the picker.
+            if let i = euroConnections.firstIndex(where: { $0.id == bank.id }) {
+                euroConnections[i] = connection
+            } else {
+                euroConnections.append(connection)
+            }
             EuroStore.connections.save(euroConnections)
             euroErrors[bank.id] = nil
             await refreshEuro(manual: true, only: bank.id)
@@ -257,12 +264,14 @@ final class AppModel {
                 euroErrors[c.id] = .from(error)
             }
         }
-        euroData.sort { Self.euroOrder($0.bank) < Self.euroOrder($1.bank) }
+        let order = euroConnections.map(\.id)
+        euroData.sort { (order.firstIndex(of: $0.id) ?? .max) < (order.firstIndex(of: $1.id) ?? .max) }
         EuroStore.saveData(euroData)
     }
 
-    private static func euroOrder(_ bank: EuroBank) -> Int {
-        EuroBank.supported.firstIndex(of: bank) ?? .max
+    /// Bank name for an error key ("FR/Hello Bank" → "Hello Bank").
+    func euroBankName(_ id: String) -> String {
+        euroConnections.first { $0.id == id }?.bank.name ?? String(id.split(separator: "/", maxSplits: 1).last ?? Substring(id))
     }
 
     // MARK: Background

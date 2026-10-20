@@ -38,7 +38,7 @@ struct SettingsView: View {
                         EuroBanksSettingsView()
                     } label: {
                         LabeledContent("Other banks", value: model.euroConnections.isEmpty
-                            ? String(localized: "Hello Bank, Revolut")
+                            ? String(localized: "No bank yet")
                             : model.euroConnections.map(\.bank.name).formatted(.list(type: .and)))
                     }
                 } header: {

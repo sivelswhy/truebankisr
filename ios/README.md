@@ -21,9 +21,10 @@ While a refresh runs, a spinner sits next to the profile button; tap it for
 the current step. It turns into a warning sign when a bank failed, with the
 error and a retry button.
 
-**Other banks**: Hello Bank and Revolut (France), read through Enable Banking
-and shown in their own section on Home with a bank picker, in euros with the
-shekel equivalent. See [European banks](#european-banks-enable-banking).
+**Other banks**: any European bank Enable Banking supports (Hello Bank,
+Revolut, BNP Paribas, N26…), chosen by country with search, shown in their own
+section on Home with a bank picker, in their currency with the shekel
+equivalent. See [EUROPEAN-BANKS.md](EUROPEAN-BANKS.md).
 
 English and French (String Catalog with plurals), Dynamic Type, Dark Mode, VoiceOver.
 
@@ -83,23 +84,14 @@ true balance goes below zero, you get a notification.
 
 ## European banks (Enable Banking)
 
-Read only, for your own accounts, free in Enable Banking's restricted mode.
-Requests are signed on the iPhone: nothing goes through a server of ours.
+Any European bank Enable Banking supports (about 2,700 in 29 countries: Hello
+Bank, Revolut, BNP Paribas, N26, ING…), read only, for your own accounts, free
+in Enable Banking's restricted mode. Requests are signed on the iPhone: nothing
+goes through a server of ours.
 
-1. On [enablebanking.com](https://enablebanking.com), create an application in
-   **Production** (the sandbox only has fake banks). Let the browser generate
-   the key and download the `.pem` file (it is named after the application ID).
-2. Allowed redirect URL: `https://sivelswhy.github.io/truebankisr/enablebanking.html`
-   (Enable Banking only accepts https; this page, `docs/enablebanking.html`,
-   hands the code on to `truebalance://enablebanking`).
-3. Link your Hello Bank and Revolut accounts in the portal: in restricted mode
-   only accounts linked beforehand are returned.
-4. In the app: Profile → Other banks → **Import the key (.pem)**, then
-   **Connect** each bank. Safari opens the bank, you confirm, and come back.
-
-Access lasts 180 days, then the app asks to reconnect. Banks may cap reads
-made without you at about 4 a day, so automatic refreshes read these banks at
-most every 6 hours; pull to refresh always reads them.
+**Step-by-step guide** (Enable Banking account, application and `.pem` key,
+linking the accounts, importing the key, connecting a bank, troubleshooting):
+[EUROPEAN-BANKS.md](EUROPEAN-BANKS.md).
 
 ## Siri, Shortcuts and widget
 

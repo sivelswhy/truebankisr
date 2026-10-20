@@ -13,8 +13,8 @@ Really available       − ₪801.20
 Two clients, English and French:
 
 - **iPhone app** (`ios/`): native SwiftUI, standalone (no server). Signs in to
-  Leumi and Max on the phone itself, and can also show European accounts
-  (Hello Bank, Revolut) through open banking. See [ios/README.md](ios/README.md).
+  Leumi and Max on the phone itself, and can also show accounts at any
+  European bank through open banking. See [ios/README.md](ios/README.md).
 - **Web app** (this folder): Next.js, runs on your Mac and scrapes with
   [`israeli-bank-scrapers`](https://github.com/eshaham/israeli-bank-scrapers).
 
@@ -36,8 +36,9 @@ on *your* machine.
 
 European banks are different: PSD2 makes them reachable through aggregators,
 and [Enable Banking](https://enablebanking.com) lets an individual read their
-own accounts for free (restricted mode). The iPhone app uses it for Hello Bank
-and Revolut, shown apart from the true balance.
+own accounts for free (restricted mode). The iPhone app uses it for European
+banks (Hello Bank, Revolut, BNP Paribas, N26…), shown apart from the true
+balance: [setup guide](ios/EUROPEAN-BANKS.md).
 
 ## Run the web app
 

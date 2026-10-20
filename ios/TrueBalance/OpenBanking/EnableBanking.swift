@@ -5,22 +5,59 @@ import Security
 /// shown apart from Leumi and Max.
 struct EuroBank: Codable, Hashable, Identifiable, Sendable {
     var name: String
+    /// ISO country code: the same bank is listed once per country.
     var country: String
-    /// Brand color for the bank picker.
+    /// Colour of its chip and card.
     var color: String
+    /// Logo from Enable Banking's bank list.
+    var logo: String?
+    /// "personal" when the bank offers it, otherwise what it offers ("business").
+    var psuType: String?
+
+    init(name: String, country: String, color: String? = nil, logo: String? = nil, psuType: String? = nil) {
+        self.name = name
+        self.country = country
+        self.color = color ?? Self.color(for: name)
+        self.logo = logo
+        self.psuType = psuType
+    }
 
     var id: String { "\(country)/\(name)" }
 
     /// Enable Banking's logo for the bank, resized for a small chip.
     var logoURL: URL? {
+        if let logo, !logo.isEmpty {
+            return URL(string: logo.hasSuffix("/") ? logo + "-/resize/96x/" : logo)
+        }
         let path = name.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? name
         return URL(string: "https://enablebanking.com/brands/\(country)/\(path)/-/resize/96x/")
     }
 
-    static let supported: [EuroBank] = [
-        EuroBank(name: "Hello Bank", country: "FR", color: "#00A3E0"),
-        EuroBank(name: "Revolut", country: "FR", color: "#0666EB"),
+    /// The countries Enable Banking covers (EEA), for the country picker.
+    static let countries = ["AT", "BE", "BG", "CY", "DE", "DK", "EE", "ES", "FI", "FR", "GR", "HR", "HU", "IE", "IS",
+                            "IT", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"]
+
+    /// "🇫🇷".
+    static func flag(_ country: String) -> String {
+        String(country.uppercased().unicodeScalars.compactMap { Unicode.Scalar(127_397 + $0.value) }.map(Character.init))
+    }
+
+    /// Brand colours for well-known banks; the others get one from a palette,
+    /// always the same for a given name.
+    private static let brands: [String: String] = [
+        "hello bank": "#00A3E0", "revolut": "#0666EB", "n26": "#36A18B", "bnp paribas": "#00915A",
+        "société générale": "#E9041E", "crédit agricole": "#009597", "boursobank": "#D4006E", "boursorama": "#D4006E",
+        "lcl": "#1A3D8F", "ing": "#FF6200", "wise": "#163300", "la banque postale": "#F5A800", "bunq": "#2F9C8F",
     ]
+    private static let palette = ["#0A84FF", "#30B0C7", "#34C759", "#5856D6", "#AF52DE", "#FF2D55", "#FF9500", "#A2845E"]
+
+    static func color(for name: String) -> String {
+        let key = name.lowercased()
+        if let brand = brands.first(where: { key.hasPrefix($0.key) })?.value { return brand }
+        // Stable across launches (String.hashValue isn't).
+        let hash = key.unicodeScalars.reduce(5381) { ($0 &* 33) &+ Int($1.value) }
+        return palette[abs(hash) % palette.count]
+    }
 }
 
 /// The app's key for Enable Banking: its id and the private key exported by
@@ -146,7 +183,7 @@ enum EnableBanking {
             "aspsp": ["name": bank.name, "country": bank.country],
             "state": state,
             "redirect_url": redirectURL,
-            "psu_type": "personal",
+            "psu_type": bank.psuType ?? "personal",
             "language": Locale.current.language.languageCode?.identifier ?? "en",
         ]
         let json = try await request("POST", "/auth", body: body, key: key)
@@ -169,6 +206,18 @@ enum EnableBanking {
         let until = ((json["access"] as? [String: Any])?["valid_until"] as? String).flatMap(parseDate)
             ?? Calendar.current.date(byAdding: .day, value: consentDays, to: .now)!
         return EuroConnection(bank: bank, sessionID: id, accounts: accounts, validUntil: until)
+    }
+
+    /// The banks of one country, by name.
+    static func banks(country: String, key: EnableBankingKey) async throws -> [EuroBank] {
+        let json = try await request("GET", "/aspsps", query: [URLQueryItem(name: "country", value: country)], key: key)
+        return (json["aspsps"] as? [[String: Any]] ?? []).compactMap { a -> EuroBank? in
+            guard let name = a["name"] as? String else { return nil }
+            let types = a["psu_types"] as? [String] ?? []
+            return EuroBank(name: name, country: a["country"] as? String ?? country, logo: a["logo"] as? String,
+                            psuType: types.contains("personal") ? "personal" : types.first)
+        }
+        .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
     }
 
     static func deleteSession(_ id: String, key: EnableBankingKey) async {

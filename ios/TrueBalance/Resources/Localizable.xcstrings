@@ -168,6 +168,46 @@
         }
       }
     },
+    "%lld bank(s)": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld bank"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld banks"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld banque"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld banques"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "%lld day(s) until the debit": {
       "localizations": {
         "en": {
@@ -465,6 +505,16 @@
         }
       }
     },
+    "Add a bank": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter une banque"
+          }
+        }
+      }
+    },
     "Add a note (e.g. reimbursed by Dana)": {
       "localizations": {
         "fr": {
@@ -563,6 +613,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Montants prélevés le %@."
+          }
+        }
+      }
+    },
+    "Any bank in Europe that Enable Banking supports. You confirm on the bank’s site or app, then come back here. Access is read only and lasts 180 days.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toute banque européenne gérée par Enable Banking. Vous confirmez sur le site ou l’app de la banque, puis vous revenez ici. L’accès est en lecture seule et dure 180 jours."
           }
         }
       }
@@ -698,6 +758,16 @@
         }
       }
     },
+    "Business accounts": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comptes professionnels"
+          }
+        }
+      }
+    },
     "By category": {
       "localizations": {
         "fr": {
@@ -829,6 +899,16 @@
         }
       }
     },
+    "Connected": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connectée"
+          }
+        }
+      }
+    },
     "Connected until %@": {
       "localizations": {
         "fr": {
@@ -895,6 +975,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de vérifier que c’est toi. Réessaie."
+          }
+        }
+      }
+    },
+    "Country": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pays"
           }
         }
       }
@@ -1528,6 +1618,16 @@
         }
       }
     },
+    "Loading banks…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chargement des banques…"
+          }
+        }
+      }
+    },
     "Location": {
       "localizations": {
         "fr": {
@@ -1738,6 +1838,16 @@
         }
       }
     },
+    "No bank yet": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune banque"
+          }
+        }
+      }
+    },
     "No budgets yet": {
       "localizations": {
         "fr": {
@@ -1864,6 +1974,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "OK"
+          }
+        }
+      }
+    },
+    "Only accounts you linked in the Enable Banking portal are shared while the application is in restricted mode.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tant que l’application est en mode restreint, seuls les comptes reliés dans le portail Enable Banking sont partagés."
           }
         }
       }
@@ -2174,6 +2294,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Épargne"
+          }
+        }
+      }
+    },
+    "Search banks": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher une banque"
           }
         }
       }
