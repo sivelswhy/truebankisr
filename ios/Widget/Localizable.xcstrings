@@ -14,6 +14,18 @@
             "state": "translated",
             "value": "אחרי מקס · %@"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "После Макса · %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بعد ماكس · %@"
+          }
         }
       }
     },
@@ -29,6 +41,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "יש לפתוח את True Balance כדי לחבר את החשבונות."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Откройте True Balance, чтобы подключить счета."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "افتح True Balance لربط حساباتك."
           }
         }
       }
@@ -46,6 +70,18 @@
             "state": "translated",
             "value": "זמין באמת"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Реально доступно"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتاح فعلًا"
+          }
         }
       }
     },
@@ -61,6 +97,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "יתרה אמיתית"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Настоящий баланс"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الرصيد الحقيقي"
           }
         }
       }
@@ -78,6 +126,18 @@
             "state": "translated",
             "value": "מה זמין באמת אחרי חיוב מקס הבא."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Что реально доступно после следующего списания Макса."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما هو متاح فعلًا بعد خصم ماكس القادم."
+          }
         }
       }
     },
@@ -94,6 +154,18 @@
             "state": "translated",
             "value": "בערך %@ ליום"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "около %@ в день"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نحو %@ يوميًا"
+          }
         }
       }
     },
@@ -109,6 +181,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "‏%@ ₪ זמינים"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступно %@ ₪"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متاح %@ ₪"
           }
         }
       }

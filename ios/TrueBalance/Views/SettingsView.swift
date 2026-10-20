@@ -83,7 +83,7 @@ struct SettingsView: View {
                         if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
                     }
                 } footer: {
-                    Text("English, French and Hebrew are available. Choose the app’s language in Settings.")
+                    Text("Available in English, French, Hebrew, Russian and Arabic. Choose the app’s language in Settings.")
                 }
 
                 Section {

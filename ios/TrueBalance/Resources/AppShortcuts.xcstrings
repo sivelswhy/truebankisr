@@ -15,6 +15,18 @@
             "state" : "translated",
             "value" : "היתרה ב-${applicationName}"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баланс в ${applicationName}"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الرصيد في ${applicationName}"
+          }
         }
       }
     },
@@ -31,6 +43,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "התקציב היומי ב-${applicationName}"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бюджет на день в ${applicationName}"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الميزانية اليومية في ${applicationName}"
           }
         }
       }
@@ -58,6 +82,18 @@
             "state" : "translated",
             "value" : "כמה אפשר להוציא ביום ב-${applicationName}"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сколько я могу тратить в день в ${applicationName}"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "كم يمكنني أن أنفق يوميًا في ${applicationName}"
+          }
         }
       }
     },
@@ -74,6 +110,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "היתרה שלי ב-${applicationName}"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мой баланс в ${applicationName}"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رصيدي في ${applicationName}"
           }
         }
       }
@@ -101,6 +149,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "מה היתרה האמיתית שלי ב-${applicationName}"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Какой у меня настоящий баланс в ${applicationName}"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ما رصيدي الحقيقي في ${applicationName}"
           }
         }
       }

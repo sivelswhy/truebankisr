@@ -21,6 +21,18 @@
             "state" : "translated",
             "value" : "True Balance"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "True Balance"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "True Balance"
+          }
         }
       }
     },
@@ -35,6 +47,18 @@
           }
         },
         "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TrueBalance"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TrueBalance"
+          }
+        },
+        "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "TrueBalance"
@@ -56,6 +80,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "פתיחת True Balance כדי לראות את היתרה."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Разблокируйте True Balance, чтобы увидеть баланс."
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "افتح قفل True Balance لرؤية رصيدك."
           }
         }
       }
