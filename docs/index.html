@@ -145,7 +145,7 @@
   .rows { margin: 0 12px; border-radius: 12px; background: #1C1C1E; }
   .row { position: relative; display: flex; align-items: center; gap: 10px; padding: 9px 12px; }
   /* iOS insets the separator, not the content. */
-  .row + .row::before { content: ""; position: absolute; top: 0; left: 48px; right: 0; height: 0.5px; background: rgba(84,84,88,0.6); }
+  .row + .row::before { content: ""; position: absolute; top: 0; inset-inline: 48px 0; height: 0.5px; background: rgba(84,84,88,0.6); }
   .row .t { flex: 1; min-width: 0; }
   .row .t div:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .row .t div:last-child { color: rgba(235,235,245,0.6); font-size: 11px; }
@@ -171,7 +171,7 @@
   }
   .eq { display: grid; grid-template-columns: 1fr auto; row-gap: 12px; font-size: 19px; }
   .eq dt { color: var(--secondary); }
-  .eq dd { margin: 0; text-align: right; font: 600 22px var(--rounded); font-variant-numeric: tabular-nums; }
+  .eq dd { margin: 0; text-align: end; font: 600 22px var(--rounded); font-variant-numeric: tabular-nums; }
   .eq .max dd { color: var(--indigo); }
   .eq .total { border-top: 1px solid var(--separator); padding-top: 14px; }
   .eq .total dt { color: var(--label); font-weight: 600; }
@@ -180,11 +180,11 @@
 
   /* Features: inset grouped lists, one per tab */
   .groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
-  .group h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px 4px; display: flex; align-items: center; gap: 8px; }
+  .group h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px; margin-inline-start: 4px; display: flex; align-items: center; gap: 8px; }
   .group h3 svg { width: 20px; height: 20px; fill: var(--accent); }
   .list { list-style: none; margin: 0; padding: 0; border-radius: 12px; background: var(--cell); }
   .list li { position: relative; display: flex; align-items: center; gap: 12px; padding: 11px 16px; }
-  .list li + li::before { content: ""; position: absolute; top: 0; left: 58px; right: 0; height: 0.5px; background: var(--separator); }
+  .list li + li::after { content: ""; position: absolute; top: 0; inset-inline: 58px 0; height: 0.5px; background: var(--separator); }
   .list .ico { width: 30px; height: 30px; border-radius: 8px; }
   .list .ico svg { width: 17px; height: 17px; }
   .list span { font-size: 16px; }
@@ -200,6 +200,11 @@
   .steps li small { display: block; color: var(--secondary); font-size: 14px; }
   .source { display: flex; gap: 8px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
   .source code { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; padding: 8px 10px; border-radius: 10px; background: var(--fill); overflow-wrap: anywhere; }
+
+  /* Hebrew: no negative tracking, and the chevron points the reading way. */
+  html[lang="he"] h1, html[lang="he"] h2 { letter-spacing: 0; }
+  html[lang="he"] .hero h1 { line-height: 1.12; }
+  [dir="rtl"] .chev { display: inline-block; transform: scaleX(-1); }
 
   footer { border-top: 1px solid var(--separator); padding: 24px 0 48px; color: var(--secondary); font-size: 14px; }
   footer p { margin: 0 0 6px; max-width: 46rem; }
@@ -259,6 +264,7 @@
     <div class="chips" role="group" aria-label="Language">
       <button class="chip" type="button" data-lang="en" aria-pressed="true">English</button>
       <button class="chip" type="button" data-lang="fr" aria-pressed="false">Français</button>
+      <button class="chip" type="button" data-lang="he" aria-pressed="false" lang="he">עברית</button>
     </div>
   </header>
 
@@ -279,10 +285,10 @@
         <div class="screen">
           <div class="island"></div>
           <div class="status"><span>9:41</span><span>5G</span></div>
-          <div class="nav"><span class="avatar">D</span></div>
+          <div class="nav"><span class="avatar" data-i18n="initial">D</span></div>
           <div class="large-title" data-i18n="hello">Hello, Dana</div>
           <div class="card">
-            <div class="caption"><span data-i18n="really">Really available</span><span aria-hidden="true">›</span></div>
+            <div class="caption"><span data-i18n="really">Really available</span><span class="chev" aria-hidden="true">›</span></div>
             <div class="amount" data-money="5299.60"></div>
             <div class="gauge"><i></i></div>
             <div class="runway"><span data-i18n="days">12 days until the debit</span><span data-i18n="perday">about ₪442/day</span></div>
@@ -296,11 +302,11 @@
           <div class="phone-section" data-i18n="latest">Latest payments</div>
           <div class="rows">
             <div class="row"><span class="ico" style="background:linear-gradient(#34C759,#248A3D)"><svg><use href="#i-cart"/></svg></span>
-              <div class="t"><div>Shufersal Deal</div><div data-i18n="groceries">Today · Groceries</div></div><span class="a" data-money="286.90"></span></div>
+              <div class="t"><div data-i18n="m1">Shufersal Deal</div><div data-i18n="groceries">Today · Groceries</div></div><span class="a" data-money="286.90"></span></div>
             <div class="row"><span class="ico" style="background:linear-gradient(#FF9500,#C93400)"><svg><use href="#i-cup"/></svg></span>
-              <div class="t"><div>Aroma Espresso Bar</div><div data-i18n="cafe">Yesterday · Restaurants</div></div><span class="a" data-money="42"></span></div>
+              <div class="t"><div data-i18n="m2">Aroma Espresso Bar</div><div data-i18n="cafe">Yesterday · Restaurants</div></div><span class="a" data-money="42"></span></div>
             <div class="row"><span class="ico" style="background:linear-gradient(#5E5CE6,#3634A3)"><svg><use href="#i-fuel"/></svg></span>
-              <div class="t"><div>Paz</div><div data-i18n="fuel">19 Oct · Fuel</div></div><span class="a" data-money="250"></span></div>
+              <div class="t"><div data-i18n="m3">Paz</div><div data-i18n="fuel">19 Oct · Fuel</div></div><span class="a" data-money="250"></span></div>
           </div>
           <div class="tabbar" aria-hidden="true">
             <span class="on"><svg><use href="#i-house"/></svg><b data-i18n="tHome">Home</b></span>
@@ -455,6 +461,57 @@
     },
   };
 
+  strings.he = {
+    h1: "כמה אפשר באמת להוציא.",
+    lede: "מקס מחייבת הכול ב-2 לחודש, ולכן היתרה בלאומי נראית גדולה ממה שהיא. True Balance מציגה <strong>את היתרה בלאומי פחות חיובי מקס שעוד יגיעו</strong>, באייפון, במספר אחד.",
+    altstore: "הוספה ל-AltStore", sidestore: "הוספה ל-SideStore", ipa: "הורדת קובץ ה-IPA",
+    note: "בחינם, לאייפון עם iOS 18 ומעלה. בעברית, באנגלית ובצרפתית.",
+    phoneLabel: "מסך הבית של True Balance",
+    initial: "ד", hello: "שלום, דנה", really: "זמין באמת", days: "12 ימים עד החיוב", perday: "בערך ‎442 ₪ ליום",
+    leumi: "יתרה בלאומי", maxon: "מקס · 2 בנוב׳", updated: "עודכן לפני 2 דק׳", latest: "תשלומים אחרונים",
+    m1: "שופרסל דיל", m2: "ארומה אספרסו בר", m3: "פז",
+    groceries: "היום · מכולת וסופר", cafe: "אתמול · מסעדות וברים", fuel: "19 באוק׳ · דלק",
+    tHome: "בית", tCharges: "חיובים", tSpending: "הוצאות", tInsights: "תובנות",
+    calcTitle: "חיסור אחד, שנעשה בשבילך.",
+    calcIntro: "האפליקציה מתחברת ללאומי ולמקס, סוכמת כל חיוב בכרטיס שעוד לא ירד מהחשבון, ומורידה אותו מהיתרה.",
+    maxDebit: "מקס, יחויב ב-2 בנוב׳",
+    calcWhy: "גם רכישות ממתינות נספרות. תשלומים עתידיים וחיובים במטבע חוץ מוצגים בצד, לפי שער בנק ישראל.",
+    insideTitle: "כל מה שמסביב למספר הזה.",
+    insideIntro: "ארבע לשוניות, כמו השאלות שבאמת שואלים על הכסף.",
+    f1: "כמה ימים נשארו עד חיוב מקס, וכמה זה משאיר ליום",
+    f2: "התשלומים האחרונים ותנועות לאומי, עם פרטי ההעברות",
+    f3: "החשבונות באירופה, באזור משלהם",
+    f4: "החיוב הבא לפי קטגוריה, נגיעה בפלח מציגה את הרכישות",
+    f5: "כל חיוב קרוב, כולל תשלומים",
+    f6: "חיפוש לפי בית עסק או קטגוריה",
+    f7: "כל תקופה, כסכום מצטבר שאפשר לגלול עליו באצבע",
+    f8: "ההיסטוריה של כל בית עסק, הערות ותגיות על רכישות",
+    f9: "ייצוא ל-CSV בשביל Numbers או Excel",
+    f10: "תקציב חודשי לכל קטגוריה, עם התראות ב-80% וב-100%",
+    f11: "מינויים, משכורת וחיובים קבועים, שמזוהים בשבילך",
+    f12: "החודש מול החודש שעבר, והשווי הנקי שלך",
+    privateTitle: "היא רצה באייפון שלך. רק שם.",
+    privateIntro: "אין שרת של True Balance. האפליקציה עושה לבד את מה שהיית עושה בספארי.",
+    p1: "היא מתחברת ללאומי ולמקס בטלפון, בדפדפן נסתר",
+    p2: "פרטי ההתחברות נשארים במחזיק המפתחות של האייפון, בלי סנכרון",
+    p3: "נעילה עם Face ID ומתג להסתרת כל הסכומים",
+    p4: "קוד פתוח: <a href=\"https://github.com/sivelswhy/truebankisr\">הקוד ב-GitHub</a>",
+    euroTitle: "גם החשבונות באירופה.",
+    euroIntro: "Hello Bank,‏ Revolut,‏ BNP Paribas,‏ N26 ועוד כ-2,700 בנקים ב-29 מדינות, בבנקאות פתוחה דרך <a href=\"https://enablebanking.com\">Enable Banking</a>. לקריאה בלבד, בחינם, מוצגים בנפרד מהיתרה האמיתית עם השווי בשקלים.",
+    euroGuide: "למדריך ההגדרה (באנגלית)",
+    installTitle: "התקנה בכמה דקות.",
+    installIntro: "True Balance לא נמצאת ב-App Store. ‏AltStore ו-SideStore מתקינות אותה עם ה-Apple ID שלך ומעדכנות אותה.",
+    s1: "להתקין <a href=\"https://altstore.io\">AltStore</a> או <a href=\"https://sidestore.io\">SideStore</a> באייפון",
+    s1n: "מספיק Apple ID חינמי.",
+    s2: "להוסיף את המקור של True Balance",
+    s2n: "עם הכפתורים למעלה, או בהדבקת הכתובת הזאת ב-Sources.",
+    s3: "להתקין את True Balance, לפתוח ולהתחבר ללאומי ולמקס",
+    s3n: "או לנסות קודם עם נתוני דוגמה.",
+    copy: "העתקה", copied: "הועתק",
+    "f-personal": "לשימוש אישי בלבד. True Balance קוראת את החשבונות שלך עם פרטי ההתחברות שלך. אין לה קשר לבנק לאומי, למקס או ל-Enable Banking.",
+    "f-license": "חינם לשימוש לא מסחרי (<a href=\"https://github.com/sivelswhy/truebankisr/blob/main/LICENSE.md\">PolyForm Noncommercial</a>). מבוססת על <a href=\"https://github.com/eshaham/israeli-bank-scrapers\">israeli-bank-scrapers</a>.",
+  };
+
   // English is in the page itself: keep it to switch back.
   const english = {};
   document.querySelectorAll("[data-i18n]").forEach(el => english[el.dataset.i18n] = el.textContent);
@@ -463,16 +520,17 @@
   english.copied = "Copied";
 
   let lang = "en";
-  function t(key) { return (lang === "fr" && strings.fr[key]) || english[key] || key; }
+  function t(key) { return (strings[lang] && strings[lang][key]) || english[key] || key; }
 
   function apply(next) {
     lang = next;
     document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "he" ? "rtl" : "ltr";
     document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = t(el.dataset.i18n));
     document.querySelectorAll("[data-i18n-html]").forEach(el => el.innerHTML = t(el.dataset.i18nHtml));
     document.querySelectorAll("[data-i18n-aria]").forEach(el => el.setAttribute("aria-label", t(el.dataset.i18nAria)));
     // Amounts the way the app writes them in each language.
-    const money = new Intl.NumberFormat(lang === "fr" ? "fr-FR" : "en-US", { style: "currency", currency: "ILS" });
+    const money = new Intl.NumberFormat({ fr: "fr-FR", he: "he-IL" }[lang] || "en-US", { style: "currency", currency: "ILS" });
     document.querySelectorAll("[data-money]").forEach(el => {
       const v = Number(el.dataset.money);
       el.textContent = (v < 0 ? "− " : "") + money.format(Math.abs(v));
@@ -482,7 +540,8 @@
 
   let saved = null;
   try { saved = localStorage.getItem("lang"); } catch {}
-  apply(saved || ((navigator.language || "").toLowerCase().startsWith("fr") ? "fr" : "en"));
+  const device = (navigator.language || "").toLowerCase();
+  apply(saved || (device.startsWith("fr") ? "fr" : device.startsWith("he") || device.startsWith("iw") ? "he" : "en"));
 
   document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => {
     apply(b.dataset.lang);
