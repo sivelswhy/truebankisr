@@ -26,11 +26,14 @@ struct TabScreen<Content: View>: View {
     @AppStorage("firstName") private var firstName = ""
     @State private var showingSettings = false
     var title: String
+    /// Colour of the glow behind the screen.
+    var tint: Color = .accentColor
     @ViewBuilder var content: () -> Content
 
     var body: some View {
         NavigationStack {
             content()
+                .appBackground(tint)
                 .navigationTitle(title)
                 .toolbar {
                     if model.isRefreshing || !model.refreshErrors.isEmpty || !model.euroErrors.isEmpty {
@@ -156,7 +159,7 @@ struct BalanceTab: View {
     @AppStorage("firstName") private var firstName = ""
 
     var body: some View {
-        TabScreen(title: Profile.greeting(name: firstName)) {
+        TabScreen(title: Profile.greeting(name: firstName), tint: model.snapshot?.mood ?? .accentColor) {
             List {
                 if let s = model.snapshot {
                     Section {
@@ -226,6 +229,7 @@ struct RecentPurchasesView: View {
         .navigationTitle("Latest payments")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
     }
 }
 
@@ -243,6 +247,7 @@ struct CalculationView: View {
         .navigationTitle("Calculation")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
     }
 
     /// Leumi − Max = available.
@@ -365,6 +370,16 @@ struct ChargesTab: View {
     }
 }
 
+@MainActor
+extension Snapshot {
+    /// How things stand: calm blue, orange under the alert threshold, red when overdrawn.
+    var mood: Color {
+        if trueBalance < 0 { return .red }
+        let threshold = AppModel.alertThreshold
+        return threshold > 0 && trueBalance < threshold ? .orange : .accentColor
+    }
+}
+
 /// The true balance on a card tinted by how things stand (calm blue, orange
 /// under the alert threshold, red when overdrawn), with the time left until
 /// the debit and the subtraction behind it. Tap for the full calculation.
@@ -374,11 +389,7 @@ private struct HeroView: View {
     /// The one number the app is for: big, and growing with Dynamic Type.
     @ScaledMetric(relativeTo: .largeTitle) private var amountSize = 48
 
-    private var tint: Color {
-        if snapshot.trueBalance < 0 { return .red }
-        let threshold = AppModel.alertThreshold
-        return threshold > 0 && snapshot.trueBalance < threshold ? .orange : .accentColor
-    }
+    private var tint: Color { snapshot.mood }
 
     var body: some View {
         HeroCard(tint: tint) {
@@ -732,5 +743,6 @@ struct CategoryDetailView: View {
         .navigationTitle(Format.categoryName(route.key))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
     }
 }

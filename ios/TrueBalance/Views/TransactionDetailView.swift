@@ -209,6 +209,7 @@ struct TransactionDetailView: View {
         .navigationTitle(txn.description)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
         .task { await location.find(for: txn) }
     }
 }
@@ -319,5 +320,6 @@ struct MerchantHistoryView: View {
         .navigationTitle(route.name)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
     }
 }

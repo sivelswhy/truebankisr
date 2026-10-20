@@ -100,6 +100,7 @@ struct SettingsView: View {
                     }
                 }
             }
+            .appBackground()
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
