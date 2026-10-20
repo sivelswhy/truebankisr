@@ -121,14 +121,22 @@ final class WebDriver: NSObject, WKNavigationDelegate {
     // MARK: Scripts
 
     /// Runs `body` as an async JS function; `args` become its parameters.
+    /// WebKit doesn't always answer (a page replaced mid-call, a promise that
+    /// never settles), so it gives up after `timeout`.
     @discardableResult
-    func eval(_ body: String, _ args: [String: Any] = [:]) async throws -> Any? {
-        do {
-            return try await webView.callAsyncJavaScript(body, arguments: args, contentWorld: .page)
-        } catch {
-            throw ScriptError(message: (error as NSError).userInfo["WKJavaScriptExceptionMessage"] as? String ?? "\(error)")
+    func eval(_ body: String, _ args: [String: Any] = [:], timeout: TimeInterval = 60) async throws -> Any? {
+        let result = try await withDeadline(timeout, "\(self.currentStep): page script didn’t answer") { [webView] in
+            do {
+                return ScriptResult(value: try await webView.callAsyncJavaScript(body, arguments: args, contentWorld: .page))
+            } catch {
+                throw ScriptError(message: (error as NSError).userInfo["WKJavaScriptExceptionMessage"] as? String ?? "\(error)")
+            }
         }
+        return result.value
     }
+
+    /// What scripts return: plain JSON-like values, read on the main actor only.
+    private struct ScriptResult: @unchecked Sendable { var value: Any? }
 
     func exists(_ selector: String) async -> Bool {
         (try? await eval("return !!document.querySelector(s)", ["s": selector])) as? Bool ?? false
@@ -185,9 +193,9 @@ final class WebDriver: NSObject, WKNavigationDelegate {
     /// GET inside the page (site cookies apply). Returns status + body.
     func fetch(_ url: String) async throws -> (status: Int, body: Data) {
         let result = try await eval("""
-            const r = await fetch(u, { credentials: 'include' });
+            const r = await fetch(u, { credentials: 'include', signal: AbortSignal.timeout(45000) });
             return [r.status, await r.text()];
-            """, ["u": url]) as? [Any]
+            """, ["u": url], timeout: 60) as? [Any]
         guard let result, let status = result.first as? Int, let text = result.last as? String else {
             throw ScriptError(message: "fetch returned nothing for \(url)")
         }
@@ -252,5 +260,44 @@ final class WebDriver: NSObject, WKNavigationDelegate {
                 throw error
             }
         }
+    }
+}
+
+/// Runs `op`, throwing `WebDriver.Timeout` after `seconds`. Unlike a task
+/// group it returns right away instead of waiting for a stuck `op` to notice
+/// the cancellation, so a page that never answers can't hold up a refresh.
+@MainActor
+func withDeadline<T: Sendable>(_ seconds: TimeInterval, _ what: @autoclosure @escaping @MainActor () -> String,
+                               _ op: @escaping @MainActor () async throws -> T) async throws -> T {
+    let race = Race<T>()
+    return try await withTaskCancellationHandler {
+        try await withCheckedThrowingContinuation { (c: CheckedContinuation<T, Error>) in
+            race.continuation = c
+            race.work = Task { @MainActor in
+                do { race.finish(.success(try await op())) } catch { race.finish(.failure(error)) }
+            }
+            race.timer = Task { @MainActor in
+                try? await Task.sleep(for: .seconds(seconds))
+                if !Task.isCancelled { race.finish(.failure(WebDriver.Timeout(what: what()))) }
+            }
+        }
+    } onCancel: {
+        Task { @MainActor in race.finish(.failure(CancellationError())) }
+    }
+}
+
+/// The first of `op` and the timer to finish resumes the caller; the other is cancelled.
+@MainActor
+private final class Race<T: Sendable>: Sendable {
+    var continuation: CheckedContinuation<T, Error>?
+    var work: Task<Void, Never>?
+    var timer: Task<Void, Never>?
+
+    func finish(_ result: Result<T, Error>) {
+        guard let c = continuation else { return }
+        continuation = nil
+        work?.cancel()
+        timer?.cancel()
+        c.resume(with: result)
     }
 }
