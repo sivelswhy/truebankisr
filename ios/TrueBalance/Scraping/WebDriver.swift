@@ -8,6 +8,9 @@ import WebKit
 final class WebDriver: NSObject, WKNavigationDelegate {
     struct Timeout: Error { var what: String }
     struct ScriptError: Error { var message: String }
+    /// The site answered the page with an error status (403 from a firewall or
+    /// a block from abroad, 5xx when it's down).
+    struct HTTPStatus: Error { var code: Int; var host: String }
 
     let webView: WKWebView
     /// Troubleshooting: the page is shown on screen and can be used by hand.
@@ -15,6 +18,8 @@ final class WebDriver: NSObject, WKNavigationDelegate {
     /// What we're doing right now, reported when something times out.
     private(set) var currentStep = "start"
     private var navigation: CheckedContinuation<Void, Error>?
+    /// HTTP status of the last page loaded in the main frame.
+    private(set) var lastStatus: Int?
 
     /// `captureURLPattern`: XHR/fetch responses whose URL matches are kept in
     /// `window.__tbCaptures` (used for Leumi's balance request).
@@ -81,7 +86,24 @@ final class WebDriver: NSObject, WKNavigationDelegate {
 
     /// Returns once the page starts arriving (not when every resource is
     /// done: bank sites keep loading trackers for a long time on mobile).
+    /// A load that times out or loses the connection is tried once more: on a
+    /// slow network the second try often gets through. An error status fails
+    /// right away instead of waiting for elements that will never come.
     func load(_ urlString: String, timeout: TimeInterval = 45) async throws {
+        do {
+            try await loadOnce(urlString, timeout: timeout)
+        } catch where Self.isTransient(error) {
+            print("[WebDriver] \(currentStep): retrying after \(error)")
+            try await Task.sleep(for: .seconds(2))
+            try await loadOnce(urlString, timeout: timeout)
+        }
+        if let code = lastStatus, code == 403 || code == 451 || code >= 500 {
+            throw HTTPStatus(code: code, host: URL(string: urlString)?.host ?? urlString)
+        }
+    }
+
+    private func loadOnce(_ urlString: String, timeout: TimeInterval) async throws {
+        lastStatus = nil
         try await withTimeout(timeout, "loading \(URL(string: urlString)?.host ?? urlString)") {
             try await withCheckedThrowingContinuation { (c: CheckedContinuation<Void, Error>) in
                 self.navigation?.resume(throwing: CancellationError())
@@ -89,6 +111,48 @@ final class WebDriver: NSObject, WKNavigationDelegate {
                 self.webView.load(URLRequest(url: URL(string: urlString)!))
             }
         }
+    }
+
+    private static func isTransient(_ error: Error) -> Bool {
+        if error is Timeout { return true }
+        let e = error as NSError
+        return e.domain == NSURLErrorDomain && [NSURLErrorTimedOut, NSURLErrorNetworkConnectionLost].contains(e.code)
+    }
+
+    nonisolated func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse,
+                             decisionHandler: @escaping @MainActor @Sendable (WKNavigationResponsePolicy) -> Void) {
+        let status = navigationResponse.isForMainFrame ? (navigationResponse.response as? HTTPURLResponse)?.statusCode : nil
+        MainActor.assumeIsolated {
+            if let status { lastStatus = status }
+            decisionHandler(.allow)
+        }
+    }
+
+    // MARK: Error pages
+
+    enum PageProblem: Equatable {
+        /// A firewall or geo-block page: the site refuses this network.
+        case refused(String)
+        case maintenance(String)
+    }
+
+    /// What the page on screen says, when a step failed: a block page, a
+    /// maintenance notice... Nil when it looks like an ordinary page.
+    func pageProblem() async -> PageProblem? {
+        let seen = (try? await eval("return [document.title, document.body ? document.body.innerText : ''].join(' | ');",
+                                    timeout: 5) as? String) ?? ""
+        let text = seen.lowercased()
+        let excerpt = String(seen.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression).prefix(160))
+        if let code = lastStatus, code == 403 || code == 451 {
+            return .refused("HTTP \(code) on \(URL(string: url)?.host ?? url): \(excerpt)")
+        }
+        let refused = ["access denied", "you don't have permission", "you do not have permission", "request unsuccessful",
+                       "incapsula", "you have been blocked", "attention required", "not available in your country",
+                       "not available in your region", "unavailable in your country", "הגישה נחסמה", "הגישה לאתר חסומה"]
+        if refused.contains(where: text.contains) { return .refused(excerpt) }
+        let maintenance = ["maintenance", "תחזוקה", "temporarily unavailable", "service unavailable", "שירות אינו זמין"]
+        if maintenance.contains(where: text.contains) || (lastStatus ?? 0) >= 500 { return .maintenance(excerpt) }
+        return nil
     }
 
     nonisolated func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
