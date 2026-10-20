@@ -103,11 +103,8 @@ struct LeumiSection: View {
                 ForEach(movements.prefix(5)) { t in
                     NavigationLink(value: BankRoute(txn: t)) { BankMovementRow(txn: t) }
                 }
-                if movements.count > 5 {
-                    NavigationLink("See all") { BankMovementsView() }
-                }
             } header: {
-                Text("Leumi account")
+                SectionHeader("Leumi account", seeAll: movements.count > 5) { BankMovementsView() }
             }
         }
     }

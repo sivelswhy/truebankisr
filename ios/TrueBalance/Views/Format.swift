@@ -102,3 +102,27 @@ struct CategoryIcon: View {
             .accessibilityHidden(true)
     }
 }
+
+/// A pill to pick one option among a few (period, bank, tag): filled with
+/// `tint` when selected. The unselected fill is translucent, so it shows both
+/// inside a list row and on the grouped background. Shrinks under the finger.
+struct ChipStyle: ButtonStyle {
+    var selected: Bool
+    var tint: Color = .accentColor
+    /// Less on the leading side when the label starts with a logo.
+    var leading: CGFloat = 12
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(selected ? AnyShapeStyle(.white) : AnyShapeStyle(.primary))
+            .padding(.leading, leading)
+            .padding(.trailing, 12)
+            .padding(.vertical, 7)
+            .background(selected ? AnyShapeStyle(tint.gradient) : AnyShapeStyle(.fill.tertiary), in: .capsule)
+            .contentShape(.capsule)
+            .scaleEffect(configuration.isPressed ? 0.94 : 1)
+            .animation(.snappy(duration: 0.2), value: configuration.isPressed)
+            .animation(.snappy, value: selected)
+    }
+}

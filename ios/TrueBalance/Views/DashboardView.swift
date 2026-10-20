@@ -137,6 +137,12 @@ struct NoDataView: View {
             Text(model.isRefreshing
                 ? Format.progress(model.progressStep)
                 : String(localized: "Pull down to sign in to Leumi and Max."))
+        } actions: {
+            if !model.isRefreshing {
+                Button("Refresh now") { Task { await model.refresh() } }
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.capsule)
+            }
         }
         .listRowBackground(Color.clear)
     }
@@ -154,31 +160,22 @@ struct BalanceTab: View {
             List {
                 if let s = model.snapshot {
                     Section {
-                        NavigationLink {
-                            CalculationView()
-                        } label: {
-                            HeroView(snapshot: s, isDemo: model.isDemo)
-                        }
-                        if let f = Forecaster.forecast(s), !(f.income.isEmpty && f.debits.isEmpty) {
-                            ForecastRow(forecast: f)
-                        }
+                        HeroView(snapshot: s, isDemo: model.isDemo)
+                            .pushes { CalculationView() }
+                            .cardRow()
+                    }
+                    if let f = Forecaster.forecast(s), !(f.income.isEmpty && f.debits.isEmpty) {
+                        Section { ForecastRow(forecast: f) }
                     }
                     recentSection
                     LeumiSection()
                     EuroBanksSection()
-                    Section {
-                    } footer: {
-                        TimelineView(.periodic(from: .now, by: 60)) { _ in
-                            Text("Updated \(s.computedAt.formatted(.relative(presentation: .named)))")
-                        }
-                        .frame(maxWidth: .infinity)
-                    }
                 } else {
                     NoDataView()
                 }
             }
-            // A little air between "Hello" and the balance.
-            .contentMargins(.top, 20, for: .scrollContent)
+            .headerProminence(.increased)
+            .listSectionSpacing(20)
             .animation(.default, value: model.snapshot)
             .sensoryFeedback(.success, trigger: model.snapshot?.computedAt)
         }
@@ -191,14 +188,11 @@ struct BalanceTab: View {
             if recent.isEmpty {
                 Text("No purchases yet.").foregroundStyle(.secondary)
             }
-            ForEach(recent.prefix(8)) { t in
+            ForEach(recent.prefix(5)) { t in
                 NavigationLink(value: TxnRoute(txn: t)) { TransactionRow(txn: t) }
             }
-            if recent.count > 8 {
-                NavigationLink("See all") { RecentPurchasesView() }
-            }
         } header: {
-            Text("Latest payments")
+            SectionHeader("Latest payments", seeAll: recent.count > 5) { RecentPurchasesView() }
         }
     }
 }
@@ -312,6 +306,9 @@ struct ChargesTab: View {
                                                description: Text("No Max charge is waiting to be debited."))
                             .listRowBackground(Color.clear)
                     } else {
+                        if let next = s.nextCharge {
+                            Section { NextDebitCard(charge: next).cardRow() }
+                        }
                         if s.upcoming.count > 1 {
                             UpcomingDebitsChart(upcoming: s.upcoming)
                         }
@@ -336,6 +333,8 @@ struct ChargesTab: View {
                     NoDataView()
                 }
             }
+            .headerProminence(.increased)
+            .listSectionSpacing(20)
             .searchable(text: $query, prompt: Text("Search charges"))
             .autocorrectionDisabled()
         }
@@ -366,62 +365,159 @@ struct ChargesTab: View {
     }
 }
 
+/// The true balance on a card tinted by how things stand (calm blue, orange
+/// under the alert threshold, red when overdrawn), with the time left until
+/// the debit and the subtraction behind it. Tap for the full calculation.
 private struct HeroView: View {
     var snapshot: Snapshot
     var isDemo: Bool
+    /// The one number the app is for: big, and growing with Dynamic Type.
+    @ScaledMetric(relativeTo: .largeTitle) private var amountSize = 48
+
+    private var tint: Color {
+        if snapshot.trueBalance < 0 { return .red }
+        let threshold = AppModel.alertThreshold
+        return threshold > 0 && snapshot.trueBalance < threshold ? .orange : .accentColor
+    }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                if let next = snapshot.nextCharge {
-                    Text("Really available after Max on \(Format.day(next.chargeDate))")
-                } else {
-                    Text("Really available")
+        HeroCard(tint: tint) {
+            VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 8) {
+                        Text("Really available")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(.secondary)
+                        if isDemo {
+                            Text("DEMO")
+                                .font(.caption2.weight(.bold))
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(.quaternary, in: .capsule)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.footnote.weight(.semibold))
+                            .foregroundStyle(.tertiary)
+                    }
+                    Text(snapshot.trueBalance.shekels)
+                        .font(.system(size: amountSize, weight: .bold, design: .rounded))
+                        .monospacedDigit()
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
+                        .foregroundStyle(snapshot.trueBalance < 0 ? .red : .primary)
+                        .contentTransition(.numericText(value: snapshot.trueBalance))
+                        .privacySensitive()
+                    if snapshot.trueBalance < 0 {
+                        Text("You’ll be overdrawn on the debit date unless money comes in first.")
+                            .font(.subheadline)
+                            .foregroundStyle(.red)
+                    }
                 }
-                if isDemo {
-                    Text("DEMO")
-                        .font(.caption2.weight(.bold))
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(.quaternary, in: .capsule)
+
+                if let next = snapshot.nextCharge {
+                    runway(next)
+                }
+
+                // The subtraction, visible without opening anything.
+                HStack(alignment: .firstTextBaseline, spacing: 10) {
+                    Figure(label: String(localized: "Leumi balance"), amount: snapshot.bankBalance)
+                    Text(verbatim: "−").font(.subheadline.weight(.semibold)).foregroundStyle(.tertiary)
+                    Figure(label: snapshot.nextCharge.map { String(localized: "Max · \(Format.day($0.chargeDate))") } ?? "Max",
+                           amount: snapshot.nextCharge?.total ?? 0)
+                    Spacer(minLength: 0)
+                }
+                .padding(12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.fill.quaternary, in: .rect(cornerRadius: 14, style: .continuous))
+
+                // Next to the number it qualifies; orange once it's getting old.
+                TimelineView(.periodic(from: .now, by: 60)) { context in
+                    let stale = context.date.timeIntervalSince(snapshot.computedAt) > 60 * 60
+                    Label {
+                        Text("Updated \(snapshot.computedAt.formatted(.relative(presentation: .named)))")
+                    } icon: {
+                        Image(systemName: stale ? "clock.badge.exclamationmark" : "clock")
+                    }
+                    .font(.caption)
+                    .foregroundStyle(stale ? AnyShapeStyle(.orange) : AnyShapeStyle(.tertiary))
                 }
             }
-            .font(.subheadline)
-            .foregroundStyle(.secondary)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isButton)
+    }
 
-            Text(snapshot.trueBalance.shekels)
-                .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                .monospacedDigit()
-                .minimumScaleFactor(0.5)
-                .lineLimit(1)
-                .foregroundStyle(snapshot.trueBalance < 0 ? .red : .primary)
-                .contentTransition(.numericText(value: snapshot.trueBalance))
-                .privacySensitive()
-
-            if snapshot.trueBalance < 0 {
-                Text("You’ll be overdrawn on the debit date unless money comes in first.")
-                    .font(.subheadline)
-                    .foregroundStyle(.red)
-            } else if let next = snapshot.nextCharge {
-                let days = TrueBalance.daysUntil(next.chargeDate)
-                HStack(spacing: 6) {
-                    Image(systemName: "calendar")
+    /// How far into the billing month we are, and what that leaves per day.
+    private func runway(_ next: UpcomingCharge) -> some View {
+        let days = TrueBalance.daysUntil(next.chargeDate)
+        let end = Israel.date(fromDay: next.chargeDate) ?? .now
+        let start = Israel.calendar.date(byAdding: .month, value: -1, to: end) ?? end
+        let progress = end > start ? min(max(Date.now.timeIntervalSince(start) / end.timeIntervalSince(start), 0), 1) : 1
+        return VStack(alignment: .leading, spacing: 8) {
+            Gauge(value: progress) { EmptyView() }
+                .gaugeStyle(.accessoryLinearCapacity)
+                .tint(tint)
+            HStack {
+                Label {
                     if days == 0 {
                         Text("Max is debited today")
                     } else {
                         Text("\(days) day(s) until the debit")
                     }
-                    if let budget = TrueBalance.dailyBudget(snapshot) {
-                        Text("·")
-                        Text("about \(budget.formatted(.currency(code: "ILS").precision(.fractionLength(0))))/day")
-                            .privacySensitive()
+                } icon: {
+                    Image(systemName: "calendar")
+                }
+                Spacer()
+                if let budget = TrueBalance.dailyBudget(snapshot) {
+                    Text("about \(budget.formatted(.currency(code: "ILS").precision(.fractionLength(0))))/day")
+                        .privacySensitive()
+                }
+            }
+            .font(.footnote)
+            .foregroundStyle(.secondary)
+        }
+    }
+}
+
+/// The amount, date and size of the next Max debit, on top of the Charges tab.
+private struct NextDebitCard: View {
+    var charge: UpcomingCharge
+    @ScaledMetric(relativeTo: .largeTitle) private var amountSize = 40
+
+    var body: some View {
+        let days = TrueBalance.daysUntil(charge.chargeDate)
+        HeroCard(tint: .indigo) {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Next Max debit")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.secondary)
+                Text(charge.total.shekels)
+                    .font(.system(size: amountSize, weight: .bold, design: .rounded))
+                    .monospacedDigit()
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
+                    .contentTransition(.numericText(value: charge.total))
+                    .privacySensitive()
+                HStack(spacing: 6) {
+                    Image(systemName: "calendar")
+                    Text(Israel.date(fromDay: charge.chargeDate)?.formatted(.dateTime.weekday(.wide).day().month(.wide)) ?? charge.chargeDate)
+                    Text(verbatim: "·")
+                    if days == 0 {
+                        Text("Max is debited today")
+                    } else {
+                        Text("\(days) day(s) until the debit")
                     }
                 }
-                .font(.subheadline)
+                .font(.footnote)
                 .foregroundStyle(.secondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+                Text("\(charge.txns.count) purchase(s)")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
             }
         }
-        .padding(.vertical, 6)
         .accessibilityElement(children: .combine)
     }
 }
