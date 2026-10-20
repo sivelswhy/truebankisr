@@ -33,6 +33,9 @@ struct TabScreen<Content: View>: View {
             content()
                 .navigationTitle(title)
                 .toolbar {
+                    if model.isRefreshing || !model.refreshErrors.isEmpty {
+                        ToolbarItem(placement: .topBarTrailing) { RefreshStatusButton() }
+                    }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             showingSettings = true
@@ -56,31 +59,64 @@ struct TabScreen<Content: View>: View {
     }
 }
 
-/// Refresh progress and errors, at the top of a tab.
-struct RefreshStatusSection: View {
+/// Next to the profile while updating (a spinner) or after a failed update
+/// (a warning sign). Tap it for the details.
+struct RefreshStatusButton: View {
+    @Environment(AppModel.self) private var model
+    @State private var showingDetails = false
+
+    var body: some View {
+        Button {
+            showingDetails = true
+        } label: {
+            if model.isRefreshing {
+                ProgressView()
+            } else {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .foregroundStyle(.orange)
+            }
+        }
+        .accessibilityLabel(Text(model.isRefreshing ? LocalizedStringKey("Updating…") : "Update failed"))
+        .popover(isPresented: $showingDetails) {
+            RefreshStatusDetails()
+                .frame(minWidth: 300, maxWidth: 360)
+                .presentationCompactAdaptation(.popover)
+        }
+    }
+}
+
+/// What the status button shows: the current step, or what went wrong.
+struct RefreshStatusDetails: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        if model.isRefreshing {
-            Section {
+        VStack(alignment: .leading, spacing: 12) {
+            if model.isRefreshing {
                 HStack(spacing: 10) {
                     ProgressView()
                     Text(Format.progress(model.progressStep))
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
                         .contentTransition(.opacity)
                 }
                 .animation(.default, value: model.progressStep)
-            }
-        }
-        if !model.refreshErrors.isEmpty {
-            Section {
+            } else {
                 ForEach(Provider.allCases.filter { model.refreshErrors[$0] != nil }, id: \.self) { p in
                     BankErrorText(error: model.refreshErrors[p]!, provider: p)
                         .font(.subheadline)
                 }
+                Button("Try again", systemImage: "arrow.clockwise") {
+                    Task { await model.refresh() }
+                }
+                .buttonStyle(.bordered)
+            }
+            if let at = model.snapshot?.computedAt {
+                Text("Updated \(at.formatted(.relative(presentation: .named)))")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
             }
         }
+        .padding()
+        .fixedSize(horizontal: false, vertical: true)
     }
 }
 
@@ -110,7 +146,6 @@ struct BalanceTab: View {
     var body: some View {
         TabScreen(title: Profile.greeting(name: firstName)) {
             List {
-                RefreshStatusSection()
                 if let s = model.snapshot {
                     Section {
                         NavigationLink {
@@ -138,7 +173,6 @@ struct BalanceTab: View {
             // A little air between "Hello" and the balance.
             .contentMargins(.top, 20, for: .scrollContent)
             .animation(.default, value: model.snapshot)
-            .animation(.default, value: model.isRefreshing)
             .sensoryFeedback(.success, trigger: model.snapshot?.computedAt)
         }
     }
@@ -263,7 +297,6 @@ struct ChargesTab: View {
     var body: some View {
         TabScreen(title: String(localized: "Charges")) {
             List {
-                RefreshStatusSection()
                 if let s = model.snapshot {
                     if !query.trimmingCharacters(in: .whitespaces).isEmpty {
                         searchResults(s)
