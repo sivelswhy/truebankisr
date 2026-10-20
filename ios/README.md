@@ -70,8 +70,10 @@ Product → Archive → Distribute App → *Release Testing / Ad Hoc* produces a
 ## Unsigned IPA (like CI)
 
 `ios/build-ipa.sh` builds the app unsigned and writes `dist/TrueBalance.ipa`,
-to sign and install with your usual tool. CI also publishes one per commit on
-`main` as a GitHub release.
+to sign and install with your usual tool. CI also publishes one on `main` as
+a GitHub release: it waits 10 minutes after a push and builds only the last
+commit of a burst, and commits that only touch docs (`*.md`, `docs/`) or CI
+settings (`.github/`) don't build at all.
 
 ## Staying signed in
 
