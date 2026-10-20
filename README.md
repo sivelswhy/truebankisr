@@ -13,7 +13,8 @@ Really available       − ₪801.20
 Two clients, English and French:
 
 - **iPhone app** (`ios/`): native SwiftUI, standalone (no server). Signs in to
-  Leumi and Max on the phone itself. See [ios/README.md](ios/README.md).
+  Leumi and Max on the phone itself, and can also show European accounts
+  (Hello Bank, Revolut) through open banking. See [ios/README.md](ios/README.md).
 - **Web app** (this folder): Next.js, runs on your Mac and scrapes with
   [`israeli-bank-scrapers`](https://github.com/eshaham/israeli-bank-scrapers).
 
@@ -32,6 +33,11 @@ So this app uses the open-source
 [`israeli-bank-scrapers`](https://github.com/eshaham/israeli-bank-scrapers),
 which logs into Leumi and Max with *your* credentials in a headless Chromium,
 on *your* machine.
+
+European banks are different: PSD2 makes them reachable through aggregators,
+and [Enable Banking](https://enablebanking.com) lets an individual read their
+own accounts for free (restricted mode). The iPhone app uses it for Hello Bank
+and Revolut, shown apart from the true balance.
 
 ## Run the web app
 
@@ -66,12 +72,6 @@ cached in `data/snapshot.json`. Optional settings are in `.env.example`.
 
 Credentials stay in `data/` (git-ignored) and the server only listens on
 `127.0.0.1`. Do not deploy this to a public host.
-
-## Roadmap
-
-- iPhone app (IPA): wrap the UI with Capacitor; the scraping stays on a
-  machine you own (Mac at home, reached over Tailscale).
-- French translation.
 
 ## Troubleshooting
 
