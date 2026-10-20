@@ -34,6 +34,13 @@ struct SettingsView: View {
                 Section {
                     LabeledContent("Bank", value: "Leumi")
                     LabeledContent("Card", value: "Max")
+                    NavigationLink {
+                        EuroBanksSettingsView()
+                    } label: {
+                        LabeledContent("Other banks", value: model.euroConnections.isEmpty
+                            ? String(localized: "Hello Bank, Revolut")
+                            : model.euroConnections.map(\.bank.name).formatted(.list(type: .and)))
+                    }
                 } header: {
                     Text("Accounts")
                 } footer: {
@@ -106,7 +113,7 @@ struct SettingsView: View {
                     model.signOut()
                 }
             } message: {
-                Text("Your Leumi and Max credentials and the saved balance will be deleted from this iPhone.")
+                Text("Your Leumi and Max credentials, the other banks’ access and the saved balances will be deleted from this iPhone.")
             }
         }
     }

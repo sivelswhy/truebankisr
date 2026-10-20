@@ -33,7 +33,7 @@ struct TabScreen<Content: View>: View {
             content()
                 .navigationTitle(title)
                 .toolbar {
-                    if model.isRefreshing || !model.refreshErrors.isEmpty {
+                    if model.isRefreshing || !model.refreshErrors.isEmpty || !model.euroErrors.isEmpty {
                         ToolbarItem(placement: .topBarTrailing) { RefreshStatusButton() }
                     }
                     ToolbarItem(placement: .topBarTrailing) {
@@ -104,6 +104,12 @@ struct RefreshStatusDetails: View {
                     BankErrorText(error: model.refreshErrors[p]!, provider: p)
                         .font(.subheadline)
                 }
+                ForEach(EuroBank.supported.filter { model.euroErrors[$0.id] != nil }) { bank in
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(bank.name).font(.subheadline.weight(.semibold))
+                        EuroErrorText(error: model.euroErrors[bank.id]!)
+                    }
+                }
                 Button("Try again", systemImage: "arrow.clockwise") {
                     Task { await model.refresh() }
                 }
@@ -159,6 +165,7 @@ struct BalanceTab: View {
                     }
                     recentSection
                     LeumiSection()
+                    EuroBanksSection()
                     Section {
                     } footer: {
                         TimelineView(.periodic(from: .now, by: 60)) { _ in
