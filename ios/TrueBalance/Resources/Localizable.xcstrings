@@ -2341,6 +2341,16 @@
         }
       }
     },
+    "Try again": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réessayer"
+          }
+        }
+      }
+    },
     "Try with sample data": {
       "localizations": {
         "fr": {
@@ -2377,6 +2387,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prochains prélèvements"
+          }
+        }
+      }
+    },
+    "Update failed": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec de la mise à jour"
           }
         }
       }
