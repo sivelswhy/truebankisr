@@ -20,6 +20,15 @@
       "screenshotURLs": [],
       "versions": [
         {
+          "version": "1.0.34",
+          "buildVersion": "34",
+          "date": "2026-10-20T23:04:17.585Z",
+          "localizedDescription": "iOS: Russian and Arabic localizations (app, widget, Siri, Info.plist)",
+          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-34/TrueBalance.ipa",
+          "size": 1805430,
+          "minOSVersion": "18.0"
+        },
+        {
           "version": "1.0.32",
           "buildVersion": "32",
           "date": "2026-10-20T22:16:49.643Z",
@@ -98,15 +107,6 @@
           "localizedDescription": "iOS: refresh status as a toolbar icon next to the profile (spinner / warning), details in a popover",
           "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-23/TrueBalance.ipa",
           "size": 1392645,
-          "minOSVersion": "18.0"
-        },
-        {
-          "version": "1.0.22",
-          "buildVersion": "22",
-          "date": "2026-10-20T15:05:28.895Z",
-          "localizedDescription": "AltStore/SideStore source updated by CI on every main build; builds stamped 1.0.<run>",
-          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-22/TrueBalance.ipa",
-          "size": 1385689,
           "minOSVersion": "18.0"
         }
       ]
