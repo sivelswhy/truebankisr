@@ -32,7 +32,7 @@ struct LockView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.background)
+        .background { AppBackground() }
         .task { await authenticate() }
     }
 

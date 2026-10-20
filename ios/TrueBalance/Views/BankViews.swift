@@ -193,6 +193,7 @@ struct BankMovementsView: View {
         .navigationTitle("Leumi account")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
         .animation(.default, value: filter)
     }
 }
@@ -283,5 +284,6 @@ struct BankMovementDetailView: View {
         .navigationTitle(party?.name ?? txn.description)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
     }
 }

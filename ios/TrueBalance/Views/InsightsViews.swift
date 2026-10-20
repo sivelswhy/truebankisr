@@ -73,6 +73,7 @@ struct ForecastView: View {
         .navigationTitle("Forecast")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
     }
 }
 
@@ -204,6 +205,7 @@ struct SubscriptionsView: View {
         .navigationTitle("Subscriptions")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
     }
 }
 
@@ -255,6 +257,7 @@ struct WealthView: View {
         .navigationTitle("Net worth")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
     }
 
     private func title(_ line: Wealth.Line) -> String {
@@ -308,6 +311,7 @@ struct BudgetsView: View {
         .navigationTitle("Budgets")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
         .toolbar {
             if !progress.isEmpty {
                 Button("Edit") { editing = true }
@@ -385,6 +389,7 @@ struct BudgetEditView: View {
                     Text("Monthly amount. Leave empty for no budget.")
                 }
             }
+            .appBackground()
             .navigationTitle("Budgets")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -442,6 +447,7 @@ struct MonthComparisonView: View {
         .navigationTitle("Month to month")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
     }
 }
 

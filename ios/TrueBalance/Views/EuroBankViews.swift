@@ -219,6 +219,7 @@ struct EuroTransactionsView: View {
         .navigationTitle(data?.bank.name ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
+        .appBackground()
     }
 }
 
@@ -261,6 +262,7 @@ struct EuroBanksSettingsView: View {
                 Text("You confirm on the bank’s site or app, then come back here. Access is read only and lasts 180 days.")
             }
         }
+        .appBackground()
         .navigationTitle("Other banks")
         .navigationBarTitleDisplayMode(.inline)
         .fileImporter(isPresented: $importing, allowedContentTypes: [UTType(filenameExtension: "pem") ?? .data, .data]) { result in

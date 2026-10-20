@@ -99,3 +99,36 @@ struct Figure: View {
         }
     }
 }
+
+/// Behind every screen: in dark mode a deep night blue instead of pure black,
+/// in light mode the usual grey; both with a soft glow of `tint` at the top so
+/// the screen has some colour without competing with the content.
+struct AppBackground: View {
+    var tint: Color = .accentColor
+    @Environment(\.colorScheme) private var scheme
+
+    var body: some View {
+        let dark = scheme == .dark
+        ZStack {
+            if dark {
+                LinearGradient(colors: [Color(hex: "#101A36"), Color(hex: "#080C18")], startPoint: .top, endPoint: .bottom)
+            } else {
+                Color(.systemGroupedBackground)
+            }
+            RadialGradient(colors: [tint.opacity(dark ? 0.32 : 0.13), .clear],
+                           center: .topLeading, startRadius: 0, endRadius: 520)
+            RadialGradient(colors: [Color.indigo.opacity(dark ? 0.22 : 0.07), .clear],
+                           center: .topTrailing, startRadius: 0, endRadius: 440)
+        }
+        .animation(.smooth(duration: 0.6), value: tint)
+        .ignoresSafeArea()
+    }
+}
+
+extension View {
+    /// Lists and forms on `AppBackground` instead of the flat system colour.
+    func appBackground(_ tint: Color = .accentColor) -> some View {
+        scrollContentBackground(.hidden)
+            .background { AppBackground(tint: tint) }
+    }
+}

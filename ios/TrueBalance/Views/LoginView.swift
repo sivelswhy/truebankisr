@@ -66,6 +66,7 @@ struct LoginView: View {
                     Text("Shows Leumi and Max on screen during sign-in, so you can see what blocks and finish a step by hand if needed.")
                 }
             }
+            .appBackground()
             .disabled(connecting)
             .scrollDismissesKeyboard(.interactively)
             .onSubmit(advance)
