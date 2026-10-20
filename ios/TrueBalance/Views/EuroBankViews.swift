@@ -15,24 +15,27 @@ struct EuroBanksSection: View {
             let data = model.euroData.first { $0.id == current.id }
             Section {
                 EuroBankPicker(banks: banks, selection: current) { selectedID = $0.id }
-                    .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
-                    .listRowBackground(Color.clear)
+                    .cardRow()
                 if let data {
-                    EuroBalanceCard(data: data, rates: model.snapshot?.fxRates ?? [:])
-                    ForEach(data.txns.prefix(5)) { EuroTxnRow(txn: $0) }
-                    if data.txns.count > 5 {
-                        NavigationLink("See all") { EuroTransactionsView(bankID: current.id) }
+                    HeroCard(tint: Color(hex: current.color)) {
+                        EuroBalanceCard(data: data, rates: model.snapshot?.fxRates ?? [:])
                     }
+                    .cardRow()
+                }
+            } header: {
+                SectionHeader("Other banks", seeAll: (data?.txns.count ?? 0) > 5) { EuroTransactionsView(bankID: current.id) }
+            }
+            .animation(.snappy, value: current)
+            Section {
+                if let data {
+                    ForEach(data.txns.prefix(5)) { EuroTxnRow(txn: $0) }
                 } else if model.euroErrors[current.id] == nil {
                     Text("Pull down to read \(current.name).").foregroundStyle(.secondary)
                 }
                 if let error = model.euroErrors[current.id] {
                     EuroErrorText(error: error)
                 }
-            } header: {
-                Text("Other banks")
             }
-            .animation(.snappy, value: current)
         }
     }
 }
@@ -42,7 +45,6 @@ struct EuroBankPicker: View {
     var banks: [EuroBank]
     var selection: EuroBank
     var select: (EuroBank) -> Void
-    @Namespace private var highlight
 
     var body: some View {
         ScrollView(.horizontal) {
@@ -53,31 +55,17 @@ struct EuroBankPicker: View {
                         withAnimation(.snappy) { select(bank) }
                     } label: {
                         HStack(spacing: 8) {
-                            EuroBankLogo(bank: bank, size: 26)
+                            EuroBankLogo(bank: bank, size: 24)
                             Text(bank.name)
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(selected ? .white : .primary)
                         }
-                        .padding(.leading, 5)
-                        .padding(.trailing, 14)
-                        .padding(.vertical, 5)
-                        .background {
-                            if selected {
-                                Capsule().fill(Color(hex: bank.color).gradient)
-                                    .matchedGeometryEffect(id: "selected", in: highlight)
-                            } else {
-                                Capsule().fill(.background.secondary)
-                            }
-                        }
-                        .contentShape(.capsule)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(ChipStyle(selected: selected, tint: Color(hex: bank.color), leading: 5))
                     .accessibilityAddTraits(selected ? .isSelected : [])
                 }
             }
-            .padding(.horizontal, 4)
         }
         .scrollIndicators(.hidden)
+        .scrollClipDisabled()
         .sensoryFeedback(.selection, trigger: selection)
     }
 }
@@ -118,6 +106,8 @@ struct EuroBalanceCard: View {
                     if let balance = account.balance {
                         Text(balance.formatted(.currency(code: account.ref.currency)))
                             .font(.system(data.accounts.count == 1 ? .largeTitle : .title2, design: .rounded).weight(.bold))
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
                             .monospacedDigit()
                             .contentTransition(.numericText(value: balance))
                             .privacySensitive()
@@ -139,7 +129,6 @@ struct EuroBalanceCard: View {
                     .foregroundStyle(.tertiary)
             }
         }
-        .padding(.vertical, 4)
     }
 }
 

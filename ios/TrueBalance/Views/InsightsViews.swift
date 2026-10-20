@@ -490,33 +490,44 @@ struct InsightsTab: View {
                     NoDataView()
                 }
             }
+            .headerProminence(.increased)
+            .listSectionSpacing(20)
             .sheet(isPresented: $editingBudgets) { BudgetEditView() }
         }
     }
 
     private func monthSection(_ c: MonthComparison) -> some View {
         Section {
-            NavigationLink {
-                MonthComparisonView(comparison: c)
-            } label: {
-                HStack(alignment: .firstTextBaseline) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(c.thisMonth.wholeShekels)
-                            .font(.system(.title, design: .rounded, weight: .bold))
-                            .monospacedDigit()
-                            .privacySensitive()
-                        Text("Last month at the same date: \(c.lastMonthSamePeriod.wholeShekels)")
-                            .font(.footnote)
+            HeroCard(tint: (c.change ?? 0) > 0.1 ? .orange : .accentColor) {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("This month on Max")
+                            .font(.subheadline.weight(.medium))
                             .foregroundStyle(.secondary)
-                            .privacySensitive()
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.footnote.weight(.semibold))
+                            .foregroundStyle(.tertiary)
                     }
-                    Spacer()
-                    if let change = c.change { ChangeBadge(change: change) }
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(c.thisMonth.wholeShekels)
+                            .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                            .monospacedDigit()
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
+                            .privacySensitive()
+                        Spacer()
+                        if let change = c.change { ChangeBadge(change: change) }
+                    }
+                    Text("Last month at the same date: \(c.lastMonthSamePeriod.wholeShekels)")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .privacySensitive()
                 }
-                .padding(.vertical, 4)
             }
-        } header: {
-            Text("This month on Max")
+            .accessibilityElement(children: .combine)
+            .pushes { MonthComparisonView(comparison: c) }
+            .cardRow()
         }
     }
 
@@ -624,20 +635,18 @@ struct NoteSection: View {
                             model.setNote(n, for: txnID)
                         } label: {
                             Label(tag, systemImage: on ? "checkmark" : "tag")
-                                .font(.subheadline.weight(.medium))
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 5)
-                                .background(on ? Color.accentColor : Color.secondary.opacity(0.15), in: .capsule)
-                                .foregroundStyle(on ? .white : .primary)
+                                .contentTransition(.symbolEffect(.replace))
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(ChipStyle(selected: on))
+                        .sensoryFeedback(.selection, trigger: on)
                     }
                     Button {
                         addingTag = true
                     } label: {
                         Image(systemName: "plus")
-                            .padding(7)
-                            .background(Color.secondary.opacity(0.15), in: .circle)
+                            .font(.subheadline.weight(.semibold))
+                            .padding(8)
+                            .background(.fill.tertiary, in: .circle)
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(Text("New tag"))

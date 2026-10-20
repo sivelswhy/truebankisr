@@ -76,48 +76,60 @@ struct SpendingTab: View {
                 } else {
                     periodSection
                     summary
+                    exportSection
                 }
             }
+            .headerProminence(.increased)
+            .listSectionSpacing(20)
         }
     }
 
+    /// The presets as chips; the dates only for a custom period.
+    @ViewBuilder
     private var periodSection: some View {
         Section {
-            ScrollView(.horizontal, showsIndicators: false) {
+            ScrollView(.horizontal) {
                 HStack(spacing: 8) {
                     ForEach(Preset.allCases) { p in
-                        Button {
+                        Button(p.label) {
                             withAnimation(.snappy) {
                                 preset = p
                                 from = p.range().lowerBound
                                 to = p.range().upperBound
                             }
-                        } label: {
-                            Text(p.label)
-                                .font(.subheadline.weight(.medium))
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 6)
-                                .background(preset == p ? Color.accentColor : Color.secondary.opacity(0.15), in: .capsule)
-                                .foregroundStyle(preset == p ? .white : .primary)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(ChipStyle(selected: preset == p))
                     }
+                    Button {
+                        withAnimation(.snappy) { preset = nil }
+                    } label: {
+                        Label("Custom", systemImage: "calendar")
+                    }
+                    .buttonStyle(ChipStyle(selected: preset == nil))
                 }
             }
-            .listRowInsets(EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16))
+            .scrollIndicators(.hidden)
+            .scrollClipDisabled()
+            .cardRow()
+            .sensoryFeedback(.selection, trigger: preset)
+        }
 
-            DatePicker("From", selection: Binding(get: { from }, set: { from = $0; preset = nil }),
-                       in: ...to, displayedComponents: .date)
-            DatePicker("To", selection: Binding(get: { to }, set: { to = $0; preset = nil }),
-                       in: from...Date.now, displayedComponents: .date)
-            let txns = Spending.purchases(model.allPurchases, from: from, to: to)
+        if preset == nil {
+            Section {
+                DatePicker("From", selection: $from, in: ...to, displayedComponents: .date)
+                DatePicker("To", selection: $to, in: from...Date.now, displayedComponents: .date)
+            }
+        }
+    }
+
+    private var exportSection: some View {
+        let txns = Spending.purchases(model.allPurchases, from: from, to: to)
+        return Section {
             ShareLink(item: CSVFile(name: csvName, text: CSVExport.make(txns, notes: model.notes)),
                       preview: SharePreview(csvName)) {
                 Label("Export \(txns.count) purchase(s) as CSV", systemImage: "square.and.arrow.up")
             }
             .disabled(txns.isEmpty)
-        } header: {
-            Text("Period")
         }
     }
 
@@ -128,28 +140,34 @@ struct SpendingTab: View {
         let days = max(1, (Israel.calendar.dateComponents([.day], from: Israel.calendar.startOfDay(for: from),
                                                           to: Israel.calendar.startOfDay(for: to)).day ?? 0) + 1)
         Section {
-            HStack(alignment: .firstTextBaseline) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Card spending").font(.subheadline).foregroundStyle(.secondary)
+            HeroCard {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Card spending")
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(.secondary)
                     Text(total.shekels)
-                        .font(.system(.title, design: .rounded, weight: .bold))
+                        .font(.system(.largeTitle, design: .rounded, weight: .bold))
                         .monospacedDigit()
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
                         .contentTransition(.numericText(value: total))
                         .privacySensitive()
-                }
-                Spacer()
-                VStack(alignment: .trailing, spacing: 2) {
-                    Text("\(txns.count) purchase(s)").font(.subheadline).foregroundStyle(.secondary)
-                    Text("about \((total / Double(days)).formatted(.currency(code: "ILS").precision(.fractionLength(0))))/day")
-                        .font(.subheadline)
-                        .privacySensitive()
-                }
-            }
+                    HStack(spacing: 6) {
+                        Text("\(txns.count) purchase(s)")
+                        Text(verbatim: "·")
+                        Text("about \((total / Double(days)).formatted(.currency(code: "ILS").precision(.fractionLength(0))))/day")
+                            .privacySensitive()
+                    }
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
 
-            if !txns.isEmpty {
-                CumulativeSpendChart(txns: txns, from: from, to: to)
-                    .padding(.vertical, 6)
+                    if !txns.isEmpty {
+                        CumulativeSpendChart(txns: txns, from: from, to: to)
+                            .padding(.top, 4)
+                    }
+                }
             }
+            .cardRow()
         } footer: {
             if let oldest = model.allPurchases.last?.date {
                 Text("Max purchases since \(oldest.formatted(.dateTime.day().month(.wide).year())).")

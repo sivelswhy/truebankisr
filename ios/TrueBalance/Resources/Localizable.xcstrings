@@ -919,6 +919,16 @@
         }
       }
     },
+    "Custom": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personnalisé"
+          }
+        }
+      }
+    },
     "DEMO": {
       "localizations": {
         "fr": {
@@ -1688,6 +1698,16 @@
         }
       }
     },
+    "Next Max debit": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prochain prélèvement Max"
+          }
+        }
+      }
+    },
     "Next around %@": {
       "localizations": {
         "fr": {
@@ -2064,6 +2084,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Référence"
+          }
+        }
+      }
+    },
+    "Refresh now": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualiser"
           }
         }
       }
