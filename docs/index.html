@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>True Balance</title>
+<meta name="description" content="What you can really spend: your Leumi balance minus the Max charges still to come. A free iPhone app that runs entirely on your phone.">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101A36" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<style>
+  /* The app's own palette: iOS system colours, accent #007AFF, and in dark
+     mode the night blue with a blue and an indigo glow (AppBackground). */
+  :root {
+    color-scheme: light dark;
+    --accent: #007AFF;
+    --indigo: #5856D6;
+    --green: #34C759;
+    --orange: #FF9500;
+    --red: #FF3B30;
+    --bg: #F2F2F7;
+    --bg-bottom: #F2F2F7;
+    --cell: #FFFFFF;
+    --label: #000000;
+    --secondary: rgba(60, 60, 67, 0.6);
+    --tertiary: rgba(60, 60, 67, 0.3);
+    --fill: rgba(118, 118, 128, 0.12);
+    --separator: rgba(60, 60, 67, 0.18);
+    --glow-a: rgba(0, 122, 255, 0.13);
+    --glow-b: rgba(88, 86, 214, 0.07);
+    --rounded: ui-rounded, "SF Pro Rounded", -apple-system, system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #0A84FF;
+      --indigo: #5E5CE6;
+      --green: #30D158;
+      --bg: #101A36;
+      --bg-bottom: #080C18;
+      --cell: #1C1C1E;
+      --label: #FFFFFF;
+      --secondary: rgba(235, 235, 245, 0.6);
+      --tertiary: rgba(235, 235, 245, 0.3);
+      --fill: rgba(118, 118, 128, 0.24);
+      --separator: rgba(84, 84, 88, 0.6);
+      --glow-a: rgba(10, 132, 255, 0.32);
+      --glow-b: rgba(94, 92, 230, 0.22);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font: 17px/1.47 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, sans-serif;
+    color: var(--label);
+    background-color: var(--bg-bottom);
+    background-image:
+      radial-gradient(70rem 40rem at 0% 0%, var(--glow-a), transparent 70%),
+      radial-gradient(60rem 36rem at 100% 0%, var(--glow-b), transparent 70%),
+      linear-gradient(var(--bg), var(--bg-bottom) 60rem);
+    background-repeat: no-repeat;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-left)); }
+
+  /* Bar */
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; color: var(--label); }
+  .brand img { width: 32px; height: 32px; border-radius: 7px; }
+  .brand:hover { text-decoration: none; }
+
+  /* Chips, like ChipStyle in the app */
+  .chips { display: flex; gap: 6px; }
+  .chip {
+    appearance: none; border: 0; cursor: pointer; font: inherit;
+    font-size: 15px; font-weight: 600; color: var(--label);
+    padding: 6px 12px; border-radius: 999px; background: var(--fill);
+    transition: transform 100ms ease-out, background-color 200ms;
+  }
+  .chip[aria-pressed="true"] { color: #fff; background: linear-gradient(var(--accent), color-mix(in srgb, var(--accent) 82%, #000)); }
+  .chip:active { transform: scale(0.94); }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; padding: 40px 0 72px; }
+  .hero h1 {
+    font-size: clamp(40px, 6.2vw, 68px); line-height: 1.04; letter-spacing: -0.025em;
+    font-weight: 800; margin: 0 0 18px; max-width: 13ch;
+  }
+  .lede { font-size: 20px; line-height: 1.45; color: var(--secondary); margin: 0 0 28px; max-width: 34rem; }
+  .lede strong { color: var(--label); font-weight: 600; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .button {
+    display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 17px;
+    padding: 13px 20px; border-radius: 14px; border: 0; cursor: pointer;
+    transition: transform 100ms ease-out;
+  }
+  .button:hover { text-decoration: none; }
+  .button:active { transform: scale(0.97); }
+  .button.primary { color: #fff; background: var(--accent); }
+  .button.secondary { color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+  .note { margin: 14px 0 0; font-size: 15px; color: var(--secondary); }
+
+  /* Phone */
+  .phone {
+    width: 320px; height: 660px; border-radius: 54px; padding: 12px;
+    background: #0B0F1C; box-shadow: 0 0 0 1px rgba(255,255,255,0.08) inset, 0 40px 80px -30px rgba(8, 12, 24, 0.55);
+  }
+  .screen {
+    position: relative; height: 100%; border-radius: 43px; overflow: hidden; color: #fff;
+    background:
+      radial-gradient(28rem 18rem at 0% 0%, rgba(10,132,255,0.32), transparent 70%),
+      radial-gradient(24rem 16rem at 100% 0%, rgba(94,92,230,0.22), transparent 70%),
+      linear-gradient(#101A36, #080C18);
+    font-size: 13px;
+  }
+  .status { display: flex; justify-content: space-between; padding: 16px 28px 0; font-weight: 600; font-size: 14px; }
+  .island { position: absolute; top: 11px; left: 50%; width: 96px; height: 28px; margin-left: -48px; border-radius: 20px; background: #000; }
+  .nav { display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding: 14px 16px 0; }
+  .avatar { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font: 600 14px var(--rounded);
+            background: linear-gradient(#0A84FF, #0040C8); }
+  .large-title { font-size: 30px; font-weight: 700; letter-spacing: -0.01em; padding: 2px 16px 10px; }
+  .card {
+    margin: 0 12px; padding: 16px; border-radius: 22px; position: relative;
+    background: linear-gradient(135deg, rgba(10,132,255,0.18), rgba(10,132,255,0.03)), #1C1C1E;
+    border: 1px solid rgba(10,132,255,0.14);
+  }
+  .card .caption { color: rgba(235,235,245,0.6); font-weight: 500; display: flex; justify-content: space-between; }
+  .card .amount { font: 700 38px/1.1 var(--rounded); letter-spacing: -0.01em; margin: 2px 0 12px; font-variant-numeric: tabular-nums; }
+  .gauge { height: 5px; border-radius: 3px; background: rgba(118,118,128,0.3); overflow: hidden; }
+  .gauge i { display: block; height: 100%; width: 0; border-radius: 3px; background: #0A84FF; transition: width 900ms cubic-bezier(.2,.8,.2,1) 500ms; }
+  .runway { display: flex; justify-content: space-between; gap: 8px; color: rgba(235,235,245,0.6); font-size: 11px; margin: 7px 0 12px; }
+  .runway span:last-child { white-space: nowrap; }
+  .strip { display: flex; align-items: baseline; gap: 10px; padding: 9px 10px; border-radius: 12px; background: rgba(118,118,128,0.14); }
+  .strip small { display: block; color: rgba(235,235,245,0.6); font-size: 10.5px; }
+  .strip b { font-weight: 600; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .strip .minus { color: rgba(235,235,245,0.3); font-weight: 600; }
+  .updated { color: rgba(235,235,245,0.3); font-size: 11px; margin-top: 10px; }
+  .phone-section { font-weight: 700; font-size: 17px; padding: 18px 16px 6px; }
+  .rows { margin: 0 12px; border-radius: 12px; background: #1C1C1E; }
+  .row { position: relative; display: flex; align-items: center; gap: 10px; padding: 9px 12px; }
+  /* iOS insets the separator, not the content. */
+  .row + .row::before { content: ""; position: absolute; top: 0; left: 48px; right: 0; height: 0.5px; background: rgba(84,84,88,0.6); }
+  .row .t { flex: 1; min-width: 0; }
+  .row .t div:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row .t div:last-child { color: rgba(235,235,245,0.6); font-size: 11px; }
+  .row .a { font-variant-numeric: tabular-nums; }
+  .ico { flex: none; width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; }
+  .ico svg { width: 15px; height: 15px; fill: #fff; }
+  .tabbar { position: absolute; left: 12px; right: 12px; bottom: 12px; height: 56px; border-radius: 28px;
+            display: flex; justify-content: space-around; align-items: center;
+            background: rgba(40,40,44,0.72); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+            font-size: 10px; color: rgba(235,235,245,0.6); }
+  .tabbar span { display: grid; justify-items: center; gap: 3px; }
+  .tabbar span.on { color: #0A84FF; }
+  .tabbar svg { width: 20px; height: 20px; fill: currentColor; }
+
+  /* The calculation, as on the Calculation screen */
+  section { padding: 0 0 64px; }
+  h2 { font-size: clamp(28px, 3.6vw, 38px); line-height: 1.12; letter-spacing: -0.02em; font-weight: 700; margin: 0 0 12px; }
+  .intro { color: var(--secondary); font-size: 19px; margin: 0 0 24px; max-width: 40rem; }
+  .hero-card {
+    border-radius: 26px; padding: 24px; max-width: 40rem;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, transparent), color-mix(in srgb, var(--accent) 3%, transparent)), var(--cell);
+    border: 1px solid color-mix(in srgb, var(--accent) 14%, transparent);
+  }
+  .eq { display: grid; grid-template-columns: 1fr auto; row-gap: 12px; font-size: 19px; }
+  .eq dt { color: var(--secondary); }
+  .eq dd { margin: 0; text-align: right; font: 600 22px var(--rounded); font-variant-numeric: tabular-nums; }
+  .eq .max dd { color: var(--indigo); }
+  .eq .total { border-top: 1px solid var(--separator); padding-top: 14px; }
+  .eq .total dt { color: var(--label); font-weight: 600; }
+  .eq .total dd { font-size: 34px; font-weight: 700; color: var(--accent); }
+  .why { color: var(--secondary); font-size: 15px; margin: 16px 0 0; }
+
+  /* Features: inset grouped lists, one per tab */
+  .groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
+  .group h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px 4px; display: flex; align-items: center; gap: 8px; }
+  .group h3 svg { width: 20px; height: 20px; fill: var(--accent); }
+  .list { list-style: none; margin: 0; padding: 0; border-radius: 12px; background: var(--cell); }
+  .list li { position: relative; display: flex; align-items: center; gap: 12px; padding: 11px 16px; }
+  .list li + li::before { content: ""; position: absolute; top: 0; left: 58px; right: 0; height: 0.5px; background: var(--separator); }
+  .list .ico { width: 30px; height: 30px; border-radius: 8px; }
+  .list .ico svg { width: 17px; height: 17px; }
+  .list span { font-size: 16px; }
+
+  /* Install: a real sequence */
+  .steps { counter-reset: step; }
+  .steps li { counter-increment: step; }
+  .steps li::before {
+    content: counter(step); flex: none; width: 30px; height: 30px; border-radius: 50%;
+    display: grid; place-items: center; font: 700 15px var(--rounded); color: #fff; background: var(--accent);
+  }
+  .steps li div { flex: 1; }
+  .steps li small { display: block; color: var(--secondary); font-size: 14px; }
+  .source { display: flex; gap: 8px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+  .source code { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; padding: 8px 10px; border-radius: 10px; background: var(--fill); overflow-wrap: anywhere; }
+
+  footer { border-top: 1px solid var(--separator); padding: 24px 0 48px; color: var(--secondary); font-size: 14px; }
+  footer p { margin: 0 0 6px; max-width: 46rem; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 16px; }
+    .phone { margin: 0 auto; }
+    .groups { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 360px) {
+    .phone { width: 100%; height: auto; aspect-ratio: 320 / 660; }
+  }
+
+  /* The one orchestrated moment: the card fills in when the page opens. */
+  .card .amount, .card .runway, .card .strip { opacity: 0; transform: translateY(6px); transition: opacity 500ms, transform 500ms cubic-bezier(.2,.8,.2,1); }
+  .card .runway { transition-delay: 500ms; }
+  .card .strip { transition-delay: 750ms; }
+  .ready .card .amount, .ready .card .runway, .ready .card .strip { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .card .amount, .card .runway, .card .strip { opacity: 1; transform: none; transition: none; }
+    .gauge i { transition: none; }
+    .chip, .button { transition: none; }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .tabbar { background: #2C2C2E; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-house" viewBox="0 0 24 24"><path d="M12 3.2 2.7 11a1 1 0 0 0 1.3 1.5l.9-.8V20a1 1 0 0 0 1 1h4.6v-5.6h3V21H18a1 1 0 0 0 1-1v-8.3l.9.8A1 1 0 0 0 21.3 11Z"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 0 1 2 2v1H2V7a2 2 0 0 1 2-2Zm-2 6h20v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Zm3 4v1.5h4V15Z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h17v1.5H2.5V3H4Zm2-3h3v-6H6Zm5 0h3V7h-3Zm5 0h3v-9h-3Z"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2Zm-3 18h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1Z"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 3h2.2l.6 3H21l-2 8H8l.4 2H19v2H7a1 1 0 0 1-1-.8L4 5H3Zm6 17.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm10 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24"><path d="M3 6h14v4h1.5a3.5 3.5 0 0 1 0 7H16a6 6 0 0 1-5 3H9a6 6 0 0 1-6-6Zm14 6v3h1.5a1.5 1.5 0 0 0 0-3Z"/></symbol>
+  <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M5 3h9a1 1 0 0 1 1 1v8h1a2 2 0 0 1 2 2v3a1 1 0 0 0 2 0V9l-2-2 1.4-1.4L22 8.2V17a3 3 0 0 1-6 0v-3h-1v7H4V4a1 1 0 0 1 1-1Zm1 2v5h7V5Z"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24"><path d="M17 5.4 18.6 7 9.3 16.3H16v2.2H5.5V8H7.7v6.7Z"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2Zm-2 7v10h14V9Z"/></symbol>
+  <symbol id="i-pie" viewBox="0 0 24 24"><path d="M11 2.1V13h10.9A10 10 0 1 1 11 2.1Zm2 0A10 10 0 0 1 21.9 11H13Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M10 3a7 7 0 0 1 5.6 11.2l5 5-1.4 1.4-5-5A7 7 0 1 1 10 3Zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 2 7.5 6.5l1.4 1.4L11 5.8V15h2V5.8l2.1 2.1 1.4-1.4ZM5 10h3v2H6v8h12v-8h-2v-2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V11a1 1 0 0 1 1-1Z"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M12 4a10 10 0 0 1 10 10 9.9 9.9 0 0 1-1.3 5H3.3A9.9 9.9 0 0 1 2 14 10 10 0 0 1 12 4Zm4.2 4.4-5.6 4.2a2 2 0 1 0 2.8 2.8Z"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 2l4 4-4 4V7H7a2 2 0 0 0-2 2v2H3V9a4 4 0 0 1 4-4h10Zm-10 20-4-4 4-4v3h10a2 2 0 0 0 2-2v-2h2v2a4 4 0 0 1-4 4H7Z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm-1.7 2.2A8 8 0 0 0 4.1 11h3.5a15 15 0 0 1 2.7-6.8ZM13.7 4.2a15 15 0 0 1 2.7 6.8h3.5a8 8 0 0 0-6.2-6.8ZM12 4.6A13 13 0 0 0 9.6 11h4.8A13 13 0 0 0 12 4.6ZM4.1 13a8 8 0 0 0 6.2 6.8A15 15 0 0 1 7.6 13Zm5.5 0a13 13 0 0 0 2.4 6.4 13 13 0 0 0 2.4-6.4Zm6.8 0a15 15 0 0 1-2.7 6.8 8 8 0 0 0 6.2-6.8Z"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="m12 2 10 5v2H2V7Zm-8 9h3v7H4Zm6.5 0h3v7h-3ZM17 11h3v7h-3ZM2 20h20v2H2Z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 1 5 5v3h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h1V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v3h6V7a3 3 0 0 0-3-3Z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M8 1h8a3 3 0 0 1 3 3v16a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3Zm0 2a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1Zm2 15h4v1.5h-4Z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8.6 6 1.4 1.4L5.4 12l4.6 4.6L8.6 18l-6-6Zm6.8 0 6 6-6 6-1.4-1.4 4.6-4.6L14 7.4Z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M12 5c5 0 9 4.5 10 7-1 2.5-5 7-10 7S3 14.5 2 12c1-2.5 5-7 10-7Zm0 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></symbol>
+  <symbol id="i-widget" viewBox="0 0 24 24"><path d="M4 3h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm10 0h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM4 13h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1Z"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header class="bar">
+    <a class="brand" href="./"><img src="icon.png" alt="" width="32" height="32">True Balance</a>
+    <div class="chips" role="group" aria-label="Language">
+      <button class="chip" type="button" data-lang="en" aria-pressed="true">English</button>
+      <button class="chip" type="button" data-lang="fr" aria-pressed="false">Français</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <h1 data-i18n="h1">What you can really spend.</h1>
+        <p class="lede" data-i18n-html="lede">Max debits everything on the 2nd, so your Leumi balance looks bigger than it is. True Balance shows <strong>your Leumi balance minus the Max charges still to come</strong>, on your iPhone, in one number.</p>
+        <div class="actions">
+          <a class="button primary" href="altstore://source?url=https://raw.githubusercontent.com/sivelswhy/truebankisr/main/altstore-source.json" data-i18n="altstore">Add to AltStore</a>
+          <a class="button secondary" href="sidestore://source?url=https://raw.githubusercontent.com/sivelswhy/truebankisr/main/altstore-source.json" data-i18n="sidestore">Add to SideStore</a>
+          <a class="button secondary" href="https://github.com/sivelswhy/truebankisr/releases/latest/download/TrueBalance.ipa" data-i18n="ipa">Download the IPA</a>
+        </div>
+        <p class="note" data-i18n="note">Free, for iPhone with iOS 18 or later. English and French.</p>
+      </div>
+
+      <div class="phone" aria-label="The True Balance home screen" role="img" data-i18n-aria="phoneLabel">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="status"><span>9:41</span><span>5G</span></div>
+          <div class="nav"><span class="avatar">D</span></div>
+          <div class="large-title" data-i18n="hello">Hello, Dana</div>
+          <div class="card">
+            <div class="caption"><span data-i18n="really">Really available</span><span aria-hidden="true">›</span></div>
+            <div class="amount" data-money="5299.60"></div>
+            <div class="gauge"><i></i></div>
+            <div class="runway"><span data-i18n="days">12 days until the debit</span><span data-i18n="perday">about ₪442/day</span></div>
+            <div class="strip">
+              <span><small data-i18n="leumi">Leumi balance</small><b data-money="8420"></b></span>
+              <span class="minus">−</span>
+              <span><small data-i18n="maxon">Max · 2 Nov</small><b data-money="3120.40"></b></span>
+            </div>
+            <div class="updated" data-i18n="updated">Updated 2 min ago</div>
+          </div>
+          <div class="phone-section" data-i18n="latest">Latest payments</div>
+          <div class="rows">
+            <div class="row"><span class="ico" style="background:linear-gradient(#34C759,#248A3D)"><svg><use href="#i-cart"/></svg></span>
+              <div class="t"><div>Shufersal Deal</div><div data-i18n="groceries">Today · Groceries</div></div><span class="a" data-money="286.90"></span></div>
+            <div class="row"><span class="ico" style="background:linear-gradient(#FF9500,#C93400)"><svg><use href="#i-cup"/></svg></span>
+              <div class="t"><div>Aroma Espresso Bar</div><div data-i18n="cafe">Yesterday · Restaurants</div></div><span class="a" data-money="42"></span></div>
+            <div class="row"><span class="ico" style="background:linear-gradient(#5E5CE6,#3634A3)"><svg><use href="#i-fuel"/></svg></span>
+              <div class="t"><div>Paz</div><div data-i18n="fuel">19 Oct · Fuel</div></div><span class="a" data-money="250"></span></div>
+          </div>
+          <div class="tabbar" aria-hidden="true">
+            <span class="on"><svg><use href="#i-house"/></svg><b data-i18n="tHome">Home</b></span>
+            <span><svg><use href="#i-card"/></svg><b data-i18n="tCharges">Charges</b></span>
+            <span><svg><use href="#i-chart"/></svg><b data-i18n="tSpending">Spending</b></span>
+            <span><svg><use href="#i-bulb"/></svg><b data-i18n="tInsights">Insights</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section aria-labelledby="calc">
+      <h2 id="calc" data-i18n="calcTitle">One subtraction, done for you.</h2>
+      <p class="intro" data-i18n="calcIntro">The app signs in to Leumi and Max, adds up every card charge that hasn't left your account yet, and takes it off your balance.</p>
+      <div class="hero-card">
+        <dl class="eq">
+          <dt data-i18n="leumi">Leumi balance</dt><dd data-money="8420"></dd>
+          <div class="max" style="display:contents"><dt data-i18n="maxDebit">Max, debited 2 Nov</dt><dd data-money="-3120.40"></dd></div>
+          <div class="total" style="display:contents"><dt class="total" data-i18n="really">Really available</dt><dd class="total" data-money="5299.60"></dd></div>
+        </dl>
+        <p class="why" data-i18n="calcWhy">Pending purchases count too. Later installments and foreign-currency charges are shown on the side, converted at the Bank of Israel rate.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="inside">
+      <h2 id="inside" data-i18n="insideTitle">Everything around that number.</h2>
+      <p class="intro" data-i18n="insideIntro">Four tabs, like the questions you actually ask about your money.</p>
+      <div class="groups">
+        <div class="group">
+          <h3><svg aria-hidden="true"><use href="#i-house"/></svg><span data-i18n="tHome">Home</span></h3>
+          <ul class="list">
+            <li><span class="ico" style="background:linear-gradient(#0A84FF,#0040C8)"><svg><use href="#i-calendar"/></svg></span><span data-i18n="f1">Days until the Max debit and what that leaves per day</span></li>
+            <li><span class="ico" style="background:linear-gradient(#34C759,#248A3D)"><svg><use href="#i-in"/></svg></span><span data-i18n="f2">Latest payments and Leumi movements, with transfer details</span></li>
+            <li><span class="ico" style="background:linear-gradient(#64D2FF,#0A84FF)"><svg><use href="#i-globe"/></svg></span><span data-i18n="f3">Your European accounts, in their own section</span></li>
+          </ul>
+        </div>
+        <div class="group">
+          <h3><svg aria-hidden="true"><use href="#i-card"/></svg><span data-i18n="tCharges">Charges</span></h3>
+          <ul class="list">
+            <li><span class="ico" style="background:linear-gradient(#5E5CE6,#3634A3)"><svg><use href="#i-pie"/></svg></span><span data-i18n="f4">The next debit by category, tap a slice for its purchases</span></li>
+            <li><span class="ico" style="background:linear-gradient(#FF9500,#C93400)"><svg><use href="#i-calendar"/></svg></span><span data-i18n="f5">Every upcoming debit, installments included</span></li>
+            <li><span class="ico" style="background:linear-gradient(#8E8E93,#48484A)"><svg><use href="#i-search"/></svg></span><span data-i18n="f6">Search by merchant or category</span></li>
+          </ul>
+        </div>
+        <div class="group">
+          <h3><svg aria-hidden="true"><use href="#i-chart"/></svg><span data-i18n="tSpending">Spending</span></h3>
+          <ul class="list">
+            <li><span class="ico" style="background:linear-gradient(#0A84FF,#0040C8)"><svg><use href="#i-chart"/></svg></span><span data-i18n="f7">Any period, as a running total you can scrub</span></li>
+            <li><span class="ico" style="background:linear-gradient(#FF375F,#C9002B)"><svg><use href="#i-cart"/></svg></span><span data-i18n="f8">Each merchant's history, notes and tags on purchases</span></li>
+            <li><span class="ico" style="background:linear-gradient(#34C759,#248A3D)"><svg><use href="#i-share"/></svg></span><span data-i18n="f9">Export to CSV for Numbers or Excel</span></li>
+          </ul>
+        </div>
+        <div class="group">
+          <h3><svg aria-hidden="true"><use href="#i-bulb"/></svg><span data-i18n="tInsights">Insights</span></h3>
+          <ul class="list">
+            <li><span class="ico" style="background:linear-gradient(#FF9500,#C93400)"><svg><use href="#i-gauge"/></svg></span><span data-i18n="f10">Monthly budgets per category, with alerts at 80% and 100%</span></li>
+            <li><span class="ico" style="background:linear-gradient(#BF5AF2,#8944AB)"><svg><use href="#i-repeat"/></svg></span><span data-i18n="f11">Subscriptions, salary and regular debits, found for you</span></li>
+            <li><span class="ico" style="background:linear-gradient(#30B0C7,#0071A4)"><svg><use href="#i-bank"/></svg></span><span data-i18n="f12">This month against last month, and your net worth</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="private">
+      <h2 id="private" data-i18n="privateTitle">It runs on your iPhone. Only there.</h2>
+      <p class="intro" data-i18n="privateIntro">There is no True Balance server. The app does what you would do in Safari, by itself.</p>
+      <ul class="list" style="max-width:40rem">
+        <li><span class="ico" style="background:linear-gradient(#0A84FF,#0040C8)"><svg><use href="#i-phone"/></svg></span><span data-i18n="p1">It signs in to Leumi and Max on the phone, in a hidden browser</span></li>
+        <li><span class="ico" style="background:linear-gradient(#8E8E93,#48484A)"><svg><use href="#i-lock"/></svg></span><span data-i18n="p2">Your credentials stay in this iPhone's Keychain, never synced</span></li>
+        <li><span class="ico" style="background:linear-gradient(#34C759,#248A3D)"><svg><use href="#i-eye"/></svg></span><span data-i18n="p3">Face ID lock and a switch to hide every amount</span></li>
+        <li><span class="ico" style="background:linear-gradient(#5E5CE6,#3634A3)"><svg><use href="#i-code"/></svg></span><span data-i18n-html="p4">Open source: <a href="https://github.com/sivelswhy/truebankisr">read the code on GitHub</a></span></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="europe">
+      <h2 id="europe" data-i18n="euroTitle">Your European accounts too.</h2>
+      <p class="intro" data-i18n-html="euroIntro">Hello Bank, Revolut, BNP Paribas, N26 and about 2,700 other banks in 29 countries, read through open banking with <a href="https://enablebanking.com">Enable Banking</a>. Read only, free, shown apart from the true balance with their shekel equivalent.</p>
+      <a class="button secondary" href="https://github.com/sivelswhy/truebankisr/blob/main/ios/EUROPEAN-BANKS.md" data-i18n="euroGuide">Read the setup guide</a>
+    </section>
+
+    <section aria-labelledby="install">
+      <h2 id="install" data-i18n="installTitle">Install it in a few minutes.</h2>
+      <p class="intro" data-i18n="installIntro">True Balance isn't on the App Store. AltStore and SideStore install it with your own Apple ID and keep it up to date.</p>
+      <ol class="list steps" style="max-width:40rem">
+        <li><div><span data-i18n-html="s1">Install <a href="https://altstore.io">AltStore</a> or <a href="https://sidestore.io">SideStore</a> on your iPhone</span><small data-i18n="s1n">A free Apple ID is enough.</small></div></li>
+        <li><div><span data-i18n="s2">Add the True Balance source</span><small data-i18n="s2n">With the buttons above, or by pasting this address in Sources.</small></div></li>
+        <li><div><span data-i18n="s3">Install True Balance, open it and sign in to Leumi and Max</span><small data-i18n="s3n">Or try it first with sample data.</small></div></li>
+      </ol>
+      <div class="source">
+        <code id="source-url">https://raw.githubusercontent.com/sivelswhy/truebankisr/main/altstore-source.json</code>
+        <button class="chip" type="button" id="copy" data-i18n="copy">Copy</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-i18n="f-personal">Personal use only. True Balance reads your own accounts with your own credentials. It isn't affiliated with Bank Leumi, Max or Enable Banking.</p>
+    <p data-i18n-html="f-license">Free for noncommercial use (<a href="https://github.com/sivelswhy/truebankisr/blob/main/LICENSE.md">PolyForm Noncommercial</a>). Built on <a href="https://github.com/eshaham/israeli-bank-scrapers">israeli-bank-scrapers</a>.</p>
+  </footer>
+</div>
+
+<script>
+  const strings = {
+    fr: {
+      h1: "Ce que vous pouvez vraiment dépenser.",
+      lede: "Max prélève tout le 2 du mois, alors votre solde Leumi paraît plus gros qu’il n’est. True Balance affiche <strong>votre solde Leumi moins les débits Max encore à venir</strong>, sur votre iPhone, en un seul chiffre.",
+      altstore: "Ajouter à AltStore", sidestore: "Ajouter à SideStore", ipa: "Télécharger l’IPA",
+      note: "Gratuit, pour iPhone sous iOS 18 ou plus récent. En français et en anglais.",
+      phoneLabel: "L’écran d’accueil de True Balance",
+      hello: "Bonjour, Dana", really: "Vraiment disponible", days: "12 jours avant le prélèvement", perday: "environ 442 ₪/jour",
+      leumi: "Solde Leumi", maxon: "Max · 2 nov.", updated: "Mis à jour il y a 2 min", latest: "Derniers paiements",
+      groceries: "Aujourd’hui · Courses", cafe: "Hier · Restaurants", fuel: "19 oct. · Carburant",
+      tHome: "Accueil", tCharges: "Débits", tSpending: "Dépenses", tInsights: "Analyses",
+      calcTitle: "Une soustraction, faite pour vous.",
+      calcIntro: "L’app se connecte à Leumi et à Max, additionne chaque achat par carte qui n’a pas encore quitté votre compte, et le retire de votre solde.",
+      maxDebit: "Max, prélevé le 2 nov.",
+      calcWhy: "Les achats en attente comptent aussi. Les échéances suivantes et les achats en devises sont indiqués à part, convertis au taux de la Banque d’Israël.",
+      insideTitle: "Tout ce qu’il y a autour de ce chiffre.",
+      insideIntro: "Quatre onglets, comme les questions qu’on se pose vraiment sur son argent.",
+      f1: "Les jours avant le prélèvement Max et ce que ça laisse par jour",
+      f2: "Les derniers paiements et mouvements Leumi, avec le détail des virements",
+      f3: "Vos comptes européens, dans leur propre section",
+      f4: "Le prochain prélèvement par catégorie, touchez une part pour ses achats",
+      f5: "Chaque prélèvement à venir, échéances comprises",
+      f6: "Recherche par commerçant ou catégorie",
+      f7: "N’importe quelle période, en total cumulé à parcourir du doigt",
+      f8: "L’historique de chaque commerçant, notes et étiquettes sur les achats",
+      f9: "Export CSV pour Numbers ou Excel",
+      f10: "Budgets mensuels par catégorie, avec alertes à 80 % et 100 %",
+      f11: "Abonnements, salaire et prélèvements réguliers, détectés pour vous",
+      f12: "Ce mois-ci face au mois dernier, et votre patrimoine",
+      privateTitle: "Elle tourne sur votre iPhone. Uniquement.",
+      privateIntro: "Il n’y a pas de serveur True Balance. L’app fait ce que vous feriez dans Safari, toute seule.",
+      p1: "Elle se connecte à Leumi et à Max sur le téléphone, dans un navigateur invisible",
+      p2: "Vos identifiants restent dans le trousseau de cet iPhone, jamais synchronisés",
+      p3: "Verrouillage Face ID et un interrupteur pour masquer tous les montants",
+      p4: "Open source : <a href=\"https://github.com/sivelswhy/truebankisr\">lire le code sur GitHub</a>",
+      euroTitle: "Vos comptes européens aussi.",
+      euroIntro: "Hello Bank, Revolut, BNP Paribas, N26 et environ 2 700 autres banques dans 29 pays, lues par l’open banking avec <a href=\"https://enablebanking.com\">Enable Banking</a>. En lecture seule, gratuit, affiché à part du solde réel avec l’équivalent en shekels.",
+      euroGuide: "Lire le guide de configuration",
+      installTitle: "Installez-la en quelques minutes.",
+      installIntro: "True Balance n’est pas sur l’App Store. AltStore et SideStore l’installent avec votre propre identifiant Apple et la tiennent à jour.",
+      s1: "Installez <a href=\"https://altstore.io\">AltStore</a> ou <a href=\"https://sidestore.io\">SideStore</a> sur votre iPhone",
+      s1n: "Un identifiant Apple gratuit suffit.",
+      s2: "Ajoutez la source True Balance",
+      s2n: "Avec les boutons plus haut, ou en collant cette adresse dans Sources.",
+      s3: "Installez True Balance, ouvrez-la et connectez-vous à Leumi et Max",
+      s3n: "Ou essayez-la d’abord avec des données d’exemple.",
+      copy: "Copier", copied: "Copié",
+      "f-personal": "Usage personnel uniquement. True Balance lit vos propres comptes avec vos propres identifiants. Elle n’est affiliée ni à la Banque Leumi, ni à Max, ni à Enable Banking.",
+      "f-license": "Gratuite pour un usage non commercial (<a href=\"https://github.com/sivelswhy/truebankisr/blob/main/LICENSE.md\">PolyForm Noncommercial</a>). Construite sur <a href=\"https://github.com/eshaham/israeli-bank-scrapers\">israeli-bank-scrapers</a>.",
+    },
+  };
+
+  // English is in the page itself: keep it to switch back.
+  const english = {};
+  document.querySelectorAll("[data-i18n]").forEach(el => english[el.dataset.i18n] = el.textContent);
+  document.querySelectorAll("[data-i18n-html]").forEach(el => english[el.dataset.i18nHtml] = el.innerHTML);
+  document.querySelectorAll("[data-i18n-aria]").forEach(el => english[el.dataset.i18nAria] = el.getAttribute("aria-label"));
+  english.copied = "Copied";
+
+  let lang = "en";
+  function t(key) { return (lang === "fr" && strings.fr[key]) || english[key] || key; }
+
+  function apply(next) {
+    lang = next;
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = t(el.dataset.i18n));
+    document.querySelectorAll("[data-i18n-html]").forEach(el => el.innerHTML = t(el.dataset.i18nHtml));
+    document.querySelectorAll("[data-i18n-aria]").forEach(el => el.setAttribute("aria-label", t(el.dataset.i18nAria)));
+    // Amounts the way the app writes them in each language.
+    const money = new Intl.NumberFormat(lang === "fr" ? "fr-FR" : "en-US", { style: "currency", currency: "ILS" });
+    document.querySelectorAll("[data-money]").forEach(el => {
+      const v = Number(el.dataset.money);
+      el.textContent = (v < 0 ? "− " : "") + money.format(Math.abs(v));
+    });
+    document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+  }
+
+  let saved = null;
+  try { saved = localStorage.getItem("lang"); } catch {}
+  apply(saved || ((navigator.language || "").toLowerCase().startsWith("fr") ? "fr" : "en"));
+
+  document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => {
+    apply(b.dataset.lang);
+    try { localStorage.setItem("lang", lang); } catch {}
+  }));
+
+  document.getElementById("copy").addEventListener("click", async e => {
+    try {
+      await navigator.clipboard.writeText(document.getElementById("source-url").textContent.trim());
+      e.target.textContent = t("copied");
+      setTimeout(() => e.target.textContent = t("copy"), 1600);
+    } catch {}
+  });
+
+  // The card fills in once, like the app after a refresh.
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.body.classList.add("ready");
+    document.querySelector(".gauge i").style.width = "60%";
+  }));
+</script>
+</body>
+</html>
