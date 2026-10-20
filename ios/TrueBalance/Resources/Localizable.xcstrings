@@ -8,6 +8,12 @@
             "state": "translated",
             "value": "%@ par an"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ בשנה"
+          }
         }
       }
     },
@@ -17,6 +23,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Compte %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חשבון %@"
           }
         }
       }
@@ -28,6 +40,12 @@
             "state": "translated",
             "value": "Compte %@ (non compté, pas de taux)"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חשבון %@ (לא נכלל, אין שער)"
+          }
         }
       }
     },
@@ -37,6 +55,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ a demandé une vérification supplémentaire. Connecte-toi une fois sur leur site, puis réessaie."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ביקשו שלב אימות נוסף. יש להתחבר פעם אחת באתר שלהם ואז לנסות שוב."
           }
         }
       }
@@ -48,6 +72,12 @@
             "state": "translated",
             "value": "%@ te demande de changer ton mot de passe. Fais-le sur leur site, puis reconnecte-toi."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ מבקשים להחליף סיסמה. יש להחליף אותה באתר שלהם ואז להתחבר שוב."
+          }
         }
       }
     },
@@ -57,6 +87,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ au taux de la Banque d’Israël"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ לפי שער בנק ישראל"
           }
         }
       }
@@ -68,6 +104,12 @@
             "state": "translated",
             "value": "Budget %@ épuisé"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "התקציב של %@ נוצל"
+          }
         }
       }
     },
@@ -77,6 +119,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ n’a pas accepté cet identifiant ou ce mot de passe."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ לא קיבלו את שם המשתמש או הסיסמה."
           }
         }
       }
@@ -88,6 +136,12 @@
             "state": "translated",
             "value": "reste %@"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "נותרו %@"
+          }
         }
       }
     },
@@ -98,6 +152,12 @@
             "state": "translated",
             "value": "%@ de dépassement"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חריגה של %@"
+          }
         }
       }
     },
@@ -107,6 +167,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ a refusé la connexion depuis ce réseau. Cela arrive depuis l’étranger ou via un VPN : désactivez le VPN ou essayez un autre réseau."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ דחו את החיבור מהרשת הזאת. זה קורה מחו״ל או דרך VPN: כדאי לכבות את ה-VPN או לנסות רשת אחרת."
           }
         }
       }
@@ -119,6 +185,12 @@
             "state": "translated",
             "value": "%@ pour l’instant"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ עד עכשיו"
+          }
         }
       }
     },
@@ -128,6 +200,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ dépensés"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הוצאו %@"
           }
         }
       }
@@ -145,6 +223,12 @@
             "state": "translated",
             "value": "%1$@ dépensés ce mois-ci sur %2$@."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "החודש הוצאו %1$@ מתוך %2$@."
+          }
         }
       }
     },
@@ -154,6 +238,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ a mis trop de temps à répondre. La connexion est peut-être lente ou le site surchargé : réessayez."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ לא הגיבו בזמן. ייתכן שהחיבור איטי או שהאתר עמוס: אפשר לנסות שוב."
           }
         }
       }
@@ -165,6 +255,12 @@
             "state": "translated",
             "value": "%@ a mis trop de temps à répondre. Réessaie."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ לא הגיבו בזמן. אפשר לנסות שוב."
+          }
         }
       }
     },
@@ -174,6 +270,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@/mois"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ לחודש"
           }
         }
       }
@@ -185,6 +287,12 @@
             "state": "translated",
             "value": "%@ : 80 %% du budget utilisé"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: נוצלו 80%% מהתקציב"
+          }
         }
       }
     },
@@ -194,6 +302,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le site de %@ est en maintenance ou indisponible pour le moment. Réessayez plus tard."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "האתר של %@ בתחזוקה או לא זמין כרגע. אפשר לנסות שוב מאוחר יותר."
           }
         }
       }
@@ -231,6 +345,30 @@
                 "stringUnit": {
                   "state": "translated",
                   "value": "%lld banques"
+                }
+              }
+            }
+          }
+        },
+        "he": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "בנק אחד"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld בנקים"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld בנקים"
                 }
               }
             }
@@ -275,6 +413,30 @@
               }
             }
           }
+        },
+        "he": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "יום אחד עד החיוב"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "יומיים עד החיוב"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ימים עד החיוב"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -315,6 +477,30 @@
               }
             }
           }
+        },
+        "he": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "חיוב אחד במטבע חוץ לא נכלל."
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld חיובים במטבע חוץ לא נכללו."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld חיובים במטבע חוץ לא נכללו."
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -330,6 +516,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$lld sur %2$lld"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld מתוך %2$lld"
           }
         }
       }
@@ -371,6 +563,30 @@
               }
             }
           }
+        },
+        "he": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "רכישה אחת"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld רכישות"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld רכישות"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -407,6 +623,30 @@
                 "stringUnit": {
                   "state": "translated",
                   "value": "%lld résultats"
+                }
+              }
+            }
+          }
+        },
+        "he": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "תוצאה אחת"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld תוצאות"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld תוצאות"
                 }
               }
             }
@@ -452,6 +692,30 @@
               }
             }
           }
+        },
+        "he": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "מינוי אחד"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld מינויים"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld מינויים"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -461,6 +725,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "30 jours"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 יום"
           }
         }
       }
@@ -472,6 +742,12 @@
             "state": "translated",
             "value": "7 jours"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 ימים"
+          }
         }
       }
     },
@@ -481,6 +757,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Environ %@ par jour jusqu’au prélèvement."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בערך %@ ליום עד החיוב."
           }
         }
       }
@@ -492,6 +774,12 @@
             "state": "translated",
             "value": "Accès expiré"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הגישה פגה"
+          }
         }
       }
     },
@@ -501,6 +789,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L’accès a expiré. Reconnectez la banque."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הגישה פגה. יש לחבר את הבנק מחדש."
           }
         }
       }
@@ -512,6 +806,12 @@
             "state": "translated",
             "value": "Compte"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חשבון"
+          }
         }
       }
     },
@@ -521,6 +821,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comptes"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חשבונות"
           }
         }
       }
@@ -532,6 +838,12 @@
             "state": "translated",
             "value": "Ajouter"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הוספה"
+          }
         }
       }
     },
@@ -541,6 +853,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajouter une banque"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הוספת בנק"
           }
         }
       }
@@ -552,6 +870,12 @@
             "state": "translated",
             "value": "Ajouter une note (ex. remboursé par Dana)"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הוספת הערה (למשל: דנה החזירה)"
+          }
         }
       }
     },
@@ -561,6 +885,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adresse donnée par Max."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הכתובת שמסרה מקס."
           }
         }
       }
@@ -578,6 +908,12 @@
             "state": "translated",
             "value": "Après le prélèvement Max du %1$@, ton solde sera de %2$@."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אחרי החיוב של מקס ב-%1$@, היתרה תהיה %2$@."
+          }
         }
       }
     },
@@ -594,6 +930,12 @@
             "state": "translated",
             "value": "Après Max le %1$@, tu auras %2$@. Mis à jour %3$@."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אחרי מקס ב-%1$@ יישארו %2$@. עודכן %3$@."
+          }
         }
       }
     },
@@ -603,6 +945,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "M’alerter en dessous de"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "התראה מתחת ל-"
           }
         }
       }
@@ -614,6 +962,12 @@
             "state": "translated",
             "value": "Tout"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הכול"
+          }
         }
       }
     },
@@ -623,6 +977,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tous les achats chez %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כל הרכישות ב-%@"
           }
         }
       }
@@ -634,6 +994,12 @@
             "state": "translated",
             "value": "Montant"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "סכום"
+          }
         }
       }
     },
@@ -643,6 +1009,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Montants prélevés le %@."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "סכומים שיחויבו ב-%@."
           }
         }
       }
@@ -654,6 +1026,12 @@
             "state": "translated",
             "value": "Toute banque européenne gérée par Enable Banking. Vous confirmez sur le site ou l’app de la banque, puis vous revenez ici. L’accès est en lecture seule et dure 180 jours."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כל בנק באירופה ש-Enable Banking תומך בו. מאשרים באתר או באפליקציה של הבנק וחוזרים לכאן. הגישה לקריאה בלבד ונמשכת 180 יום."
+          }
         }
       }
     },
@@ -663,6 +1041,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Identifiant de l’application"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מזהה האפליקציה"
           }
         }
       }
@@ -674,6 +1058,12 @@
             "state": "translated",
             "value": "Actualisation automatique"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "רענון אוטומטי"
+          }
         }
       }
     },
@@ -684,6 +1074,12 @@
             "state": "translated",
             "value": "Disponible"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "זמין"
+          }
         }
       }
     },
@@ -693,6 +1089,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Disponible après Max"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "זמין אחרי מקס"
           }
         }
       }
@@ -705,6 +1107,12 @@
             "state": "translated",
             "value": "Solde"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יתרה"
+          }
         }
       }
     },
@@ -714,6 +1122,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Solde %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יתרה %@"
           }
         }
       }
@@ -725,6 +1139,12 @@
             "state": "translated",
             "value": "Solde après"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יתרה אחרי"
+          }
         }
       }
     },
@@ -734,6 +1154,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Solde indisponible"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "היתרה לא זמינה"
           }
         }
       }
@@ -745,6 +1171,12 @@
             "state": "translated",
             "value": "Banque"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בנק"
+          }
         }
       }
     },
@@ -754,6 +1186,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Banque Leumi"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בנק לאומי"
           }
         }
       }
@@ -765,6 +1203,12 @@
             "state": "translated",
             "value": "Banques"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בנקים"
+          }
         }
       }
     },
@@ -774,6 +1218,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Agence"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "סניף"
           }
         }
       }
@@ -785,6 +1235,12 @@
             "state": "translated",
             "value": "Budgets"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תקציבים"
+          }
         }
       }
     },
@@ -794,6 +1250,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comptes professionnels"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חשבונות עסקיים"
           }
         }
       }
@@ -805,6 +1267,12 @@
             "state": "translated",
             "value": "Par catégorie"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "לפי קטגוריה"
+          }
         }
       }
     },
@@ -814,6 +1282,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Calcul"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "החישוב"
           }
         }
       }
@@ -825,6 +1299,12 @@
             "state": "translated",
             "value": "Annuler"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ביטול"
+          }
         }
       }
     },
@@ -834,6 +1314,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Carte"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כרטיס"
           }
         }
       }
@@ -845,6 +1331,12 @@
             "state": "translated",
             "value": "Carte se terminant par %@"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כרטיס המסתיים ב-%@"
+          }
         }
       }
     },
@@ -854,6 +1346,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dépenses carte"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הוצאות בכרטיס"
           }
         }
       }
@@ -865,6 +1363,12 @@
             "state": "translated",
             "value": "Cartes"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כרטיסים"
+          }
         }
       }
     },
@@ -874,6 +1378,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Catégorie"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קטגוריה"
           }
         }
       }
@@ -885,6 +1395,12 @@
             "state": "translated",
             "value": "Évolution"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שינוי"
+          }
         }
       }
     },
@@ -894,6 +1410,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prélèvements"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיובים"
           }
         }
       }
@@ -906,6 +1428,12 @@
             "state": "translated",
             "value": "Effacer"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ניקוי"
+          }
         }
       }
     },
@@ -915,6 +1443,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Effacer le journal"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ניקוי היומן"
           }
         }
       }
@@ -926,6 +1460,12 @@
             "state": "translated",
             "value": "Comparé aux mêmes jours du mois dernier."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בהשוואה לאותם ימים בחודש שעבר."
+          }
         }
       }
     },
@@ -935,6 +1475,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se connecter"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "התחברות"
           }
         }
       }
@@ -946,6 +1492,12 @@
             "state": "translated",
             "value": "Connectée"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מחובר"
+          }
         }
       }
     },
@@ -955,6 +1507,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Connectée jusqu’au %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מחובר עד %@"
           }
         }
       }
@@ -966,6 +1524,12 @@
             "state": "translated",
             "value": "Connexion à Leumi et Max…"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מתחברים ללאומי ולמקס…"
+          }
         }
       }
     },
@@ -975,6 +1539,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copier le montant"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "העתקת הסכום"
           }
         }
       }
@@ -986,6 +1556,12 @@
             "state": "translated",
             "value": "Copier le commerçant"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "העתקת שם בית העסק"
+          }
         }
       }
     },
@@ -995,6 +1571,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de joindre %@. Vérifie ta connexion et réessaie."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אין גישה ל%@. כדאי לבדוק את החיבור ולנסות שוב."
           }
         }
       }
@@ -1006,6 +1588,12 @@
             "state": "translated",
             "value": "Impossible de joindre Enable Banking. Vérifiez votre connexion et réessayez."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אין גישה ל-Enable Banking. כדאי לבדוק את החיבור ולנסות שוב."
+          }
         }
       }
     },
@@ -1015,6 +1603,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de vérifier que c’est toi. Réessaie."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "לא הצלחנו לאמת את זהותך. אפשר לנסות שוב."
           }
         }
       }
@@ -1026,6 +1620,12 @@
             "state": "translated",
             "value": "Pays"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מדינה"
+          }
         }
       }
     },
@@ -1035,6 +1635,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Compte courant après les prélèvements Max déjà connus, épargne et comptes en devises au taux du jour de la Banque d’Israël."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חשבון העו״ש אחרי חיובי מקס הידועים, חיסכון וחשבונות מט״ח לפי שער בנק ישראל היום."
           }
         }
       }
@@ -1046,6 +1652,12 @@
             "state": "translated",
             "value": "Compte courant, épargne et devises"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עו״ש, חיסכון ומט״ח"
+          }
         }
       }
     },
@@ -1055,6 +1667,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Personnalisé"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מותאם"
           }
         }
       }
@@ -1066,6 +1684,12 @@
             "state": "translated",
             "value": "DÉMO"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הדגמה"
+          }
         }
       }
     },
@@ -1075,6 +1699,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Budget du jour"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תקציב יומי"
           }
         }
       }
@@ -1086,6 +1716,12 @@
             "state": "translated",
             "value": "Date"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תאריך"
+          }
         }
       }
     },
@@ -1095,6 +1731,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jour"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יום"
           }
         }
       }
@@ -1106,6 +1748,12 @@
             "state": "translated",
             "value": "Prélèvement"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיוב"
+          }
         }
       }
     },
@@ -1115,6 +1763,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prélevé le"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חויב"
           }
         }
       }
@@ -1126,6 +1780,12 @@
             "state": "translated",
             "value": "Prélevé le %@"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יחויב ב-%@"
+          }
         }
       }
     },
@@ -1135,6 +1795,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Libellé"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תיאור"
           }
         }
       }
@@ -1146,6 +1812,12 @@
             "state": "translated",
             "value": "Détails"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "פרטים"
+          }
         }
       }
     },
@@ -1155,6 +1827,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Déconnecter"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ניתוק"
           }
         }
       }
@@ -1166,6 +1844,12 @@
             "state": "translated",
             "value": "Déconnecter les comptes"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ניתוק החשבונות"
+          }
         }
       }
     },
@@ -1175,6 +1859,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Déconnecter les comptes ?"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "לנתק את החשבונות?"
           }
         }
       }
@@ -1186,6 +1876,12 @@
             "state": "translated",
             "value": "Déconnecter et oublier les identifiants"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ניתוק ומחיקת פרטי ההתחברות"
+          }
         }
       }
     },
@@ -1195,6 +1891,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "OK"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "סיום"
           }
         }
       }
@@ -1206,6 +1908,12 @@
             "state": "translated",
             "value": "Modifier"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עריכה"
+          }
         }
       }
     },
@@ -1215,6 +1923,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enable Banking a répondu par une erreur (%lld)."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enable Banking החזיר שגיאה (%lld)."
           }
         }
       }
@@ -1226,15 +1940,27 @@
             "state": "translated",
             "value": "Clé Enable Banking"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מפתח Enable Banking"
+          }
         }
       }
     },
-    "English and French are available. Choose the app’s language in Settings.": {
+    "English, French and Hebrew are available. Choose the app’s language in Settings.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’anglais et le français sont disponibles. Choisis la langue de l’app dans Réglages."
+            "value": "Le français, l’anglais et l’hébreu sont disponibles. Choisissez la langue de l’app dans Réglages."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יש אנגלית, צרפתית ועברית. את שפת האפליקציה בוחרים בהגדרות."
           }
         }
       }
@@ -1246,6 +1972,12 @@
             "state": "translated",
             "value": "Chaque mois sur Leumi"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כל חודש בלאומי"
+          }
         }
       }
     },
@@ -1256,6 +1988,12 @@
             "state": "translated",
             "value": "Quitter la démo"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יציאה מההדגמה"
+          }
         }
       }
     },
@@ -1265,6 +2003,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prévu le %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "צפי ל-%@"
           }
         }
       }
@@ -1306,6 +2050,30 @@
               }
             }
           }
+        },
+        "he": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "ייצוא רכישה אחת ל-CSV"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "ייצוא %lld רכישות ל-CSV"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "ייצוא %lld רכישות ל-CSV"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -1315,6 +2083,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Exporter le journal"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ייצוא היומן"
           }
         }
       }
@@ -1326,6 +2100,12 @@
             "state": "translated",
             "value": "Prévision"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תחזית"
+          }
         }
       }
     },
@@ -1335,6 +2115,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Du"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מ-"
           }
         }
       }
@@ -1346,6 +2132,12 @@
             "state": "translated",
             "value": "Obtenir le budget du jour"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קבלת התקציב היומי"
+          }
         }
       }
     },
@@ -1355,6 +2147,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Obtenir le vrai solde"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קבלת היתרה האמיתית"
           }
         }
       }
@@ -1366,6 +2164,12 @@
             "state": "translated",
             "value": "A une note"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יש הערה"
+          }
         }
       }
     },
@@ -1375,6 +2179,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Attention : tu vas être à découvert"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שימו לב: צפוי מינוס"
           }
         }
       }
@@ -1386,6 +2196,12 @@
             "state": "translated",
             "value": "Bonjour"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שלום"
+          }
         }
       }
     },
@@ -1395,6 +2211,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hello Bank, Revolut"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hello Bank,‏ Revolut"
           }
         }
       }
@@ -1406,6 +2228,12 @@
             "state": "translated",
             "value": "Bonjour, %@"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שלום, %@"
+          }
         }
       }
     },
@@ -1415,6 +2243,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Masquer les montants"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הסתרת סכומים"
           }
         }
       }
@@ -1426,6 +2260,12 @@
             "state": "translated",
             "value": "Masquer le mot de passe"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הסתרת הסיסמה"
+          }
         }
       }
     },
@@ -1435,6 +2275,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Accueil"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בית"
           }
         }
       }
@@ -1446,6 +2292,12 @@
             "state": "translated",
             "value": "Importer la clé (.pem)"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ייבוא המפתח (‎.pem)"
+          }
         }
       }
     },
@@ -1456,6 +2308,12 @@
             "state": "translated",
             "value": "Importez d’abord votre clé Enable Banking."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קודם צריך לייבא את מפתח Enable Banking."
+          }
         }
       }
     },
@@ -1465,6 +2323,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Reçu"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "נכנס"
           }
         }
       }
@@ -1506,6 +2370,30 @@
               }
             }
           }
+        },
+        "he": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "כולל חיוב אחד במטבע חוץ שהומר לפי שער בנק ישראל (הערכה)."
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "כולל %lld חיובים במטבע חוץ שהומרו לפי שער בנק ישראל (הערכה)."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "כולל %lld חיובים במטבע חוץ שהומרו לפי שער בנק ישראל (הערכה)."
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -1515,6 +2403,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prélèvements réguliers compris"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כולל חיובים קבועים"
           }
         }
       }
@@ -1526,6 +2420,12 @@
             "state": "translated",
             "value": "Analyse"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תובנות"
+          }
         }
       }
     },
@@ -1535,6 +2435,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Échéance"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תשלום"
           }
         }
       }
@@ -1546,6 +2452,12 @@
             "state": "translated",
             "value": "Gardé uniquement sur cet iPhone, et inclus dans l’export CSV."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "נשמר רק באייפון הזה, וכלול בייצוא ל-CSV."
+          }
         }
       }
     },
@@ -1555,6 +2467,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Langue"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שפה"
           }
         }
       }
@@ -1566,6 +2484,12 @@
             "state": "translated",
             "value": "Mois dernier"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "החודש שעבר"
+          }
         }
       }
     },
@@ -1575,6 +2499,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le mois dernier à la même date : %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בחודש שעבר באותו תאריך: %@"
           }
         }
       }
@@ -1586,6 +2516,12 @@
             "state": "translated",
             "value": "Mois dernier, mêmes jours"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "החודש שעבר, אותם ימים"
+          }
         }
       }
     },
@@ -1596,6 +2532,12 @@
             "state": "translated",
             "value": "Mois dernier, en entier"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "החודש שעבר, כולו"
+          }
         }
       }
     },
@@ -1605,6 +2547,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Derniers paiements"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תשלומים אחרונים"
           }
         }
       }
@@ -1622,11 +2570,25 @@
             "state": "translated",
             "value": "Reste %1$@ sur %2$@"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "נותרו %1$@ מתוך %2$@"
+          }
         }
       }
     },
     "Leumi": {
-      "shouldTranslate": false
+      "shouldTranslate": false,
+      "localizations": {
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "לאומי"
+          }
+        }
+      }
     },
     "Leumi account": {
       "localizations": {
@@ -1634,6 +2596,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Compte Leumi"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חשבון לאומי"
           }
         }
       }
@@ -1645,6 +2613,12 @@
             "state": "translated",
             "value": "Solde Leumi"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יתרה בלאומי"
+          }
         }
       }
     },
@@ -1654,6 +2628,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Compte courant Leumi"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עו״ש בלאומי"
           }
         }
       }
@@ -1665,6 +2645,12 @@
             "state": "translated",
             "value": "Mouvements Leumi depuis le %@."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תנועות בלאומי מאז %@."
+          }
         }
       }
     },
@@ -1674,6 +2660,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chargement des banques…"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "טוען בנקים…"
           }
         }
       }
@@ -1685,6 +2677,12 @@
             "state": "translated",
             "value": "Lieu"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מיקום"
+          }
         }
       }
     },
@@ -1694,6 +2692,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verrouiller avec Face ID"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "נעילה עם Face ID"
           }
         }
       }
@@ -1705,6 +2709,12 @@
             "state": "translated",
             "value": "Journal"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יומן"
+          }
         }
       }
     },
@@ -1714,6 +2724,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Max"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מקס"
           }
         }
       }
@@ -1725,6 +2741,12 @@
             "state": "translated",
             "value": "Achats Max chez le même commerçant, du même montant, chaque mois. Les paiements en plusieurs fois ne sont pas inclus."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיובי מקס מאותו בית עסק, באותו סכום, כל חודש. עסקאות תשלומים לא נכללות."
+          }
         }
       }
     },
@@ -1734,6 +2756,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Achats Max à prélever"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיובי מקס הצפויים"
           }
         }
       }
@@ -1745,6 +2773,12 @@
             "state": "translated",
             "value": "Prélèvement Max"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיוב מקס"
+          }
         }
       }
     },
@@ -1754,6 +2788,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Max est prélevé aujourd’hui"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מקס מחייבת היום"
           }
         }
       }
@@ -1765,6 +2805,12 @@
             "state": "translated",
             "value": "Achats Max depuis le %@."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "רכישות במקס מאז %@."
+          }
         }
       }
     },
@@ -1774,6 +2820,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Achats Max depuis le 1er du mois. Notifications à 80 % et 100 %."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "רכישות במקס מתחילת החודש. התראות ב-80% וב-100%."
           }
         }
       }
@@ -1785,6 +2837,12 @@
             "state": "translated",
             "value": "Max · %@"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מקס · %@"
+          }
         }
       }
     },
@@ -1794,6 +2852,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Crédit"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הכנסות"
           }
         }
       }
@@ -1805,6 +2869,12 @@
             "state": "translated",
             "value": "Mois"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חודש"
+          }
         }
       }
     },
@@ -1814,6 +2884,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mois par mois"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חודש מול חודש"
           }
         }
       }
@@ -1825,6 +2901,12 @@
             "state": "translated",
             "value": "Montant mensuel. Laisse vide pour ne pas avoir de budget."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "סכום חודשי. להשאיר ריק בלי תקציב."
+          }
         }
       }
     },
@@ -1834,6 +2916,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nom"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שם"
           }
         }
       }
@@ -1845,6 +2933,12 @@
             "state": "translated",
             "value": "Patrimoine"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שווי נקי"
+          }
         }
       }
     },
@@ -1854,6 +2948,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nouvelle étiquette"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תגית חדשה"
           }
         }
       }
@@ -1865,6 +2965,12 @@
             "state": "translated",
             "value": "Prochain prélèvement Max"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיוב מקס הבא"
+          }
         }
       }
     },
@@ -1874,6 +2980,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prochain vers le %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הבא בסביבות %@"
           }
         }
       }
@@ -1885,6 +2997,12 @@
             "state": "translated",
             "value": "Au prochain prélèvement"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בחיוב הבא"
+          }
         }
       }
     },
@@ -1894,6 +3012,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucun achat Max en attente de prélèvement."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אין חיובי מקס שממתינים לחיוב."
           }
         }
       }
@@ -1905,6 +3029,12 @@
             "state": "translated",
             "value": "Aucune banque"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עוד אין בנק"
+          }
         }
       }
     },
@@ -1914,6 +3044,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pas encore de budget"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עוד אין תקציבים"
           }
         }
       }
@@ -1925,6 +3061,12 @@
             "state": "translated",
             "value": "Pas encore de données"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עוד אין נתונים"
+          }
         }
       }
     },
@@ -1934,6 +3076,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pas de connexion internet."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אין חיבור לאינטרנט."
           }
         }
       }
@@ -1945,6 +3093,12 @@
             "state": "translated",
             "value": "Pas de connexion internet. La mise à jour reprendra dès que vous serez de nouveau en ligne."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אין חיבור לאינטרנט. העדכון יתחדש ברגע שהחיבור יחזור."
+          }
         }
       }
     },
@@ -1954,6 +3108,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucun mouvement"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אין תנועות"
           }
         }
       }
@@ -1965,6 +3125,12 @@
             "state": "translated",
             "value": "Aucun achat"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אין רכישות"
+          }
         }
       }
     },
@@ -1974,6 +3140,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pas encore d’achat."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עוד אין רכישות."
           }
         }
       }
@@ -1985,6 +3157,12 @@
             "state": "translated",
             "value": "Aucun"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ללא"
+          }
         }
       }
     },
@@ -1994,6 +3172,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Non connectée"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "לא מחובר"
           }
         }
       }
@@ -2005,6 +3189,12 @@
             "state": "translated",
             "value": "Note et étiquettes"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הערה ותגיות"
+          }
         }
       }
     },
@@ -2014,6 +3204,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plus rien à répartir jusqu’au prélèvement."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "לא נשאר מה לחלק עד החיוב."
           }
         }
       }
@@ -2025,6 +3221,12 @@
             "state": "translated",
             "value": "Rien sur ta carte Max pendant cette période."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אין רכישות בכרטיס מקס בתקופה הזאת."
+          }
         }
       }
     },
@@ -2034,6 +3236,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rien à prélever"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אין מה לחייב"
           }
         }
       }
@@ -2045,6 +3253,12 @@
             "state": "translated",
             "value": "Notifications"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "התראות"
+          }
         }
       }
     },
@@ -2054,6 +3268,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "OK"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אישור"
           }
         }
       }
@@ -2065,6 +3285,12 @@
             "state": "translated",
             "value": "Tant que l’application est en mode restreint, seuls les comptes reliés dans le portail Enable Banking sont partagés."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כל עוד האפליקציה במצב מוגבל, משותפים רק החשבונות שקושרו בפורטל של Enable Banking."
+          }
         }
       }
     },
@@ -2074,6 +3300,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ouvre True Balance une fois pour connecter Leumi et Max."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יש לפתוח את True Balance פעם אחת כדי לחבר את לאומי ומקס."
           }
         }
       }
@@ -2085,6 +3317,12 @@
             "state": "translated",
             "value": "Autres banques"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בנקים נוספים"
+          }
         }
       }
     },
@@ -2094,6 +3332,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Envoyé"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יצא"
           }
         }
       }
@@ -2105,6 +3349,12 @@
             "state": "translated",
             "value": "Mot de passe"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "סיסמה"
+          }
         }
       }
     },
@@ -2114,6 +3364,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En attente"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ממתין"
           }
         }
       }
@@ -2125,6 +3381,12 @@
             "state": "translated",
             "value": "Par mois"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "לחודש"
+          }
         }
       }
     },
@@ -2134,6 +3396,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Période"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תקופה"
           }
         }
       }
@@ -2145,6 +3413,12 @@
             "state": "translated",
             "value": "Confidentialité"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "פרטיות"
+          }
         }
       }
     },
@@ -2154,6 +3428,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lieu probable, trouvé grâce au nom du commerçant. Ça peut être une autre succursale."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מיקום משוער לפי שם בית העסק. ייתכן שזה סניף אחר."
           }
         }
       }
@@ -2165,6 +3445,12 @@
             "state": "translated",
             "value": "Profil"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "פרופיל"
+          }
         }
       }
     },
@@ -2174,6 +3460,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Profil et réglages"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "פרופיל והגדרות"
           }
         }
       }
@@ -2185,6 +3477,12 @@
             "state": "translated",
             "value": "Tirez vers le bas pour lire %@."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יש למשוך למטה כדי לקרוא את %@."
+          }
         }
       }
     },
@@ -2194,6 +3492,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tire vers le bas pour te connecter à Leumi et Max."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יש למשוך למטה כדי להתחבר ללאומי ולמקס."
           }
         }
       }
@@ -2205,6 +3509,12 @@
             "state": "translated",
             "value": "Achats"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "רכישות"
+          }
         }
       }
     },
@@ -2214,6 +3524,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Achats enregistrés sur cet iPhone."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "רכישות שנשמרו באייפון הזה."
           }
         }
       }
@@ -2225,6 +3541,12 @@
             "state": "translated",
             "value": "Lecture de ton solde Leumi…"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קוראים את היתרה בלאומי…"
+          }
         }
       }
     },
@@ -2234,6 +3556,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lecture de tes dépenses Max…"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קוראים את החיובים במקס…"
           }
         }
       }
@@ -2245,6 +3573,12 @@
             "state": "translated",
             "value": "Vraiment disponible"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "זמין באמת"
+          }
         }
       }
     },
@@ -2254,6 +3588,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vraiment disponible après Max le %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "זמין באמת אחרי מקס ב-%@"
           }
         }
       }
@@ -2265,6 +3605,12 @@
             "state": "translated",
             "value": "Destinataire"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מקבל"
+          }
         }
       }
     },
@@ -2274,6 +3620,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Reconnecter"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיבור מחדש"
           }
         }
       }
@@ -2285,6 +3637,12 @@
             "state": "translated",
             "value": "Référence"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אסמכתא"
+          }
         }
       }
     },
@@ -2294,6 +3652,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Actualiser"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "רענון עכשיו"
           }
         }
       }
@@ -2305,6 +3669,12 @@
             "state": "translated",
             "value": "Mouvements Leumi réguliers attendus avant le prélèvement, repérés sur les derniers mois : même émetteur ou bénéficiaire, à peu près le même montant, chaque mois."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תנועות קבועות בלאומי שצפויות לפני החיוב, לפי החודשים האחרונים: אותו משלם או מוטב, בערך אותו סכום, כל חודש."
+          }
         }
       }
     },
@@ -2314,6 +3684,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remboursé"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הוחזר"
           }
         }
       }
@@ -2325,6 +3701,12 @@
             "state": "translated",
             "value": "Remplacer la clé"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "החלפת המפתח"
+          }
         }
       }
     },
@@ -2334,6 +3716,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Obligatoire"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חובה"
           }
         }
       }
@@ -2345,6 +3733,12 @@
             "state": "translated",
             "value": "Salaire et prélèvements réguliers"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "משכורת וחיובים קבועים"
+          }
         }
       }
     },
@@ -2354,6 +3748,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Salaire et prélèvements réguliers compris"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כולל משכורת וחיובים קבועים"
           }
         }
       }
@@ -2365,6 +3765,12 @@
             "state": "translated",
             "value": "Enregistrer"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שמירה"
+          }
         }
       }
     },
@@ -2374,6 +3780,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Épargne"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיסכון"
           }
         }
       }
@@ -2385,6 +3797,12 @@
             "state": "translated",
             "value": "Rechercher une banque"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיפוש בנק"
+          }
         }
       }
     },
@@ -2394,6 +3812,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rechercher une dépense"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיפוש בחיובים"
           }
         }
       }
@@ -2405,6 +3829,12 @@
             "state": "translated",
             "value": "Rechercher des mouvements"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיפוש בתנועות"
+          }
         }
       }
     },
@@ -2414,6 +3844,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tout voir"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הצגת הכול"
           }
         }
       }
@@ -2425,6 +3861,12 @@
             "state": "translated",
             "value": "Tout voir (%lld)"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הצגת כל ה-%lld"
+          }
         }
       }
     },
@@ -2434,6 +3876,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vois ce que tu peux vraiment dépenser : ton solde Leumi moins les dépenses Max encore à venir."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כמה אפשר באמת להוציא: היתרה בלאומי פחות חיובי מקס שעוד יגיעו."
           }
         }
       }
@@ -2445,6 +3893,12 @@
             "state": "translated",
             "value": "Envoyeur"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שולח"
+          }
         }
       }
     },
@@ -2454,6 +3908,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fixe un montant mensuel par catégorie, par exemple courses 1 500 ₪. Tu seras prévenu à 80 % et à 100 %."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קובעים סכום חודשי לקטגוריה, למשל מכולת ‎₪1,500. תגיע התראה ב-80% וב-100%."
           }
         }
       }
@@ -2465,6 +3925,12 @@
             "state": "translated",
             "value": "Fixer un budget mensuel par catégorie"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קביעת תקציב חודשי לכל קטגוריה"
+          }
         }
       }
     },
@@ -2474,6 +3940,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Définir des budgets"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קביעת תקציבים"
           }
         }
       }
@@ -2486,6 +3958,12 @@
             "state": "translated",
             "value": "Réglages"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הגדרות"
+          }
         }
       }
     },
@@ -2495,6 +3973,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Partagé"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "משותף"
           }
         }
       }
@@ -2506,6 +3990,12 @@
             "state": "translated",
             "value": "Afficher"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הצגה"
+          }
         }
       }
     },
@@ -2515,6 +4005,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Afficher les pages des banques pendant la connexion"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הצגת דפי הבנק בזמן ההתחברות"
           }
         }
       }
@@ -2526,6 +4022,12 @@
             "state": "translated",
             "value": "Afficher le mot de passe"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הצגת הסיסמה"
+          }
         }
       }
     },
@@ -2535,6 +4037,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Affiché dans le portail Enable Banking. Le fichier de clé porte généralement ce nom."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מופיע בפורטל של Enable Banking. קובץ המפתח בדרך כלל נקרא בשם הזה."
           }
         }
       }
@@ -2546,6 +4054,12 @@
             "state": "translated",
             "value": "Affiche Leumi et Max à l’écran pendant la connexion, pour voir ce qui bloque et terminer une étape à la main si besoin."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מציג את לאומי ומקס על המסך בזמן ההתחברות, כדי לראות מה נתקע ולהשלים שלב ידנית אם צריך."
+          }
         }
       }
     },
@@ -2555,6 +4069,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Connexion à Leumi…"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מתחברים ללאומי…"
           }
         }
       }
@@ -2566,6 +4086,12 @@
             "state": "translated",
             "value": "Connexion à Max…"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מתחברים למקס…"
+          }
         }
       }
     },
@@ -2576,6 +4102,12 @@
             "state": "translated",
             "value": "Un problème est survenu"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "משהו השתבש"
+          }
         }
       }
     },
@@ -2585,6 +4117,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dépenses"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הוצאות"
           }
         }
       }
@@ -2597,6 +4135,12 @@
             "state": "translated",
             "value": "Dépenses sur une période"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הוצאות לאורך תקופה"
+          }
         }
       }
     },
@@ -2606,6 +4150,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abonnements"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מינויים"
           }
         }
       }
@@ -2617,6 +4167,12 @@
             "state": "translated",
             "value": "Étiquette"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תגית"
+          }
         }
       }
     },
@@ -2626,6 +4182,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le fichier .pem téléchargé depuis le portail Enable Banking. Il est conservé dans le trousseau de cet iPhone."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קובץ ה-‎.pem שהורד מהפורטל של Enable Banking. הוא נשמר במחזיק המפתחות של האייפון הזה."
           }
         }
       }
@@ -2637,6 +4199,12 @@
             "state": "translated",
             "value": "La banque n’a pas donné l’accès. Réessayez de la connecter."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הבנק לא אישר גישה. אפשר לנסות להתחבר שוב."
+          }
         }
       }
     },
@@ -2646,6 +4214,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La banque limite le nombre de lectures. Réessayez plus tard."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הבנק מגביל את מספר הקריאות. אפשר לנסות שוב מאוחר יותר."
           }
         }
       }
@@ -2657,6 +4231,12 @@
             "state": "translated",
             "value": "L’identifiant et le mot de passe que tu utilises sur leumi.co.il."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שם המשתמש והסיסמה של leumi.co.il."
+          }
         }
       }
     },
@@ -2666,6 +4246,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L’identifiant et le mot de passe que tu utilises sur max.co.il."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שם המשתמש והסיסמה של max.co.il."
           }
         }
       }
@@ -2677,6 +4263,12 @@
             "state": "translated",
             "value": "C’est tout ce que Leumi donne sur l’autre partie, y compris sur son site."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "זה כל מה שלאומי מוסר על הצד השני, גם באתר שלו."
+          }
         }
       }
     },
@@ -2686,6 +4278,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ce fichier de clé est illisible. Utilisez le fichier .pem du portail Enable Banking."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אי אפשר לקרוא את קובץ המפתח. יש להשתמש בקובץ ה-‎.pem מהפורטל של Enable Banking."
           }
         }
       }
@@ -2697,6 +4295,12 @@
             "state": "translated",
             "value": "Ce mois-ci"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "החודש"
+          }
         }
       }
     },
@@ -2706,6 +4310,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ce mois-ci sur Max"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "החודש במקס"
           }
         }
       }
@@ -2718,6 +4328,12 @@
             "state": "translated",
             "value": "Ce mois-ci vs le mois dernier"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "החודש מול החודש שעבר"
+          }
         }
       }
     },
@@ -2727,6 +4343,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Au"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עד"
           }
         }
       }
@@ -2738,6 +4360,12 @@
             "state": "translated",
             "value": "Aujourd’hui"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "היום"
+          }
         }
       }
     },
@@ -2747,6 +4375,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mouvement du jour : Leumi peut encore l’ajuster."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תנועה של היום: לאומי עוד עשויים לעדכן אותה."
           }
         }
       }
@@ -2758,6 +4392,12 @@
             "state": "translated",
             "value": "Total"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "סה״כ"
+          }
         }
       }
     },
@@ -2767,6 +4407,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Total : %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "סה״כ: %@"
           }
         }
       }
@@ -2778,6 +4424,12 @@
             "state": "translated",
             "value": "Transaction"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תנועה"
+          }
         }
       }
     },
@@ -2787,6 +4439,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Virement reçu"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "העברה שהתקבלה"
           }
         }
       }
@@ -2798,6 +4456,12 @@
             "state": "translated",
             "value": "Virement envoyé"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "העברה שנשלחה"
+          }
         }
       }
     },
@@ -2807,6 +4471,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Virements"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "העברות"
           }
         }
       }
@@ -2818,12 +4488,24 @@
             "state": "translated",
             "value": "Dépannage"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "פתרון בעיות"
+          }
         }
       }
     },
     "True Balance": {
       "localizations": {
         "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "True Balance"
+          }
+        },
+        "he": {
           "stringUnit": {
             "state": "translated",
             "value": "True Balance"
@@ -2838,6 +4520,12 @@
             "state": "translated",
             "value": "True Balance est verrouillé"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "True Balance נעולה"
+          }
         }
       }
     },
@@ -2847,6 +4535,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Journal True Balance"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יומן True Balance"
           }
         }
       }
@@ -2858,6 +4552,12 @@
             "state": "translated",
             "value": "Vrai solde"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יתרה אמיתית"
+          }
         }
       }
     },
@@ -2867,6 +4567,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réessayer"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ניסיון חוזר"
           }
         }
       }
@@ -2878,6 +4584,12 @@
             "state": "translated",
             "value": "Essayer avec des données d’exemple"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "לנסות עם נתוני דוגמה"
+          }
         }
       }
     },
@@ -2887,6 +4599,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Déverrouiller"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "פתיחה"
           }
         }
       }
@@ -2898,6 +4616,12 @@
             "state": "translated",
             "value": "Déverrouille pour voir ton solde"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יש לפתוח כדי לראות את היתרה"
+          }
         }
       }
     },
@@ -2907,6 +4631,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prochains prélèvements"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיובים קרובים"
           }
         }
       }
@@ -2918,6 +4648,12 @@
             "state": "translated",
             "value": "Échec de la mise à jour"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "העדכון נכשל"
+          }
         }
       }
     },
@@ -2927,6 +4663,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mis à jour %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עודכן %@"
           }
         }
       }
@@ -2938,6 +4680,12 @@
             "state": "translated",
             "value": "Mise à jour…"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מעדכנים…"
+          }
         }
       }
     },
@@ -2947,6 +4695,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Utilisé %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "נוצלו %@"
           }
         }
       }
@@ -2958,6 +4712,12 @@
             "state": "translated",
             "value": "Pour te saluer sur l’écran d’accueil."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "משמש לברכה במסך הבית."
+          }
         }
       }
     },
@@ -2967,6 +4727,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Identifiant"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שם משתמש"
           }
         }
       }
@@ -2978,6 +4744,12 @@
             "state": "translated",
             "value": "Date de valeur"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תאריך ערך"
+          }
         }
       }
     },
@@ -2987,6 +4759,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ce que l’app a fait pendant les mises à jour : étapes, nouvelles tentatives, erreurs. Aucun mot de passe ni montant. Il reste sur cet iPhone tant que vous ne le partagez pas."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מה האפליקציה עשתה בזמן העדכונים: שלבים, ניסיונות חוזרים, שגיאות. בלי סיסמאות ובלי סכומים. נשאר באייפון עד שמשתפים אותו."
           }
         }
       }
@@ -2998,6 +4776,12 @@
             "state": "translated",
             "value": "Ce que tu peux dépenser par jour jusqu’au prochain prélèvement Max."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כמה אפשר להוציא ביום עד חיוב מקס הבא."
+          }
         }
       }
     },
@@ -3007,6 +4791,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "À l’ouverture de l’app et en arrière-plan"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בפתיחת האפליקציה וברקע"
           }
         }
       }
@@ -3018,6 +4808,12 @@
             "state": "translated",
             "value": "En comptant les échéances suivantes déjà engagées : %@"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כולל תשלומים עתידיים שכבר התחייבת להם: %@"
+          }
         }
       }
     },
@@ -3027,6 +4823,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pro"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עבודה"
           }
         }
       }
@@ -3038,6 +4840,12 @@
             "state": "translated",
             "value": "Vous confirmez sur le site ou l’app de la banque, puis vous revenez ici. L’accès est en lecture seule et dure 180 jours."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מאשרים באתר או באפליקציה של הבנק וחוזרים לכאן. הגישה לקריאה בלבד ונמשכת 180 יום."
+          }
         }
       }
     },
@@ -3047,6 +4855,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tu restes connecté. Tes identifiants sont gardés dans le trousseau de cet iPhone."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "נשארים מחוברים. פרטי ההתחברות נשמרים במחזיק המפתחות של האייפון הזה."
           }
         }
       }
@@ -3064,6 +4878,12 @@
             "state": "translated",
             "value": "Ton compte %1$@ est bloqué. Contacte %2$@."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "החשבון ב%1$@ חסום. יש לפנות ל%2$@."
+          }
         }
       }
     },
@@ -3073,6 +4893,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tes identifiants Leumi et Max et le solde enregistré seront supprimés de cet iPhone."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "פרטי ההתחברות ללאומי ולמקס והיתרה השמורה יימחקו מהאייפון הזה."
           }
         }
       }
@@ -3084,6 +4910,12 @@
             "state": "translated",
             "value": "Vos identifiants Leumi et Max, l’accès aux autres banques et les soldes enregistrés seront supprimés de cet iPhone."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "פרטי ההתחברות ללאומי ולמקס, הגישה לבנקים הנוספים והיתרות השמורות יימחקו מהאייפון הזה."
+          }
         }
       }
     },
@@ -3093,6 +4925,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ton solde Leumi moins le prochain prélèvement Max, d’après la dernière mise à jour."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "היתרה בלאומי פחות חיוב מקס הבא, לפי העדכון האחרון."
           }
         }
       }
@@ -3104,6 +4942,12 @@
             "state": "translated",
             "value": "Tes identifiants sont stockés dans le trousseau de cet iPhone et n’en sortent jamais, sauf pour te connecter à Leumi et Max."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "פרטי ההתחברות נשמרים במחזיק המפתחות של האייפון ולא יוצאים ממנו, חוץ מההתחברות ללאומי ולמקס."
+          }
         }
       }
     },
@@ -3114,6 +4958,12 @@
             "state": "translated",
             "value": "Ton prénom"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "השם הפרטי שלך"
+          }
         }
       }
     },
@@ -3123,6 +4973,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ton vrai solde est de %@."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "היתרה האמיתית שלך היא %@."
           }
         }
       }
@@ -3140,6 +4996,12 @@
             "state": "translated",
             "value": "Ton vrai solde est de %1$@. Mis à jour %2$@."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "היתרה האמיתית שלך היא %1$@. עודכן %2$@."
+          }
         }
       }
     },
@@ -3149,6 +5011,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ton vrai solde est passé sous %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "היתרה האמיתית שלך מתחת ל-%@"
           }
         }
       }
@@ -3160,6 +5028,12 @@
             "state": "translated",
             "value": "Tu seras prévenu si ton vrai solde passe sous zéro."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תגיע התראה אם היתרה האמיתית תרד מתחת לאפס."
+          }
         }
       }
     },
@@ -3169,6 +5043,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tu seras prévenu quand ton vrai solde passe sous ce montant."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תגיע התראה כשהיתרה האמיתית תרד מתחת לסכום הזה."
           }
         }
       }
@@ -3180,6 +5060,12 @@
             "state": "translated",
             "value": "Tu seras à découvert le jour du prélèvement, sauf si de l’argent arrive avant."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ביום החיוב צפוי מינוס, אלא אם ייכנס כסף לפני כן."
+          }
         }
       }
     },
@@ -3189,6 +5075,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tu seras prévenu à 80 % et à 100 %."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תגיע התראה ב-80% וב-100%."
           }
         }
       }
@@ -3200,6 +5092,12 @@
             "state": "translated",
             "value": "Tu utilises des données d’exemple."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מוצגים נתוני דוגמה."
+          }
         }
       }
     },
@@ -3210,6 +5108,12 @@
             "state": "translated",
             "value": "environ %@ par achat"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בערך %@ כל אחת"
+          }
         }
       }
     },
@@ -3219,6 +5123,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "environ %@/jour"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בערך %@ ליום"
           }
         }
       }
@@ -3238,6 +5148,12 @@
             "state": "translated",
             "value": "Beauté et soins"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "טיפוח ויופי"
+          }
         }
       }
     },
@@ -3255,6 +5171,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Livres et papeterie"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ספרים ודפוס"
           }
         }
       }
@@ -3274,6 +5196,12 @@
             "state": "translated",
             "value": "Retrait d’espèces"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "משיכת מזומן"
+          }
         }
       }
     },
@@ -3291,6 +5219,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Électronique"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אלקטרוניקה"
           }
         }
       }
@@ -3310,6 +5244,12 @@
             "state": "translated",
             "value": "Carburant, électricité et gaz"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "דלק, חשמל וגז"
+          }
         }
       }
     },
@@ -3327,6 +5267,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mode"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אופנה"
           }
         }
       }
@@ -3346,6 +5292,12 @@
             "state": "translated",
             "value": "Devises"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מטבע חוץ"
+          }
         }
       }
     },
@@ -3363,6 +5315,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mairie et administration"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עירייה וממשלה"
           }
         }
       }
@@ -3382,6 +5340,12 @@
             "state": "translated",
             "value": "Courses"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מכולת וסופר"
+          }
         }
       }
     },
@@ -3399,6 +5363,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Santé et pharmacie"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בריאות ופארם"
           }
         }
       }
@@ -3418,6 +5388,12 @@
             "state": "translated",
             "value": "Maison et bricolage"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בית ועשה זאת בעצמך"
+          }
         }
       }
     },
@@ -3435,6 +5411,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Assurance"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ביטוח"
           }
         }
       }
@@ -3454,6 +5436,12 @@
             "state": "translated",
             "value": "Loisirs et sport"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "פנאי וספורט"
+          }
         }
       }
     },
@@ -3471,6 +5459,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Produits Max"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מוצרי מקס"
           }
         }
       }
@@ -3490,6 +5484,12 @@
             "state": "translated",
             "value": "Divers"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אחר"
+          }
         }
       }
     },
@@ -3507,6 +5507,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Animaux"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חיות מחמד"
           }
         }
       }
@@ -3526,6 +5532,12 @@
             "state": "translated",
             "value": "Restaurants et bars"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מסעדות וברים"
+          }
         }
       }
     },
@@ -3543,6 +5555,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Téléphone et internet"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "טלפון ואינטרנט"
           }
         }
       }
@@ -3562,6 +5580,12 @@
             "state": "translated",
             "value": "Virement"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "העברת כספים"
+          }
         }
       }
     },
@@ -3579,6 +5603,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transport et voiture"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תחבורה ורכב"
           }
         }
       }
@@ -3598,6 +5628,12 @@
             "state": "translated",
             "value": "Vols et voyages"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "טיסות ונסיעות"
+          }
         }
       }
     },
@@ -3616,6 +5652,12 @@
             "state": "translated",
             "value": "Sans catégorie"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ללא קטגוריה"
+          }
         }
       }
     },
@@ -3626,11 +5668,25 @@
             "state": "translated",
             "value": "iOS décide quand l’actualisation en arrière-plan a lieu. Tu peux aussi tirer vers le bas pour actualiser à tout moment."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‏iOS מחליט מתי הרענון ברקע רץ. אפשר גם למשוך למטה כדי לרענן בכל רגע."
+          }
         }
       }
     },
     "·": {
-      "shouldTranslate": false
+      "shouldTranslate": false,
+      "localizations": {
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "·"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

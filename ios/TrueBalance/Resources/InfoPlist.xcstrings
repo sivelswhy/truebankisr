@@ -15,6 +15,12 @@
             "state" : "translated",
             "value" : "True Balance"
           }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "True Balance"
+          }
         }
       }
     },
@@ -25,6 +31,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "TrueBalance"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "TrueBalance"
           }
         }
@@ -38,6 +50,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Unlock True Balance to see your balance."
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "פתיחת True Balance כדי לראות את היתרה."
           }
         }
       }

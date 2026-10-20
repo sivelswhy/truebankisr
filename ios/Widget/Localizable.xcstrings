@@ -1,22 +1,18 @@
 {
   "sourceLanguage": "en",
   "strings": {
-    "about %@/day": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "environ %@/jour"
-          }
-        }
-      }
-    },
     "After Max · %@": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Après Max · %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אחרי מקס · %@"
           }
         }
       }
@@ -28,6 +24,12 @@
             "state": "translated",
             "value": "Ouvre True Balance pour connecter tes comptes."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יש לפתוח את True Balance כדי לחבר את החשבונות."
+          }
         }
       }
     },
@@ -37,6 +39,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vraiment disponible"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "זמין באמת"
           }
         }
       }
@@ -48,6 +56,12 @@
             "state": "translated",
             "value": "Vrai solde"
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יתרה אמיתית"
+          }
         }
       }
     },
@@ -58,6 +72,28 @@
             "state": "translated",
             "value": "Ce qui est vraiment disponible après le prochain prélèvement Max."
           }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מה זמין באמת אחרי חיוב מקס הבא."
+          }
+        }
+      }
+    },
+    "about %@/day": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "environ %@/jour"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בערך %@ ליום"
+          }
         }
       }
     },
@@ -67,6 +103,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ ₪ disponibles"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‏%@ ₪ זמינים"
           }
         }
       }

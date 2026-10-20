@@ -9,6 +9,12 @@
             "state" : "translated",
             "value" : "Solde ${applicationName}"
           }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "היתרה ב-${applicationName}"
+          }
         }
       }
     },
@@ -19,6 +25,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Budget du jour ${applicationName}"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "התקציב היומי ב-${applicationName}"
           }
         }
       }
@@ -40,6 +52,12 @@
             "state" : "needs_review",
             "value" : "Combien je peux dépenser par jour dans ${applicationName}"
           }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "כמה אפשר להוציא ביום ב-${applicationName}"
+          }
         }
       }
     },
@@ -50,6 +68,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mon solde dans ${applicationName}"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "היתרה שלי ב-${applicationName}"
           }
         }
       }
@@ -71,6 +95,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Quel est mon vrai solde dans ${applicationName}"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "מה היתרה האמיתית שלי ב-${applicationName}"
           }
         }
       }

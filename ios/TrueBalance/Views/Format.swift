@@ -28,7 +28,7 @@ enum Format {
     }
 
     static func message(_ error: BankError, _ provider: Provider) -> String {
-        let name = provider == .leumi ? "Leumi" : "Max"
+        let name = provider == .leumi ? String(localized: "Leumi") : String(localized: "Max")
         return switch error {
         case .invalidCredentials: String(localized: "\(name) didn’t accept this username or password.")
         case .changePassword: String(localized: "\(name) asks you to change your password. Do it on their site, then sign in again.")
