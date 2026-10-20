@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>True Balance</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 17px -apple-system, system-ui, sans-serif; margin: 0; min-height: 100vh;
+         display: grid; place-items: center; text-align: center; padding: 16px; box-sizing: border-box; }
+  a { display: inline-block; margin-top: 16px; padding: 12px 20px; border-radius: 12px;
+      background: #0a84ff; color: #fff; text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+  <p>Retour vers True Balance…</p>
+  <a id="open" href="truebalance://enablebanking">Ouvrir True Balance</a>
+</main>
+<script>
+  // Enable Banking only redirects to https: hand the code and state on to the app.
+  const target = 'truebalance://enablebanking' + location.search + location.hash;
+  document.getElementById('open').href = target;
+  location.replace(target);
+</script>
+</body>
+</html>
