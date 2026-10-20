@@ -95,6 +95,15 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    ShareLink(item: LogFile(header: LogFile.header(model: model)), preview: SharePreview("True Balance log")) {
+                        Label("Export the log", systemImage: "doc.text.magnifyingglass")
+                    }
+                    Button("Clear the log", role: .destructive) { Log.clear() }
+                } footer: {
+                    Text("What the app did when updating: steps, retries, errors. No passwords or amounts. It stays on this iPhone until you share it.")
+                }
+
+                Section {
                     Button(model.isDemo ? "Exit demo" : "Disconnect accounts", role: .destructive) {
                         confirmingSignOut = true
                     }

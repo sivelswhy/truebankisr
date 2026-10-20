@@ -72,7 +72,7 @@ final class WebDriver: NSObject, WKNavigationDelegate {
     func step(_ name: String) {
         currentStep = name
         Self.onStep?(name)
-        print("[WebDriver] \(name)")
+        Log.add("[step] \(name)")
     }
 
     func close() {
@@ -93,11 +93,12 @@ final class WebDriver: NSObject, WKNavigationDelegate {
         do {
             try await loadOnce(urlString, timeout: timeout)
         } catch where Self.isTransient(error) {
-            print("[WebDriver] \(currentStep): retrying after \(error)")
+            Log.add("[retry] \(currentStep): \(error)")
             try await Task.sleep(for: .seconds(2))
             try await loadOnce(urlString, timeout: timeout)
         }
         if let code = lastStatus, code == 403 || code == 451 || code >= 500 {
+            Log.add("[page] HTTP \(code) on \(URL(string: urlString)?.host ?? urlString)")
             throw HTTPStatus(code: code, host: URL(string: urlString)?.host ?? urlString)
         }
     }

@@ -909,6 +909,16 @@
         }
       }
     },
+    "Clear the log": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effacer le journal"
+          }
+        }
+      }
+    },
     "Compared with the same days of last month.": {
       "localizations": {
         "fr": {
@@ -1299,6 +1309,16 @@
         }
       }
     },
+    "Export the log": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exporter le journal"
+          }
+        }
+      }
+    },
     "Forecast": {
       "localizations": {
         "fr": {
@@ -1674,6 +1694,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verrouiller avec Face ID"
+          }
+        }
+      }
+    },
+    "Log": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Journal"
           }
         }
       }
@@ -2811,6 +2841,16 @@
         }
       }
     },
+    "True Balance log": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Journal True Balance"
+          }
+        }
+      }
+    },
     "True balance": {
       "localizations": {
         "fr": {
@@ -2937,6 +2977,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Date de valeur"
+          }
+        }
+      }
+    },
+    "What the app did when updating: steps, retries, errors. No passwords or amounts. It stays on this iPhone until you share it.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce que l’app a fait pendant les mises à jour : étapes, nouvelles tentatives, erreurs. Aucun mot de passe ni montant. Il reste sur cet iPhone tant que vous ne le partagez pas."
           }
         }
       }
