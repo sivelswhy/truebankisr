@@ -3,11 +3,12 @@ import Foundation
 /// Card spending over time, from `Snapshot.history`.
 public enum Spending {
     /// Purchases made between two days (inclusive, Israel time), in ILS.
+    /// Later installments share the purchase date: only the first one counts.
     public static func purchases(_ txns: [Txn], from start: Date, to end: Date) -> [Txn] {
         let first = Israel.day(start), last = Israel.day(end)
         return txns.filter { t in
             let day = Israel.day(t.date)
-            return t.chargedCurrency == "ILS" && day >= first && day <= last
+            return t.chargedCurrency == "ILS" && day >= first && day <= last && (t.installments?.number ?? 1) <= 1
         }
     }
 

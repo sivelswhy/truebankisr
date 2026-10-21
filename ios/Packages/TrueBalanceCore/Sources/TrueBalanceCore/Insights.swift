@@ -376,7 +376,7 @@ public enum BankMovement {
     /// "העברה מאת: BNP PARIBAS - PARIS 10-800-02" → "BNP PARIBAS - PARIS 10-800-02".
     static let counterpartyPattern = try! NSRegularExpression(
         pattern: #"^\s*(?:העברה|העב['׳]?|זיכוי|חיוב)?\s*(?:מאת|מ-|אל|ל-|לטובת|עבור|מ|ל)\s*:\s*(.+)$"#)
-    static let transferPattern = try! NSRegularExpression(pattern: #"העברה|העב['׳]|bit|ביט|paybox|פייבוקס|transfer"#, options: .caseInsensitive)
+    static let transferPattern = try! NSRegularExpression(pattern: #"העברה|העב['׳]|bit|ביט(?!וח)|paybox|פייבוקס|transfer"#, options: .caseInsensitive)
 
     public static func isTransfer(_ t: Txn) -> Bool {
         [t.description, t.memo ?? ""].contains { s in
