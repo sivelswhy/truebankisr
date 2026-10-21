@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Dashboard, type Data } from './components/Dashboard.tsx';
+import type { Data } from './components/App.tsx';
 import { I18nProvider } from './components/I18n.tsx';
 import { Login } from './components/Login.tsx';
+import { Shell } from './components/Shell.tsx';
 
 type State = { status: 'loading' } | { status: 'signedOut' } | { status: 'signedIn'; snapshot: Data | null };
 
@@ -21,13 +22,11 @@ export default function Home() {
 
   return (
     <I18nProvider>
-      <div className="screen" key={state.status}>
-        {state.status === 'signedIn' ? (
-          <Dashboard initial={state.snapshot} onSignOut={() => setState({ status: 'signedOut' })} />
-        ) : (
-          <Login onConnected={(snapshot) => setState({ status: 'signedIn', snapshot })} />
-        )}
-      </div>
+      {state.status === 'signedIn' ? (
+        <Shell initial={state.snapshot} onSignOut={() => setState({ status: 'signedOut' })} />
+      ) : (
+        <Login onConnected={(snapshot) => setState({ status: 'signedIn', snapshot })} />
+      )}
     </I18nProvider>
   );
 }

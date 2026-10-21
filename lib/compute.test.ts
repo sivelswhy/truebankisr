@@ -1,8 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { computeTrueBalance, type Txn } from './compute.ts';
+import { computeTrueBalance, dailyBudget, daysUntil, type Txn } from './compute.ts';
 
+let n = 0;
 const card = (processedDate: string, amount: number, extra: Partial<Txn> = {}): Txn => ({
+  id: `t${n++}`,
   date: '2026-10-05T10:00:00.000Z',
   processedDate,
   chargedAmount: -amount,
@@ -76,4 +78,26 @@ test('pending Max txns with no charged amount yet use the original amount', () =
   );
   assert.equal(r.nextCharge?.total, 42);
   assert.equal(r.trueBalance, 58);
+});
+
+test('foreign charges with a known rate become ILS estimates', () => {
+  const r = computeTrueBalance(
+    { accountNumber: 'b', balance: 100, txns: [] },
+    [{ accountNumber: 'c', txns: [card('2026-11-01T22:00:00.000Z', 10, { chargedCurrency: 'USD' })] }],
+    { now, fxRates: { USD: 3.5 } },
+  );
+  assert.equal(r.trueBalance, 65);
+  assert.equal(r.ignoredForeign.length, 0);
+  assert.equal(r.nextCharge?.txns[0].originalCurrency, 'USD');
+  assert.equal(r.nextCharge?.txns[0].originalAmount, -10);
+});
+
+test('daily budget spreads the true balance until the debit', () => {
+  const r = computeTrueBalance(
+    { accountNumber: 'b', balance: 1300, txns: [] },
+    [{ accountNumber: 'c', txns: [card('2026-11-01T22:00:00.000Z', 100)] }],
+    { now },
+  );
+  assert.equal(daysUntil('2026-11-02', now), 14);
+  assert.equal(dailyBudget(r, now), 85.71);
 });

@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start -H 127.0.0.1",
     "test": "node --test lib/*.test.ts",
+    "strings": "node scripts/strings.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

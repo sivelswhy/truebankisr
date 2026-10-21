@@ -20,12 +20,15 @@ Two clients:
   Arabic. See [ios/README.md](ios/README.md).
 - **Web app** (this folder): Next.js, runs on your Mac and scrapes with
   [`israeli-bank-scrapers`](https://github.com/eshaham/israeli-bank-scrapers).
-  In English and French.
+  The same four tabs and screens as the iPhone app, in the same five languages.
 
-Both show the next debit by category, installments in later months, and pending
-purchases (with the time of purchase when Max gives it). The iPhone app adds
-Leumi movements, spending over any period, budgets, subscriptions, a forecast,
-net worth, notes and tags, a widget, Siri and an optional Face ID lock.
+Both show the true balance with the days left and a daily budget, the next debit
+by category, installments in later months, pending purchases (with the time of
+purchase when Max gives it), Leumi movements with transfer details, spending over
+any period with CSV export, budgets, subscriptions, a forecast with salary and
+regular debits, month-to-month comparison, notes and tags on purchases, an alert
+threshold and a hide-amounts switch. The iPhone app adds European banks, a
+widget, Siri and an optional Face ID lock.
 
 > **Personal use only.** This logs into your bank with your own credentials and
 > reads your own data. Credentials never leave your device (Keychain on iPhone,
@@ -81,8 +84,14 @@ only saves the credentials if both succeed. They are stored encrypted
 (AES-256-GCM) in `data/credentials.enc`, with the key in `data/vault.key`
 (both readable only by your macOS user). **Disconnect accounts** deletes them.
 
-Pull down (or tap ↻) to refresh; a refresh takes 30–90 s. The last result is
-cached in `data/snapshot.json`. Optional settings are in `.env.example`.
+Pull down, tap ↻ or press **R** to refresh; a refresh takes 30–90 s. Like the
+iPhone app, the first refresh reads a year of Max purchases and later ones only
+the last two months; older purchases are kept in `data/history.json`. The last
+result is cached in `data/snapshot.json`, and your first name, budgets, notes and
+settings in `data/prefs.json`. Optional settings are in `.env.example`.
+
+The wording comes from the iPhone app's string catalog: after changing iOS
+strings, run `npm run strings` to update `lib/strings.json`.
 
 ## How it's computed (`lib/compute.ts`)
 

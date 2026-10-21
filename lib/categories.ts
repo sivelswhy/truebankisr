@@ -1,66 +1,66 @@
-// Max category names (Hebrew, as returned by Max's API) → translations + colour.
+// Max category names (Hebrew, as returned by Max's API) → the iPhone app's
+// category keys and colours. Labels are "category.<key>" in lib/strings.json.
 // Source: https://onlinelcapi.max.co.il/api/contents/getCategories
 
-export type Lang = 'en' | 'fr';
+export const UNCATEGORIZED = 'uncategorized';
 
-interface Category {
-  key: string;
-  color: string;
-  en: string;
-  fr: string;
-}
-
-const CATEGORIES: Record<string, Category> = {
-  'ביטוח': { key: 'insurance', color: '#2550ff', en: 'Insurance', fr: 'Assurance' },
-  'דלק, חשמל וגז': { key: 'energy', color: '#3dc0e9', en: 'Fuel, power & gas', fr: 'Carburant, électricité et gaz' },
-  'אופנה': { key: 'fashion', color: '#00a3ad', en: 'Fashion', fr: 'Mode' },
-  'עיצוב הבית': { key: 'home', color: '#c20017', en: 'Home & DIY', fr: 'Maison et bricolage' },
-  'טיסות ותיירות': { key: 'travel', color: '#b200df', en: 'Flights & travel', fr: 'Vols et voyages' },
-  'חשמל ומחשבים': { key: 'electronics', color: '#7800f7', en: 'Electronics', fr: 'Électronique et informatique' },
-  'מזון וצריכה': { key: 'groceries', color: '#ff3f9b', en: 'Groceries', fr: 'Courses' },
-  'ספרים ודפוס': { key: 'books', color: '#ff2a11', en: 'Books & print', fr: 'Livres et papeterie' },
-  'פנאי, בידור וספורט': { key: 'leisure', color: '#ff7121', en: 'Leisure & sport', fr: 'Loisirs et sport' },
-  'תחבורה ורכבים': { key: 'transport', color: '#009950', en: 'Transport & cars', fr: 'Transport et voiture' },
-  'עירייה וממשלה': { key: 'government', color: '#f9b300', en: 'City & government', fr: 'Mairie et administration' },
-  'רפואה ובתי מרקחת': { key: 'health', color: '#879aff', en: 'Health & pharmacy', fr: 'Santé et pharmacie' },
-  'שירותי תקשורת': { key: 'telecom', color: '#b6c700', en: 'Phone & internet', fr: 'Téléphone et internet' },
-  'שונות': { key: 'other', color: '#a1a1a6', en: 'Other', fr: 'Divers' },
-  'מוצרי אשראי m_a_x': { key: 'max', color: '#002aa9', en: 'Max products', fr: 'Produits Max' },
-  'מוצרי m_a_x': { key: 'max', color: '#002aa9', en: 'Max products', fr: 'Produits Max' },
-  'משיכת מזומן': { key: 'cash', color: '#1bc200', en: 'Cash withdrawal', fr: 'Retrait d’espèces' },
-  'העברת כספים': { key: 'transfer', color: '#aa82ff', en: 'Money transfer', fr: 'Virement' },
-  'חיות מחמד': { key: 'pets', color: '#922108', en: 'Pets', fr: 'Animaux' },
-  'קוסמטיקה וטיפוח': { key: 'beauty', color: '#ff8dab', en: 'Beauty & care', fr: 'Beauté et soins' },
-  'מסעדות, קפה וברים': { key: 'restaurants', color: '#13e2bf', en: 'Restaurants & bars', fr: 'Restaurants, cafés et bars' },
-  'מט"ח': { key: 'fx', color: '#d9a364', en: 'Foreign currency', fr: 'Devises' },
+const BY_NAME: Record<string, string> = {
+  'ביטוח': 'insurance',
+  'דלק, חשמל וגז': 'energy',
+  'אופנה': 'fashion',
+  'עיצוב הבית': 'home',
+  'טיסות ותיירות': 'travel',
+  'חשמל ומחשבים': 'electronics',
+  'מזון וצריכה': 'groceries',
+  'ספרים ודפוס': 'books',
+  'פנאי, בידור וספורט': 'leisure',
+  'תחבורה ורכבים': 'transport',
+  'עירייה וממשלה': 'government',
+  'רפואה ובתי מרקחת': 'health',
+  'שירותי תקשורת': 'telecom',
+  'שונות': 'other',
+  'מוצרי אשראי m_a_x': 'max',
+  'מוצרי m_a_x': 'max',
+  'משיכת מזומן': 'cash',
+  'העברת כספים': 'transfer',
+  'חיות מחמד': 'pets',
+  'קוסמטיקה וטיפוח': 'beauty',
+  'מסעדות, קפה וברים': 'restaurants',
+  'מט"ח': 'fx',
 };
 
-const UNKNOWN: Category = { key: 'uncategorized', color: '#a1a1a6', en: 'Uncategorized', fr: 'Sans catégorie' };
+// Same colours as `Category.colors` in TrueBalanceCore.
+export const COLORS: Record<string, string> = {
+  insurance: '#2550FF', energy: '#3DC0E9', fashion: '#00A3AD', home: '#C20017',
+  travel: '#B200DF', electronics: '#7800F7', groceries: '#FF3F9B', books: '#FF2A11',
+  leisure: '#FF7121', transport: '#009950', government: '#F9B300', health: '#879AFF',
+  telecom: '#B6C700', other: '#A1A1A6', max: '#002AA9', cash: '#1BC200',
+  transfer: '#AA82FF', pets: '#922108', beauty: '#FF8DAB', restaurants: '#13E2BF',
+  fx: '#D9A364', [UNCATEGORIZED]: '#A1A1A6',
+};
 
-export function category(name: string | undefined, lang: Lang): { key: string; color: string; label: string } {
-  const c = (name && CATEGORIES[name.trim()]) || null;
-  if (c) return { key: c.key, color: c.color, label: c[lang] };
-  // Unknown category: show Max's own name rather than hide it.
-  return { key: name ? `raw:${name}` : UNKNOWN.key, color: UNKNOWN.color, label: name || UNKNOWN[lang] };
+/** Max's Hebrew category name → stable key. */
+export function categoryKey(name: string | undefined): string {
+  return (name && BY_NAME[name.trim()]) || UNCATEGORIZED;
 }
+
+export const categoryColor = (key: string | undefined) => COLORS[key ?? UNCATEGORIZED] ?? COLORS[UNCATEGORIZED];
 
 export interface CategoryTotal {
   key: string;
-  label: string;
-  color: string;
   total: number;
   count: number;
 }
 
-// Totals per category, biggest first. Amounts are positive spend.
-export function totalsByCategory(txns: { category?: string; chargedAmount: number }[], lang: Lang): CategoryTotal[] {
+/** Totals per category, biggest first. Amounts are positive spend. */
+export function totalsByCategory(txns: { category?: string; chargedAmount: number }[]): CategoryTotal[] {
   const map = new Map<string, CategoryTotal>();
   for (const t of txns) {
-    const c = category(t.category, lang);
-    const entry = map.get(c.key) ?? { ...c, total: 0, count: 0 };
-    entry.total += -t.chargedAmount;
+    const key = t.category ?? UNCATEGORIZED;
+    const entry = map.get(key) ?? { key, total: 0, count: 0 };
+    entry.total -= t.chargedAmount;
     entry.count += 1;
-    map.set(c.key, entry);
+    map.set(key, entry);
   }
   return [...map.values()]
     .map((e) => ({ ...e, total: Math.round(e.total * 100) / 100 }))

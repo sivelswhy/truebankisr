@@ -1,0 +1,2121 @@
+{
+ "%@ a year": {
+  "fr": "%@ par an",
+  "he": "%@ בשנה",
+  "ru": "%@ в год",
+  "ar": "%@ سنويًا"
+ },
+ "%@ account": {
+  "fr": "Compte %@",
+  "he": "חשבון %@",
+  "ru": "Счёт в %@",
+  "ar": "حساب %@"
+ },
+ "%@ account (not counted, no rate)": {
+  "fr": "Compte %@ (non compté, pas de taux)",
+  "he": "חשבון %@ (לא נכלל, אין שער)",
+  "ru": "Счёт в %@ (не учтён: нет курса)",
+  "ar": "حساب %@ (غير محتسب، لا يوجد سعر صرف)"
+ },
+ "%@ asked for an extra verification step. Sign in once on their website, then try again.": {
+  "fr": "%@ a demandé une vérification supplémentaire. Connecte-toi une fois sur leur site, puis réessaie.",
+  "he": "%@ ביקשו שלב אימות נוסף. יש להתחבר פעם אחת באתר שלהם ואז לנסות שוב.",
+  "ru": "%@ запросил дополнительную проверку. Войдите один раз на его сайте, затем повторите попытку.",
+  "ar": "طلب %@ خطوة تحقق إضافية. سجّل الدخول مرة واحدة على موقعه، ثم حاول مجددًا."
+ },
+ "%@ asks you to change your password. Do it on their site, then sign in again.": {
+  "fr": "%@ te demande de changer ton mot de passe. Fais-le sur leur site, puis reconnecte-toi.",
+  "he": "%@ מבקשים להחליף סיסמה. יש להחליף אותה באתר שלהם ואז להתחבר שוב.",
+  "ru": "%@ просит сменить пароль. Смените его на сайте, затем войдите снова.",
+  "ar": "يطلب %@ تغيير كلمة المرور. غيّرها على موقعه، ثم سجّل الدخول مجددًا."
+ },
+ "%@ at the Bank of Israel rate": {
+  "fr": "%@ au taux de la Banque d’Israël",
+  "he": "%@ לפי שער בנק ישראל",
+  "ru": "%@ по курсу Банка Израиля",
+  "ar": "%@ بسعر بنك إسرائيل"
+ },
+ "%@ budget used up": {
+  "fr": "Budget %@ épuisé",
+  "he": "התקציב של %@ נוצל",
+  "ru": "Бюджет «%@» исчерпан",
+  "ar": "نفدت ميزانية %@"
+ },
+ "%@ didn’t accept this username or password.": {
+  "fr": "%@ n’a pas accepté cet identifiant ou ce mot de passe.",
+  "he": "%@ לא קיבלו את שם המשתמש או הסיסמה.",
+  "ru": "%@ не принял этот логин или пароль.",
+  "ar": "لم يقبل %@ اسم المستخدم أو كلمة المرور هذه."
+ },
+ "%@ left": {
+  "fr": "reste %@",
+  "he": "נותרו %@",
+  "ru": "Осталось %@",
+  "ar": "متبقٍّ %@"
+ },
+ "%@ over": {
+  "fr": "%@ de dépassement",
+  "he": "חריגה של %@",
+  "ru": "Перерасход %@",
+  "ar": "تجاوز بمقدار %@"
+ },
+ "%@ refused the connection from this network. This happens from abroad or through a VPN: turn the VPN off or try another network.": {
+  "fr": "%@ a refusé la connexion depuis ce réseau. Cela arrive depuis l’étranger ou via un VPN : désactivez le VPN ou essayez un autre réseau.",
+  "he": "%@ דחו את החיבור מהרשת הזאת. זה קורה מחו״ל או דרך VPN: כדאי לכבות את ה-VPN או לנסות רשת אחרת.",
+  "ru": "%@ отклонил подключение из этой сети. Так бывает за границей или через VPN: отключите VPN или попробуйте другую сеть.",
+  "ar": "رفض %@ الاتصال من هذه الشبكة. يحدث هذا من خارج البلاد أو عبر VPN: أوقف الـ VPN أو جرّب شبكة أخرى."
+ },
+ "%@ so far": {
+  "fr": "%@ pour l’instant",
+  "he": "%@ עד עכשיו",
+  "ru": "%@ на сегодня",
+  "ar": "%@ حتى الآن"
+ },
+ "%@ spent": {
+  "fr": "%@ dépensés",
+  "he": "הוצאו %@",
+  "ru": "Потрачено %@",
+  "ar": "أُنفق %@"
+ },
+ "%@ spent this month out of %@.": {
+  "en": "%1$@ spent this month out of %2$@.",
+  "fr": "%1$@ dépensés ce mois-ci sur %2$@.",
+  "he": "החודש הוצאו %1$@ מתוך %2$@.",
+  "ru": "В этом месяце потрачено %1$@ из %2$@.",
+  "ar": "أُنفق هذا الشهر %1$@ من أصل %2$@."
+ },
+ "%@ took too long to respond. The connection may be slow or the site busy: try again.": {
+  "fr": "%@ a mis trop de temps à répondre. La connexion est peut-être lente ou le site surchargé : réessayez.",
+  "he": "%@ לא הגיבו בזמן. ייתכן שהחיבור איטי או שהאתר עמוס: אפשר לנסות שוב.",
+  "ru": "%@ слишком долго не отвечал. Возможно, связь медленная или сайт перегружен: повторите попытку.",
+  "ar": "استغرق %@ وقتًا طويلًا للرد. قد يكون الاتصال بطيئًا أو الموقع مزدحمًا: حاول مجددًا."
+ },
+ "%@ took too long to respond. Try again.": {
+  "fr": "%@ a mis trop de temps à répondre. Réessaie.",
+  "he": "%@ לא הגיבו בזמן. אפשר לנסות שוב.",
+  "ru": "%@ слишком долго не отвечал. Повторите попытку.",
+  "ar": "استغرق %@ وقتًا طويلًا للرد. حاول مجددًا."
+ },
+ "%@/month": {
+  "fr": "%@/mois",
+  "he": "%@ לחודש",
+  "ru": "%@/мес.",
+  "ar": "%@ شهريًا"
+ },
+ "%@: 80%% of the budget used": {
+  "fr": "%@ : 80 %% du budget utilisé",
+  "he": "%@: נוצלו 80%% מהתקציב",
+  "ru": "%@: использовано 80%% бюджета",
+  "ar": "%@: استُخدم 80%% من الميزانية"
+ },
+ "%@’s site is under maintenance or unavailable for now. Try again later.": {
+  "fr": "Le site de %@ est en maintenance ou indisponible pour le moment. Réessayez plus tard.",
+  "he": "האתר של %@ בתחזוקה או לא זמין כרגע. אפשר לנסות שוב מאוחר יותר.",
+  "ru": "Сайт %@ на техобслуживании или сейчас недоступен. Повторите попытку позже.",
+  "ar": "موقع %@ قيد الصيانة أو غير متاح حاليًا. حاول لاحقًا."
+ },
+ "%lld bank(s)": {
+  "en": {
+   "one": "%lld bank",
+   "other": "%lld banks"
+  },
+  "fr": {
+   "one": "%lld banque",
+   "other": "%lld banques"
+  },
+  "he": {
+   "one": "בנק אחד",
+   "two": "%lld בנקים",
+   "other": "%lld בנקים"
+  },
+  "ru": {
+   "one": "%lld банк",
+   "few": "%lld банка",
+   "many": "%lld банков",
+   "other": "%lld банка"
+  },
+  "ar": {
+   "zero": "%lld بنك",
+   "one": "بنك واحد",
+   "two": "بنكان",
+   "few": "%lld بنوك",
+   "many": "%lld بنكًا",
+   "other": "%lld بنك"
+  }
+ },
+ "%lld day(s) until the debit": {
+  "en": {
+   "one": "%lld day until the debit",
+   "other": "%lld days until the debit"
+  },
+  "fr": {
+   "one": "%lld jour avant le prélèvement",
+   "other": "%lld jours avant le prélèvement"
+  },
+  "he": {
+   "one": "יום אחד עד החיוב",
+   "two": "יומיים עד החיוב",
+   "other": "%lld ימים עד החיוב"
+  },
+  "ru": {
+   "one": "%lld день до списания",
+   "few": "%lld дня до списания",
+   "many": "%lld дней до списания",
+   "other": "%lld дня до списания"
+  },
+  "ar": {
+   "zero": "%lld يوم حتى الخصم",
+   "one": "يوم واحد حتى الخصم",
+   "two": "يومان حتى الخصم",
+   "few": "%lld أيام حتى الخصم",
+   "many": "%lld يومًا حتى الخصم",
+   "other": "%lld يوم حتى الخصم"
+  }
+ },
+ "%lld foreign-currency charge(s) not included.": {
+  "en": {
+   "one": "%lld foreign-currency charge not included.",
+   "other": "%lld foreign-currency charges not included."
+  },
+  "fr": {
+   "one": "%lld dépense en devise étrangère non incluse.",
+   "other": "%lld dépenses en devise étrangère non incluses."
+  },
+  "he": {
+   "one": "חיוב אחד במטבע חוץ לא נכלל.",
+   "two": "%lld חיובים במטבע חוץ לא נכללו.",
+   "other": "%lld חיובים במטבע חוץ לא נכללו."
+  },
+  "ru": {
+   "one": "%lld покупка в валюте не учтена.",
+   "few": "%lld покупки в валюте не учтены.",
+   "many": "%lld покупок в валюте не учтено.",
+   "other": "%lld покупки в валюте не учтено."
+  },
+  "ar": {
+   "zero": "لم تُحتسب %lld عملية شراء بعملة أجنبية.",
+   "one": "لم تُحتسب عملية شراء واحدة بعملة أجنبية.",
+   "two": "لم تُحتسب عمليتا شراء بعملة أجنبية.",
+   "few": "لم تُحتسب %lld عمليات شراء بعملة أجنبية.",
+   "many": "لم تُحتسب %lld عملية شراء بعملة أجنبية.",
+   "other": "لم تُحتسب %lld عملية شراء بعملة أجنبية."
+  }
+ },
+ "%lld of %lld": {
+  "en": "%1$lld of %2$lld",
+  "fr": "%1$lld sur %2$lld",
+  "he": "%1$lld מתוך %2$lld",
+  "ru": "%1$lld из %2$lld",
+  "ar": "%1$lld من %2$lld"
+ },
+ "%lld purchase(s)": {
+  "en": {
+   "one": "%lld purchase",
+   "other": "%lld purchases"
+  },
+  "fr": {
+   "one": "%lld achat",
+   "other": "%lld achats"
+  },
+  "he": {
+   "one": "רכישה אחת",
+   "two": "%lld רכישות",
+   "other": "%lld רכישות"
+  },
+  "ru": {
+   "one": "%lld покупка",
+   "few": "%lld покупки",
+   "many": "%lld покупок",
+   "other": "%lld покупки"
+  },
+  "ar": {
+   "zero": "%lld عملية شراء",
+   "one": "عملية شراء واحدة",
+   "two": "عمليتا شراء",
+   "few": "%lld عمليات شراء",
+   "many": "%lld عملية شراء",
+   "other": "%lld عملية شراء"
+  }
+ },
+ "%lld result(s)": {
+  "en": {
+   "one": "%lld result",
+   "other": "%lld results"
+  },
+  "fr": {
+   "one": "%lld résultat",
+   "other": "%lld résultats"
+  },
+  "he": {
+   "one": "תוצאה אחת",
+   "two": "%lld תוצאות",
+   "other": "%lld תוצאות"
+  },
+  "ru": {
+   "one": "%lld результат",
+   "few": "%lld результата",
+   "many": "%lld результатов",
+   "other": "%lld результата"
+  },
+  "ar": {
+   "zero": "%lld نتيجة",
+   "one": "نتيجة واحدة",
+   "two": "نتيجتان",
+   "few": "%lld نتائج",
+   "many": "%lld نتيجة",
+   "other": "%lld نتيجة"
+  }
+ },
+ "%lld subscription(s)": {
+  "en": {
+   "one": "%lld subscription",
+   "other": "%lld subscriptions"
+  },
+  "fr": {
+   "one": "%lld abonnement",
+   "other": "%lld abonnements"
+  },
+  "he": {
+   "one": "מינוי אחד",
+   "two": "%lld מינויים",
+   "other": "%lld מינויים"
+  },
+  "ru": {
+   "one": "%lld подписка",
+   "few": "%lld подписки",
+   "many": "%lld подписок",
+   "other": "%lld подписки"
+  },
+  "ar": {
+   "zero": "%lld اشتراك",
+   "one": "اشتراك واحد",
+   "two": "اشتراكان",
+   "few": "%lld اشتراكات",
+   "many": "%lld اشتراكًا",
+   "other": "%lld اشتراك"
+  }
+ },
+ "30 days": {
+  "fr": "30 jours",
+  "he": "30 יום",
+  "ru": "30 дней",
+  "ar": "30 يومًا"
+ },
+ "7 days": {
+  "fr": "7 jours",
+  "he": "7 ימים",
+  "ru": "7 дней",
+  "ar": "7 أيام"
+ },
+ "About %@ a day until the debit.": {
+  "fr": "Environ %@ par jour jusqu’au prélèvement.",
+  "he": "בערך %@ ליום עד החיוב.",
+  "ru": "Около %@ в день до списания.",
+  "ar": "نحو %@ يوميًا حتى الخصم."
+ },
+ "Access expired": {
+  "fr": "Accès expiré",
+  "he": "הגישה פגה",
+  "ru": "Доступ истёк",
+  "ar": "انتهت صلاحية الوصول"
+ },
+ "Access has expired. Connect the bank again.": {
+  "fr": "L’accès a expiré. Reconnectez la banque.",
+  "he": "הגישה פגה. יש לחבר את הבנק מחדש.",
+  "ru": "Доступ истёк. Подключите банк заново.",
+  "ar": "انتهت صلاحية الوصول. اربط البنك من جديد."
+ },
+ "Account": {
+  "fr": "Compte",
+  "he": "חשבון",
+  "ru": "Счёт",
+  "ar": "الحساب"
+ },
+ "Accounts": {
+  "fr": "Comptes",
+  "he": "חשבונות",
+  "ru": "Счета",
+  "ar": "الحسابات"
+ },
+ "Add": {
+  "fr": "Ajouter",
+  "he": "הוספה",
+  "ru": "Добавить",
+  "ar": "إضافة"
+ },
+ "Add a bank": {
+  "fr": "Ajouter une banque",
+  "he": "הוספת בנק",
+  "ru": "Добавить банк",
+  "ar": "إضافة بنك"
+ },
+ "Add a note (e.g. reimbursed by Dana)": {
+  "fr": "Ajouter une note (ex. remboursé par Dana)",
+  "he": "הוספת הערה (למשל: דנה החזירה)",
+  "ru": "Добавьте заметку (например, Дана вернула деньги)",
+  "ar": "أضف ملاحظة (مثلًا: أعادته دانة)"
+ },
+ "Address given by Max.": {
+  "fr": "Adresse donnée par Max.",
+  "he": "הכתובת שמסרה מקס.",
+  "ru": "Адрес указан Максом.",
+  "ar": "العنوان كما أرسلته ماكس."
+ },
+ "After Max is debited on %@, your balance will be %@.": {
+  "en": "After Max is debited on %1$@, your balance will be %2$@.",
+  "fr": "Après le prélèvement Max du %1$@, ton solde sera de %2$@.",
+  "he": "אחרי החיוב של מקס ב-%1$@, היתרה תהיה %2$@.",
+  "ru": "После списания Макса %1$@ ваш баланс составит %2$@.",
+  "ar": "بعد خصم ماكس في %1$@، سيصبح رصيدك %2$@."
+ },
+ "After Max on %@, you’ll have %@. Updated %@.": {
+  "en": "After Max on %1$@, you’ll have %2$@. Updated %3$@.",
+  "fr": "Après Max le %1$@, tu auras %2$@. Mis à jour %3$@.",
+  "he": "אחרי מקס ב-%1$@ יישארו %2$@. עודכן %3$@.",
+  "ru": "После Макса %1$@ у вас останется %2$@. Обновлено %3$@.",
+  "ar": "بعد ماكس في %1$@ سيتبقى لك %2$@. آخر تحديث %3$@."
+ },
+ "Alert me below": {
+  "fr": "M’alerter en dessous de",
+  "he": "התראה מתחת ל-",
+  "ru": "Уведомлять ниже",
+  "ar": "نبّهني عند الانخفاض عن"
+ },
+ "All": {
+  "fr": "Tout",
+  "he": "הכול",
+  "ru": "Все",
+  "ar": "الكل"
+ },
+ "All purchases at %@": {
+  "fr": "Tous les achats chez %@",
+  "he": "כל הרכישות ב-%@",
+  "ru": "Все покупки в %@",
+  "ar": "كل المشتريات في %@"
+ },
+ "Amount": {
+  "fr": "Montant",
+  "he": "סכום",
+  "ru": "Сумма",
+  "ar": "المبلغ"
+ },
+ "Amounts debited %@.": {
+  "fr": "Montants prélevés le %@.",
+  "he": "סכומים שיחויבו ב-%@.",
+  "ru": "Суммы к списанию %@.",
+  "ar": "المبالغ التي تُخصم في %@."
+ },
+ "Any bank in Europe that Enable Banking supports. You confirm on the bank’s site or app, then come back here. Access is read only and lasts 180 days.": {
+  "fr": "Toute banque européenne gérée par Enable Banking. Vous confirmez sur le site ou l’app de la banque, puis vous revenez ici. L’accès est en lecture seule et dure 180 jours.",
+  "he": "כל בנק באירופה ש-Enable Banking תומך בו. מאשרים באתר או באפליקציה של הבנק וחוזרים לכאן. הגישה לקריאה בלבד ונמשכת 180 יום.",
+  "ru": "Любой европейский банк, который поддерживает Enable Banking. Вы подтверждаете доступ на сайте или в приложении банка и возвращаетесь сюда. Доступ только для чтения и действует 180 дней.",
+  "ar": "أي بنك في أوروبا يدعمه Enable Banking. تؤكّد على موقع البنك أو تطبيقه ثم تعود إلى هنا. الوصول للقراءة فقط ويدوم 180 يومًا."
+ },
+ "Application ID": {
+  "fr": "Identifiant de l’application",
+  "he": "מזהה האפליקציה",
+  "ru": "ID приложения",
+  "ar": "معرّف التطبيق"
+ },
+ "Automatic refresh": {
+  "fr": "Actualisation automatique",
+  "he": "רענון אוטומטי",
+  "ru": "Автообновление",
+  "ar": "التحديث التلقائي"
+ },
+ "Available": {
+  "fr": "Disponible",
+  "he": "זמין",
+  "ru": "Доступно",
+  "ar": "المتاح"
+ },
+ "Available after Max": {
+  "fr": "Disponible après Max",
+  "he": "זמין אחרי מקס",
+  "ru": "Доступно после Макса",
+  "ar": "المتاح بعد ماكس"
+ },
+ "Available in English, French, Hebrew, Russian and Arabic. Choose the app’s language in Settings.": {
+  "fr": "Disponible en anglais, français, hébreu, russe et arabe. Choisissez la langue de l’app dans Réglages.",
+  "he": "זמינה באנגלית, בצרפתית, בעברית, ברוסית ובערבית. את שפת האפליקציה בוחרים בהגדרות.",
+  "ru": "Доступно на английском, французском, иврите, русском и арабском. Язык приложения выбирается в Настройках.",
+  "ar": "متوفر بالإنجليزية والفرنسية والعبرية والروسية والعربية. اختر لغة التطبيق من الإعدادات."
+ },
+ "Balance": {
+  "fr": "Solde",
+  "he": "יתרה",
+  "ru": "Баланс",
+  "ar": "الرصيد"
+ },
+ "Balance %@": {
+  "fr": "Solde %@",
+  "he": "יתרה %@",
+  "ru": "Баланс %@",
+  "ar": "الرصيد %@"
+ },
+ "Balance after": {
+  "fr": "Solde après",
+  "he": "יתרה אחרי",
+  "ru": "Баланс после",
+  "ar": "الرصيد بعدها"
+ },
+ "Balance not available": {
+  "fr": "Solde indisponible",
+  "he": "היתרה לא זמינה",
+  "ru": "Баланс недоступен",
+  "ar": "الرصيد غير متاح"
+ },
+ "Bank": {
+  "fr": "Banque",
+  "he": "בנק",
+  "ru": "Банк",
+  "ar": "البنك"
+ },
+ "Bank Leumi": {
+  "fr": "Banque Leumi",
+  "he": "בנק לאומי",
+  "ru": "Банк Леуми",
+  "ar": "بنك لئومي"
+ },
+ "Banks": {
+  "fr": "Banques",
+  "he": "בנקים",
+  "ru": "Банки",
+  "ar": "البنوك"
+ },
+ "Branch": {
+  "fr": "Agence",
+  "he": "סניף",
+  "ru": "Отделение",
+  "ar": "الفرع"
+ },
+ "Budgets": {
+  "fr": "Budgets",
+  "he": "תקציבים",
+  "ru": "Бюджеты",
+  "ar": "الميزانيات"
+ },
+ "Business accounts": {
+  "fr": "Comptes professionnels",
+  "he": "חשבונות עסקיים",
+  "ru": "Бизнес-счета",
+  "ar": "حسابات تجارية"
+ },
+ "By category": {
+  "fr": "Par catégorie",
+  "he": "לפי קטגוריה",
+  "ru": "По категориям",
+  "ar": "حسب الفئة"
+ },
+ "Calculation": {
+  "fr": "Calcul",
+  "he": "החישוב",
+  "ru": "Расчёт",
+  "ar": "طريقة الحساب"
+ },
+ "Cancel": {
+  "fr": "Annuler",
+  "he": "ביטול",
+  "ru": "Отменить",
+  "ar": "إلغاء"
+ },
+ "Card": {
+  "fr": "Carte",
+  "he": "כרטיס",
+  "ru": "Карта",
+  "ar": "البطاقة"
+ },
+ "Card ending in %@": {
+  "fr": "Carte se terminant par %@",
+  "he": "כרטיס המסתיים ב-%@",
+  "ru": "Карта, оканчивающаяся на %@",
+  "ar": "بطاقة تنتهي بـ %@"
+ },
+ "Card spending": {
+  "fr": "Dépenses carte",
+  "he": "הוצאות בכרטיס",
+  "ru": "Расходы по карте",
+  "ar": "مصاريف البطاقة"
+ },
+ "Cards": {
+  "fr": "Cartes",
+  "he": "כרטיסים",
+  "ru": "Карты",
+  "ar": "البطاقات"
+ },
+ "Category": {
+  "fr": "Catégorie",
+  "he": "קטגוריה",
+  "ru": "Категория",
+  "ar": "الفئة"
+ },
+ "Change": {
+  "fr": "Évolution",
+  "he": "שינוי",
+  "ru": "Изменение",
+  "ar": "التغيّر"
+ },
+ "Charges": {
+  "fr": "Prélèvements",
+  "he": "חיובים",
+  "ru": "Списания",
+  "ar": "الخصومات"
+ },
+ "Clear": {
+  "fr": "Effacer",
+  "he": "ניקוי",
+  "ru": "Очистить",
+  "ar": "مسح"
+ },
+ "Clear the log": {
+  "fr": "Effacer le journal",
+  "he": "ניקוי היומן",
+  "ru": "Очистить журнал",
+  "ar": "مسح السجل"
+ },
+ "Compared with the same days of last month.": {
+  "fr": "Comparé aux mêmes jours du mois dernier.",
+  "he": "בהשוואה לאותם ימים בחודש שעבר.",
+  "ru": "По сравнению с теми же днями прошлого месяца.",
+  "ar": "مقارنةً بالأيام نفسها من الشهر الماضي."
+ },
+ "Connect": {
+  "fr": "Se connecter",
+  "he": "התחברות",
+  "ru": "Подключить",
+  "ar": "ربط"
+ },
+ "Connected": {
+  "fr": "Connectée",
+  "he": "מחובר",
+  "ru": "Подключён",
+  "ar": "مرتبط"
+ },
+ "Connected until %@": {
+  "fr": "Connectée jusqu’au %@",
+  "he": "מחובר עד %@",
+  "ru": "Подключён до %@",
+  "ar": "مرتبط حتى %@"
+ },
+ "Connecting to Leumi and Max…": {
+  "fr": "Connexion à Leumi et Max…",
+  "he": "מתחברים ללאומי ולמקס…",
+  "ru": "Подключение к Леуми и Максу…",
+  "ar": "جارٍ الاتصال بلئومي وماكس…"
+ },
+ "Copy amount": {
+  "fr": "Copier le montant",
+  "he": "העתקת הסכום",
+  "ru": "Скопировать сумму",
+  "ar": "نسخ المبلغ"
+ },
+ "Copy merchant": {
+  "fr": "Copier le commerçant",
+  "he": "העתקת שם בית העסק",
+  "ru": "Скопировать продавца",
+  "ar": "نسخ اسم التاجر"
+ },
+ "Couldn’t reach %@. Check your connection and try again.": {
+  "fr": "Impossible de joindre %@. Vérifie ta connexion et réessaie.",
+  "he": "אין גישה ל%@. כדאי לבדוק את החיבור ולנסות שוב.",
+  "ru": "Не удалось связаться с %@. Проверьте подключение и повторите попытку.",
+  "ar": "تعذّر الوصول إلى %@. تحقّق من الاتصال وحاول مجددًا."
+ },
+ "Couldn’t reach Enable Banking. Check your connection and try again.": {
+  "fr": "Impossible de joindre Enable Banking. Vérifiez votre connexion et réessayez.",
+  "he": "אין גישה ל-Enable Banking. כדאי לבדוק את החיבור ולנסות שוב.",
+  "ru": "Не удалось связаться с Enable Banking. Проверьте подключение и повторите попытку.",
+  "ar": "تعذّر الوصول إلى Enable Banking. تحقّق من الاتصال وحاول مجددًا."
+ },
+ "Couldn’t verify it’s you. Try again.": {
+  "fr": "Impossible de vérifier que c’est toi. Réessaie.",
+  "he": "לא הצלחנו לאמת את זהותך. אפשר לנסות שוב.",
+  "ru": "Не удалось подтвердить вашу личность. Повторите попытку.",
+  "ar": "تعذّر التحقق من هويتك. حاول مجددًا."
+ },
+ "Country": {
+  "fr": "Pays",
+  "he": "מדינה",
+  "ru": "Страна",
+  "ar": "البلد"
+ },
+ "Current account after the Max debits already known, savings and foreign-currency accounts at today’s Bank of Israel rate.": {
+  "fr": "Compte courant après les prélèvements Max déjà connus, épargne et comptes en devises au taux du jour de la Banque d’Israël.",
+  "he": "חשבון העו״ש אחרי חיובי מקס הידועים, חיסכון וחשבונות מט״ח לפי שער בנק ישראל היום.",
+  "ru": "Текущий счёт за вычетом уже известных списаний Макса, сбережения и валютные счета по сегодняшнему курсу Банка Израиля.",
+  "ar": "الحساب الجاري بعد خصومات ماكس المعروفة، والتوفير، وحسابات العملات الأجنبية بسعر بنك إسرائيل اليوم."
+ },
+ "Current account, savings and foreign currency": {
+  "fr": "Compte courant, épargne et devises",
+  "he": "עו״ש, חיסכון ומט״ח",
+  "ru": "Текущий счёт, сбережения и валюта",
+  "ar": "الحساب الجاري والتوفير والعملات الأجنبية"
+ },
+ "Custom": {
+  "fr": "Personnalisé",
+  "he": "מותאם",
+  "ru": "Свой период",
+  "ar": "مخصّص"
+ },
+ "DEMO": {
+  "fr": "DÉMO",
+  "he": "הדגמה",
+  "ru": "ДЕМО",
+  "ar": "تجريبي"
+ },
+ "Daily budget": {
+  "fr": "Budget du jour",
+  "he": "תקציב יומי",
+  "ru": "Бюджет на день",
+  "ar": "الميزانية اليومية"
+ },
+ "Date": {
+  "fr": "Date",
+  "he": "תאריך",
+  "ru": "Дата",
+  "ar": "التاريخ"
+ },
+ "Day": {
+  "fr": "Jour",
+  "he": "יום",
+  "ru": "День",
+  "ar": "اليوم"
+ },
+ "Debit": {
+  "fr": "Prélèvement",
+  "he": "חיוב",
+  "ru": "Списание",
+  "ar": "الخصم"
+ },
+ "Debited": {
+  "fr": "Prélevé le",
+  "he": "חויב",
+  "ru": "Списание",
+  "ar": "يُخصم"
+ },
+ "Debited %@": {
+  "fr": "Prélevé le %@",
+  "he": "יחויב ב-%@",
+  "ru": "Спишется %@",
+  "ar": "يُخصم في %@"
+ },
+ "Description": {
+  "fr": "Libellé",
+  "he": "תיאור",
+  "ru": "Описание",
+  "ar": "الوصف"
+ },
+ "Details": {
+  "fr": "Détails",
+  "he": "פרטים",
+  "ru": "Подробности",
+  "ar": "التفاصيل"
+ },
+ "Disconnect": {
+  "fr": "Déconnecter",
+  "he": "ניתוק",
+  "ru": "Отключить",
+  "ar": "فصل"
+ },
+ "Disconnect accounts": {
+  "fr": "Déconnecter les comptes",
+  "he": "ניתוק החשבונות",
+  "ru": "Отключить счета",
+  "ar": "فصل الحسابات"
+ },
+ "Disconnect accounts?": {
+  "fr": "Déconnecter les comptes ?",
+  "he": "לנתק את החשבונות?",
+  "ru": "Отключить счета?",
+  "ar": "فصل الحسابات؟"
+ },
+ "Disconnect and forget credentials": {
+  "fr": "Déconnecter et oublier les identifiants",
+  "he": "ניתוק ומחיקת פרטי ההתחברות",
+  "ru": "Отключить и удалить данные для входа",
+  "ar": "الفصل وحذف بيانات الدخول"
+ },
+ "Done": {
+  "fr": "OK",
+  "he": "סיום",
+  "ru": "Готово",
+  "ar": "تم"
+ },
+ "Edit": {
+  "fr": "Modifier",
+  "he": "עריכה",
+  "ru": "Изменить",
+  "ar": "تعديل"
+ },
+ "Enable Banking answered with an error (%lld).": {
+  "fr": "Enable Banking a répondu par une erreur (%lld).",
+  "he": "Enable Banking החזיר שגיאה (%lld).",
+  "ru": "Enable Banking вернул ошибку (%lld).",
+  "ar": "ردّ Enable Banking بخطأ (%lld)."
+ },
+ "Enable Banking key": {
+  "fr": "Clé Enable Banking",
+  "he": "מפתח Enable Banking",
+  "ru": "Ключ Enable Banking",
+  "ar": "مفتاح Enable Banking"
+ },
+ "Every month on Leumi": {
+  "fr": "Chaque mois sur Leumi",
+  "he": "כל חודש בלאומי",
+  "ru": "Каждый месяц в Леуми",
+  "ar": "كل شهر في لئومي"
+ },
+ "Exit demo": {
+  "fr": "Quitter la démo",
+  "he": "יציאה מההדגמה",
+  "ru": "Выйти из демо",
+  "ar": "الخروج من الوضع التجريبي"
+ },
+ "Expected on %@": {
+  "fr": "Prévu le %@",
+  "he": "צפי ל-%@",
+  "ru": "Ожидается %@",
+  "ar": "المتوقع في %@"
+ },
+ "Export %lld purchase(s) as CSV": {
+  "en": {
+   "one": "Export %lld purchase as CSV",
+   "other": "Export %lld purchases as CSV"
+  },
+  "fr": {
+   "one": "Exporter %lld achat en CSV",
+   "other": "Exporter %lld achats en CSV"
+  },
+  "he": {
+   "one": "ייצוא רכישה אחת ל-CSV",
+   "two": "ייצוא %lld רכישות ל-CSV",
+   "other": "ייצוא %lld רכישות ל-CSV"
+  },
+  "ru": {
+   "one": "Экспортировать %lld покупку в CSV",
+   "few": "Экспортировать %lld покупки в CSV",
+   "many": "Экспортировать %lld покупок в CSV",
+   "other": "Экспортировать %lld покупки в CSV"
+  },
+  "ar": {
+   "zero": "تصدير %lld عملية شراء بصيغة CSV",
+   "one": "تصدير عملية شراء واحدة بصيغة CSV",
+   "two": "تصدير عمليتي شراء بصيغة CSV",
+   "few": "تصدير %lld عمليات شراء بصيغة CSV",
+   "many": "تصدير %lld عملية شراء بصيغة CSV",
+   "other": "تصدير %lld عملية شراء بصيغة CSV"
+  }
+ },
+ "Export the log": {
+  "fr": "Exporter le journal",
+  "he": "ייצוא היומן",
+  "ru": "Экспортировать журнал",
+  "ar": "تصدير السجل"
+ },
+ "Forecast": {
+  "fr": "Prévision",
+  "he": "תחזית",
+  "ru": "Прогноз",
+  "ar": "التوقعات"
+ },
+ "From": {
+  "fr": "Du",
+  "he": "מ-",
+  "ru": "С",
+  "ar": "من"
+ },
+ "Get daily budget": {
+  "fr": "Obtenir le budget du jour",
+  "he": "קבלת התקציב היומי",
+  "ru": "Узнать бюджет на день",
+  "ar": "عرض الميزانية اليومية"
+ },
+ "Get true balance": {
+  "fr": "Obtenir le vrai solde",
+  "he": "קבלת היתרה האמיתית",
+  "ru": "Узнать настоящий баланс",
+  "ar": "عرض الرصيد الحقيقي"
+ },
+ "Has a note": {
+  "fr": "A une note",
+  "he": "יש הערה",
+  "ru": "Есть заметка",
+  "ar": "عليها ملاحظة"
+ },
+ "Heads up: you’ll be overdrawn": {
+  "fr": "Attention : tu vas être à découvert",
+  "he": "שימו לב: צפוי מינוס",
+  "ru": "Внимание: ожидается минус",
+  "ar": "تنبيه: رصيدك سيصبح سالبًا"
+ },
+ "Hello": {
+  "fr": "Bonjour",
+  "he": "שלום",
+  "ru": "Здравствуйте",
+  "ar": "مرحبًا"
+ },
+ "Hello Bank, Revolut": {
+  "fr": "Hello Bank, Revolut",
+  "he": "Hello Bank,‏ Revolut",
+  "ru": "Hello Bank, Revolut",
+  "ar": "Hello Bank، Revolut"
+ },
+ "Hello, %@": {
+  "fr": "Bonjour, %@",
+  "he": "שלום, %@",
+  "ru": "Здравствуйте, %@",
+  "ar": "مرحبًا، %@"
+ },
+ "Hide amounts": {
+  "fr": "Masquer les montants",
+  "he": "הסתרת סכומים",
+  "ru": "Скрывать суммы",
+  "ar": "إخفاء المبالغ"
+ },
+ "Hide password": {
+  "fr": "Masquer le mot de passe",
+  "he": "הסתרת הסיסמה",
+  "ru": "Скрыть пароль",
+  "ar": "إخفاء كلمة المرور"
+ },
+ "Home": {
+  "fr": "Accueil",
+  "he": "בית",
+  "ru": "Главная",
+  "ar": "الرئيسية"
+ },
+ "Import the key (.pem)": {
+  "fr": "Importer la clé (.pem)",
+  "he": "ייבוא המפתח (‎.pem)",
+  "ru": "Импортировать ключ (.pem)",
+  "ar": "استيراد المفتاح (‎.pem)"
+ },
+ "Import your Enable Banking key first.": {
+  "fr": "Importez d’abord votre clé Enable Banking.",
+  "he": "קודם צריך לייבא את מפתח Enable Banking.",
+  "ru": "Сначала импортируйте ключ Enable Banking.",
+  "ar": "استورد مفتاح Enable Banking أولًا."
+ },
+ "In": {
+  "fr": "Reçu",
+  "he": "נכנס",
+  "ru": "Приход",
+  "ar": "وارد"
+ },
+ "Includes %lld foreign-currency charge(s) converted at the Bank of Israel rate (estimate).": {
+  "en": {
+   "one": "Includes %lld foreign-currency charge converted at the Bank of Israel rate (estimate).",
+   "other": "Includes %lld foreign-currency charges converted at the Bank of Israel rate (estimate)."
+  },
+  "fr": {
+   "one": "Inclut %lld achat en devises converti au taux de la Banque d’Israël (estimation).",
+   "other": "Inclut %lld achats en devises convertis au taux de la Banque d’Israël (estimation)."
+  },
+  "he": {
+   "one": "כולל חיוב אחד במטבע חוץ שהומר לפי שער בנק ישראל (הערכה).",
+   "two": "כולל %lld חיובים במטבע חוץ שהומרו לפי שער בנק ישראל (הערכה).",
+   "other": "כולל %lld חיובים במטבע חוץ שהומרו לפי שער בנק ישראל (הערכה)."
+  },
+  "ru": {
+   "one": "Включает %lld покупку в валюте, пересчитанную по курсу Банка Израиля (оценка).",
+   "few": "Включает %lld покупки в валюте, пересчитанные по курсу Банка Израиля (оценка).",
+   "many": "Включает %lld покупок в валюте, пересчитанных по курсу Банка Израиля (оценка).",
+   "other": "Включает %lld покупки в валюте, пересчитанные по курсу Банка Израиля (оценка)."
+  },
+  "ar": {
+   "zero": "يشمل %lld عملية شراء بعملة أجنبية محوّلة بسعر بنك إسرائيل (تقدير).",
+   "one": "يشمل عملية شراء واحدة بعملة أجنبية محوّلة بسعر بنك إسرائيل (تقدير).",
+   "two": "يشمل عمليتي شراء بعملة أجنبية محوّلتين بسعر بنك إسرائيل (تقدير).",
+   "few": "يشمل %lld عمليات شراء بعملة أجنبية محوّلة بسعر بنك إسرائيل (تقدير).",
+   "many": "يشمل %lld عملية شراء بعملة أجنبية محوّلة بسعر بنك إسرائيل (تقدير).",
+   "other": "يشمل %lld عملية شراء بعملة أجنبية محوّلة بسعر بنك إسرائيل (تقدير)."
+  }
+ },
+ "Including regular debits": {
+  "fr": "Prélèvements réguliers compris",
+  "he": "כולל חיובים קבועים",
+  "ru": "С учётом регулярных списаний",
+  "ar": "مع الخصومات الثابتة"
+ },
+ "Insights": {
+  "fr": "Analyse",
+  "he": "תובנות",
+  "ru": "Аналитика",
+  "ar": "التحليلات"
+ },
+ "Installment": {
+  "fr": "Échéance",
+  "he": "תשלום",
+  "ru": "Платёж",
+  "ar": "القسط"
+ },
+ "Kept on this iPhone only, and included in the CSV export.": {
+  "fr": "Gardé uniquement sur cet iPhone, et inclus dans l’export CSV.",
+  "he": "נשמר רק באייפון הזה, וכלול בייצוא ל-CSV.",
+  "ru": "Хранится только на этом iPhone и входит в экспорт CSV.",
+  "ar": "محفوظة على هذا الـ iPhone فقط، ومضمّنة في تصدير CSV."
+ },
+ "Language": {
+  "fr": "Langue",
+  "he": "שפה",
+  "ru": "Язык",
+  "ar": "اللغة"
+ },
+ "Last month": {
+  "fr": "Mois dernier",
+  "he": "החודש שעבר",
+  "ru": "Прошлый месяц",
+  "ar": "الشهر الماضي"
+ },
+ "Last month at the same date: %@": {
+  "fr": "Le mois dernier à la même date : %@",
+  "he": "בחודש שעבר באותו תאריך: %@",
+  "ru": "В прошлом месяце на ту же дату: %@",
+  "ar": "الشهر الماضي في التاريخ نفسه: %@"
+ },
+ "Last month, same days": {
+  "fr": "Mois dernier, mêmes jours",
+  "he": "החודש שעבר, אותם ימים",
+  "ru": "Прошлый месяц, те же дни",
+  "ar": "الشهر الماضي، الأيام نفسها"
+ },
+ "Last month, whole": {
+  "fr": "Mois dernier, en entier",
+  "he": "החודש שעבר, כולו",
+  "ru": "Прошлый месяц, целиком",
+  "ar": "الشهر الماضي كاملًا"
+ },
+ "Latest payments": {
+  "fr": "Derniers paiements",
+  "he": "תשלומים אחרונים",
+  "ru": "Последние платежи",
+  "ar": "آخر المدفوعات"
+ },
+ "Left %@ of %@": {
+  "en": "Left %1$@ of %2$@",
+  "fr": "Reste %1$@ sur %2$@",
+  "he": "נותרו %1$@ מתוך %2$@",
+  "ru": "Осталось %1$@ из %2$@",
+  "ar": "متبقٍّ %1$@ من %2$@"
+ },
+ "Leumi": {
+  "he": "לאומי",
+  "ru": "Леуми",
+  "ar": "لئومي"
+ },
+ "Leumi account": {
+  "fr": "Compte Leumi",
+  "he": "חשבון לאומי",
+  "ru": "Счёт в Леуми",
+  "ar": "حساب لئومي"
+ },
+ "Leumi balance": {
+  "fr": "Solde Leumi",
+  "he": "יתרה בלאומי",
+  "ru": "Баланс Леуми",
+  "ar": "رصيد لئومي"
+ },
+ "Leumi current account": {
+  "fr": "Compte courant Leumi",
+  "he": "עו״ש בלאומי",
+  "ru": "Текущий счёт в Леуми",
+  "ar": "الحساب الجاري في لئومي"
+ },
+ "Leumi movements since %@.": {
+  "fr": "Mouvements Leumi depuis le %@.",
+  "he": "תנועות בלאומי מאז %@.",
+  "ru": "Операции в Леуми с %@.",
+  "ar": "حركات لئومي منذ %@."
+ },
+ "Loading banks…": {
+  "fr": "Chargement des banques…",
+  "he": "טוען בנקים…",
+  "ru": "Загрузка банков…",
+  "ar": "جارٍ تحميل البنوك…"
+ },
+ "Location": {
+  "fr": "Lieu",
+  "he": "מיקום",
+  "ru": "Место",
+  "ar": "الموقع"
+ },
+ "Lock with Face ID": {
+  "fr": "Verrouiller avec Face ID",
+  "he": "נעילה עם Face ID",
+  "ru": "Блокировка Face ID",
+  "ar": "القفل بـ Face ID"
+ },
+ "Log": {
+  "fr": "Journal",
+  "he": "יומן",
+  "ru": "Журнал",
+  "ar": "السجل"
+ },
+ "Max": {
+  "fr": "Max",
+  "he": "מקס",
+  "ru": "Макс",
+  "ar": "ماكس"
+ },
+ "Max charges from the same merchant, for the same amount, every month. Installment plans aren’t included.": {
+  "fr": "Achats Max chez le même commerçant, du même montant, chaque mois. Les paiements en plusieurs fois ne sont pas inclus.",
+  "he": "חיובי מקס מאותו בית עסק, באותו סכום, כל חודש. עסקאות תשלומים לא נכללות.",
+  "ru": "Списания Макса от одного продавца на одну и ту же сумму каждый месяц. Покупки в рассрочку не учитываются.",
+  "ar": "خصومات ماكس من التاجر نفسه وبالمبلغ نفسه كل شهر. لا تشمل خطط التقسيط."
+ },
+ "Max charges to come": {
+  "fr": "Achats Max à prélever",
+  "he": "חיובי מקס הצפויים",
+  "ru": "Предстоящие списания Макса",
+  "ar": "خصومات ماكس القادمة"
+ },
+ "Max debit": {
+  "fr": "Prélèvement Max",
+  "he": "חיוב מקס",
+  "ru": "Списание Макса",
+  "ar": "خصم ماكس"
+ },
+ "Max is debited today": {
+  "fr": "Max est prélevé aujourd’hui",
+  "he": "מקס מחייבת היום",
+  "ru": "Макс списывает сегодня",
+  "ar": "تُخصم ماكس اليوم"
+ },
+ "Max purchases since %@.": {
+  "fr": "Achats Max depuis le %@.",
+  "he": "רכישות במקס מאז %@.",
+  "ru": "Покупки по Максу с %@.",
+  "ar": "مشتريات ماكس منذ %@."
+ },
+ "Max purchases since the 1st of the month. Notifications at 80% and 100%.": {
+  "fr": "Achats Max depuis le 1er du mois. Notifications à 80 % et 100 %.",
+  "he": "רכישות במקס מתחילת החודש. התראות ב-80% וב-100%.",
+  "ru": "Покупки по Максу с 1-го числа месяца. Уведомления при 80% и 100%.",
+  "ar": "مشتريات ماكس منذ أول الشهر. تنبيهات عند 80% و100%."
+ },
+ "Max · %@": {
+  "fr": "Max · %@",
+  "he": "מקס · %@",
+  "ru": "Макс · %@",
+  "ar": "ماكس · %@"
+ },
+ "Money in": {
+  "fr": "Crédit",
+  "he": "הכנסות",
+  "ru": "Поступления",
+  "ar": "الأموال الواردة"
+ },
+ "Month": {
+  "fr": "Mois",
+  "he": "חודש",
+  "ru": "Месяц",
+  "ar": "الشهر"
+ },
+ "Month to month": {
+  "fr": "Mois par mois",
+  "he": "חודש מול חודש",
+  "ru": "Месяц к месяцу",
+  "ar": "شهرًا بشهر"
+ },
+ "Monthly amount. Leave empty for no budget.": {
+  "fr": "Montant mensuel. Laisse vide pour ne pas avoir de budget.",
+  "he": "סכום חודשי. להשאיר ריק בלי תקציב.",
+  "ru": "Сумма на месяц. Оставьте пустым, чтобы не задавать бюджет.",
+  "ar": "مبلغ شهري. اتركه فارغًا لعدم تحديد ميزانية."
+ },
+ "Name": {
+  "fr": "Nom",
+  "he": "שם",
+  "ru": "Имя",
+  "ar": "الاسم"
+ },
+ "Net worth": {
+  "fr": "Patrimoine",
+  "he": "שווי נקי",
+  "ru": "Чистые активы",
+  "ar": "صافي الثروة"
+ },
+ "New tag": {
+  "fr": "Nouvelle étiquette",
+  "he": "תגית חדשה",
+  "ru": "Новый тег",
+  "ar": "وسم جديد"
+ },
+ "Next Max debit": {
+  "fr": "Prochain prélèvement Max",
+  "he": "חיוב מקס הבא",
+  "ru": "Следующее списание Макса",
+  "ar": "خصم ماكس القادم"
+ },
+ "Next around %@": {
+  "fr": "Prochain vers le %@",
+  "he": "הבא בסביבות %@",
+  "ru": "Следующее около %@",
+  "ar": "التالي في حدود %@"
+ },
+ "Next debit": {
+  "fr": "Au prochain prélèvement",
+  "he": "בחיוב הבא",
+  "ru": "Со следующим списанием",
+  "ar": "مع الخصم القادم"
+ },
+ "No Max charge is waiting to be debited.": {
+  "fr": "Aucun achat Max en attente de prélèvement.",
+  "he": "אין חיובי מקס שממתינים לחיוב.",
+  "ru": "Нет покупок по Максу, ожидающих списания.",
+  "ar": "لا توجد مشتريات ماكس بانتظار الخصم."
+ },
+ "No bank yet": {
+  "fr": "Aucune banque",
+  "he": "עוד אין בנק",
+  "ru": "Банков пока нет",
+  "ar": "لا توجد بنوك بعد"
+ },
+ "No budgets yet": {
+  "fr": "Pas encore de budget",
+  "he": "עוד אין תקציבים",
+  "ru": "Бюджетов пока нет",
+  "ar": "لا توجد ميزانيات بعد"
+ },
+ "No data yet": {
+  "fr": "Pas encore de données",
+  "he": "עוד אין נתונים",
+  "ru": "Данных пока нет",
+  "ar": "لا توجد بيانات بعد"
+ },
+ "No internet connection.": {
+  "fr": "Pas de connexion internet.",
+  "he": "אין חיבור לאינטרנט.",
+  "ru": "Нет подключения к интернету.",
+  "ar": "لا يوجد اتصال بالإنترنت."
+ },
+ "No internet connection. The update will start again as soon as you’re back online.": {
+  "fr": "Pas de connexion internet. La mise à jour reprendra dès que vous serez de nouveau en ligne.",
+  "he": "אין חיבור לאינטרנט. העדכון יתחדש ברגע שהחיבור יחזור.",
+  "ru": "Нет подключения к интернету. Обновление возобновится, как только связь появится.",
+  "ar": "لا يوجد اتصال بالإنترنت. سيُستأنف التحديث فور عودة الاتصال."
+ },
+ "No movements": {
+  "fr": "Aucun mouvement",
+  "he": "אין תנועות",
+  "ru": "Операций нет",
+  "ar": "لا توجد حركات"
+ },
+ "No purchases": {
+  "fr": "Aucun achat",
+  "he": "אין רכישות",
+  "ru": "Покупок нет",
+  "ar": "لا توجد مشتريات"
+ },
+ "No purchases yet.": {
+  "fr": "Pas encore d’achat.",
+  "he": "עוד אין רכישות.",
+  "ru": "Покупок пока нет.",
+  "ar": "لا توجد مشتريات بعد."
+ },
+ "None": {
+  "fr": "Aucun",
+  "he": "ללא",
+  "ru": "Нет",
+  "ar": "بلا"
+ },
+ "Not connected": {
+  "fr": "Non connectée",
+  "he": "לא מחובר",
+  "ru": "Не подключён",
+  "ar": "غير مرتبط"
+ },
+ "Note and tags": {
+  "fr": "Note et étiquettes",
+  "he": "הערה ותגיות",
+  "ru": "Заметка и теги",
+  "ar": "الملاحظة والوسوم"
+ },
+ "Nothing left to spread until the debit.": {
+  "fr": "Plus rien à répartir jusqu’au prélèvement.",
+  "he": "לא נשאר מה לחלק עד החיוב.",
+  "ru": "До списания распределять нечего.",
+  "ar": "لم يتبقَّ ما يُوزَّع حتى الخصم."
+ },
+ "Nothing on your Max card in this period.": {
+  "fr": "Rien sur ta carte Max pendant cette période.",
+  "he": "אין רכישות בכרטיס מקס בתקופה הזאת.",
+  "ru": "За этот период по карте Макс покупок нет.",
+  "ar": "لا شيء على بطاقة ماكس في هذه الفترة."
+ },
+ "Nothing to debit": {
+  "fr": "Rien à prélever",
+  "he": "אין מה לחייב",
+  "ru": "Списывать нечего",
+  "ar": "لا شيء للخصم"
+ },
+ "Notifications": {
+  "fr": "Notifications",
+  "he": "התראות",
+  "ru": "Уведомления",
+  "ar": "التنبيهات"
+ },
+ "OK": {
+  "fr": "OK",
+  "he": "אישור",
+  "ru": "ОК",
+  "ar": "حسنًا"
+ },
+ "Only accounts you linked in the Enable Banking portal are shared while the application is in restricted mode.": {
+  "fr": "Tant que l’application est en mode restreint, seuls les comptes reliés dans le portail Enable Banking sont partagés.",
+  "he": "כל עוד האפליקציה במצב מוגבל, משותפים רק החשבונות שקושרו בפורטל של Enable Banking.",
+  "ru": "Пока приложение работает в ограниченном режиме, доступны только счета, привязанные на портале Enable Banking.",
+  "ar": "ما دام التطبيق في الوضع المقيّد، لا تُشارك إلا الحسابات التي ربطتها في بوابة Enable Banking."
+ },
+ "Open True Balance once to connect Leumi and Max.": {
+  "fr": "Ouvre True Balance une fois pour connecter Leumi et Max.",
+  "he": "יש לפתוח את True Balance פעם אחת כדי לחבר את לאומי ומקס.",
+  "ru": "Откройте True Balance один раз, чтобы подключить Леуми и Макс.",
+  "ar": "افتح True Balance مرة واحدة لربط لئومي وماكس."
+ },
+ "Other banks": {
+  "fr": "Autres banques",
+  "he": "בנקים נוספים",
+  "ru": "Другие банки",
+  "ar": "بنوك أخرى"
+ },
+ "Out": {
+  "fr": "Envoyé",
+  "he": "יצא",
+  "ru": "Расход",
+  "ar": "صادر"
+ },
+ "Password": {
+  "fr": "Mot de passe",
+  "he": "סיסמה",
+  "ru": "Пароль",
+  "ar": "كلمة المرور"
+ },
+ "Pending": {
+  "fr": "En attente",
+  "he": "ממתין",
+  "ru": "В обработке",
+  "ar": "قيد المعالجة"
+ },
+ "Per month": {
+  "fr": "Par mois",
+  "he": "לחודש",
+  "ru": "В месяц",
+  "ar": "شهريًا"
+ },
+ "Period": {
+  "fr": "Période",
+  "he": "תקופה",
+  "ru": "Период",
+  "ar": "الفترة"
+ },
+ "Privacy": {
+  "fr": "Confidentialité",
+  "he": "פרטיות",
+  "ru": "Конфиденциальность",
+  "ar": "الخصوصية"
+ },
+ "Probable location, found by the merchant’s name. It may be another branch.": {
+  "fr": "Lieu probable, trouvé grâce au nom du commerçant. Ça peut être une autre succursale.",
+  "he": "מיקום משוער לפי שם בית העסק. ייתכן שזה סניף אחר.",
+  "ru": "Вероятное место, найденное по названию продавца. Это может быть другой филиал.",
+  "ar": "موقع مرجّح، عُثر عليه من اسم التاجر. قد يكون فرعًا آخر."
+ },
+ "Profile": {
+  "fr": "Profil",
+  "he": "פרופיל",
+  "ru": "Профиль",
+  "ar": "الملف الشخصي"
+ },
+ "Profile and settings": {
+  "fr": "Profil et réglages",
+  "he": "פרופיל והגדרות",
+  "ru": "Профиль и настройки",
+  "ar": "الملف الشخصي والإعدادات"
+ },
+ "Pull down to read %@.": {
+  "fr": "Tirez vers le bas pour lire %@.",
+  "he": "יש למשוך למטה כדי לקרוא את %@.",
+  "ru": "Потяните вниз, чтобы прочитать %@.",
+  "ar": "اسحب للأسفل لقراءة %@."
+ },
+ "Pull down to sign in to Leumi and Max.": {
+  "fr": "Tire vers le bas pour te connecter à Leumi et Max.",
+  "he": "יש למשוך למטה כדי להתחבר ללאומי ולמקס.",
+  "ru": "Потяните вниз, чтобы войти в Леуми и Макс.",
+  "ar": "اسحب للأسفل لتسجيل الدخول إلى لئومي وماكس."
+ },
+ "Purchases": {
+  "fr": "Achats",
+  "he": "רכישות",
+  "ru": "Покупки",
+  "ar": "المشتريات"
+ },
+ "Purchases saved on this iPhone.": {
+  "fr": "Achats enregistrés sur cet iPhone.",
+  "he": "רכישות שנשמרו באייפון הזה.",
+  "ru": "Покупки, сохранённые на этом iPhone.",
+  "ar": "مشتريات محفوظة على هذا الـ iPhone."
+ },
+ "Reading your Leumi balance…": {
+  "fr": "Lecture de ton solde Leumi…",
+  "he": "קוראים את היתרה בלאומי…",
+  "ru": "Читаем баланс Леуми…",
+  "ar": "جارٍ قراءة رصيدك في لئومي…"
+ },
+ "Reading your Max charges…": {
+  "fr": "Lecture de tes dépenses Max…",
+  "he": "קוראים את החיובים במקס…",
+  "ru": "Читаем списания Макса…",
+  "ar": "جارٍ قراءة خصومات ماكس…"
+ },
+ "Really available": {
+  "fr": "Vraiment disponible",
+  "he": "זמין באמת",
+  "ru": "Реально доступно",
+  "ar": "المتاح فعلًا"
+ },
+ "Really available after Max on %@": {
+  "fr": "Vraiment disponible après Max le %@",
+  "he": "זמין באמת אחרי מקס ב-%@",
+  "ru": "Реально доступно после Макса %@",
+  "ar": "المتاح فعلًا بعد ماكس في %@"
+ },
+ "Recipient": {
+  "fr": "Destinataire",
+  "he": "מקבל",
+  "ru": "Получатель",
+  "ar": "المستلم"
+ },
+ "Reconnect": {
+  "fr": "Reconnecter",
+  "he": "חיבור מחדש",
+  "ru": "Переподключить",
+  "ar": "إعادة الربط"
+ },
+ "Reference": {
+  "fr": "Référence",
+  "he": "אסמכתא",
+  "ru": "Номер операции",
+  "ar": "المرجع"
+ },
+ "Refresh now": {
+  "fr": "Actualiser",
+  "he": "רענון עכשיו",
+  "ru": "Обновить",
+  "ar": "التحديث الآن"
+ },
+ "Regular Leumi movements expected before the debit, detected from the last months: same payer or payee, about the same amount, every month.": {
+  "fr": "Mouvements Leumi réguliers attendus avant le prélèvement, repérés sur les derniers mois : même émetteur ou bénéficiaire, à peu près le même montant, chaque mois.",
+  "he": "תנועות קבועות בלאומי שצפויות לפני החיוב, לפי החודשים האחרונים: אותו משלם או מוטב, בערך אותו סכום, כל חודש.",
+  "ru": "Регулярные операции в Леуми, ожидаемые до списания, найденные по последним месяцам: тот же плательщик или получатель, примерно та же сумма, каждый месяц.",
+  "ar": "حركات ثابتة في لئومي متوقعة قبل الخصم، مكتشفة من الأشهر الأخيرة: الدافع أو المستفيد نفسه، والمبلغ نفسه تقريبًا، كل شهر."
+ },
+ "Reimbursed": {
+  "fr": "Remboursé",
+  "he": "הוחזר",
+  "ru": "Возмещено",
+  "ar": "مُسترد"
+ },
+ "Replace the key": {
+  "fr": "Remplacer la clé",
+  "he": "החלפת המפתח",
+  "ru": "Заменить ключ",
+  "ar": "استبدال المفتاح"
+ },
+ "Required": {
+  "fr": "Obligatoire",
+  "he": "חובה",
+  "ru": "Обязательно",
+  "ar": "مطلوب"
+ },
+ "Salary and regular debits": {
+  "fr": "Salaire et prélèvements réguliers",
+  "he": "משכורת וחיובים קבועים",
+  "ru": "Зарплата и регулярные списания",
+  "ar": "الراتب والخصومات الثابتة"
+ },
+ "Salary and regular debits included": {
+  "fr": "Salaire et prélèvements réguliers compris",
+  "he": "כולל משכורת וחיובים קבועים",
+  "ru": "С учётом зарплаты и регулярных списаний",
+  "ar": "مع الراتب والخصومات الثابتة"
+ },
+ "Save": {
+  "fr": "Enregistrer",
+  "he": "שמירה",
+  "ru": "Сохранить",
+  "ar": "حفظ"
+ },
+ "Savings": {
+  "fr": "Épargne",
+  "he": "חיסכון",
+  "ru": "Сбережения",
+  "ar": "التوفير"
+ },
+ "Search banks": {
+  "fr": "Rechercher une banque",
+  "he": "חיפוש בנק",
+  "ru": "Поиск банка",
+  "ar": "البحث عن بنك"
+ },
+ "Search charges": {
+  "fr": "Rechercher une dépense",
+  "he": "חיפוש בחיובים",
+  "ru": "Поиск по списаниям",
+  "ar": "البحث في الخصومات"
+ },
+ "Search movements": {
+  "fr": "Rechercher des mouvements",
+  "he": "חיפוש בתנועות",
+  "ru": "Поиск по операциям",
+  "ar": "البحث في الحركات"
+ },
+ "See all": {
+  "fr": "Tout voir",
+  "he": "הצגת הכול",
+  "ru": "Все",
+  "ar": "عرض الكل"
+ },
+ "See all %lld": {
+  "fr": "Tout voir (%lld)",
+  "he": "הצגת כל ה-%lld",
+  "ru": "Все %lld",
+  "ar": "عرض الكل (%lld)"
+ },
+ "See what you can really spend: your Leumi balance minus the Max charges still to come.": {
+  "fr": "Vois ce que tu peux vraiment dépenser : ton solde Leumi moins les dépenses Max encore à venir.",
+  "he": "כמה אפשר באמת להוציא: היתרה בלאומי פחות חיובי מקס שעוד יגיעו.",
+  "ru": "Узнайте, сколько вы реально можете потратить: баланс Леуми минус ещё не списанные покупки по Максу.",
+  "ar": "اعرف ما يمكنك إنفاقه فعلًا: رصيدك في لئومي ناقص خصومات ماكس القادمة."
+ },
+ "Sender": {
+  "fr": "Envoyeur",
+  "he": "שולח",
+  "ru": "Отправитель",
+  "ar": "المرسِل"
+ },
+ "Set a monthly amount for a category, e.g. groceries ₪1,500. You’ll get a notification at 80% and 100%.": {
+  "fr": "Fixe un montant mensuel par catégorie, par exemple courses 1 500 ₪. Tu seras prévenu à 80 % et à 100 %.",
+  "he": "קובעים סכום חודשי לקטגוריה, למשל מכולת ‎₪1,500. תגיע התראה ב-80% וב-100%.",
+  "ru": "Задайте сумму на месяц для категории, например продукты ₪1,500. Вы получите уведомление при 80% и 100%.",
+  "ar": "حدّد مبلغًا شهريًا لفئة، مثلًا البقالة ₪1,500. سيصلك تنبيه عند 80% و100%."
+ },
+ "Set a monthly budget per category": {
+  "fr": "Fixer un budget mensuel par catégorie",
+  "he": "קביעת תקציב חודשי לכל קטגוריה",
+  "ru": "Задать месячный бюджет по категориям",
+  "ar": "تحديد ميزانية شهرية لكل فئة"
+ },
+ "Set budgets": {
+  "fr": "Définir des budgets",
+  "he": "קביעת תקציבים",
+  "ru": "Задать бюджеты",
+  "ar": "تحديد الميزانيات"
+ },
+ "Settings": {
+  "fr": "Réglages",
+  "he": "הגדרות",
+  "ru": "Настройки",
+  "ar": "الإعدادات"
+ },
+ "Shared": {
+  "fr": "Partagé",
+  "he": "משותף",
+  "ru": "Общее",
+  "ar": "مشترك"
+ },
+ "Show": {
+  "fr": "Afficher",
+  "he": "הצגה",
+  "ru": "Показать",
+  "ar": "عرض"
+ },
+ "Show bank pages while signing in": {
+  "fr": "Afficher les pages des banques pendant la connexion",
+  "he": "הצגת דפי הבנק בזמן ההתחברות",
+  "ru": "Показывать страницы банков при входе",
+  "ar": "عرض صفحات البنوك أثناء تسجيل الدخول"
+ },
+ "Show password": {
+  "fr": "Afficher le mot de passe",
+  "he": "הצגת הסיסמה",
+  "ru": "Показать пароль",
+  "ar": "إظهار كلمة المرور"
+ },
+ "Shown in the Enable Banking portal. The key file is usually named after it.": {
+  "fr": "Affiché dans le portail Enable Banking. Le fichier de clé porte généralement ce nom.",
+  "he": "מופיע בפורטל של Enable Banking. קובץ המפתח בדרך כלל נקרא בשם הזה.",
+  "ru": "Указан на портале Enable Banking. Файл ключа обычно называется так же.",
+  "ar": "يظهر في بوابة Enable Banking. يحمل ملف المفتاح عادةً الاسم نفسه."
+ },
+ "Shows Leumi and Max on screen during sign-in, so you can see what blocks and finish a step by hand if needed.": {
+  "fr": "Affiche Leumi et Max à l’écran pendant la connexion, pour voir ce qui bloque et terminer une étape à la main si besoin.",
+  "he": "מציג את לאומי ומקס על המסך בזמן ההתחברות, כדי לראות מה נתקע ולהשלים שלב ידנית אם צריך.",
+  "ru": "Показывает Леуми и Макс на экране во время входа, чтобы видеть, что мешает, и при необходимости пройти шаг вручную.",
+  "ar": "يعرض لئومي وماكس على الشاشة أثناء تسجيل الدخول، لترى ما يعيق العملية وتُكمل خطوة يدويًا عند الحاجة."
+ },
+ "Signing in to Leumi…": {
+  "fr": "Connexion à Leumi…",
+  "he": "מתחברים ללאומי…",
+  "ru": "Вход в Леуми…",
+  "ar": "جارٍ تسجيل الدخول إلى لئومي…"
+ },
+ "Signing in to Max…": {
+  "fr": "Connexion à Max…",
+  "he": "מתחברים למקס…",
+  "ru": "Вход в Макс…",
+  "ar": "جارٍ تسجيل الدخول إلى ماكس…"
+ },
+ "Something went wrong": {
+  "fr": "Un problème est survenu",
+  "he": "משהו השתבש",
+  "ru": "Что-то пошло не так",
+  "ar": "حدث خطأ ما"
+ },
+ "Spending": {
+  "fr": "Dépenses",
+  "he": "הוצאות",
+  "ru": "Расходы",
+  "ar": "المصاريف"
+ },
+ "Spending over a period": {
+  "fr": "Dépenses sur une période",
+  "he": "הוצאות לאורך תקופה",
+  "ru": "Расходы за период",
+  "ar": "المصاريف خلال فترة"
+ },
+ "Subscriptions": {
+  "fr": "Abonnements",
+  "he": "מינויים",
+  "ru": "Подписки",
+  "ar": "الاشتراكات"
+ },
+ "Tag": {
+  "fr": "Étiquette",
+  "he": "תגית",
+  "ru": "Тег",
+  "ar": "وسم"
+ },
+ "The .pem file downloaded from the Enable Banking portal. It’s kept in this iPhone’s Keychain.": {
+  "fr": "Le fichier .pem téléchargé depuis le portail Enable Banking. Il est conservé dans le trousseau de cet iPhone.",
+  "he": "קובץ ה-‎.pem שהורד מהפורטל של Enable Banking. הוא נשמר במחזיק המפתחות של האייפון הזה.",
+  "ru": "Файл .pem, скачанный с портала Enable Banking. Он хранится в связке ключей этого iPhone.",
+  "ar": "ملف ‎.pem الذي نزّلته من بوابة Enable Banking. يُحفظ في سلسلة مفاتيح هذا الـ iPhone."
+ },
+ "The bank didn’t give access. Try connecting again.": {
+  "fr": "La banque n’a pas donné l’accès. Réessayez de la connecter.",
+  "he": "הבנק לא אישר גישה. אפשר לנסות להתחבר שוב.",
+  "ru": "Банк не предоставил доступ. Попробуйте подключиться снова.",
+  "ar": "لم يمنح البنك الوصول. حاول الربط مجددًا."
+ },
+ "The bank limits how often it can be read. Try again later.": {
+  "fr": "La banque limite le nombre de lectures. Réessayez plus tard.",
+  "he": "הבנק מגביל את מספר הקריאות. אפשר לנסות שוב מאוחר יותר.",
+  "ru": "Банк ограничивает частоту запросов. Повторите попытку позже.",
+  "ar": "يحدّ البنك من عدد مرات القراءة. حاول لاحقًا."
+ },
+ "The username and password you use on leumi.co.il.": {
+  "fr": "L’identifiant et le mot de passe que tu utilises sur leumi.co.il.",
+  "he": "שם המשתמש והסיסמה של leumi.co.il.",
+  "ru": "Логин и пароль, которые вы используете на leumi.co.il.",
+  "ar": "اسم المستخدم وكلمة المرور اللذان تستخدمهما في leumi.co.il."
+ },
+ "The username and password you use on max.co.il.": {
+  "fr": "L’identifiant et le mot de passe que tu utilises sur max.co.il.",
+  "he": "שם המשתמש והסיסמה של max.co.il.",
+  "ru": "Логин и пароль, которые вы используете на max.co.il.",
+  "ar": "اسم المستخدم وكلمة المرور اللذان تستخدمهما في max.co.il."
+ },
+ "This is everything Leumi gives about the other side, also on its website.": {
+  "fr": "C’est tout ce que Leumi donne sur l’autre partie, y compris sur son site.",
+  "he": "זה כל מה שלאומי מוסר על הצד השני, גם באתר שלו.",
+  "ru": "Это всё, что Леуми сообщает о другой стороне, в том числе на своём сайте.",
+  "ar": "هذا كل ما يقدّمه لئومي عن الطرف الآخر، وهو ما يظهر على موقعه أيضًا."
+ },
+ "This key file can’t be read. Use the .pem file from the Enable Banking portal.": {
+  "fr": "Ce fichier de clé est illisible. Utilisez le fichier .pem du portail Enable Banking.",
+  "he": "אי אפשר לקרוא את קובץ המפתח. יש להשתמש בקובץ ה-‎.pem מהפורטל של Enable Banking.",
+  "ru": "Не удаётся прочитать файл ключа. Используйте файл .pem с портала Enable Banking.",
+  "ar": "تعذّرت قراءة ملف المفتاح. استخدم ملف ‎.pem من بوابة Enable Banking."
+ },
+ "This month": {
+  "fr": "Ce mois-ci",
+  "he": "החודש",
+  "ru": "Этот месяц",
+  "ar": "هذا الشهر"
+ },
+ "This month on Max": {
+  "fr": "Ce mois-ci sur Max",
+  "he": "החודש במקס",
+  "ru": "Этот месяц по Максу",
+  "ar": "هذا الشهر على ماكس"
+ },
+ "This month vs last month": {
+  "fr": "Ce mois-ci vs le mois dernier",
+  "he": "החודש מול החודש שעבר",
+  "ru": "Этот месяц и прошлый",
+  "ar": "هذا الشهر مقابل الشهر الماضي"
+ },
+ "To": {
+  "fr": "Au",
+  "he": "עד",
+  "ru": "По",
+  "ar": "إلى"
+ },
+ "Today": {
+  "fr": "Aujourd’hui",
+  "he": "היום",
+  "ru": "Сегодня",
+  "ar": "اليوم"
+ },
+ "Today’s movement: Leumi may still adjust it.": {
+  "fr": "Mouvement du jour : Leumi peut encore l’ajuster.",
+  "he": "תנועה של היום: לאומי עוד עשויים לעדכן אותה.",
+  "ru": "Сегодняшняя операция: Леуми ещё может её изменить.",
+  "ar": "حركة اليوم: قد يعدّلها لئومي بعد."
+ },
+ "Total": {
+  "fr": "Total",
+  "he": "סה״כ",
+  "ru": "Итого",
+  "ar": "المجموع"
+ },
+ "Total: %@": {
+  "fr": "Total : %@",
+  "he": "סה״כ: %@",
+  "ru": "Итого: %@",
+  "ar": "المجموع: %@"
+ },
+ "Transaction": {
+  "fr": "Transaction",
+  "he": "תנועה",
+  "ru": "Операция",
+  "ar": "المعاملة"
+ },
+ "Transfer received": {
+  "fr": "Virement reçu",
+  "he": "העברה שהתקבלה",
+  "ru": "Входящий перевод",
+  "ar": "تحويل وارد"
+ },
+ "Transfer sent": {
+  "fr": "Virement envoyé",
+  "he": "העברה שנשלחה",
+  "ru": "Исходящий перевод",
+  "ar": "تحويل صادر"
+ },
+ "Transfers": {
+  "fr": "Virements",
+  "he": "העברות",
+  "ru": "Переводы",
+  "ar": "التحويلات"
+ },
+ "Troubleshooting": {
+  "fr": "Dépannage",
+  "he": "פתרון בעיות",
+  "ru": "Устранение неполадок",
+  "ar": "حل المشكلات"
+ },
+ "True Balance": {
+  "fr": "True Balance",
+  "he": "True Balance",
+  "ru": "True Balance",
+  "ar": "True Balance"
+ },
+ "True Balance is locked": {
+  "fr": "True Balance est verrouillé",
+  "he": "True Balance נעולה",
+  "ru": "True Balance заблокирован",
+  "ar": "True Balance مقفل"
+ },
+ "True Balance log": {
+  "fr": "Journal True Balance",
+  "he": "יומן True Balance",
+  "ru": "Журнал True Balance",
+  "ar": "سجل True Balance"
+ },
+ "True balance": {
+  "fr": "Vrai solde",
+  "he": "יתרה אמיתית",
+  "ru": "Настоящий баланс",
+  "ar": "الرصيد الحقيقي"
+ },
+ "Try again": {
+  "fr": "Réessayer",
+  "he": "ניסיון חוזר",
+  "ru": "Повторить",
+  "ar": "إعادة المحاولة"
+ },
+ "Try with sample data": {
+  "fr": "Essayer avec des données d’exemple",
+  "he": "לנסות עם נתוני דוגמה",
+  "ru": "Попробовать на примере",
+  "ar": "التجربة ببيانات نموذجية"
+ },
+ "Unlock": {
+  "fr": "Déverrouiller",
+  "he": "פתיחה",
+  "ru": "Разблокировать",
+  "ar": "فتح القفل"
+ },
+ "Unlock to see your balance": {
+  "fr": "Déverrouille pour voir ton solde",
+  "he": "יש לפתוח כדי לראות את היתרה",
+  "ru": "Разблокируйте, чтобы увидеть баланс",
+  "ar": "افتح القفل لرؤية رصيدك"
+ },
+ "Upcoming debits": {
+  "fr": "Prochains prélèvements",
+  "he": "חיובים קרובים",
+  "ru": "Предстоящие списания",
+  "ar": "الخصومات القادمة"
+ },
+ "Update failed": {
+  "fr": "Échec de la mise à jour",
+  "he": "העדכון נכשל",
+  "ru": "Обновление не удалось",
+  "ar": "فشل التحديث"
+ },
+ "Updated %@": {
+  "fr": "Mis à jour %@",
+  "he": "עודכן %@",
+  "ru": "Обновлено %@",
+  "ar": "آخر تحديث %@"
+ },
+ "Updating…": {
+  "fr": "Mise à jour…",
+  "he": "מעדכנים…",
+  "ru": "Обновление…",
+  "ar": "جارٍ التحديث…"
+ },
+ "Used %@": {
+  "fr": "Utilisé %@",
+  "he": "נוצלו %@",
+  "ru": "Использовано %@",
+  "ar": "مستخدم %@"
+ },
+ "Used to greet you on the home screen.": {
+  "fr": "Pour te saluer sur l’écran d’accueil.",
+  "he": "משמש לברכה במסך הבית.",
+  "ru": "Для приветствия на главном экране.",
+  "ar": "يُستخدم لتحيتك في الشاشة الرئيسية."
+ },
+ "Username": {
+  "fr": "Identifiant",
+  "he": "שם משתמש",
+  "ru": "Логин",
+  "ar": "اسم المستخدم"
+ },
+ "Value date": {
+  "fr": "Date de valeur",
+  "he": "תאריך ערך",
+  "ru": "Дата валютирования",
+  "ar": "تاريخ القيمة"
+ },
+ "What the app did when updating: steps, retries, errors. No passwords or amounts. It stays on this iPhone until you share it.": {
+  "fr": "Ce que l’app a fait pendant les mises à jour : étapes, nouvelles tentatives, erreurs. Aucun mot de passe ni montant. Il reste sur cet iPhone tant que vous ne le partagez pas.",
+  "he": "מה האפליקציה עשתה בזמן העדכונים: שלבים, ניסיונות חוזרים, שגיאות. בלי סיסמאות ובלי סכומים. נשאר באייפון עד שמשתפים אותו.",
+  "ru": "Что приложение делало при обновлении: шаги, повторные попытки, ошибки. Без паролей и сумм. Остаётся на этом iPhone, пока вы им не поделитесь.",
+  "ar": "ما فعله التطبيق أثناء التحديث: الخطوات، وإعادة المحاولات، والأخطاء. بلا كلمات مرور ولا مبالغ. يبقى على هذا الـ iPhone حتى تشاركه."
+ },
+ "What you can spend per day until the next Max debit.": {
+  "fr": "Ce que tu peux dépenser par jour jusqu’au prochain prélèvement Max.",
+  "he": "כמה אפשר להוציא ביום עד חיוב מקס הבא.",
+  "ru": "Сколько можно тратить в день до следующего списания Макса.",
+  "ar": "ما يمكنك إنفاقه يوميًا حتى خصم ماكس القادم."
+ },
+ "When you open the app, and in the background": {
+  "fr": "À l’ouverture de l’app et en arrière-plan",
+  "he": "בפתיחת האפליקציה וברקע",
+  "ru": "При открытии приложения и в фоне",
+  "ar": "عند فتح التطبيق وفي الخلفية"
+ },
+ "With later installments already committed: %@": {
+  "fr": "En comptant les échéances suivantes déjà engagées : %@",
+  "he": "כולל תשלומים עתידיים שכבר התחייבת להם: %@",
+  "ru": "С учётом уже взятых будущих платежей: %@",
+  "ar": "مع الأقساط اللاحقة الملتزم بها: %@"
+ },
+ "Work": {
+  "fr": "Pro",
+  "he": "עבודה",
+  "ru": "Работа",
+  "ar": "العمل"
+ },
+ "You confirm on the bank’s site or app, then come back here. Access is read only and lasts 180 days.": {
+  "fr": "Vous confirmez sur le site ou l’app de la banque, puis vous revenez ici. L’accès est en lecture seule et dure 180 jours.",
+  "he": "מאשרים באתר או באפליקציה של הבנק וחוזרים לכאן. הגישה לקריאה בלבד ונמשכת 180 יום.",
+  "ru": "Вы подтверждаете доступ на сайте или в приложении банка и возвращаетесь сюда. Доступ только для чтения и действует 180 дней.",
+  "ar": "تؤكّد على موقع البنك أو تطبيقه ثم تعود إلى هنا. الوصول للقراءة فقط ويدوم 180 يومًا."
+ },
+ "You stay signed in. Your credentials are kept in this iPhone’s Keychain.": {
+  "fr": "Tu restes connecté. Tes identifiants sont gardés dans le trousseau de cet iPhone.",
+  "he": "נשארים מחוברים. פרטי ההתחברות נשמרים במחזיק המפתחות של האייפון הזה.",
+  "ru": "Вход сохраняется. Данные для входа хранятся в связке ключей этого iPhone.",
+  "ar": "تبقى مسجّل الدخول. تُحفظ بيانات دخولك في سلسلة مفاتيح هذا الـ iPhone."
+ },
+ "Your %@ account is blocked. Contact %@.": {
+  "en": "Your %1$@ account is blocked. Contact %2$@.",
+  "fr": "Ton compte %1$@ est bloqué. Contacte %2$@.",
+  "he": "החשבון ב%1$@ חסום. יש לפנות ל%2$@.",
+  "ru": "Ваш счёт в %1$@ заблокирован. Обратитесь в %2$@.",
+  "ar": "حسابك في %1$@ محظور. تواصل مع %2$@."
+ },
+ "Your Leumi and Max credentials and the saved balance will be deleted from this iPhone.": {
+  "fr": "Tes identifiants Leumi et Max et le solde enregistré seront supprimés de cet iPhone.",
+  "he": "פרטי ההתחברות ללאומי ולמקס והיתרה השמורה יימחקו מהאייפון הזה.",
+  "ru": "Данные для входа в Леуми и Макс и сохранённый баланс будут удалены с этого iPhone.",
+  "ar": "ستُحذف بيانات دخولك إلى لئومي وماكس والرصيد المحفوظ من هذا الـ iPhone."
+ },
+ "Your Leumi and Max credentials, the other banks’ access and the saved balances will be deleted from this iPhone.": {
+  "fr": "Vos identifiants Leumi et Max, l’accès aux autres banques et les soldes enregistrés seront supprimés de cet iPhone.",
+  "he": "פרטי ההתחברות ללאומי ולמקס, הגישה לבנקים הנוספים והיתרות השמורות יימחקו מהאייפון הזה.",
+  "ru": "Данные для входа в Леуми и Макс, доступ к другим банкам и сохранённые балансы будут удалены с этого iPhone.",
+  "ar": "ستُحذف بيانات دخولك إلى لئومي وماكس، والوصول إلى البنوك الأخرى، والأرصدة المحفوظة من هذا الـ iPhone."
+ },
+ "Your Leumi balance minus the next Max debit, from the last update.": {
+  "fr": "Ton solde Leumi moins le prochain prélèvement Max, d’après la dernière mise à jour.",
+  "he": "היתרה בלאומי פחות חיוב מקס הבא, לפי העדכון האחרון.",
+  "ru": "Баланс Леуми минус следующее списание Макса, по последнему обновлению.",
+  "ar": "رصيدك في لئومي ناقص خصم ماكس القادم، حسب آخر تحديث."
+ },
+ "Your credentials are stored in this iPhone’s Keychain and never leave it, except to sign in to Leumi and Max.": {
+  "fr": "Tes identifiants sont stockés dans le trousseau de cet iPhone et n’en sortent jamais, sauf pour te connecter à Leumi et Max.",
+  "he": "פרטי ההתחברות נשמרים במחזיק המפתחות של האייפון ולא יוצאים ממנו, חוץ מההתחברות ללאומי ולמקס.",
+  "ru": "Данные для входа хранятся в связке ключей этого iPhone и не покидают его, кроме как для входа в Леуми и Макс.",
+  "ar": "تُحفظ بيانات دخولك في سلسلة مفاتيح هذا الـ iPhone ولا تغادره أبدًا، إلا لتسجيل الدخول إلى لئومي وماكس."
+ },
+ "Your first name": {
+  "fr": "Ton prénom",
+  "he": "השם הפרטי שלך",
+  "ru": "Ваше имя",
+  "ar": "اسمك الأول"
+ },
+ "Your true balance is %@.": {
+  "fr": "Ton vrai solde est de %@.",
+  "he": "היתרה האמיתית שלך היא %@.",
+  "ru": "Ваш настоящий баланс: %@.",
+  "ar": "رصيدك الحقيقي %@."
+ },
+ "Your true balance is %@. Updated %@.": {
+  "en": "Your true balance is %1$@. Updated %2$@.",
+  "fr": "Ton vrai solde est de %1$@. Mis à jour %2$@.",
+  "he": "היתרה האמיתית שלך היא %1$@. עודכן %2$@.",
+  "ru": "Ваш настоящий баланс: %1$@. Обновлено %2$@.",
+  "ar": "رصيدك الحقيقي %1$@. آخر تحديث %2$@."
+ },
+ "Your true balance is below %@": {
+  "fr": "Ton vrai solde est passé sous %@",
+  "he": "היתרה האמיתית שלך מתחת ל-%@",
+  "ru": "Ваш настоящий баланс ниже %@",
+  "ar": "رصيدك الحقيقي أقل من %@"
+ },
+ "You’ll be notified if your true balance goes below zero.": {
+  "fr": "Tu seras prévenu si ton vrai solde passe sous zéro.",
+  "he": "תגיע התראה אם היתרה האמיתית תרד מתחת לאפס.",
+  "ru": "Вы получите уведомление, если настоящий баланс станет ниже нуля.",
+  "ar": "سيصلك تنبيه إذا انخفض رصيدك الحقيقي عن الصفر."
+ },
+ "You’ll be notified when your true balance goes below this amount.": {
+  "fr": "Tu seras prévenu quand ton vrai solde passe sous ce montant.",
+  "he": "תגיע התראה כשהיתרה האמיתית תרד מתחת לסכום הזה.",
+  "ru": "Вы получите уведомление, когда настоящий баланс опустится ниже этой суммы.",
+  "ar": "سيصلك تنبيه عندما ينخفض رصيدك الحقيقي عن هذا المبلغ."
+ },
+ "You’ll be overdrawn on the debit date unless money comes in first.": {
+  "fr": "Tu seras à découvert le jour du prélèvement, sauf si de l’argent arrive avant.",
+  "he": "ביום החיוב צפוי מינוס, אלא אם ייכנס כסף לפני כן.",
+  "ru": "В день списания вы уйдёте в минус, если до этого не поступят деньги.",
+  "ar": "سيصبح رصيدك سالبًا يوم الخصم ما لم يصل مال قبل ذلك."
+ },
+ "You’ll get a notification at 80% and 100%.": {
+  "fr": "Tu seras prévenu à 80 % et à 100 %.",
+  "he": "תגיע התראה ב-80% וב-100%.",
+  "ru": "Вы получите уведомление при 80% и 100%.",
+  "ar": "سيصلك تنبيه عند 80% و100%."
+ },
+ "You’re using sample data.": {
+  "fr": "Tu utilises des données d’exemple.",
+  "he": "מוצגים נתוני דוגמה.",
+  "ru": "Вы используете демонстрационные данные.",
+  "ar": "تستخدم بيانات نموذجية."
+ },
+ "about %@ each": {
+  "fr": "environ %@ par achat",
+  "he": "בערך %@ כל אחת",
+  "ru": "около %@ за покупку",
+  "ar": "نحو %@ لكل عملية"
+ },
+ "about %@/day": {
+  "fr": "environ %@/jour",
+  "he": "בערך %@ ליום",
+  "ru": "около %@ в день",
+  "ar": "نحو %@ يوميًا"
+ },
+ "category.beauty": {
+  "en": "Beauty & care",
+  "fr": "Beauté et soins",
+  "he": "טיפוח ויופי",
+  "ru": "Красота и уход",
+  "ar": "الجمال والعناية"
+ },
+ "category.books": {
+  "en": "Books & print",
+  "fr": "Livres et papeterie",
+  "he": "ספרים ודפוס",
+  "ru": "Книги и печать",
+  "ar": "الكتب والمطبوعات"
+ },
+ "category.cash": {
+  "en": "Cash withdrawal",
+  "fr": "Retrait d’espèces",
+  "he": "משיכת מזומן",
+  "ru": "Снятие наличных",
+  "ar": "سحب نقدي"
+ },
+ "category.electronics": {
+  "en": "Electronics",
+  "fr": "Électronique",
+  "he": "אלקטרוניקה",
+  "ru": "Электроника",
+  "ar": "الإلكترونيات"
+ },
+ "category.energy": {
+  "en": "Fuel, power & gas",
+  "fr": "Carburant, électricité et gaz",
+  "he": "דלק, חשמל וגז",
+  "ru": "Топливо, электричество и газ",
+  "ar": "الوقود والكهرباء والغاز"
+ },
+ "category.fashion": {
+  "en": "Fashion",
+  "fr": "Mode",
+  "he": "אופנה",
+  "ru": "Одежда",
+  "ar": "الأزياء"
+ },
+ "category.fx": {
+  "en": "Foreign currency",
+  "fr": "Devises",
+  "he": "מטבע חוץ",
+  "ru": "Иностранная валюта",
+  "ar": "العملات الأجنبية"
+ },
+ "category.government": {
+  "en": "City & government",
+  "fr": "Mairie et administration",
+  "he": "עירייה וממשלה",
+  "ru": "Муниципалитет и госуслуги",
+  "ar": "البلدية والحكومة"
+ },
+ "category.groceries": {
+  "en": "Groceries",
+  "fr": "Courses",
+  "he": "מכולת וסופר",
+  "ru": "Продукты",
+  "ar": "البقالة"
+ },
+ "category.health": {
+  "en": "Health & pharmacy",
+  "fr": "Santé et pharmacie",
+  "he": "בריאות ופארם",
+  "ru": "Здоровье и аптека",
+  "ar": "الصحة والصيدلية"
+ },
+ "category.home": {
+  "en": "Home & DIY",
+  "fr": "Maison et bricolage",
+  "he": "בית ועשה זאת בעצמך",
+  "ru": "Дом и ремонт",
+  "ar": "المنزل والأدوات"
+ },
+ "category.insurance": {
+  "en": "Insurance",
+  "fr": "Assurance",
+  "he": "ביטוח",
+  "ru": "Страхование",
+  "ar": "التأمين"
+ },
+ "category.leisure": {
+  "en": "Leisure & sport",
+  "fr": "Loisirs et sport",
+  "he": "פנאי וספורט",
+  "ru": "Досуг и спорт",
+  "ar": "الترفيه والرياضة"
+ },
+ "category.max": {
+  "en": "Max products",
+  "fr": "Produits Max",
+  "he": "מוצרי מקס",
+  "ru": "Продукты Макса",
+  "ar": "منتجات ماكس"
+ },
+ "category.other": {
+  "en": "Other",
+  "fr": "Divers",
+  "he": "אחר",
+  "ru": "Другое",
+  "ar": "أخرى"
+ },
+ "category.pets": {
+  "en": "Pets",
+  "fr": "Animaux",
+  "he": "חיות מחמד",
+  "ru": "Домашние животные",
+  "ar": "الحيوانات الأليفة"
+ },
+ "category.restaurants": {
+  "en": "Restaurants & bars",
+  "fr": "Restaurants et bars",
+  "he": "מסעדות וברים",
+  "ru": "Рестораны и бары",
+  "ar": "المطاعم والمقاهي"
+ },
+ "category.telecom": {
+  "en": "Phone & internet",
+  "fr": "Téléphone et internet",
+  "he": "טלפון ואינטרנט",
+  "ru": "Связь и интернет",
+  "ar": "الهاتف والإنترنت"
+ },
+ "category.transfer": {
+  "en": "Money transfer",
+  "fr": "Virement",
+  "he": "העברת כספים",
+  "ru": "Денежные переводы",
+  "ar": "تحويل أموال"
+ },
+ "category.transport": {
+  "en": "Transport & cars",
+  "fr": "Transport et voiture",
+  "he": "תחבורה ורכב",
+  "ru": "Транспорт и авто",
+  "ar": "النقل والسيارات"
+ },
+ "category.travel": {
+  "en": "Flights & travel",
+  "fr": "Vols et voyages",
+  "he": "טיסות ונסיעות",
+  "ru": "Авиабилеты и поездки",
+  "ar": "الطيران والسفر"
+ },
+ "category.uncategorized": {
+  "en": "Uncategorized",
+  "fr": "Sans catégorie",
+  "he": "ללא קטגוריה",
+  "ru": "Без категории",
+  "ar": "بلا فئة"
+ },
+ "iOS decides when background refresh runs. You can also pull down to refresh at any time.": {
+  "fr": "iOS décide quand l’actualisation en arrière-plan a lieu. Tu peux aussi tirer vers le bas pour actualiser à tout moment.",
+  "he": "‏iOS מחליט מתי הרענון ברקע רץ. אפשר גם למשוך למטה כדי לרענן בכל רגע.",
+  "ru": "iOS сам решает, когда запускать фоновое обновление. Вы также можете в любой момент потянуть вниз, чтобы обновить.",
+  "ar": "يحدّد iOS موعد التحديث في الخلفية. يمكنك أيضًا السحب للأسفل للتحديث في أي وقت."
+ },
+ "·": {
+  "he": "·",
+  "ru": "·",
+  "ar": "·"
+ }
+}

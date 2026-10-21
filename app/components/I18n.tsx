@@ -1,16 +1,19 @@
 'use client';
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { detectLang, dictionaries, format, formatters, type ErrorCode, type Lang } from '@/lib/i18n.ts';
+import { categoryColor } from '@/lib/categories.ts';
+import { detectLang, errorText, formatters, isRTL, L, type Lang } from '@/lib/i18n.ts';
 
 function build(lang: Lang, setLang: (l: Lang) => void) {
-  const d = dictionaries[lang];
   return {
     lang,
     setLang,
-    d,
-    t: (template: string, params?: Record<string, string | number>) => format(template, params),
-    error: (code: string | undefined, name = '') => format(d.err[(code as ErrorCode) in d.err ? (code as ErrorCode) : 'UNKNOWN'], { name }),
+    rtl: isRTL(lang),
+    /** The iPhone app's string for `key`, in the current language. */
+    t: (key: string, ...args: (string | number)[]) => L(lang, key, ...args),
+    error: (code: string | undefined, name = '') => errorText(lang, code, name),
+    category: (key: string | undefined) => L(lang, `category.${key ?? 'uncategorized'}`),
+    categoryColor,
     ...formatters(lang),
   };
 }
@@ -25,7 +28,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   useEffect(() => setLangState(detectLang()), []);
   useEffect(() => {
     document.documentElement.lang = lang;
-    document.title = dictionaries[lang].appName;
+    document.documentElement.dir = isRTL(lang) ? 'rtl' : 'ltr';
   }, [lang]);
 
   const value = useMemo(
