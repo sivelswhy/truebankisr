@@ -290,10 +290,21 @@
   .eq .total dd { font-size: 34px; font-weight: 700; color: var(--accent); }
   .why { color: var(--secondary); font-size: 15px; margin: 16px 0 0; }
 
-  /* Features: inset grouped lists, one per tab */
-  .groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
-  .group h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px; margin-inline-start: 4px; display: flex; align-items: center; gap: 8px; }
-  .group h3 svg { width: 20px; height: 20px; fill: var(--accent); }
+  /* Features: one card per tab, all the same height. */
+  .groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 16px; }
+  .group { display: flex; flex-direction: column; padding: 20px 20px 8px; border-radius: 22px; background: var(--cell);
+           border: 1px solid color-mix(in srgb, var(--tint) 16%, transparent);
+           background-image: linear-gradient(160deg, color-mix(in srgb, var(--tint) 10%, transparent), transparent 55%); }
+  .group h3 { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; font-size: 21px; font-weight: 700; }
+  .group h3 .tile { flex: none; width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center;
+                    background: linear-gradient(var(--tint), color-mix(in srgb, var(--tint) 70%, #000)); }
+  .group h3 svg { width: 21px; height: 21px; fill: #fff; }
+  .group .list { background: none; border-radius: 0; }
+  .group .list li { padding: 11px 0; gap: 12px; }
+  .group .list li + li::after { inset-inline: 40px 0; }
+  .group .list .ico { width: 28px; height: 28px; border-radius: 8px; }
+  .group .list .ico svg { width: 16px; height: 16px; }
+  .group .list span:not(.ico) { font-size: 15px; line-height: 1.35; }
   .list { list-style: none; margin: 0; padding: 0; border-radius: 12px; background: var(--cell); }
   .list li { position: relative; display: flex; align-items: center; gap: 12px; padding: 11px 16px; }
   .list li + li::after { content: ""; position: absolute; top: 0; inset-inline: 58px 0; height: 0.5px; background: var(--separator); }
@@ -326,7 +337,7 @@
   @media (max-width: 860px) {
     .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 16px; }
     .phone { margin: 0 auto; }
-    .groups { grid-template-columns: 1fr; }
+    .groups { grid-template-columns: 1fr; grid-auto-rows: auto; }
   }
   @media (max-width: 360px) {
     .phone { width: 100%; height: auto; aspect-ratio: 320 / 660; }
@@ -446,32 +457,32 @@
       <h2 id="inside" data-i18n="insideTitle">Everything around that number.</h2>
       <p class="intro" data-i18n="insideIntro">Four tabs, like the questions you actually ask about your money.</p>
       <div class="groups">
-        <div class="group">
-          <h3><svg aria-hidden="true"><use href="#i-house"/></svg><span data-i18n="tHome">Home</span></h3>
+        <div class="group" style="--tint:var(--accent)">
+          <h3><span class="tile"><svg aria-hidden="true"><use href="#i-house"/></svg></span><span data-i18n="tHome">Home</span></h3>
           <ul class="list">
             <li><span class="ico" style="background:linear-gradient(#0A84FF,#0040C8)"><svg><use href="#i-calendar"/></svg></span><span data-i18n="f1">Days until the Max debit and what that leaves per day</span></li>
             <li><span class="ico" style="background:linear-gradient(#34C759,#248A3D)"><svg><use href="#i-in"/></svg></span><span data-i18n="f2">Latest payments and Leumi movements, with transfer details</span></li>
             <li><span class="ico" style="background:linear-gradient(#64D2FF,#0A84FF)"><svg><use href="#i-globe"/></svg></span><span data-i18n="f3">Your European accounts, in their own section</span></li>
           </ul>
         </div>
-        <div class="group">
-          <h3><svg aria-hidden="true"><use href="#i-card"/></svg><span data-i18n="tCharges">Charges</span></h3>
+        <div class="group" style="--tint:var(--indigo)">
+          <h3><span class="tile"><svg aria-hidden="true"><use href="#i-card"/></svg></span><span data-i18n="tCharges">Charges</span></h3>
           <ul class="list">
             <li><span class="ico" style="background:linear-gradient(#5E5CE6,#3634A3)"><svg><use href="#i-pie"/></svg></span><span data-i18n="f4">The next debit by category, tap a slice for its purchases</span></li>
             <li><span class="ico" style="background:linear-gradient(#FF9500,#C93400)"><svg><use href="#i-calendar"/></svg></span><span data-i18n="f5">Every upcoming debit, installments included</span></li>
             <li><span class="ico" style="background:linear-gradient(#8E8E93,#48484A)"><svg><use href="#i-search"/></svg></span><span data-i18n="f6">Search by merchant or category</span></li>
           </ul>
         </div>
-        <div class="group">
-          <h3><svg aria-hidden="true"><use href="#i-chart"/></svg><span data-i18n="tSpending">Spending</span></h3>
+        <div class="group" style="--tint:var(--green)">
+          <h3><span class="tile"><svg aria-hidden="true"><use href="#i-chart"/></svg></span><span data-i18n="tSpending">Spending</span></h3>
           <ul class="list">
             <li><span class="ico" style="background:linear-gradient(#0A84FF,#0040C8)"><svg><use href="#i-chart"/></svg></span><span data-i18n="f7">Any period, as a running total you can scrub</span></li>
             <li><span class="ico" style="background:linear-gradient(#FF375F,#C9002B)"><svg><use href="#i-cart"/></svg></span><span data-i18n="f8">Each merchant's history, notes and tags on purchases</span></li>
             <li><span class="ico" style="background:linear-gradient(#34C759,#248A3D)"><svg><use href="#i-share"/></svg></span><span data-i18n="f9">Export to CSV for Numbers or Excel</span></li>
           </ul>
         </div>
-        <div class="group">
-          <h3><svg aria-hidden="true"><use href="#i-bulb"/></svg><span data-i18n="tInsights">Insights</span></h3>
+        <div class="group" style="--tint:var(--orange)">
+          <h3><span class="tile"><svg aria-hidden="true"><use href="#i-bulb"/></svg></span><span data-i18n="tInsights">Insights</span></h3>
           <ul class="list">
             <li><span class="ico" style="background:linear-gradient(#FF9500,#C93400)"><svg><use href="#i-gauge"/></svg></span><span data-i18n="f10">Monthly budgets per category, with alerts at 80% and 100%</span></li>
             <li><span class="ico" style="background:linear-gradient(#BF5AF2,#8944AB)"><svg><use href="#i-repeat"/></svg></span><span data-i18n="f11">Subscriptions, salary and regular debits, found for you</span></li>
