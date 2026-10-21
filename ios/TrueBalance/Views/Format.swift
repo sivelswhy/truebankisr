@@ -15,6 +15,18 @@ enum Format {
         date.formatted(.dateTime.day().month(.abbreviated))
     }
 
+    /// "2 Nov, 14:32" when the bank gave the time, else "2 Nov".
+    static func dayTime(_ date: Date) -> String {
+        Israel.hasTime(date) ? date.formatted(.dateTime.day().month(.abbreviated).hour().minute()) : day(date)
+    }
+
+    /// "Monday 2 November 2026 at 14:32" when the bank gave the time.
+    static func fullDate(_ date: Date) -> String {
+        Israel.hasTime(date)
+            ? date.formatted(.dateTime.weekday(.wide).day().month(.wide).year().hour().minute())
+            : date.formatted(.dateTime.weekday(.wide).day().month(.wide).year())
+    }
+
     static func categoryName(_ key: String?) -> String {
         NSLocalizedString("category." + (key ?? Category.uncategorized), comment: "Max spending category")
     }

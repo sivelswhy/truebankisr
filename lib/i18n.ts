@@ -160,6 +160,14 @@ export function formatters(lang: Lang) {
     ils: (n: number) => shekel.format(n === 0 ? 0 : n).replace('-', '−'), // n === 0 also catches −0
     day: (iso: string) =>
       new Date(`${iso.slice(0, 10)}T12:00:00Z`).toLocaleDateString(locales[lang], { day: 'numeric', month: 'short' }),
+    // "19 Oct, 16:03" when the bank gave the time (Leumi, and Max once processed, only give the day).
+    dayTime: (iso: string) => {
+      const opts = { timeZone: 'Asia/Jerusalem', day: 'numeric', month: 'short' } as const;
+      const time = new Date(iso).toLocaleTimeString(locales[lang], { timeZone: 'Asia/Jerusalem', hour: '2-digit', minute: '2-digit', hour12: false });
+      return /^0?0:00$/.test(time)
+        ? new Date(iso).toLocaleDateString(locales[lang], opts)
+        : new Date(iso).toLocaleString(locales[lang], { ...opts, hour: '2-digit', minute: '2-digit', hour12: false });
+    },
     ago: (iso: string) => {
       const minutes = Math.round((new Date(iso).getTime() - Date.now()) / 60_000);
       if (Math.abs(minutes) < 60) return rtf.format(minutes, 'minute');

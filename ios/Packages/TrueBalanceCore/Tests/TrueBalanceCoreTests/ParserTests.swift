@@ -103,3 +103,20 @@ import Testing
     #expect(HolderName.fromElementText("Dana,") == "Dana")
     #expect(HolderName.fromElementText("") == nil)
 }
+
+@Test func keepsTimeOfPurchase() throws {
+    let json = """
+    {"result":{"transactions":[
+      {"paymentDate":null,"purchaseDate":"2026-10-19T16:03:45","actualPaymentAmount":10,"merchantName":"A","planName":"רגילה"},
+      {"paymentDate":"2026-11-02T00:00:00","purchaseDate":"2026-10-05T00:00:00","actualPaymentAmount":10,"merchantName":"B",
+       "planName":"רגילה","dealData":{"arn":"B1","purchaseTime":"09:41:00"}},
+      {"paymentDate":"2026-11-02T00:00:00","purchaseDate":"2026-10-06T00:00:00","actualPaymentAmount":10,"merchantName":"C","planName":"רגילה"}
+    ]}}
+    """
+    let txns = try MaxParser.parseMonth(Data(json.utf8))
+    let time = { (t: Txn) in Israel.calendar.dateComponents([.hour, .minute], from: t.date) }
+    #expect(time(txns[0]) == DateComponents(hour: 16, minute: 3))
+    #expect(time(txns[1]) == DateComponents(hour: 9, minute: 41))
+    #expect(Israel.day(txns[1].date) == "2026-10-05")
+    #expect(!Israel.hasTime(txns[2].date))
+}

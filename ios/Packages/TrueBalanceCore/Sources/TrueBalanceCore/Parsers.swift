@@ -78,17 +78,23 @@ public enum MaxParser {
                 var txn = map(raw)
                 txn?.logoURL = extra.logo
                 txn?.merchantAddress = extra.address
+                if let date = txn?.date, !Israel.hasTime(date), let time = extra.time {
+                    txn?.date = Israel.calendar.date(bySettingHour: time.hour, minute: time.minute, second: 0, of: date) ?? date
+                }
                 return txn
             }
     }
 
-    /// Max doesn't document a logo or address field; pick them up if they show
-    /// up: an http(s) value under a key mentioning "logo"/"image", and text
-    /// under keys mentioning "address" or "city".
-    static func undocumentedFields(_ data: Data, count: Int) -> [(logo: String?, address: String?)] {
+    typealias Extra = (logo: String?, address: String?, time: (hour: Int, minute: Int)?)
+
+    /// Max doesn't document a logo, address or time field; pick them up if they
+    /// show up: an http(s) value under a key mentioning "logo"/"image", text
+    /// under keys mentioning "address" or "city", and "HH:mm(:ss)" under a key
+    /// mentioning "time" (on the row or in its deal data).
+    static func undocumentedFields(_ data: Data, count: Int) -> [Extra] {
         let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
         let rows = ((json?["result"] as? [String: Any])?["transactions"] as? [[String: Any]]) ?? []
-        let found = rows.map { row -> (logo: String?, address: String?) in
+        let found = rows.map { row -> Extra in
             func text(_ keys: [String], url: Bool) -> [String] {
                 row.compactMap { key, value in
                     let k = key.lowercased()
@@ -100,9 +106,21 @@ public enum MaxParser {
             let logo = text(["logo", "image"], url: true).first
             // Street first, then city, e.g. "Dizengoff 50, Tel Aviv".
             let parts = text(["address"], url: false) + text(["city"], url: false)
-            return (logo, parts.isEmpty ? nil : parts.joined(separator: ", "))
+            let deal = row["dealData"] as? [String: Any] ?? [:]
+            let time = (Array(row) + Array(deal)).lazy
+                .filter { $0.key.lowercased().contains("time") }
+                .compactMap { timeOfDay($0.value as? String) }.first
+            return (logo, parts.isEmpty ? nil : parts.joined(separator: ", "), time)
         }
-        return found.count == count ? found : Array(repeating: (nil, nil), count: count)
+        return found.count == count ? found : Array(repeating: (nil, nil, nil), count: count)
+    }
+
+    /// "14:32" / "14:32:05" → 14h32; nil for anything else or midnight.
+    static func timeOfDay(_ text: String?) -> (hour: Int, minute: Int)? {
+        let parts = (text ?? "").trimmingCharacters(in: .whitespaces).split(separator: ":")
+        guard (2...3).contains(parts.count), parts.allSatisfy({ (1...2).contains($0.count) && $0.allSatisfy(\.isNumber) }),
+              let hour = Int(parts[0]), let minute = Int(parts[1]), hour < 24, minute < 60, hour + minute > 0 else { return nil }
+        return (hour, minute)
     }
 
     static func map(_ raw: Raw) -> Txn? {
