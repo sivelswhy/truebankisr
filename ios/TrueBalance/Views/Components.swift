@@ -77,29 +77,6 @@ extension SectionHeader {
     }
 }
 
-/// A small labelled amount, for the figures under a hero number.
-struct Figure: View {
-    var label: String
-    var amount: Double
-    var tint: Color = .primary
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(label)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
-            Text(amount.shekels)
-                .font(.subheadline.weight(.semibold))
-                .monospacedDigit()
-                .foregroundStyle(tint)
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
-                .privacySensitive()
-        }
-    }
-}
-
 /// Behind every screen: in dark mode a deep night blue instead of pure black,
 /// in light mode the usual grey; both with a soft glow of `tint` at the top so
 /// the screen has some colour without competing with the content.

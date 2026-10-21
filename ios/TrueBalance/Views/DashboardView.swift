@@ -397,7 +397,7 @@ extension Snapshot {
 
 /// The true balance on a card tinted by how things stand (calm blue, orange
 /// under the alert threshold, red when overdrawn), with the time left until
-/// the debit and the subtraction behind it. Tap for the full calculation.
+/// the debit. Tap for the calculation (Leumi − Max).
 private struct HeroView: View {
     var snapshot: Snapshot
     var isDemo: Bool
@@ -444,18 +444,6 @@ private struct HeroView: View {
                 if let next = snapshot.nextCharge {
                     runway(next)
                 }
-
-                // The subtraction, visible without opening anything.
-                HStack(alignment: .firstTextBaseline, spacing: 10) {
-                    Figure(label: String(localized: "Leumi balance"), amount: snapshot.bankBalance)
-                    Text(verbatim: "−").font(.subheadline.weight(.semibold)).foregroundStyle(.tertiary)
-                    Figure(label: snapshot.nextCharge.map { String(localized: "Max · \(Format.day($0.chargeDate))") } ?? "Max",
-                           amount: snapshot.nextCharge?.total ?? 0)
-                    Spacer(minLength: 0)
-                }
-                .padding(12)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(.fill.quaternary, in: .rect(cornerRadius: 14, style: .continuous))
 
                 // Next to the number it qualifies; orange once it's getting old.
                 TimelineView(.periodic(from: .now, by: 60)) { context in
