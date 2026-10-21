@@ -136,6 +136,13 @@ public enum Israel {
         return String(format: "%04d-%02d-%02d", c.year!, c.month!, c.day!)
     }
 
+    /// Whether an instant carries a time of day: Leumi, and Max once a
+    /// purchase is processed, only give the day (midnight in Israel).
+    public static func hasTime(_ date: Date) -> Bool {
+        let c = calendar.dateComponents([.hour, .minute], from: date)
+        return c.hour != 0 || c.minute != 0
+    }
+
     /// Noon in Israel on a YYYY-MM-DD day, for display.
     public static func date(fromDay day: String) -> Date? {
         let parts = day.split(separator: "-").compactMap { Int($0) }

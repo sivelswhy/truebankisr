@@ -153,7 +153,7 @@ struct TransactionDetailView: View {
                             .privacySensitive()
                     }
                     HStack(spacing: 6) {
-                        Text(txn.date.formatted(.dateTime.weekday(.wide).day().month(.wide).year()))
+                        Text(Format.fullDate(txn.date))
                         if txn.status == .pending {
                             Text("Pending")
                                 .font(.caption.weight(.semibold))

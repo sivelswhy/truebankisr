@@ -64,7 +64,7 @@ struct BankMovementRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(BankMovement.party(txn)?.name ?? txn.description)
                     .lineLimit(1)
-                Text([Format.day(txn.date), kind.label].joined(separator: " · "))
+                Text([Format.dayTime(txn.date), kind.label].joined(separator: " · "))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -255,7 +255,7 @@ struct BankMovementDetailView: View {
             }
 
             Section {
-                LabeledContent("Date", value: txn.date.formatted(.dateTime.weekday(.wide).day().month(.wide).year()))
+                LabeledContent("Date", value: Format.fullDate(txn.date))
                 if let value = txn.valueDate {
                     LabeledContent("Value date", value: value.formatted(.dateTime.day().month(.wide).year()))
                 }

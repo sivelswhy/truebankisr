@@ -636,7 +636,7 @@ struct TransactionRow: View {
     }
 
     private var subtitle: String {
-        var parts = [Format.day(txn.date), Format.categoryName(txn.category)]
+        var parts = [Format.dayTime(txn.date), Format.categoryName(txn.category)]
         if let i = txn.installments {
             parts.append(String(localized: "\(i.number) of \(i.total)"))
         }

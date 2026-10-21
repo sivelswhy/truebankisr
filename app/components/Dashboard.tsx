@@ -184,7 +184,7 @@ export function Dashboard({ initial, onSignOut }: { initial: Data | null; onSign
 }
 
 function TxnRow({ txn }: { txn: Txn }) {
-  const { d, t, ils, day, lang } = useI18n();
+  const { d, t, ils, dayTime, lang } = useI18n();
   const c = category(txn.category, lang);
   return (
     <li>
@@ -192,7 +192,7 @@ function TxnRow({ txn }: { txn: Txn }) {
       <div className="txn">
         <span className="txn-name">{txn.description}</span>
         <span className="secondary">
-          {day(txn.date)} · {c.label}
+          {dayTime(txn.date)} · {c.label}
           {txn.installments && ` · ${t(d.installment, { n: txn.installments.number, total: txn.installments.total })}`}
           {txn.status === 'pending' && ` · ${d.pending}`}
         </span>
