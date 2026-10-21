@@ -177,6 +177,7 @@
   /* The preview works like the app: tabs, and pages pushed on top. */
   .phone-col { display: grid; justify-items: center; gap: 14px; }
   .phone-hint { margin: 0; font-size: 14px; color: var(--secondary); text-align: center; max-width: 320px; }
+  .phone-hint.small { margin-top: -8px; font-size: 12px; color: var(--tertiary); }
   .views { position: absolute; inset: 40px 0 0; overflow: hidden; }
   .view { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 84px; scrollbar-width: none; background: inherit; }
   .view::-webkit-scrollbar { display: none; }
@@ -241,6 +242,35 @@
   .pchips button:focus-visible { outline: 2px solid #0A84FF; }
   .curve { display: block; width: 100%; height: 80px; margin-top: 10px; }
   .change { font: 600 13px var(--rounded); }
+  .avatar.tap { cursor: pointer; }
+  .avatar.tap:active { filter: brightness(1.2); }
+  .avatar.tap:focus-visible { outline: 2px solid #0A84FF; outline-offset: 2px; border-radius: 50%; }
+  /* Profile, as a sheet over the tabs. */
+  .dim { position: absolute; inset: 0; z-index: 5; background: rgba(0,0,0,0.45); animation: fade-in 200ms ease-out; }
+  .sheet { position: absolute; inset: 44px 0 0; z-index: 6; overflow-y: auto; scrollbar-width: none; padding-bottom: 24px;
+           border-radius: 16px 16px 0 0; background: #000; animation: sheet-in 360ms cubic-bezier(.2,.8,.2,1); }
+  .sheet::-webkit-scrollbar { display: none; }
+  @keyframes sheet-in { from { transform: translateY(100%); } }
+  .sheet .topbar { background: rgba(0,0,0,0.82); }
+  .sheet .rows { background: #1C1C1E; }
+  .done { all: unset; cursor: pointer; justify-self: end; color: #0A84FF; font-weight: 600; font-size: 14px; padding: 4px; }
+  .done:focus-visible { outline: 2px solid #0A84FF; border-radius: 8px; }
+  .me { display: grid; justify-items: center; gap: 8px; padding: 14px 16px 0; }
+  .me .avatar { width: 72px; height: 72px; font-size: 30px; }
+  .me b { font-size: 20px; }
+  .row .val { color: rgba(235,235,245,0.6); text-align: end; }
+  .switch { all: unset; cursor: pointer; flex: none; width: 42px; height: 26px; border-radius: 13px; background: rgba(120,120,128,0.32); position: relative; transition: background-color 200ms; }
+  .switch::after { content: ""; position: absolute; top: 2px; inset-inline-start: 2px; width: 22px; height: 22px; border-radius: 50%; background: #fff;
+                   box-shadow: 0 2px 4px rgba(0,0,0,0.25); transition: inset-inline-start 200ms cubic-bezier(.2,.8,.2,1); }
+  .switch[aria-checked="true"] { background: #30D158; }
+  .switch[aria-checked="true"]::after { inset-inline-start: 18px; }
+  .switch:focus-visible, .stepper button:focus-visible { outline: 2px solid #0A84FF; outline-offset: 2px; }
+  .stepper { display: flex; flex: none; border-radius: 8px; background: rgba(118,118,128,0.24); }
+  .stepper button { all: unset; cursor: pointer; width: 34px; height: 26px; display: grid; place-items: center; font-size: 17px; }
+  .stepper button + button { border-inline-start: 0.5px solid rgba(84,84,88,0.6); }
+  .stepper button:disabled { color: rgba(235,235,245,0.3); cursor: default; }
+  /* Hide amounts, like the app's privacy redaction. */
+  .private :is(.amount, .big-amount, .a, .meta, .foot, .bars small, .change, .runway span:last-child, .split span:last-child, .foot-note.money) { filter: blur(6px); }
   .foot-note { padding: 6px 28px 0; color: rgba(235,235,245,0.6); font-size: 10.5px; line-height: 1.4; }
   /* The calculation, as on the Calculation screen */
   section { padding: 0 0 64px; }
@@ -395,6 +425,7 @@
           </div>
         </div>
         <p class="phone-hint" data-i18n="hint">Try it: tap the balance, a payment or a tab.</p>
+        <p class="phone-hint small" data-i18n="previewNote">A preview with sample data: the real app may look and work a little differently.</p>
       </div>
     </div>
 
@@ -492,6 +523,7 @@
   const strings = {
     fr: {
     hint: "Essayez : touchez le solde, un paiement ou un onglet.",
+    previewNote: "Un aperçu avec des données d’exemple : l’app réelle peut être un peu différente.",
       h1: "Ce que vous pouvez vraiment dépenser.",
       lede: "Max prélève tout le 2 du mois, alors votre solde Leumi paraît plus gros qu’il n’est. True Balance affiche <strong>votre solde Leumi moins les débits Max encore à venir</strong>, sur votre iPhone, en un seul chiffre.",
       altstore: "Ajouter à AltStore", sidestore: "Ajouter à SideStore", ipa: "Télécharger l’IPA",
@@ -545,6 +577,7 @@
 
   strings.he = {
     hint: "נסו: לחצו על היתרה, על תשלום או על לשונית.",
+    previewNote: "תצוגה מקדימה עם נתוני דוגמה: האפליקציה עצמה עשויה להיראות ולפעול מעט אחרת.",
     h1: "כמה אפשר באמת להוציא.",
     lede: "מקס מחייבת הכול ב-2 לחודש, ולכן היתרה בלאומי נראית גדולה ממה שהיא. True Balance מציגה <strong>את היתרה בלאומי פחות חיובי מקס שעוד יגיעו</strong>, באייפון, במספר אחד.",
     altstore: "הוספה ל-AltStore", sidestore: "הוספה ל-SideStore", ipa: "הורדת קובץ ה-IPA",
@@ -598,6 +631,7 @@
 
   strings.ru = {
     hint: "Попробуйте: нажмите на баланс, платёж или вкладку.",
+    previewNote: "Превью с примерными данными: настоящее приложение может выглядеть и работать немного иначе.",
     h1: "Сколько вы реально можете потратить.",
     lede: "Макс списывает всё 2-го числа, поэтому баланс в Леуми кажется больше, чем он есть. True Balance показывает <strong>баланс Леуми минус ещё не списанные покупки по Максу</strong> — на iPhone, одним числом.",
     altstore: "Добавить в AltStore", sidestore: "Добавить в SideStore", ipa: "Скачать IPA",
@@ -649,6 +683,7 @@
 
   strings.ar = {
     hint: "جرّب: اضغط على الرصيد أو على دفعة أو على تبويب.",
+    previewNote: "معاينة ببيانات نموذجية: قد يبدو التطبيق الفعلي ويعمل بشكل مختلف قليلًا.",
     h1: "ما يمكنك إنفاقه فعلًا.",
     lede: "تخصم ماكس كل شيء في الثاني من الشهر، لذا يبدو رصيدك في لئومي أكبر مما هو عليه. يعرض True Balance <strong>رصيدك في لئومي ناقص خصومات ماكس القادمة</strong>، على الـ iPhone، برقم واحد.",
     altstore: "إضافة إلى AltStore", sidestore: "إضافة إلى SideStore", ipa: "تنزيل ملف IPA",
@@ -733,6 +768,25 @@
   // ---- The interactive preview: the app's screens with sample data. ----
   // Labels come from the app's own string catalog (Localizable.xcstrings).
   const ui = {
+    "Profile": {"fr": "Profil", "he": "פרופיל", "ru": "Профиль", "ar": "الملف الشخصي"},
+    "Done": {"fr": "OK", "he": "סיום", "ru": "Готово", "ar": "تم"},
+    "Used to greet you on the home screen.": {"fr": "Pour te saluer sur l’écran d’accueil.", "he": "משמש לברכה במסך הבית.", "ru": "Для приветствия на главном экране.", "ar": "يُستخدم لتحيتك في الشاشة الرئيسية."},
+    "Bank": {"fr": "Banque", "he": "בנק", "ru": "Банк", "ar": "البنك"},
+    "Other banks": {"fr": "Autres banques", "he": "בנקים נוספים", "ru": "Другие банки", "ar": "بنوك أخرى"},
+    "No bank yet": {"fr": "Aucune banque", "he": "עוד אין בנק", "ru": "Банков пока нет", "ar": "لا توجد بنوك بعد"},
+    "Accounts": {"fr": "Comptes", "he": "חשבונות", "ru": "Счета", "ar": "الحسابات"},
+    "You’re using sample data.": {"fr": "Tu utilises des données d’exemple.", "he": "מוצגים נתוני דוגמה.", "ru": "Вы используете демонстрационные данные.", "ar": "تستخدم بيانات نموذجية."},
+    "Automatic refresh": {"fr": "Actualisation automatique", "he": "רענון אוטומטי", "ru": "Автообновление", "ar": "التحديث التلقائي"},
+    "When you open the app, and in the background": {"fr": "À l’ouverture de l’app et en arrière-plan", "he": "בפתיחת האפליקציה וברקע", "ru": "При открытии приложения и в фоне", "ar": "عند فتح التطبيق وفي الخلفية"},
+    "iOS decides when background refresh runs. You can also pull down to refresh at any time.": {"fr": "iOS décide quand l’actualisation en arrière-plan a lieu. Tu peux aussi tirer vers le bas pour actualiser à tout moment.", "he": "‏iOS מחליט מתי הרענון ברקע רץ. אפשר גם למשוך למטה כדי לרענן בכל רגע.", "ru": "iOS сам решает, когда запускать фоновое обновление. Вы также можете в любой момент потянуть вниз, чтобы обновить.", "ar": "يحدّد iOS موعد التحديث في الخلفية. يمكنك أيضًا السحب للأسفل للتحديث في أي وقت."},
+    "Notifications": {"fr": "Notifications", "he": "התראות", "ru": "Уведомления", "ar": "التنبيهات"},
+    "Alert me below": {"fr": "M’alerter en dessous de", "he": "התראה מתחת ל-", "ru": "Уведомлять ниже", "ar": "نبّهني عند الانخفاض عن"},
+    "You’ll be notified if your true balance goes below zero.": {"fr": "Tu seras prévenu si ton vrai solde passe sous zéro.", "he": "תגיע התראה אם היתרה האמיתית תרד מתחת לאפס.", "ru": "Вы получите уведомление, если настоящий баланс станет ниже нуля.", "ar": "سيصلك تنبيه إذا انخفض رصيدك الحقيقي عن الصفر."},
+    "You’ll be notified when your true balance goes below this amount.": {"fr": "Tu seras prévenu quand ton vrai solde passe sous ce montant.", "he": "תגיע התראה כשהיתרה האמיתית תרד מתחת לסכום הזה.", "ru": "Вы получите уведомление, когда настоящий баланс опустится ниже этой суммы.", "ar": "سيصلك تنبيه عندما ينخفض رصيدك الحقيقي عن هذا المبلغ."},
+    "Lock with Face ID": {"fr": "Verrouiller avec Face ID", "he": "נעילה עם Face ID", "ru": "Блокировка Face ID", "ar": "القفل بـ Face ID"},
+    "Hide amounts": {"fr": "Masquer les montants", "he": "הסתרת סכומים", "ru": "Скрывать суммы", "ar": "إخفاء المبالغ"},
+    "Privacy": {"fr": "Confidentialité", "he": "פרטיות", "ru": "Конфиденциальность", "ar": "الخصوصية"},
+    "Profile and settings": {"fr": "Profil et réglages", "he": "פרופיל והגדרות", "ru": "Профиль и настройки", "ar": "الملف الشخصي والإعدادات"},
     "Calculation": {"fr": "Calcul", "he": "החישוב", "ru": "Расчёт", "ar": "طريقة الحساب"},
     "Leumi balance": {"fr": "Solde Leumi", "he": "יתרה בלאומי", "ru": "Баланс Леуми", "ar": "رصيد لئومي"},
     "Available": {"fr": "Disponible", "he": "זמין", "ru": "Доступно", "ar": "المتاح"},
@@ -954,7 +1008,7 @@
         <div class="row"><span class="lab"><svg aria-hidden="true"><use href="#i-card"/></svg>${esc(L("Max") + " · " + day(DEBIT))}</span><span class="a">${ils(-nextTotal)}</span></div>
         <div class="row total"><span class="lab"><svg aria-hidden="true"><use href="#i-equal"/></svg>${esc(L("Available"))}</span><span class="a">${ils(available)}</span></div>
       </div>
-      <p class="foot-note">${esc(L("With later installments already committed: %@", ils(allKnown)))}</p>`,
+      <p class="foot-note money">${esc(L("With later installments already committed: %@", ils(allKnown)))}</p>`,
     }),
 
     forecast: () => ({
@@ -1062,6 +1116,67 @@
     },
   };
 
+  // Profile and settings, a sheet like in the app. The switches work on the preview.
+  const settings = { faceID: false, hide: false, alert: 0 };
+  let profileOpen = false;
+  const screen = document.querySelector(".phone .screen");
+  const toggle = (key, label) => `<div class="row"><span class="lab">${esc(L(label))}</span>
+    <button type="button" class="switch" role="switch" aria-checked="${settings[key]}" aria-label="${esc(L(label))}" data-toggle="${key}"></button></div>`;
+
+  function renderProfile(animate) {
+    screen.querySelector(".dim")?.remove();
+    screen.querySelector(".sheet")?.remove();
+    if (!profileOpen) return;
+    const dim = document.createElement("div");
+    dim.className = "dim";
+    dim.dataset.close = "";
+    if (!animate) dim.style.animation = "none";
+    const sheet = document.createElement("div");
+    sheet.className = "sheet";
+    sheet.setAttribute("role", "dialog");
+    sheet.setAttribute("aria-label", L("Profile"));
+    if (!animate) sheet.style.animation = "none";
+    sheet.innerHTML = `
+      <div class="topbar"><span></span><div class="bar-title">${esc(L("Profile"))}</div><button type="button" class="done" data-close>${esc(L("Done"))}</button></div>
+      <div class="me"><span class="avatar" aria-hidden="true">${esc(t("initial"))}</span><b>${esc(t("hello").split(/[,،]\s*/).pop())}</b></div>
+      <p class="foot-note" style="text-align:center;padding-top:2px">${esc(L("Used to greet you on the home screen."))}</p>
+      ${header(L("Accounts"))}<div class="rows plain">
+        <div class="row"><span class="lab">${esc(L("Bank"))}</span><span class="val">${esc(L("Leumi"))}</span></div>
+        <div class="row"><span class="lab">${esc(L("Card"))}</span><span class="val">${esc(L("Max"))}</span></div>
+        <div class="row"><span class="lab">${esc(L("Other banks"))}</span><span class="val">${esc(L("No bank yet"))}</span></div></div>
+      <p class="foot-note">${esc(L("You’re using sample data."))}</p>
+      <div class="rows plain" style="margin-top:18px"><div class="row"><span class="lab">${esc(L("Automatic refresh"))}</span>
+        <span class="val">${esc(L("When you open the app, and in the background"))}</span></div></div>
+      <p class="foot-note">${esc(L("iOS decides when background refresh runs. You can also pull down to refresh at any time."))}</p>
+      ${header(L("Notifications"))}<div class="rows plain"><div class="row"><span class="lab">${esc(L("Alert me below"))}</span>
+        <span class="val" style="margin-inline-end:8px">${ils(settings.alert, true)}</span>
+        <span class="stepper"><button type="button" data-step="-100" aria-label="−" ${settings.alert ? "" : "disabled"}>−</button><button type="button" data-step="100" aria-label="+">+</button></span></div></div>
+      <p class="foot-note">${esc(L(settings.alert ? "You’ll be notified when your true balance goes below this amount." : "You’ll be notified if your true balance goes below zero."))}</p>
+      ${header(L("Privacy"))}<div class="rows plain">${toggle("faceID", "Lock with Face ID")}${toggle("hide", "Hide amounts")}</div>`;
+    screen.append(dim, sheet);
+  }
+
+  screen.addEventListener("click", e => {
+    if (e.target.closest("[data-profile]")) { profileOpen = true; renderProfile(true); screen.querySelector(".sheet .done").focus({ preventScroll: true }); return; }
+    if (e.target.closest("[data-close]")) { profileOpen = false; renderProfile(); screen.querySelector("[data-profile]")?.focus({ preventScroll: true }); return; }
+    const sw = e.target.closest("[data-toggle]");
+    if (sw) {
+      settings[sw.dataset.toggle] = !settings[sw.dataset.toggle];
+      sw.setAttribute("aria-checked", settings[sw.dataset.toggle]);
+      screen.classList.toggle("private", settings.hide);
+      return;
+    }
+    const step = e.target.closest("[data-step]");
+    if (step) {
+      settings.alert = Math.min(20000, Math.max(0, settings.alert + Number(step.dataset.step)));
+      renderProfile(false);
+      screen.querySelector(`.sheet [data-step="${step.dataset.step}"]:not(:disabled)`)?.focus({ preventScroll: true });
+    }
+  });
+  screen.addEventListener("keydown", e => {
+    if (e.key === "Escape" && profileOpen) { profileOpen = false; renderProfile(); screen.querySelector("[data-profile]")?.focus({ preventScroll: true }); }
+  });
+
   // Navigation: a stack per tab, like a NavigationStack in each Tab.
   const stacks = { home: ["home"], charges: ["charges"], spending: ["spending"], insights: ["insights"] };
   let tab = "home", period = "month", introDone = false;
@@ -1080,8 +1195,11 @@
     view.innerHTML = (back
       ? `<div class="topbar"><button type="button" class="back" data-back><svg aria-hidden="true"><use href="#i-back"/></svg><span>${esc(back)}</span></button>
          <div class="bar-title">${esc(top.title)}</div><span></span></div>`
-      : `<div class="nav"><span class="avatar" aria-hidden="true">${esc(t("initial"))}</span></div><div class="large-title">${esc(top.title)}</div>`) + top.body;
+      : `<div class="nav"><button type="button" class="avatar tap" data-profile aria-label="${esc(L("Profile and settings"))}">${esc(t("initial"))}</button></div>
+         <div class="large-title">${esc(top.title)}</div>`) + top.body;
     views.replaceChildren(view);
+    screen.classList.toggle("private", settings.hide);
+    if (profileOpen) renderProfile(false);
     document.querySelectorAll("#tabbar [data-tab]").forEach(b =>
       b.dataset.tab === tab ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"));
   }
