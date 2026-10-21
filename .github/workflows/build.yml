@@ -1,30 +1,15 @@
 name: Build
 
-# Commits that only touch docs or CI settings don't build (run the workflow
-# by hand from the Actions tab if needed). Tags always build.
+# Builds the iPhone app only: commits that don't touch ios/ (web app, website,
+# READMEs, CI settings) don't build (run the workflow by hand from the Actions tab if
+# needed). Tags always build.
 on:
   push:
     branches: [main]
     tags: ["v*"]
-    paths-ignore:
-      - "**.md"
-      - "LICENSE*"
-      - "docs/**"
-      - ".github/**"
-      - "altstore-source.json"
-      - ".gitignore"
-      - ".env.example"
-      - "ios/Local.xcconfig.example"
+    paths: ["ios/**", "!ios/**.md"]
   pull_request:
-    paths-ignore:
-      - "**.md"
-      - "LICENSE*"
-      - "docs/**"
-      - ".github/**"
-      - "altstore-source.json"
-      - ".gitignore"
-      - ".env.example"
-      - "ios/Local.xcconfig.example"
+    paths: ["ios/**", "!ios/**.md"]
   workflow_dispatch:
 
 permissions:
@@ -46,23 +31,6 @@ jobs:
       - name: Wait 10 minutes
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: sleep 600
-
-  web:
-    name: Web app
-    needs: settle
-    runs-on: ubuntu-latest
-    env:
-      PUPPETEER_SKIP_DOWNLOAD: "1" # Chromium is only needed to scrape, not to build
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm test
-      - run: npm run typecheck
-      - run: npm run build
 
   ios:
     name: iPhone app
