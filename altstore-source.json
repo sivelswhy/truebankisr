@@ -20,6 +20,15 @@
       "screenshotURLs": [],
       "versions": [
         {
+          "version": "1.0.39",
+          "buildVersion": "39",
+          "date": "2026-10-21T16:47:28.587Z",
+          "localizedDescription": "Web app at the iPhone app's level: four tabs, every screen, five languages",
+          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-39/TrueBalance.ipa",
+          "size": 1804647,
+          "minOSVersion": "18.0"
+        },
+        {
           "version": "1.0.38",
           "buildVersion": "38",
           "date": "2026-10-21T10:05:47.114Z",
@@ -98,15 +107,6 @@
           "localizedDescription": "iOS: Hello Bank and Revolut through Enable Banking, apart from the true balance",
           "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-26/TrueBalance.ipa",
           "size": 1583073,
-          "minOSVersion": "18.0"
-        },
-        {
-          "version": "1.0.25",
-          "buildVersion": "25",
-          "date": "2026-10-20T16:09:19.834Z",
-          "localizedDescription": "Enable Banking redirect page (GitHub Pages) that hands the code on to the app",
-          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-25/TrueBalance.ipa",
-          "size": 1414623,
           "minOSVersion": "18.0"
         }
       ]
