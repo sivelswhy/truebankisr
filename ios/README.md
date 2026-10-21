@@ -6,7 +6,8 @@ invisible `WKWebView`, the same way
 [`israeli-bank-scrapers`](https://github.com/eshaham/israeli-bank-scrapers)
 drives Chromium, then shows:
 
-- the **true balance**: Leumi balance minus the Max charges not yet debited,
+- the **true balance**: Leumi balance minus the Max charges not yet debited
+  (tap it for the calculation),
 - the breakdown of the next debit **by category**,
 - every upcoming charge, grouped by debit date (installments included).
 
@@ -26,7 +27,9 @@ Revolut, BNP Paribas, N26…), chosen by country with search, shown in their own
 section on Home with a bank picker, in their currency with the shekel
 equivalent. See [EUROPEAN-BANKS.md](EUROPEAN-BANKS.md).
 
-English and French (String Catalog with plurals), Dynamic Type, Dark Mode, VoiceOver.
+English, French, Hebrew, Russian and Arabic (String Catalog with plurals, right to left for Hebrew and
+Arabic), Dynamic Type, Dark Mode, VoiceOver. Settings also has an on-device log of refresh steps and
+errors, to export when something goes wrong.
 
 ## Layout
 
@@ -44,7 +47,7 @@ ios/
     ├── AppModel.swift                State, refresh, background refresh, alerts
     ├── Views/                        SwiftUI screens; Components.swift holds the
     │                                 shared hero card, chips, headers and background
-    └── Resources/                    Assets, Localizable.xcstrings (en, fr)
+    └── Resources/                    Assets, Localizable.xcstrings (en, fr, he, ru, ar)
 
 docs/enablebanking.html             GitHub Pages redirect back into the app
 ```

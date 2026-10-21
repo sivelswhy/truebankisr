@@ -12,20 +12,46 @@ Max, debited 2 Nov     − ₪964.20
 Really available       − ₪801.20
 ```
 
-Two clients, English and French:
+Two clients:
 
 - **iPhone app** (`ios/`): native SwiftUI, standalone (no server). Signs in to
   Leumi and Max on the phone itself, and can also show accounts at any
-  European bank through open banking. See [ios/README.md](ios/README.md).
+  European bank through open banking. In English, French, Hebrew, Russian and
+  Arabic. See [ios/README.md](ios/README.md).
 - **Web app** (this folder): Next.js, runs on your Mac and scrapes with
   [`israeli-bank-scrapers`](https://github.com/eshaham/israeli-bank-scrapers).
+  In English and French.
 
 Both show the next debit by category, installments in later months, and pending
-purchases.
+purchases (with the time of purchase when Max gives it). The iPhone app adds
+Leumi movements, spending over any period, budgets, subscriptions, a forecast,
+net worth, notes and tags, a widget, Siri and an optional Face ID lock.
 
 > **Personal use only.** This logs into your bank with your own credentials and
 > reads your own data. Credentials never leave your device (Keychain on iPhone,
 > encrypted file on the Mac). Not affiliated with Bank Leumi or Max.
+
+## Install on iPhone
+
+The app is not on the App Store, so you sideload it from a computer (Mac or PC):
+
+- **AltStore / SideStore**: add the source
+  `https://raw.githubusercontent.com/sivelswhy/truebankisr/main/altstore-source.json`
+  to get one-tap updates.
+- **Or** download `TrueBalance.ipa` from the
+  [latest release](https://github.com/sivelswhy/truebankisr/releases/latest)
+  and sign it with your usual tool (Sideloadly, AltStore…).
+- **Or** build it yourself with Xcode: [ios/README.md](ios/README.md).
+
+## Other banks and cards: contributions welcome
+
+Only **Leumi** and **Max** are supported for now, because that's what I use.
+[`israeli-bank-scrapers`](https://github.com/eshaham/israeli-bank-scrapers)
+already covers most Israeli banks and cards (Hapoalim, Discount, Mizrahi,
+Isracard, Cal…), so adding one is mostly a matter of plugging it in: the web
+app's `lib/scrape.ts`, and for the iPhone a port of the login flow in
+`ios/TrueBalance/Scraping/BankScrapers.swift` plus a parser in
+`TrueBalanceCore`. Issues and pull requests are welcome.
 
 ## Why not Israeli Open Banking?
 
