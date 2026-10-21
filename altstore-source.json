@@ -20,6 +20,15 @@
       "screenshotURLs": [],
       "versions": [
         {
+          "version": "1.0.35",
+          "buildVersion": "35",
+          "date": "2026-10-21T09:46:53.054Z",
+          "localizedDescription": "iOS: drop the Leumi − Max box from the hero card; the calculation shows on tap",
+          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-35/TrueBalance.ipa",
+          "size": 1804600,
+          "minOSVersion": "18.0"
+        },
+        {
           "version": "1.0.34",
           "buildVersion": "34",
           "date": "2026-10-20T23:04:17.585Z",
@@ -98,15 +107,6 @@
           "localizedDescription": "iOS: a stuck bank page can no longer hang the refresh",
           "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-24/TrueBalance.ipa",
           "size": 1414625,
-          "minOSVersion": "18.0"
-        },
-        {
-          "version": "1.0.23",
-          "buildVersion": "23",
-          "date": "2026-10-20T15:35:18.330Z",
-          "localizedDescription": "iOS: refresh status as a toolbar icon next to the profile (spinner / warning), details in a popover",
-          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-23/TrueBalance.ipa",
-          "size": 1392645,
           "minOSVersion": "18.0"
         }
       ]
