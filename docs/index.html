@@ -662,8 +662,8 @@
 
   let saved = null;
   try { saved = localStorage.getItem("lang"); } catch {}
-  const device = (navigator.language || "").toLowerCase().replace(/^iw/, "he").slice(0, 2);
-  apply(saved || (["fr", "he", "ru", "ar"].includes(device) ? device : "en"));
+  // English unless the visitor picked another language in the menu.
+  apply(saved || "en");
 
   document.getElementById("lang").addEventListener("change", e => {
     apply(e.target.value);
