@@ -146,13 +146,15 @@
   .gauge i { display: block; height: 100%; width: 0; border-radius: 3px; background: #0A84FF; transition: width 900ms cubic-bezier(.2,.8,.2,1) 500ms; }
   .runway { display: flex; justify-content: space-between; gap: 8px; color: rgba(235,235,245,0.6); font-size: 11px; margin: 7px 0 12px; }
   .runway span:last-child { white-space: nowrap; }
-  .strip { display: flex; align-items: baseline; gap: 10px; padding: 9px 10px; border-radius: 12px; background: rgba(118,118,128,0.14); }
-  .strip small { display: block; color: rgba(235,235,245,0.6); font-size: 10.5px; }
-  .strip b { font-weight: 600; font-size: 13px; font-variant-numeric: tabular-nums; }
-  .strip .minus { color: rgba(235,235,245,0.3); font-weight: 600; }
   .updated { color: rgba(235,235,245,0.3); font-size: 11px; margin-top: 10px; }
+  .card.indigo { background: linear-gradient(135deg, rgba(94,92,230,0.22), rgba(94,92,230,0.03)), #1C1C1E; border-color: rgba(94,92,230,0.18); }
+  .card .meta { color: rgba(235,235,245,0.6); font-size: 11px; }
+  .card .meta svg { width: 12px; height: 12px; fill: currentColor; vertical-align: -1px; margin-inline-end: 4px; }
+  /* Separators start where the text does. */
+  .rows.plain .row + .row::before { inset-inline-start: 12px; }
+  .rows.labels .row + .row::before { inset-inline-start: 36px; }
   .phone-section { font-weight: 700; font-size: 17px; padding: 18px 16px 6px; }
-  .rows { margin: 0 12px; border-radius: 12px; background: #1C1C1E; }
+  .rows { margin: 0 12px; border-radius: 12px; background: #1C1C1E; overflow: hidden; }
   .row { position: relative; display: flex; align-items: center; gap: 10px; padding: 9px 12px; }
   /* iOS insets the separator, not the content. */
   .row + .row::before { content: ""; position: absolute; top: 0; inset-inline: 48px 0; height: 0.5px; background: rgba(84,84,88,0.6); }
@@ -166,10 +168,80 @@
             display: flex; justify-content: space-around; align-items: center;
             background: rgba(40,40,44,0.72); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
             font-size: 10px; color: rgba(235,235,245,0.6); }
-  .tabbar span { display: grid; justify-items: center; gap: 3px; }
-  .tabbar span.on { color: #0A84FF; }
+  .tabbar button { all: unset; cursor: pointer; display: grid; justify-items: center; gap: 3px; padding: 4px 8px; border-radius: 18px; }
+  .tabbar button[aria-current="page"] { color: #0A84FF; }
+  .tabbar button:focus-visible { outline: 2px solid #0A84FF; }
   .tabbar svg { width: 20px; height: 20px; fill: currentColor; }
+  .tabbar b { font-weight: 500; }
 
+  /* The preview works like the app: tabs, and pages pushed on top. */
+  .phone-col { display: grid; justify-items: center; gap: 14px; }
+  .phone-hint { margin: 0; font-size: 14px; color: var(--secondary); text-align: center; max-width: 320px; }
+  .views { position: absolute; inset: 40px 0 0; overflow: hidden; }
+  .view { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 84px; scrollbar-width: none; background: inherit; }
+  .view::-webkit-scrollbar { display: none; }
+  .view.push { animation: push-in 340ms cubic-bezier(.2,.8,.2,1); }
+  .view.pop { animation: pop-in 340ms cubic-bezier(.2,.8,.2,1); }
+  .view.switch { animation: fade-in 160ms ease-out; }
+  @keyframes push-in { from { transform: translateX(100%); } }
+  @keyframes pop-in { from { transform: translateX(-30%); opacity: 0.5; } }
+  @keyframes fade-in { from { opacity: 0; } }
+  [dir="rtl"] .view.push { animation-name: push-in-rtl; }
+  [dir="rtl"] .view.pop { animation-name: pop-in-rtl; }
+  @keyframes push-in-rtl { from { transform: translateX(-100%); } }
+  @keyframes pop-in-rtl { from { transform: translateX(30%); opacity: 0.5; } }
+  .topbar { position: sticky; top: 0; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 4px;
+            min-height: 40px; padding: 2px 8px; background: rgba(16,26,54,0.82);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+  .topbar .bar-title { font-weight: 600; font-size: 14px; max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .back { all: unset; cursor: pointer; justify-self: start; display: flex; align-items: center; gap: 1px; color: #0A84FF; font-size: 14px;
+          padding: 4px; min-width: 0; max-width: 100%; }
+  .back span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .back svg { flex: none; width: 16px; height: 16px; fill: currentColor; }
+  [dir="rtl"] .back svg, [dir="rtl"] .disc { transform: scaleX(-1); }
+  .back:focus-visible { outline: 2px solid #0A84FF; border-radius: 8px; }
+  /* Zero specificity, so .row, .card and .budget keep their own layout. */
+  :where(.tap) { appearance: none; box-sizing: border-box; display: flex; width: 100%; margin: 0; padding: 0; border: 0; background: transparent;
+                 color: inherit; font: inherit; text-align: start; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .row.tap:active, .budget.tap:active { background-color: rgba(255,255,255,0.07); }
+  .tap:focus-visible { outline: 2px solid #0A84FF; outline-offset: -2px; border-radius: 12px; }
+  button.card { display: block; width: calc(100% - 24px); text-align: start; }
+  button.card:active { filter: brightness(1.15); }
+  .disc { flex: none; color: rgba(235,235,245,0.3); font-size: 16px; line-height: 1; }
+  .rows + .phone-section, .card + .phone-section { padding-top: 20px; }
+  .sub { padding: 6px 28px 0; color: rgba(235,235,245,0.6); font-size: 11px; }
+  .phone-section.split { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .phone-section.split span:last-child { font-size: 13px; font-weight: 600; color: rgba(235,235,245,0.6); font-variant-numeric: tabular-nums; }
+  .row .a.in { color: #30D158; }
+  .row .a small { display: block; text-align: end; color: #FF9F0A; font-size: 10px; font-weight: 600; }
+  .row .lab { flex: 1; display: flex; align-items: center; gap: 8px; }
+  .row .lab svg { width: 16px; height: 16px; fill: #0A84FF; }
+  .row.total { font-weight: 600; }
+  .ico.big { width: 56px; height: 56px; border-radius: 15px; }
+  .ico.big svg { width: 30px; height: 30px; }
+  .head { display: grid; justify-items: center; gap: 4px; padding: 14px 16px 18px; text-align: center; }
+  .head .name { font-size: 18px; font-weight: 700; }
+  .head .big-amount { font: 700 30px/1.15 var(--rounded); font-variant-numeric: tabular-nums; }
+  .head .when { color: rgba(235,235,245,0.6); font-size: 12px; display: flex; gap: 6px; align-items: center; }
+  .badge { font-size: 10px; font-weight: 600; color: #FF9F0A; background: rgba(255,159,10,0.16); padding: 2px 7px; border-radius: 999px; }
+  .bar-track { height: 4px; border-radius: 2px; background: rgba(118,118,128,0.3); overflow: hidden; margin-top: 5px; }
+  .bar-track i { display: block; height: 100%; border-radius: 2px; }
+  .budget { display: block; padding: 10px 12px; }
+  .budget .top { display: flex; align-items: center; gap: 10px; }
+  .budget .top span:nth-child(2) { flex: 1; }
+  .budget .foot { display: flex; justify-content: space-between; color: rgba(235,235,245,0.6); font-size: 10.5px; margin-top: 5px; font-variant-numeric: tabular-nums; }
+  .bars { display: flex; align-items: flex-end; justify-content: space-around; gap: 14px; height: 110px; padding: 18px 12px 8px; }
+  .bars div { flex: 1; display: grid; justify-items: center; gap: 4px; align-self: stretch; grid-template-rows: auto 1fr auto; }
+  .bars small { color: rgba(235,235,245,0.6); font-size: 10px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .bars i { align-self: end; width: 100%; border-radius: 6px; background: rgba(142,142,147,0.5); }
+  .bars i.on { background: linear-gradient(#0A84FF, #0060DF); }
+  .pchips { display: flex; gap: 6px; padding: 0 12px 12px; overflow-x: auto; scrollbar-width: none; }
+  .pchips button { all: unset; cursor: pointer; flex: none; font-size: 12px; font-weight: 600; padding: 6px 11px; border-radius: 999px; background: rgba(118,118,128,0.24); }
+  .pchips button[aria-pressed="true"] { background: linear-gradient(#0A84FF, #0060DF); }
+  .pchips button:focus-visible { outline: 2px solid #0A84FF; }
+  .curve { display: block; width: 100%; height: 80px; margin-top: 10px; }
+  .change { font: 600 13px var(--rounded); }
+  .foot-note { padding: 6px 28px 0; color: rgba(235,235,245,0.6); font-size: 10.5px; line-height: 1.4; }
   /* The calculation, as on the Calculation screen */
   section { padding: 0 0 64px; }
   h2 { font-size: clamp(28px, 3.6vw, 38px); line-height: 1.12; letter-spacing: -0.02em; font-weight: 700; margin: 0 0 12px; }
@@ -231,12 +303,12 @@
   }
 
   /* The one orchestrated moment: the card fills in when the page opens. */
-  .card .amount, .card .runway, .card .strip { opacity: 0; transform: translateY(6px); transition: opacity 500ms, transform 500ms cubic-bezier(.2,.8,.2,1); }
-  .card .runway { transition-delay: 500ms; }
-  .card .strip { transition-delay: 750ms; }
-  .ready .card .amount, .ready .card .runway, .ready .card .strip { opacity: 1; transform: none; }
+  .intro-card .amount, .intro-card .runway { opacity: 0; transform: translateY(6px); transition: opacity 500ms, transform 500ms cubic-bezier(.2,.8,.2,1); }
+  .intro-card .runway { transition-delay: 500ms; }
+  .ready .intro-card .amount, .ready .intro-card .runway { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
-    .card .amount, .card .runway, .card .strip { opacity: 1; transform: none; transition: none; }
+    .intro-card .amount, .intro-card .runway { opacity: 1; transform: none; transition: none; }
+    .view.push, .view.pop, .view.switch { animation: none; }
     .gauge i { transition: none; }
     .chip, .button { transition: none; }
   }
@@ -267,6 +339,15 @@
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M8 1h8a3 3 0 0 1 3 3v16a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3Zm0 2a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1Zm2 15h4v1.5h-4Z"/></symbol>
   <symbol id="i-code" viewBox="0 0 24 24"><path d="m8.6 6 1.4 1.4L5.4 12l4.6 4.6L8.6 18l-6-6Zm6.8 0 6 6-6 6-1.4-1.4 4.6-4.6L14 7.4Z"/></symbol>
   <symbol id="i-eye" viewBox="0 0 24 24"><path d="M12 5c5 0 9 4.5 10 7-1 2.5-5 7-10 7S3 14.5 2 12c1-2.5 5-7 10-7Zm0 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6Z"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3.5a2.5 2.5 0 0 0 0 5V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3.5a2.5 2.5 0 0 0 0-5Zm10 1v2h2V7Zm0 4v2h2v-2Zm0 4v2h2v-2Z"/></symbol>
+  <symbol id="i-sofa" viewBox="0 0 24 24"><path d="M6 5h12a2 2 0 0 1 2 2v2.2a3 3 0 0 1 2 2.8v6h-2v2h-2v-2H6v2H4v-2H2v-6a3 3 0 0 1 2-2.8V7a2 2 0 0 1 2-2Zm1 7v2h10v-2a3 3 0 0 1 1-2.2V7H6v2.8A3 3 0 0 1 7 12Z"/></symbol>
+  <symbol id="i-antenna" viewBox="0 0 24 24"><path d="M12 9a2 2 0 0 1 1 3.7V22h-2v-9.3A2 2 0 0 1 12 9ZM6.3 5.3l1.4 1.4a7.5 7.5 0 0 0 0 10.6l-1.4 1.4a9.5 9.5 0 0 1 0-13.4Zm11.4 0a9.5 9.5 0 0 1 0 13.4l-1.4-1.4a7.5 7.5 0 0 0 0-10.6ZM9.2 8.2l1.4 1.4a3.4 3.4 0 0 0 0 4.8l-1.4 1.4a5.4 5.4 0 0 1 0-7.6Zm5.6 0a5.4 5.4 0 0 1 0 7.6l-1.4-1.4a3.4 3.4 0 0 0 0-4.8Z"/></symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M8.5 3a3.5 3.5 0 0 0 7 0l6 3-2 5-2.5-1V21h-10V10l-2.5 1-2-5Z"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 5.5h11.5V17h-2.2v-7.7L7.6 18 6 16.4l8.7-8.7H7Z"/></symbol>
+  <symbol id="i-equal" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm-4.5 6.5v2h9v-2Zm0 5v2h9v-2Z"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 18.6 9 12.5l4 4 6.6-6.6V13H22V6h-7v2.4h3.1L13 13.5l-4-4-7.4 7.6ZM2 20h20v2H2Z"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15.4 3.6 17 5.2 10.2 12l6.8 6.8-1.6 1.6L7 12Z"/></symbol>
   <symbol id="i-widget" viewBox="0 0 24 24"><path d="M4 3h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm10 0h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM4 13h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1Z"/></symbol>
 </svg>
 
@@ -299,40 +380,21 @@
         <p class="note" data-i18n="note">Free, for iPhone with iOS 18 or later. In English, French, Hebrew, Russian and Arabic.</p>
       </div>
 
-      <div class="phone" aria-label="The True Balance home screen" role="img" data-i18n-aria="phoneLabel">
-        <div class="screen">
-          <div class="island"></div>
-          <div class="status"><span>9:41</span><span>5G</span></div>
-          <div class="nav"><span class="avatar" data-i18n="initial">D</span></div>
-          <div class="large-title" data-i18n="hello">Hello, Dana</div>
-          <div class="card">
-            <div class="caption"><span data-i18n="really">Really available</span><span class="chev" aria-hidden="true">›</span></div>
-            <div class="amount" data-money="5299.60"></div>
-            <div class="gauge"><i></i></div>
-            <div class="runway"><span data-i18n="days">12 days until the debit</span><span data-i18n="perday">about ₪442/day</span></div>
-            <div class="strip">
-              <span><small data-i18n="leumi">Leumi balance</small><b data-money="8420"></b></span>
-              <span class="minus">−</span>
-              <span><small data-i18n="maxon">Max · 2 Nov</small><b data-money="3120.40"></b></span>
-            </div>
-            <div class="updated" data-i18n="updated">Updated 2 min ago</div>
-          </div>
-          <div class="phone-section" data-i18n="latest">Latest payments</div>
-          <div class="rows">
-            <div class="row"><span class="ico" style="background:linear-gradient(#34C759,#248A3D)"><svg><use href="#i-cart"/></svg></span>
-              <div class="t"><div data-i18n="m1">Shufersal Deal</div><div data-i18n="groceries">Today · Groceries</div></div><span class="a" data-money="286.90"></span></div>
-            <div class="row"><span class="ico" style="background:linear-gradient(#FF9500,#C93400)"><svg><use href="#i-cup"/></svg></span>
-              <div class="t"><div data-i18n="m2">Aroma Espresso Bar</div><div data-i18n="cafe">Yesterday · Restaurants</div></div><span class="a" data-money="42"></span></div>
-            <div class="row"><span class="ico" style="background:linear-gradient(#5E5CE6,#3634A3)"><svg><use href="#i-fuel"/></svg></span>
-              <div class="t"><div data-i18n="m3">Paz</div><div data-i18n="fuel">19 Oct · Fuel</div></div><span class="a" data-money="250"></span></div>
-          </div>
-          <div class="tabbar" aria-hidden="true">
-            <span class="on"><svg><use href="#i-house"/></svg><b data-i18n="tHome">Home</b></span>
-            <span><svg><use href="#i-card"/></svg><b data-i18n="tCharges">Charges</b></span>
-            <span><svg><use href="#i-chart"/></svg><b data-i18n="tSpending">Spending</b></span>
-            <span><svg><use href="#i-bulb"/></svg><b data-i18n="tInsights">Insights</b></span>
+      <div class="phone-col">
+        <div class="phone" role="region" aria-label="The True Balance home screen" data-i18n-aria="phoneLabel">
+          <div class="screen">
+            <div class="island"></div>
+            <div class="status"><span>9:41</span><span>5G</span></div>
+            <div class="views" id="views"></div>
+            <nav class="tabbar" id="tabbar">
+              <button type="button" data-tab="home"><svg aria-hidden="true"><use href="#i-house"/></svg><b data-i18n="tHome">Home</b></button>
+              <button type="button" data-tab="charges"><svg aria-hidden="true"><use href="#i-card"/></svg><b data-i18n="tCharges">Charges</b></button>
+              <button type="button" data-tab="spending"><svg aria-hidden="true"><use href="#i-chart"/></svg><b data-i18n="tSpending">Spending</b></button>
+              <button type="button" data-tab="insights"><svg aria-hidden="true"><use href="#i-bulb"/></svg><b data-i18n="tInsights">Insights</b></button>
+            </nav>
           </div>
         </div>
+        <p class="phone-hint" data-i18n="hint">Try it: tap the balance, a payment or a tab.</p>
       </div>
     </div>
 
@@ -429,6 +491,7 @@
 <script>
   const strings = {
     fr: {
+    hint: "Essayez : touchez le solde, un paiement ou un onglet.",
       h1: "Ce que vous pouvez vraiment dépenser.",
       lede: "Max prélève tout le 2 du mois, alors votre solde Leumi paraît plus gros qu’il n’est. True Balance affiche <strong>votre solde Leumi moins les débits Max encore à venir</strong>, sur votre iPhone, en un seul chiffre.",
       altstore: "Ajouter à AltStore", sidestore: "Ajouter à SideStore", ipa: "Télécharger l’IPA",
@@ -481,6 +544,7 @@
   };
 
   strings.he = {
+    hint: "נסו: לחצו על היתרה, על תשלום או על לשונית.",
     h1: "כמה אפשר באמת להוציא.",
     lede: "מקס מחייבת הכול ב-2 לחודש, ולכן היתרה בלאומי נראית גדולה ממה שהיא. True Balance מציגה <strong>את היתרה בלאומי פחות חיובי מקס שעוד יגיעו</strong>, באייפון, במספר אחד.",
     altstore: "הוספה ל-AltStore", sidestore: "הוספה ל-SideStore", ipa: "הורדת קובץ ה-IPA",
@@ -533,6 +597,7 @@
   };
 
   strings.ru = {
+    hint: "Попробуйте: нажмите на баланс, платёж или вкладку.",
     h1: "Сколько вы реально можете потратить.",
     lede: "Макс списывает всё 2-го числа, поэтому баланс в Леуми кажется больше, чем он есть. True Balance показывает <strong>баланс Леуми минус ещё не списанные покупки по Максу</strong> — на iPhone, одним числом.",
     altstore: "Добавить в AltStore", sidestore: "Добавить в SideStore", ipa: "Скачать IPA",
@@ -583,6 +648,7 @@
   };
 
   strings.ar = {
+    hint: "جرّب: اضغط على الرصيد أو على دفعة أو على تبويب.",
     h1: "ما يمكنك إنفاقه فعلًا.",
     lede: "تخصم ماكس كل شيء في الثاني من الشهر، لذا يبدو رصيدك في لئومي أكبر مما هو عليه. يعرض True Balance <strong>رصيدك في لئومي ناقص خصومات ماكس القادمة</strong>، على الـ iPhone، برقم واحد.",
     altstore: "إضافة إلى AltStore", sidestore: "إضافة إلى SideStore", ipa: "تنزيل ملف IPA",
@@ -639,6 +705,8 @@
   document.querySelectorAll("[data-i18n-html]").forEach(el => english[el.dataset.i18nHtml] = el.innerHTML);
   document.querySelectorAll("[data-i18n-aria]").forEach(el => english[el.dataset.i18nAria] = el.getAttribute("aria-label"));
   english.copied = "Copied";
+  // Drawn by the preview script, not in the page.
+  Object.assign(english, { hello: "Hello, Dana", initial: "D", updated: "Updated 2 min ago" });
 
   let lang = "en";
   function t(key) { return (strings[lang] && strings[lang][key]) || english[key] || key; }
@@ -658,7 +726,381 @@
       el.textContent = (v < 0 ? "− " : "") + money.format(Math.abs(v));
     });
     document.getElementById("lang").value = lang;
+    renderPhone();
   }
+
+
+  // ---- The interactive preview: the app's screens with sample data. ----
+  // Labels come from the app's own string catalog (Localizable.xcstrings).
+  const ui = {
+    "Calculation": {"fr": "Calcul", "he": "החישוב", "ru": "Расчёт", "ar": "طريقة الحساب"},
+    "Leumi balance": {"fr": "Solde Leumi", "he": "יתרה בלאומי", "ru": "Баланс Леуми", "ar": "رصيد لئومي"},
+    "Available": {"fr": "Disponible", "he": "זמין", "ru": "Доступно", "ar": "المتاح"},
+    "Expected on %@": {"fr": "Prévu le %@", "he": "צפי ל-%@", "ru": "Ожидается %@", "ar": "المتوقع في %@"},
+    "Salary and regular debits included": {"fr": "Salaire et prélèvements réguliers compris", "he": "כולל משכורת וחיובים קבועים", "ru": "С учётом зарплаты и регулярных списаний", "ar": "مع الراتب والخصومات الثابتة"},
+    "Latest payments": {"fr": "Derniers paiements", "he": "תשלומים אחרונים", "ru": "Последние платежи", "ar": "آخر المدفوعات"},
+    "Leumi account": {"fr": "Compte Leumi", "he": "חשבון לאומי", "ru": "Счёт в Леуми", "ar": "حساب لئومي"},
+    "Next Max debit": {"fr": "Prochain prélèvement Max", "he": "חיוב מקס הבא", "ru": "Следующее списание Макса", "ar": "خصم ماكس القادم"},
+    "%lld purchase(s)": {"en": {"one": "%lld purchase", "other": "%lld purchases"}, "fr": {"one": "%lld achat", "other": "%lld achats"}, "he": {"one": "רכישה אחת", "two": "%lld רכישות", "other": "%lld רכישות"}, "ru": {"one": "%lld покупка", "few": "%lld покупки", "many": "%lld покупок", "other": "%lld покупки"}, "ar": {"zero": "%lld عملية شراء", "one": "عملية شراء واحدة", "two": "عمليتا شراء", "few": "%lld عمليات شراء", "many": "%lld عملية شراء", "other": "%lld عملية شراء"}},
+    "Upcoming debits": {"fr": "Prochains prélèvements", "he": "חיובים קרובים", "ru": "Предстоящие списания", "ar": "الخصومات القادمة"},
+    "By category": {"fr": "Par catégorie", "he": "לפי קטגוריה", "ru": "По категориям", "ar": "حسب الفئة"},
+    "Debited %@": {"fr": "Prélevé le %@", "he": "יחויב ב-%@", "ru": "Спишется %@", "ar": "يُخصم في %@"},
+    "7 days": {"fr": "7 jours", "he": "7 ימים", "ru": "7 дней", "ar": "7 أيام"},
+    "30 days": {"fr": "30 jours", "he": "30 יום", "ru": "30 дней", "ar": "30 يومًا"},
+    "This month": {"fr": "Ce mois-ci", "he": "החודש", "ru": "Этот месяц", "ar": "هذا الشهر"},
+    "Last month": {"fr": "Mois dernier", "he": "החודש שעבר", "ru": "Прошлый месяц", "ar": "الشهر الماضي"},
+    "Card spending": {"fr": "Dépenses carte", "he": "הוצאות בכרטיס", "ru": "Расходы по карте", "ar": "مصاريف البطاقة"},
+    "about %@/day": {"fr": "environ %@/jour", "he": "בערך %@ ליום", "ru": "около %@ в день", "ar": "نحو %@ يوميًا"},
+    "This month on Max": {"fr": "Ce mois-ci sur Max", "he": "החודש במקס", "ru": "Этот месяц по Максу", "ar": "هذا الشهر على ماكس"},
+    "Last month at the same date: %@": {"fr": "Le mois dernier à la même date : %@", "he": "בחודש שעבר באותו תאריך: %@", "ru": "В прошлом месяце на ту же дату: %@", "ar": "الشهر الماضي في التاريخ نفسه: %@"},
+    "Budgets": {"fr": "Budgets", "he": "תקציבים", "ru": "Бюджеты", "ar": "الميزانيات"},
+    "Subscriptions": {"fr": "Abonnements", "he": "מינויים", "ru": "Подписки", "ar": "الاشتراكات"},
+    "%@/month": {"fr": "%@/mois", "he": "%@ לחודש", "ru": "%@/мес.", "ar": "%@ شهريًا"},
+    "Net worth": {"fr": "Patrimoine", "he": "שווי נקי", "ru": "Чистые активы", "ar": "صافي الثروة"},
+    "Pending": {"fr": "En attente", "he": "ממתין", "ru": "В обработке", "ar": "قيد المعالجة"},
+    "Card": {"fr": "Carte", "he": "כרטיס", "ru": "Карта", "ar": "البطاقة"},
+    "Category": {"fr": "Catégorie", "he": "קטגוריה", "ru": "Категория", "ar": "الفئة"},
+    "Max is debited today": {"fr": "Max est prélevé aujourd’hui", "he": "מקס מחייבת היום", "ru": "Макс списывает сегодня", "ar": "تُخصم ماكس اليوم"},
+    "%lld day(s) until the debit": {"en": {"one": "%lld day until the debit", "other": "%lld days until the debit"}, "fr": {"one": "%lld jour avant le prélèvement", "other": "%lld jours avant le prélèvement"}, "he": {"one": "יום אחד עד החיוב", "two": "יומיים עד החיוב", "other": "%lld ימים עד החיוב"}, "ru": {"one": "%lld день до списания", "few": "%lld дня до списания", "many": "%lld дней до списания", "other": "%lld дня до списания"}, "ar": {"zero": "%lld يوم حتى الخصم", "one": "يوم واحد حتى الخصم", "two": "يومان حتى الخصم", "few": "%lld أيام حتى الخصم", "many": "%lld يومًا حتى الخصم", "other": "%lld يوم حتى الخصم"}},
+    "Really available": {"fr": "Vraiment disponible", "he": "זמין באמת", "ru": "Реально доступно", "ar": "المتاح فعلًا"},
+    "Current account, savings and foreign currency": {"fr": "Compte courant, épargne et devises", "he": "עו״ש, חיסכון ומט״ח", "ru": "Текущий счёт, сбережения и валюта", "ar": "الحساب الجاري والتوفير والعملات الأجنبية"},
+    "Home": {"fr": "Accueil", "he": "בית", "ru": "Главная", "ar": "الرئيسية"},
+    "Charges": {"fr": "Prélèvements", "he": "חיובים", "ru": "Списания", "ar": "الخصومات"},
+    "Spending": {"fr": "Dépenses", "he": "הוצאות", "ru": "Расходы", "ar": "المصاريف"},
+    "Insights": {"fr": "Analyse", "he": "תובנות", "ru": "Аналитика", "ar": "التحليلات"},
+    "Debited": {"fr": "Prélevé le", "he": "חויב", "ru": "Списание", "ar": "يُخصم"},
+    "Installment": {"fr": "Échéance", "he": "תשלום", "ru": "Платёж", "ar": "القسط"},
+    "%lld of %lld": {"en": "%1$lld of %2$lld", "fr": "%1$lld sur %2$lld", "he": "%1$lld מתוך %2$lld", "ru": "%1$lld из %2$lld", "ar": "%1$lld من %2$lld"},
+    "With later installments already committed: %@": {"fr": "En comptant les échéances suivantes déjà engagées : %@", "he": "כולל תשלומים עתידיים שכבר התחייבת להם: %@", "ru": "С учётом уже взятых будущих платежей: %@", "ar": "مع الأقساط اللاحقة الملتزم بها: %@"},
+    "Transfer received": {"fr": "Virement reçu", "he": "העברה שהתקבלה", "ru": "Входящий перевод", "ar": "تحويل وارد"},
+    "Transfer sent": {"fr": "Virement envoyé", "he": "העברה שנשלחה", "ru": "Исходящий перевод", "ar": "تحويل صادر"},
+    "Max debit": {"fr": "Prélèvement Max", "he": "חיוב מקס", "ru": "Списание Макса", "ar": "خصم ماكس"},
+    "Money in": {"fr": "Crédit", "he": "הכנסות", "ru": "Поступления", "ar": "الأموال الواردة"},
+    "Debit": {"fr": "Prélèvement", "he": "חיוב", "ru": "Списание", "ar": "الخصم"},
+    "%@ spent": {"fr": "%@ dépensés", "he": "הוצאו %@", "ru": "Потрачено %@", "ar": "أُنفق %@"},
+    "%@ left": {"fr": "reste %@", "he": "נותרו %@", "ru": "Осталось %@", "ar": "متبقٍّ %@"},
+    "Next around %@": {"fr": "Prochain vers le %@", "he": "הבא בסביבות %@", "ru": "Следующее около %@", "ar": "التالي في حدود %@"},
+    "Salary and regular debits": {"fr": "Salaire et prélèvements réguliers", "he": "משכורת וחיובים קבועים", "ru": "Зарплата и регулярные списания", "ar": "الراتب والخصومات الثابتة"},
+    "Forecast": {"fr": "Prévision", "he": "תחזית", "ru": "Прогноз", "ar": "التوقعات"},
+    "Date": {"fr": "Date", "he": "תאריך", "ru": "Дата", "ar": "التاريخ"},
+    "All purchases at %@": {"fr": "Tous les achats chez %@", "he": "כל הרכישות ב-%@", "ru": "Все покупки в %@", "ar": "كل المشتريات في %@"},
+    "Next debit": {"fr": "Au prochain prélèvement", "he": "בחיוב הבא", "ru": "Со следующим списанием", "ar": "مع الخصم القادم"},
+    "Max": {"fr": "Max", "he": "מקס", "ru": "Макс", "ar": "ماكس"},
+    "Leumi": {"he": "לאומי", "ru": "Леуми", "ar": "لئومي"},
+    "You’ll get a notification at 80% and 100%.": {"fr": "Tu seras prévenu à 80 % et à 100 %.", "he": "תגיע התראה ב-80% וב-100%.", "ru": "Вы получите уведомление при 80% и 100%.", "ar": "سيصلك تنبيه عند 80% و100%."},
+    "Regular Leumi movements expected before the debit, detected from the last months: same payer or payee, about the same amount, every month.": {"fr": "Mouvements Leumi réguliers attendus avant le prélèvement, repérés sur les derniers mois : même émetteur ou bénéficiaire, à peu près le même montant, chaque mois.", "he": "תנועות קבועות בלאומי שצפויות לפני החיוב, לפי החודשים האחרונים: אותו משלם או מוטב, בערך אותו סכום, כל חודש.", "ru": "Регулярные операции в Леуми, ожидаемые до списания, найденные по последним месяцам: тот же плательщик или получатель, примерно та же сумма, каждый месяц.", "ar": "حركات ثابتة في لئومي متوقعة قبل الخصم، مكتشفة من الأشهر الأخيرة: الدافع أو المستفيد نفسه، والمبلغ نفسه تقريبًا، كل شهر."},
+    "category.groceries": {"en": "Groceries", "fr": "Courses", "he": "מכולת וסופר", "ru": "Продукты", "ar": "البقالة"},
+    "category.restaurants": {"en": "Restaurants & bars", "fr": "Restaurants et bars", "he": "מסעדות וברים", "ru": "Рестораны и бары", "ar": "المطاعم والمقاهي"},
+    "category.energy": {"en": "Fuel, power & gas", "fr": "Carburant, électricité et gaz", "he": "דלק, חשמל וגז", "ru": "Топливо, электричество и газ", "ar": "الوقود والكهرباء والغاز"},
+    "category.health": {"en": "Health & pharmacy", "fr": "Santé et pharmacie", "he": "בריאות ופארם", "ru": "Здоровье и аптека", "ar": "الصحة والصيدلية"},
+    "category.leisure": {"en": "Leisure & sport", "fr": "Loisirs et sport", "he": "פנאי וספורט", "ru": "Досуг и спорт", "ar": "الترفيه والرياضة"},
+    "category.home": {"en": "Home & DIY", "fr": "Maison et bricolage", "he": "בית ועשה זאת בעצמך", "ru": "Дом и ремонт", "ar": "المنزل والأدوات"},
+    "category.telecom": {"en": "Phone & internet", "fr": "Téléphone et internet", "he": "טלפון ואינטרנט", "ru": "Связь и интернет", "ar": "الهاتف والإنترنت"},
+    "category.fashion": {"en": "Fashion", "fr": "Mode", "he": "אופנה", "ru": "Одежда", "ar": "الأزياء"},
+  };
+
+  function L(key, ...args) {
+    const e = ui[key] || {};
+    let s = e[lang] || e.en || key;
+    if (typeof s === "object") s = s[new Intl.PluralRules(lang).select(args[0])] || s.other;
+    let n = 0;
+    return s.replace(/%(\d)\$lld|%lld|%@/g, (m, pos) => String(pos ? args[pos - 1] : args[n++]));
+  }
+  const cat = key => L("category." + key);
+  const esc = v => String(v).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const locale = () => ({ fr: "fr-FR", he: "he-IL", ru: "ru-RU", ar: "ar-IL-u-nu-latn" }[lang] || "en-GB");
+  const ils = (v, whole) => new Intl.NumberFormat(locale(), { style: "currency", currency: "ILS",
+    maximumFractionDigits: whole ? 0 : 2, minimumFractionDigits: whole ? 0 : 2 }).format(v).replace("-", "−");
+  // Dates are Israel wall-clock times, kept as UTC so the visitor's zone doesn't move them.
+  const at = s => new Date(s.length > 10 ? s + ":00Z" : s + "T00:00:00Z");
+  const hasTime = s => s.length > 10;
+  const fmt = (s, o) => at(s).toLocaleString(locale(), { timeZone: "UTC", ...o });
+  const day = s => fmt(s, { day: "numeric", month: "short" });
+  const dayTime = s => hasTime(s) ? fmt(s, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }) : day(s);
+  const fullDate = s => fmt(s, { weekday: "long", day: "numeric", month: "long", year: "numeric",
+    ...(hasTime(s) ? { hour: "2-digit", minute: "2-digit", hourCycle: "h23" } : {}) });
+  const percent = v => new Intl.NumberFormat(locale(), { style: "percent", maximumFractionDigits: 0 }).format(v);
+
+  const TODAY = "2026-10-21", DEBIT = "2026-11-02", BANK = 8420;
+  const cats = {
+    groceries: ["#FF3F9B", "i-cart"], restaurants: ["#13E2BF", "i-cup"], energy: ["#3DC0E9", "i-fuel"],
+    health: ["#879AFF", "i-cross"], leisure: ["#FF7121", "i-ticket"], home: ["#C20017", "i-sofa"],
+    telecom: ["#B6C700", "i-antenna"], fashion: ["#00A3AD", "i-shirt"],
+  };
+  const names = {
+    shufersal: { en: "Shufersal Deal", he: "שופרסל דיל", ar: "شوفرسال ديل" },
+    aroma: { en: "Aroma Espresso Bar", he: "ארומה אספרסו בר", ar: "أروما إسبريسو بار" },
+    paz: { en: "Paz", he: "פז", ar: "باز" }, ramilevy: { en: "Rami Levy", he: "רמי לוי", ar: "رامي ليفي" },
+    superpharm: { en: "Super-Pharm", he: "סופר-פארם", ar: "سوبر فارم" },
+    acme: { en: "Acme Ltd", he: "אקמי בע״מ", ar: "أكمي م.ض." }, yael: { en: "Yael Levi", he: "יעל לוי", ar: "ياعيل ليفي" },
+    rent: { en: "Rent", fr: "Loyer", he: "שכר דירה", ru: "Аренда", ar: "الإيجار" }, max: { en: "Max", he: "מקס", ru: "Макс", ar: "ماكس" },
+  };
+  const name = k => (names[k] && (names[k][lang] || names[k].en)) || k;
+
+  // Max purchases waiting for the 2 Nov debit (they add up to the number on the page).
+  const P = (id, date, m, c, amount, extra = {}) => ({ id, date, m, c, amount, card: "4580", debit: DEBIT, ...extra });
+  const nextTxns = [
+    P("p1", "2026-10-21T18:42", "shufersal", "groceries", 286.90, { pending: true }),
+    P("p2", "2026-10-21T08:15", "aroma", "restaurants", 42, { pending: true }),
+    P("p3", "2026-10-20", "paz", "energy", 250),
+    P("p4", "2026-10-19", "Wolt", "restaurants", 118),
+    P("p5", "2026-10-18", "superpharm", "health", 118.50),
+    P("p6", "2026-10-16", "ramilevy", "groceries", 412.30, { card: "7712" }),
+    P("p7", "2026-10-14", "Cinema City", "leisure", 96),
+    P("p8", "2026-10-12", "Netflix", "leisure", 54.90),
+    P("p9", "2026-10-10", "IKEA", "home", 249.90, { inst: [1, 3] }),
+    P("p10", "2026-10-09", "shufersal", "groceries", 341.60),
+    P("p11", "2026-10-08", "Spotify", "leisure", 21.90),
+    P("p12", "2026-10-07", "Sonol", "energy", 230),
+    P("p13", "2026-10-05", "Golda", "restaurants", 64),
+    P("p14", "2026-10-04", "Victory", "groceries", 199.80, { card: "7712" }),
+    P("p15", "2026-10-03", "Partner", "telecom", 69),
+    P("p16", "2026-10-01", "Zara", "fashion", 565.60),
+  ];
+  const upcoming = [
+    { date: DEBIT, txns: nextTxns },
+    { date: "2026-12-02", txns: [P("p9-2", "2026-10-10", "IKEA", "home", 249.90, { inst: [2, 3], debit: "2026-12-02" })] },
+    { date: "2027-01-02", txns: [P("p9-3", "2026-10-10", "IKEA", "home", 249.90, { inst: [3, 3], debit: "2027-01-02" })] },
+  ];
+  const sum = list => list.reduce((a, t) => a + t.amount, 0);
+  upcoming.forEach(u => u.total = sum(u.txns));
+  const nextTotal = upcoming[0].total;
+  const available = BANK - nextTotal;
+  const allKnown = BANK - sum(upcoming.flatMap(u => u.txns));
+  const allTxns = upcoming.flatMap(u => u.txns);
+  const findTxn = id => allTxns.find(t => t.id === id);
+
+  // September, already debited: only for the spending curve and month to month.
+  const september = [];
+  for (let d = 1, seed = 7; d <= 30; d++) {
+    seed = (seed * 9301 + 49297) % 233280;
+    september.push({ date: `2026-09-${String(d).padStart(2, "0")}`, amount: 40 + Math.round(seed / 233280 * 18000) / 100 });
+  }
+  const spendTxns = [...september, ...nextTxns];
+
+  const moves = [
+    { id: "m1", date: "2026-10-19", who: "yael", kind: "Transfer sent", amount: -350 },
+    { id: "m2", date: "2026-10-02", who: "max", kind: "Max debit", amount: -2964.10 },
+    { id: "m3", date: "2026-10-01", who: "acme", kind: "Money in", amount: 9800 },
+    { id: "m4", date: "2026-10-01", who: "rent", kind: "Debit", amount: -4200 },
+  ];
+  const regular = [
+    { who: "acme", next: "2026-11-01", amount: 9800 },
+    { who: "rent", next: "2026-11-01", amount: -4200 },
+  ];
+  const expected = available + sum(regular);
+  const subs = [
+    { m: "Netflix", c: "leisure", next: "2026-11-12", amount: 54.90 },
+    { m: "Spotify", c: "leisure", next: "2026-11-08", amount: 21.90 },
+    { m: "Partner", c: "telecom", next: "2026-11-03", amount: 69 },
+  ];
+  const budgets = [{ c: "groceries", limit: 1500 }, { c: "restaurants", limit: 300 }];
+  const netWorth = allKnown + 42000 + 3240;
+
+  // Building blocks, the way the app draws them.
+  const icon = (c, big) => `<span class="ico${big ? " big" : ""}" style="background:linear-gradient(${cats[c][0]},color-mix(in srgb,${cats[c][0]} 70%,#000))"><svg aria-hidden="true"><use href="#${cats[c][1]}"/></svg></span>`;
+  const moveIcon = (m, big) => {
+    const inn = m.amount > 0;
+    return `<span class="ico${big ? " big" : ""}" style="background:linear-gradient(${inn ? "#34C759,#248A3D" : "#5E5CE6,#3634A3"})"><svg aria-hidden="true"><use href="#${inn ? "i-in" : "i-out"}"/></svg></span>`;
+  };
+  const disc = `<span class="disc" aria-hidden="true">›</span>`;
+  const go = (to, body) => `<button type="button" class="row tap" data-go="${esc(to)}">${body}${disc}</button>`;
+  const header = (text, right) => right != null
+    ? `<div class="phone-section split"><span>${esc(text)}</span><span>${esc(right)}</span></div>`
+    : `<div class="phone-section">${esc(text)}</div>`;
+  const merchant = t => name(t.m);
+
+  function txnRow(t, withDebit) {
+    const parts = [dayTime(t.date), cat(t.c)];
+    if (t.inst) parts.push(L("%lld of %lld", t.inst[0], t.inst[1]));
+    if (withDebit) parts.push(L("Debited %@", day(t.debit)));
+    return go("txn:" + t.id, `${icon(t.c)}<div class="t"><div>${esc(merchant(t))}</div><div>${esc(parts.join(" · "))}</div></div>
+      <span class="a">${ils(t.amount)}${t.pending ? `<small>${esc(L("Pending"))}</small>` : ""}</span>`);
+  }
+  function moveRow(m) {
+    return go("move:" + m.id, `${moveIcon(m)}<div class="t"><div>${esc(name(m.who))}</div><div>${esc(day(m.date) + " · " + L(m.kind))}</div></div>
+      <span class="a${m.amount > 0 ? " in" : ""}">${(m.amount > 0 ? "+" : "") + ils(m.amount)}</span>`);
+  }
+  function categoryRows(list, total) {
+    const by = {};
+    list.forEach(t => by[t.c] = (by[t.c] || 0) + t.amount);
+    return Object.entries(by).sort((a, b) => b[1] - a[1]).map(([c, v]) => go("cat:" + c, `${icon(c)}<div class="t"><div>${esc(cat(c))}</div>
+      <div class="bar-track"><i style="width:${(v / total * 100).toFixed(1)}%;background:${cats[c][0]}"></i></div></div><span class="a">${ils(v)}</span>`)).join("");
+  }
+  const daysLeft = Math.round((at(DEBIT) - at(TODAY)) / 864e5);
+
+  // ---- Screens: each returns { title, large, body }. ----
+  const screens = {
+    home: () => ({
+      title: t("hello"), large: true, body: `
+      <button type="button" class="card tap intro-card" data-go="calc" aria-label="${esc(t("really") + " " + ils(available))}">
+        <div class="caption"><span>${esc(t("really"))}</span><span class="chev" aria-hidden="true">›</span></div>
+        <div class="amount">${ils(available)}</div>
+        <div class="gauge"><i style="width:${introDone ? 60 : 0}%"></i></div>
+        <div class="runway"><span>${esc(L("%lld day(s) until the debit", daysLeft))}</span><span>${esc(L("about %@/day", ils(available / daysLeft, true)))}</span></div>
+        <div class="updated">${esc(t("updated"))}</div>
+      </button>
+      <div class="rows" style="margin-top:14px">${go("forecast", `<span class="lab"><svg aria-hidden="true"><use href="#i-trend"/></svg>
+        <span class="t"><div>${esc(L("Expected on %@", day(DEBIT)))}</div><div>${esc(L("Salary and regular debits included"))}</div></span></span>
+        <span class="a">${ils(expected)}</span>`)}</div>
+      ${header(L("Latest payments"))}<div class="rows">${[...nextTxns].slice(0, 5).map(x => txnRow(x)).join("")}</div>
+      ${header(L("Leumi account"))}<div class="rows">${moves.map(moveRow).join("")}</div>`,
+    }),
+
+    calc: () => ({
+      title: L("Calculation"), body: `
+      <div class="rows labels" style="margin-top:12px">
+        <div class="row"><span class="lab"><svg aria-hidden="true"><use href="#i-bank"/></svg>${esc(L("Leumi balance"))}</span><span class="a">${ils(BANK)}</span></div>
+        <div class="row"><span class="lab"><svg aria-hidden="true"><use href="#i-card"/></svg>${esc(L("Max") + " · " + day(DEBIT))}</span><span class="a">${ils(-nextTotal)}</span></div>
+        <div class="row total"><span class="lab"><svg aria-hidden="true"><use href="#i-equal"/></svg>${esc(L("Available"))}</span><span class="a">${ils(available)}</span></div>
+      </div>
+      <p class="foot-note">${esc(L("With later installments already committed: %@", ils(allKnown)))}</p>`,
+    }),
+
+    forecast: () => ({
+      title: L("Forecast"), body: `
+      <div class="card" style="margin-top:12px"><div class="caption"><span>${esc(L("Expected on %@", day(DEBIT)))}</span></div>
+        <div class="amount" style="margin-bottom:4px">${ils(expected)}</div>
+        <div class="meta">${esc(L("Salary and regular debits included"))}</div></div>
+      ${header(L("Salary and regular debits"))}<div class="rows">${regular.map(r => `<div class="row">${moveIcon(r)}
+        <div class="t"><div>${esc(name(r.who))}</div><div>${esc(L("Next around %@", day(r.next)))}</div></div>
+        <span class="a${r.amount > 0 ? " in" : ""}">${(r.amount > 0 ? "+" : "") + ils(r.amount)}</span></div>`).join("")}</div>
+      <p class="foot-note">${esc(L("Regular Leumi movements expected before the debit, detected from the last months: same payer or payee, about the same amount, every month."))}</p>`,
+    }),
+
+    charges: () => {
+      const max = Math.max(...upcoming.map(u => u.total));
+      return { title: L("Charges"), large: true, body: `
+      <div class="card indigo"><div class="caption"><span>${esc(L("Next Max debit"))}</span></div>
+        <div class="amount" style="margin-bottom:6px">${ils(nextTotal)}</div>
+        <div class="meta"><svg aria-hidden="true"><use href="#i-calendar"/></svg>${esc(fmt(DEBIT, { weekday: "long", day: "numeric", month: "long" }))} · ${esc(L("%lld day(s) until the debit", daysLeft))}</div>
+        <div class="meta" style="margin-top:3px">${esc(L("%lld purchase(s)", nextTxns.length))}</div></div>
+      ${header(L("Upcoming debits"))}<div class="rows"><div class="bars">${upcoming.map((u, i) => `<div><small>${ils(u.total, true)}</small>
+        <i class="${i ? "" : "on"}" style="height:${Math.max(6, u.total / max * 100)}%"></i><small>${esc(day(u.date))}</small></div>`).join("")}</div></div>
+      ${header(L("By category"))}<div class="rows">${categoryRows(nextTxns, nextTotal)}</div>
+      ${upcoming.map(u => header(L("Debited %@", day(u.date)), ils(u.total)) + `<div class="rows">${u.txns.map(x => txnRow(x)).join("")}</div>`).join("")}` };
+    },
+
+    spending: () => {
+      const presets = { week: ["7 days", "2026-10-15"], d30: ["30 days", "2026-09-22"], month: ["This month", "2026-10-01"], last: ["Last month", "2026-09-01", "2026-09-30"] };
+      const [, from, to = TODAY] = presets[period];
+      const list = spendTxns.filter(x => x.date.slice(0, 10) >= from && x.date.slice(0, 10) <= to);
+      const total = sum(list), days = Math.round((at(to) - at(from)) / 864e5) + 1;
+      // Running total, one point per day.
+      const pts = [];
+      for (let i = 0, run = 0; i < days; i++) {
+        const d = new Date(at(from).getTime() + i * 864e5).toISOString().slice(0, 10);
+        run += sum(list.filter(x => x.date.slice(0, 10) === d));
+        pts.push([i / Math.max(1, days - 1) * 260, 76 - run / total * 70]);
+      }
+      const line = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join("");
+      const flip = document.documentElement.dir === "rtl" ? ' transform="scale(-1,1) translate(-260,0)"' : "";
+      const withCats = list.filter(x => x.c);
+      return { title: L("Spending"), large: true, body: `
+      <div class="pchips" role="group">${Object.entries(presets).map(([k, [label]]) => `<button type="button" data-period="${k}" aria-pressed="${k === period}">${esc(L(label))}</button>`).join("")}</div>
+      <div class="card"><div class="caption"><span>${esc(L("Card spending"))}</span></div>
+        <div class="amount" style="margin-bottom:4px">${ils(total)}</div>
+        <div class="meta">${esc(L("%lld purchase(s)", list.length))} · ${esc(L("about %@/day", ils(total / days, true)))}</div>
+        <svg class="curve" viewBox="0 0 260 80" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#0A84FF" stop-opacity=".35"/><stop offset="1" stop-color="#0A84FF" stop-opacity="0"/></linearGradient></defs>
+          <g${flip}><path d="${line}L260 80L0 80Z" fill="url(#fill)"/><path d="${line}" fill="none" stroke="#0A84FF" stroke-width="2" vector-effect="non-scaling-stroke"/></g></svg></div>
+      ${withCats.length ? header(L("By category")) + `<div class="rows">${categoryRows(withCats, sum(withCats))}</div>` : ""}` };
+    },
+
+    insights: () => {
+      const thisMonth = nextTotal, lastSame = sum(september.filter(x => x.date <= "2026-09-21")), change = thisMonth / lastSame - 1;
+      return { title: L("Insights"), large: true, body: `
+      <div class="card"><div class="caption"><span>${esc(L("This month on Max"))}</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div class="amount" style="margin-bottom:4px">${ils(thisMonth, true)}</div>
+        <span class="change" style="color:${change > 0 ? "#FF453A" : "#30D158"}">${(change > 0 ? "+" : "") + percent(change)}</span></div>
+        <div class="meta">${esc(L("Last month at the same date: %@", ils(lastSame, true)))}</div></div>
+      ${header(L("Budgets"))}<div class="rows">${budgets.map(b => {
+        const spent = sum(nextTxns.filter(x => x.c === b.c)), r = spent / b.limit, color = r >= 1 ? "#FF453A" : r >= 0.8 ? "#FF9F0A" : cats[b.c][0];
+        return `<button type="button" class="tap budget" data-go="cat:${b.c}"><div class="top">${icon(b.c)}<span>${esc(cat(b.c))}</span><span style="color:${color}">${percent(r)}</span></div>
+          <div class="bar-track"><i style="width:${Math.min(r, 1) * 100}%;background:${color}"></i></div>
+          <div class="foot"><span>${esc(L("%@ spent", ils(spent, true)))}</span><span>${esc(L("%@ left", ils(b.limit - spent, true)))}</span></div></button>`;
+      }).join("")}</div>
+      <p class="foot-note">${esc(L("You’ll get a notification at 80% and 100%."))}</p>
+      ${header(L("Subscriptions"), L("%@/month", ils(sum(subs), true)))}<div class="rows">${subs.map(x => `<div class="row">${icon(x.c)}
+        <div class="t"><div>${esc(x.m)}</div><div>${esc(L("Next around %@", day(x.next)))}</div></div><span class="a">${ils(x.amount)}</span></div>`).join("")}</div>
+      ${header(L("Leumi"))}<div class="rows">${go("forecast", `<span class="lab"><svg aria-hidden="true"><use href="#i-repeat"/></svg>${esc(L("Salary and regular debits"))}</span>`)}</div>
+      ${header(L("Net worth"))}<div class="rows"><div class="row"><span class="lab"><svg aria-hidden="true"><use href="#i-bank"/></svg>
+        <span class="t"><div>${esc(L("Current account, savings and foreign currency"))}</div></span></span><span class="a" style="font-weight:600">${ils(netWorth, true)}</span></div></div>` };
+    },
+
+    txn: id => {
+      const x = findTxn(id), others = nextTxns.filter(o => o.m === x.m);
+      return { title: merchant(x), body: `
+      <div class="head">${icon(x.c, true)}<div class="name">${esc(merchant(x))}</div><div class="big-amount">${ils(x.amount)}</div>
+        <div class="when">${esc(fullDate(x.date))}${x.pending ? `<span class="badge">${esc(L("Pending"))}</span>` : ""}</div></div>
+      <div class="rows plain">
+        <div class="row"><span class="lab">${esc(L("Card"))}</span><span class="a">•• ${x.card}</span></div>
+        <div class="row"><span class="lab">${esc(L("Category"))}</span><span class="a">${esc(cat(x.c))}</span></div>
+        ${x.inst ? `<div class="row"><span class="lab">${esc(L("Installment"))}</span><span class="a">${esc(L("%lld of %lld", x.inst[0], x.inst[1]))}</span></div>` : ""}
+        <div class="row"><span class="lab">${esc(L("Debited"))}</span><span class="a">${esc(x.pending ? L("Next debit") : fmt(x.debit, { day: "numeric", month: "long", year: "numeric" }))}</span></div>
+      </div>
+      ${others.length > 1 ? `<div class="rows" style="margin-top:20px">${go("merchant:" + x.m, `<span class="lab">${esc(L("All purchases at %@", merchant(x)))}</span><span class="a">${others.length}</span>`)}</div>` : ""}` };
+    },
+
+    move: id => {
+      const m = moves.find(o => o.id === id);
+      return { title: name(m.who), body: `
+      <div class="head">${moveIcon(m, true)}<div class="name">${esc(name(m.who))}</div>
+        <div class="big-amount" style="color:${m.amount > 0 ? "#30D158" : "inherit"}">${(m.amount > 0 ? "+" : "") + ils(m.amount)}</div>
+        <div class="when">${esc(L(m.kind))}</div></div>
+      <div class="rows plain"><div class="row"><span class="lab">${esc(L("Date"))}</span><span class="a">${esc(fullDate(m.date))}</span></div></div>` };
+    },
+
+    cat: c => {
+      const list = nextTxns.filter(x => x.c === c);
+      return { title: cat(c), body: header(cat(c), ils(sum(list))) + `<div class="rows">${list.map(x => txnRow(x)).join("")}</div>` };
+    },
+
+    merchant: m => {
+      const list = nextTxns.filter(x => x.m === m);
+      return { title: name(m), body: header(L("%lld purchase(s)", list.length), ils(sum(list))) + `<div class="rows">${list.map(x => txnRow(x)).join("")}</div>` };
+    },
+  };
+
+  // Navigation: a stack per tab, like a NavigationStack in each Tab.
+  const stacks = { home: ["home"], charges: ["charges"], spending: ["spending"], insights: ["insights"] };
+  let tab = "home", period = "month", introDone = false;
+  const views = document.getElementById("views");
+
+  function build(route) {
+    const [kind, arg] = route.split(/:(.*)/);
+    return screens[kind](arg);
+  }
+
+  function renderPhone(motion) {
+    const stack = stacks[tab], top = build(stack[stack.length - 1]);
+    const back = stack.length > 1 ? build(stack[stack.length - 2]).title : null;
+    const view = document.createElement("div");
+    view.className = "view" + (motion ? " " + motion : "");
+    view.innerHTML = (back
+      ? `<div class="topbar"><button type="button" class="back" data-back><svg aria-hidden="true"><use href="#i-back"/></svg><span>${esc(back)}</span></button>
+         <div class="bar-title">${esc(top.title)}</div><span></span></div>`
+      : `<div class="nav"><span class="avatar" aria-hidden="true">${esc(t("initial"))}</span></div><div class="large-title">${esc(top.title)}</div>`) + top.body;
+    views.replaceChildren(view);
+    document.querySelectorAll("#tabbar [data-tab]").forEach(b =>
+      b.dataset.tab === tab ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"));
+  }
+
+  views.addEventListener("click", e => {
+    const target = e.target.closest("[data-go], [data-back], [data-period]");
+    if (!target) return;
+    if (target.dataset.period) { period = target.dataset.period; renderPhone(); return; }
+    if (target.hasAttribute("data-back")) { stacks[tab].pop(); renderPhone("pop"); }
+    else { stacks[tab].push(target.dataset.go); renderPhone("push"); }
+    views.querySelector(".view button")?.focus({ preventScroll: true });
+  });
+  document.getElementById("tabbar").addEventListener("click", e => {
+    const b = e.target.closest("[data-tab]");
+    if (!b) return;
+    // Tapping the current tab goes back to its first screen, like iOS.
+    if (b.dataset.tab === tab) stacks[tab].length = 1; else tab = b.dataset.tab;
+    renderPhone("switch");
+  });
 
   let saved = null;
   try { saved = localStorage.getItem("lang"); } catch {}
@@ -681,7 +1123,9 @@
   // The card fills in once, like the app after a refresh.
   requestAnimationFrame(() => requestAnimationFrame(() => {
     document.body.classList.add("ready");
-    document.querySelector(".gauge i").style.width = "60%";
+    introDone = true;
+    const gauge = document.querySelector(".gauge i");
+    if (gauge) gauge.style.width = "60%";
   }));
 </script>
 </body>
