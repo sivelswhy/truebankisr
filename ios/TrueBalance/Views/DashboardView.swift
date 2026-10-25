@@ -302,6 +302,9 @@ struct CalculationView: View {
                 if !s.ignoredForeign.isEmpty {
                     Text("\(s.ignoredForeign.count) foreign-currency charge(s) not included.")
                 }
+                if let credit = s.nextCharge?.credit {
+                    Text("Max owes you \(credit.shekels): it comes off the next statement.")
+                }
             }
         }
         .monospacedDigit()

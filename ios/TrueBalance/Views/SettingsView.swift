@@ -52,7 +52,7 @@ struct SettingsView: View {
                 Section {
                     LabeledContent("Automatic refresh", value: String(localized: "When you open the app, and in the background"))
                 } footer: {
-                    Text("iOS decides when background refresh runs. You can also pull down to refresh at any time.")
+                    Text("iOS decides when background refresh runs, usually while the iPhone is charging. You can also pull down to refresh at any time.")
                 }
 
                 Section {

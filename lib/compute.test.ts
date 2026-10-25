@@ -92,6 +92,27 @@ test('foreign charges with a known rate become ILS estimates', () => {
   assert.equal(r.nextCharge?.txns[0].originalAmount, -10);
 });
 
+test('a statement in credit debits nothing and carries the credit to the next one', () => {
+  const r = computeTrueBalance(
+    { accountNumber: 'b', balance: 500, txns: [] },
+    [{
+      accountNumber: 'c',
+      txns: [
+        card('2026-11-01T22:00:00.000Z', 156.9),
+        card('2026-11-01T22:00:00.000Z', -200, { category: 'transfer' }), // money sent to the card from Revolut
+        card('2026-12-01T22:00:00.000Z', 100),
+      ],
+    }],
+    { now },
+  );
+  assert.equal(r.nextCharge?.total, 0);
+  assert.equal(r.nextCharge?.credit, 43.1);
+  assert.equal(r.trueBalance, 500);
+  assert.equal(r.upcoming[1].total, 56.9);
+  assert.equal(r.upcoming[1].credit, undefined);
+  assert.equal(r.trueBalanceAllKnown, 443.1);
+});
+
 test('daily budget spreads the true balance until the debit', () => {
   const r = computeTrueBalance(
     { accountNumber: 'b', balance: 1300, txns: [] },

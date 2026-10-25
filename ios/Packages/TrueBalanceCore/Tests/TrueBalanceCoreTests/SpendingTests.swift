@@ -17,6 +17,15 @@ private func buy(_ date: String, _ amount: Double, _ name: String = "Shop", curr
     #expect(Spending.total(got) == 30)
 }
 
+@Test func moneySentToTheCardIsNotARefund() {
+    var revolut = buy("2026-10-22T08:00:00Z", -200, "REVOLUT*NEHEMIE ISAAC")
+    revolut.category = "transfer"
+    let refund = buy("2026-10-23T08:00:00Z", -30, "Bakery")
+    let got = Spending.purchases([buy("2026-10-16T08:00:00Z", 45), revolut, refund],
+                                 from: iso("2026-10-01T12:00:00Z"), to: iso("2026-10-31T12:00:00Z"))
+    #expect(Spending.total(got) == 15)
+}
+
 @Test func dailyBucketsIncludeEmptyDays() {
     let txns = [buy("2026-10-01T08:00:00Z", 10), buy("2026-10-03T08:00:00Z", 5), buy("2026-10-03T09:00:00Z", 2.5)]
     let b = Spending.buckets(txns, from: iso("2026-10-01T12:00:00Z"), to: iso("2026-10-03T12:00:00Z"), by: .day)

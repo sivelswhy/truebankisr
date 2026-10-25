@@ -32,6 +32,9 @@ export interface UpcomingCharge {
   chargeDate: string; // YYYY-MM-DD (Israel time)
   total: number; // positive amount in ILS that will leave the bank account
   txns: Txn[];
+  // When credits (refunds, money sent to the card) outweigh the charges, Max
+  // debits nothing and keeps what it owes for the next statement.
+  credit?: number;
 }
 
 export interface TrueBalance {
@@ -114,13 +117,14 @@ export function computeTrueBalance(
     byDay.get(day)!.push(txn);
   }
 
+  let carried = 0;
   const upcoming = [...byDay.entries()]
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([chargeDate, txns]) => ({
-      chargeDate,
-      txns: txns.sort(newestFirst),
-      total: round(-txns.reduce((sum, t) => sum + t.chargedAmount, 0)),
-    }));
+    .map(([chargeDate, txns]): UpcomingCharge => {
+      const net = round(-txns.reduce((sum, t) => sum + t.chargedAmount, 0) - carried);
+      carried = Math.max(0, -net);
+      return { chargeDate, txns: txns.sort(newestFirst), total: Math.max(0, net), ...(carried ? { credit: carried } : {}) };
+    });
 
   const nextCharge = upcoming[0] ?? null;
   const allKnown = upcoming.reduce((sum, c) => sum + c.total, 0);

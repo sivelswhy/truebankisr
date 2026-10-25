@@ -4,13 +4,17 @@ import Foundation
 public enum Spending {
     /// Purchases made between two days (inclusive, Israel time), in ILS.
     /// Later installments share the purchase date: only the first one counts.
+    /// Money sent to the card (e.g. from Revolut) is a transfer, not a refund of spending.
     public static func purchases(_ txns: [Txn], from start: Date, to end: Date) -> [Txn] {
         let first = Israel.day(start), last = Israel.day(end)
         return txns.filter { t in
             let day = Israel.day(t.date)
             return t.chargedCurrency == "ILS" && day >= first && day <= last && (t.installments?.number ?? 1) <= 1
+                && !isTransferToCard(t)
         }
     }
+
+    public static func isTransferToCard(_ t: Txn) -> Bool { t.chargedAmount > 0 && t.category == "transfer" }
 
     public static func total(_ txns: [Txn]) -> Double {
         TrueBalance.round2(txns.reduce(0) { $0 - $1.chargedAmount })

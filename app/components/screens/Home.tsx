@@ -139,7 +139,8 @@ export function Calculation() {
           <>
             {data.upcoming.length > 1 && <>{t('With later installments already committed: %@', ils(data.trueBalanceAllKnown))} </>}
             {converted > 0 && <>{t('Includes %lld foreign-currency charge(s) converted at the Bank of Israel rate (estimate).', converted)} </>}
-            {data.ignoredForeign.length > 0 && t('%lld foreign-currency charge(s) not included.', data.ignoredForeign.length)}
+            {data.ignoredForeign.length > 0 && <>{t('%lld foreign-currency charge(s) not included.', data.ignoredForeign.length)} </>}
+            {data.nextCharge?.credit && t('Max owes you %@: it comes off the next statement.', ils(data.nextCharge.credit))}
           </>
         }
       >

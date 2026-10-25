@@ -25,14 +25,17 @@ export const merchantKey = (t: Txn) => t.description.trim().toLowerCase();
 
 /**
  * Purchases made between two days (inclusive, Israel time), in ILS. Later
- * installments share the purchase date: only the first one counts.
+ * installments share the purchase date: only the first one counts. Money sent
+ * to the card (e.g. from Revolut) is a transfer, not a refund of spending.
  */
 export function purchases(txns: Txn[], from: string, to: string): Txn[] {
   return txns.filter((t) => {
     const day = israelDay(t.date);
-    return (t.chargedCurrency ?? 'ILS') === 'ILS' && day >= from && day <= to && (t.installments?.number ?? 1) <= 1;
+    return (t.chargedCurrency ?? 'ILS') === 'ILS' && day >= from && day <= to && (t.installments?.number ?? 1) <= 1 && !isTransferToCard(t);
   });
 }
+
+export const isTransferToCard = (t: Txn) => t.chargedAmount > 0 && t.category === 'transfer';
 
 export const total = (txns: Txn[]) => round(txns.reduce((s, t) => s - t.chargedAmount, 0));
 

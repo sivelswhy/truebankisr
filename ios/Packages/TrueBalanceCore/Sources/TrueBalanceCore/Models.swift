@@ -92,6 +92,9 @@ public struct UpcomingCharge: Codable, Hashable, Identifiable, Sendable {
     /// Positive amount in ILS that will leave the bank account.
     public var total: Double
     public var txns: [Txn]
+    /// When credits (refunds, money sent to the card) outweigh the charges, Max
+    /// debits nothing and keeps what it owes for the next statement.
+    public var credit: Double?
 
     public var id: String { chargeDate }
 }

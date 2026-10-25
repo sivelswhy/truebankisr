@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { computeTrueBalance, type Txn } from './compute.ts';
 import {
-  addMonths, budgetProgress, compareMonths, csv, detectRecurring, forecast, mergeHistory, movementKind, subscriptions, transferParty,
+  addMonths, budgetProgress, purchases, compareMonths, csv, detectRecurring, forecast, mergeHistory, movementKind, subscriptions, transferParty,
 } from './insights.ts';
 
 const now = new Date('2026-10-19T09:00:00Z');
@@ -54,6 +54,15 @@ test('budgets count this month only, per category', () => {
   const [g] = budgetProgress({ groceries: 1500, fuel: 0 }, history, now);
   assert.equal(g.spent, 1250);
   assert.ok(Math.abs(g.ratio - 0.8333) < 0.001);
+});
+
+test('money sent to the card is not a refund of spending', () => {
+  const history = [
+    txn('2026-10-16T10:00:00Z', -45, 'Bakery', { category: 'groceries' }),
+    txn('2026-10-22T10:00:00Z', 200, 'REVOLUT*NEHEMIE ISAAC', { category: 'transfer' }),
+    txn('2026-10-23T10:00:00Z', 30, 'Bakery', { category: 'groceries' }), // a real refund still counts
+  ];
+  assert.deepEqual(purchases(history, '2026-10-01', '2026-10-31').map((t) => t.chargedAmount), [-45, 30]);
 });
 
 test('month to month compares the same number of days', () => {

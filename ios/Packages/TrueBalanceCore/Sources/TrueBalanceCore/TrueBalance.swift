@@ -37,9 +37,12 @@ public enum TrueBalance {
             byDay[day, default: []].append(txn)
         }
 
+        var carried = 0.0
         let upcoming = byDay.keys.sorted().map { day in
             let txns = byDay[day]!.sorted { $0.date > $1.date }
-            return UpcomingCharge(chargeDate: day, total: round2(-txns.reduce(0) { $0 + $1.chargedAmount }), txns: txns)
+            let net = round2(-txns.reduce(0) { $0 + $1.chargedAmount } - carried)
+            carried = max(0, -net)
+            return UpcomingCharge(chargeDate: day, total: max(0, net), txns: txns, credit: carried > 0 ? carried : nil)
         }
         let next = upcoming.first
         let allKnown = upcoming.reduce(0) { $0 + $1.total }

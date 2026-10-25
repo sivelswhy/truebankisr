@@ -34,7 +34,7 @@ targets:
         CFBundleLocalizations: [en, fr, he, ru, ar]
         UILaunchScreen: {}
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
-        UIBackgroundModes: [fetch]
+        UIBackgroundModes: [processing]
         BGTaskSchedulerPermittedIdentifiers: [il.truebalance.refresh]
         ITSAppUsesNonExemptEncryption: false
         NSFaceIDUsageDescription: Unlock True Balance to see your balance.

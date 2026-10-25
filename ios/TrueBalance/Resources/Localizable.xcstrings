@@ -5122,6 +5122,34 @@
         }
       }
     },
+    "Max owes you %@: it comes off the next statement.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Max vous doit %@ : ce sera déduit du relevé suivant."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מקס חייבת לך %@: הסכום יקוזז מהחיוב הבא."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Макс должен вам %@: сумма будет вычтена из следующего списания."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لك لدى ماكس %@: سيُخصم من الخصم التالي."
+          }
+        }
+      }
+    },
     "Max · %@": {
       "localizations": {
         "fr": {
@@ -9933,30 +9961,30 @@
         }
       }
     },
-    "iOS decides when background refresh runs. You can also pull down to refresh at any time.": {
+    "iOS decides when background refresh runs, usually while the iPhone is charging. You can also pull down to refresh at any time.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "iOS décide quand l’actualisation en arrière-plan a lieu. Tu peux aussi tirer vers le bas pour actualiser à tout moment."
+            "value": "iOS décide quand l’actualisation en arrière-plan a lieu, en général pendant que l’iPhone charge. Tu peux aussi tirer vers le bas pour actualiser à tout moment."
           }
         },
         "he": {
           "stringUnit": {
             "state": "translated",
-            "value": "‏iOS מחליט מתי הרענון ברקע רץ. אפשר גם למשוך למטה כדי לרענן בכל רגע."
+            "value": "‏iOS מחליט מתי הרענון ברקע רץ, בדרך כלל כשהאייפון בטעינה. אפשר גם למשוך למטה כדי לרענן בכל רגע."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "iOS сам решает, когда запускать фоновое обновление. Вы также можете в любой момент потянуть вниз, чтобы обновить."
+            "value": "iOS сам решает, когда запускать фоновое обновление, обычно во время зарядки iPhone. Вы также можете в любой момент потянуть вниз, чтобы обновить."
           }
         },
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "يحدّد iOS موعد التحديث في الخلفية. يمكنك أيضًا السحب للأسفل للتحديث في أي وقت."
+            "value": "يحدّد iOS موعد التحديث في الخلفية، عادةً أثناء شحن الآيفون. يمكنك أيضًا السحب للأسفل للتحديث في أي وقت."
           }
         }
       }

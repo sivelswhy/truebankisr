@@ -1093,6 +1093,12 @@
   "ru": "Покупки по Максу с 1-го числа месяца. Уведомления при 80% и 100%.",
   "ar": "مشتريات ماكس منذ أول الشهر. تنبيهات عند 80% و100%."
  },
+ "Max owes you %@: it comes off the next statement.": {
+  "fr": "Max vous doit %@ : ce sera déduit du relevé suivant.",
+  "he": "מקס חייבת לך %@: הסכום יקוזז מהחיוב הבא.",
+  "ru": "Макс должен вам %@: сумма будет вычтена из следующего списания.",
+  "ar": "لك لدى ماكس %@: سيُخصم من الخصم التالي."
+ },
  "Max · %@": {
   "fr": "Max · %@",
   "he": "מקס · %@",
@@ -2107,11 +2113,11 @@
   "ru": "Без категории",
   "ar": "بلا فئة"
  },
- "iOS decides when background refresh runs. You can also pull down to refresh at any time.": {
-  "fr": "iOS décide quand l’actualisation en arrière-plan a lieu. Tu peux aussi tirer vers le bas pour actualiser à tout moment.",
-  "he": "‏iOS מחליט מתי הרענון ברקע רץ. אפשר גם למשוך למטה כדי לרענן בכל רגע.",
-  "ru": "iOS сам решает, когда запускать фоновое обновление. Вы также можете в любой момент потянуть вниз, чтобы обновить.",
-  "ar": "يحدّد iOS موعد التحديث في الخلفية. يمكنك أيضًا السحب للأسفل للتحديث في أي وقت."
+ "iOS decides when background refresh runs, usually while the iPhone is charging. You can also pull down to refresh at any time.": {
+  "fr": "iOS décide quand l’actualisation en arrière-plan a lieu, en général pendant que l’iPhone charge. Tu peux aussi tirer vers le bas pour actualiser à tout moment.",
+  "he": "‏iOS מחליט מתי הרענון ברקע רץ, בדרך כלל כשהאייפון בטעינה. אפשר גם למשוך למטה כדי לרענן בכל רגע.",
+  "ru": "iOS сам решает, когда запускать фоновое обновление, обычно во время зарядки iPhone. Вы также можете в любой момент потянуть вниз, чтобы обновить.",
+  "ar": "يحدّد iOS موعد التحديث في الخلفية، عادةً أثناء شحن الآيفون. يمكنك أيضًا السحب للأسفل للتحديث في أي وقت."
  },
  "·": {
   "he": "·",

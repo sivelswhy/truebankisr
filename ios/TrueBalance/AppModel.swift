@@ -297,16 +297,34 @@ final class AppModel {
 
     // MARK: Background
 
+    /// A processing task, not an app refresh: signing in to both sites takes
+    /// a minute or more, and an app refresh is stopped after about 30 seconds.
+    /// iOS runs it when the phone is idle, usually at night while charging.
     func scheduleBackgroundRefresh() {
         guard phase == .signedIn, !isDemo else { return }
-        let request = BGAppRefreshTaskRequest(identifier: Self.refreshTaskID)
+        let request = BGProcessingTaskRequest(identifier: Self.refreshTaskID)
+        request.requiresNetworkConnectivity = true
+        request.requiresExternalPower = false
         request.earliestBeginDate = .now.addingTimeInterval(60 * 60)
-        try? BGTaskScheduler.shared.submit(request)
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            Log.add("[background] not scheduled: \(error)")
+        }
     }
 
-    func backgroundRefresh() async {
+    /// Called by iOS on the main queue (see `TrueBalanceApp.init`).
+    func runBackgroundRefresh(_ task: BGProcessingTask) {
         scheduleBackgroundRefresh() // keep the chain going
-        await refresh(manual: false)
+        Log.add("[background] start")
+        let work = Task {
+            await refresh(manual: false)
+            task.setTaskCompleted(success: !Task.isCancelled && refreshErrors.isEmpty)
+        }
+        task.expirationHandler = {
+            Log.add("[background] iOS stopped it: out of time")
+            work.cancel()
+        }
     }
 
     // MARK: Notifications

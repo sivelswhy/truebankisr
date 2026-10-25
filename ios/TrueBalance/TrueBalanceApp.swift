@@ -1,11 +1,24 @@
+import BackgroundTasks
 import SwiftUI
 
 @main
 struct TrueBalanceApp: App {
-    @State private var model = AppModel()
+    @State private var model: AppModel
     @Environment(\.scenePhase) private var scenePhase
     @AppStorage("requireFaceID") private var requireFaceID = false
     @State private var locked = UserDefaults.standard.bool(forKey: "requireFaceID")
+
+    init() {
+        let model = AppModel()
+        _model = State(initialValue: model)
+        // Must be registered before launch ends. `.backgroundTask` only knows app refreshes.
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: AppModel.refreshTaskID, using: .main) { task in
+            MainActor.assumeIsolated {
+                guard let task = task as? BGProcessingTask else { return task.setTaskCompleted(success: false) }
+                model.runBackgroundRefresh(task)
+            }
+        }
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -41,9 +54,6 @@ struct TrueBalanceApp: App {
         }
         .onChange(of: locked) { _, isLocked in
             if !isLocked { Task { await model.refreshIfStale() } }
-        }
-        .backgroundTask(.appRefresh(AppModel.refreshTaskID)) {
-            await model.backgroundRefresh()
         }
     }
 }

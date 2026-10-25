@@ -29,6 +29,23 @@ private let now = iso("2026-10-19T09:00:00Z")
     #expect(r.upcoming.count == 2)
 }
 
+@Test func statementInCreditCarriesToNextOne() throws {
+    let r = try TrueBalance.compute(
+        bank: Account(accountNumber: "b", balance: 500, txns: []),
+        cards: [Account(accountNumber: "c", txns: [
+            card("2026-11-01T22:00:00Z", 156.9),
+            card("2026-11-01T22:00:00Z", -200, category: "transfer"), // money sent to the card from Revolut
+            card("2026-12-01T22:00:00Z", 100),
+        ])],
+        now: now)
+    #expect(r.nextCharge?.total == 0)
+    #expect(r.nextCharge?.credit == 43.1)
+    #expect(r.trueBalance == 500)
+    #expect(r.upcoming[1].total == 56.9)
+    #expect(r.upcoming[1].credit == nil)
+    #expect(r.trueBalanceAllKnown == 443.1)
+}
+
 @Test func pendingGoesToNextBillingDay() throws {
     let r = try TrueBalance.compute(
         bank: Account(accountNumber: "b", balance: 1000, txns: []),
