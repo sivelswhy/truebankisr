@@ -20,6 +20,15 @@
       "screenshotURLs": [],
       "versions": [
         {
+          "version": "1.0.40",
+          "buildVersion": "40",
+          "date": "2026-10-25T14:58:41.492Z",
+          "localizedDescription": "Core: a statement in credit debits nothing and carries over; money sent to the card isn't spending. iPhone: background refresh as a processing task",
+          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-40/TrueBalance.ipa",
+          "size": 1805666,
+          "minOSVersion": "18.0"
+        },
+        {
           "version": "1.0.39",
           "buildVersion": "39",
           "date": "2026-10-21T16:47:28.587Z",
@@ -98,15 +107,6 @@
           "localizedDescription": "iOS: design overhaul — hero cards, prominent section headers, shared chips",
           "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-27/TrueBalance.ipa",
           "size": 1633645,
-          "minOSVersion": "18.0"
-        },
-        {
-          "version": "1.0.26",
-          "buildVersion": "26",
-          "date": "2026-10-20T16:17:55.958Z",
-          "localizedDescription": "iOS: Hello Bank and Revolut through Enable Banking, apart from the true balance",
-          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-26/TrueBalance.ipa",
-          "size": 1583073,
           "minOSVersion": "18.0"
         }
       ]
