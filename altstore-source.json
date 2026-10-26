@@ -20,6 +20,15 @@
       "screenshotURLs": [],
       "versions": [
         {
+          "version": "1.0.41",
+          "buildVersion": "41",
+          "date": "2026-10-26T10:04:41.575Z",
+          "localizedDescription": "Second currency: amounts also in euros (or 12 others) at the Bank of Israel rate, shekels or the other one first. Purchases paid in a foreign currency keep their exact amount, with a globe; converted amounts are marked ≈",
+          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-41/TrueBalance.ipa",
+          "size": 1833151,
+          "minOSVersion": "18.0"
+        },
+        {
           "version": "1.0.40",
           "buildVersion": "40",
           "date": "2026-10-25T14:58:41.492Z",
@@ -98,15 +107,6 @@
           "localizedDescription": "iOS: night-blue background with a soft glow instead of pure black",
           "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-28/TrueBalance.ipa",
           "size": 1657899,
-          "minOSVersion": "18.0"
-        },
-        {
-          "version": "1.0.27",
-          "buildVersion": "27",
-          "date": "2026-10-20T16:30:35.466Z",
-          "localizedDescription": "iOS: design overhaul — hero cards, prominent section headers, shared chips",
-          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-27/TrueBalance.ipa",
-          "size": 1633645,
           "minOSVersion": "18.0"
         }
       ]
