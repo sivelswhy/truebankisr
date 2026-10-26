@@ -14,10 +14,8 @@ struct ForecastRow: View {
             ForecastView(forecast: forecast)
         } label: {
             LabeledContent {
-                Text(forecast.projectedBalance.shekels)
-                    .monospacedDigit()
+                Money(forecast.projectedBalance)
                     .foregroundStyle(forecast.projectedBalance < 0 ? .red : .primary)
-                    .privacySensitive()
             } label: {
                 Label {
                     VStack(alignment: .leading, spacing: 2) {
@@ -44,15 +42,16 @@ struct ForecastView: View {
         List {
             Section {
                 if let s {
-                    LabeledContent("Available after Max", value: s.trueBalance.shekels)
+                    LabeledContent("Available after Max") { Money(s.trueBalance) }
                 }
                 ForEach(forecast.income) { r in
-                    LabeledContent(r.name, value: "+" + r.amount.shekels).foregroundStyle(.green)
+                    LabeledContent { Money(r.amount, prefix: "+") } label: { Text(r.name) }
+                        .foregroundStyle(.green)
                 }
                 ForEach(forecast.debits) { r in
-                    LabeledContent(r.name, value: r.amount.shekels)
+                    LabeledContent { Money(r.amount) } label: { Text(r.name) }
                 }
-                LabeledContent("Expected on \(Format.day(forecast.until))", value: forecast.projectedBalance.shekels)
+                LabeledContent("Expected on \(Format.day(forecast.until))") { Money(forecast.projectedBalance) }
                     .fontWeight(.semibold)
             } footer: {
                 Text("Regular Leumi movements expected before the debit, detected from the last months: same payer or payee, about the same amount, every month.")
@@ -98,10 +97,8 @@ struct RecurringRow: View {
                     .foregroundStyle(.secondary)
             }
             Spacer()
-            Text(item.amount > 0 ? "+" + item.amount.shekels : (-item.amount).shekels)
-                .monospacedDigit()
+            Money(abs(item.amount), prefix: item.amount > 0 ? "+" : "")
                 .foregroundStyle(item.amount > 0 ? .green : .primary)
-                .privacySensitive()
         }
         .accessibilityElement(children: .combine)
     }
@@ -145,7 +142,7 @@ private struct CardSummaryRow: View {
                 Image(systemName: "creditcard.fill").foregroundStyle(Color.accentColor)
                 Text(verbatim: "•• \(last4)").monospacedDigit()
                 Spacer()
-                Text(nextDebit.shekels).monospacedDigit().privacySensitive()
+                Money(nextDebit)
             }
             if let info, let limit = info.creditLimit, let used = info.used, limit > 0 {
                 Gauge(value: min(max(used / limit, 0), 1)) {
@@ -178,10 +175,8 @@ struct SubscriptionsView: View {
         List {
             Section {
                 LabeledContent {
-                    Text(Subscriptions.monthlyTotal(subscriptions).shekels)
+                    Money(Subscriptions.monthlyTotal(subscriptions))
                         .font(.title2.bold())
-                        .monospacedDigit()
-                        .privacySensitive()
                 } label: {
                     VStack(alignment: .leading) {
                         Text("Per month")
@@ -217,11 +212,9 @@ struct WealthView: View {
     var body: some View {
         List {
             Section {
-                Text(wealth.total.shekels)
+                Money(wealth.total, alignment: .leading, secondaryFont: .title3)
                     .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                    .monospacedDigit()
                     .minimumScaleFactor(0.5)
-                    .privacySensitive()
                     .frame(maxWidth: .infinity, alignment: .leading)
             } header: {
                 Text("Total")
@@ -410,9 +403,9 @@ struct MonthComparisonView: View {
         let rows = comparison.byCategory.filter { abs($0.value) >= 1 }.sorted { abs($0.value) > abs($1.value) }
         List {
             Section {
-                LabeledContent("This month", value: comparison.thisMonth.shekels)
-                LabeledContent("Last month, same days", value: comparison.lastMonthSamePeriod.shekels)
-                LabeledContent("Last month, whole", value: comparison.lastMonthTotal.shekels)
+                LabeledContent("This month") { Money(comparison.thisMonth) }
+                LabeledContent("Last month, same days") { Money(comparison.lastMonthSamePeriod) }
+                LabeledContent("Last month, whole") { Money(comparison.lastMonthTotal) }
                     .foregroundStyle(.secondary)
                 if let change = comparison.change {
                     LabeledContent("Change") {
@@ -694,9 +687,4 @@ struct CSVFile: Transferable {
             return SentTransferredFile(url)
         }
     }
-}
-
-extension Double {
-    /// "₪1,500" without agorot, for budgets and summaries.
-    var wholeShekels: String { (self == 0 ? 0 : self).formatted(.currency(code: "ILS").precision(.fractionLength(0))) }
 }

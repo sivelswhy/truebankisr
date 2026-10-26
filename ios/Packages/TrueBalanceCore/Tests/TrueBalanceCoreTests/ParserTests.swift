@@ -120,3 +120,22 @@ import Testing
     #expect(Israel.day(txns[1].date) == "2026-10-05")
     #expect(!Israel.hasTime(txns[2].date))
 }
+
+@Test func keepsWhatAPurchaseCostInTheShopsCurrency() throws {
+    let json = """
+    {"result":{"transactions":[
+      {"shortCardNumber":"4580","paymentDate":"2026-11-02T00:00:00","purchaseDate":"2026-10-05T00:00:00",
+       "originalAmount":42.3,"originalCurrency":"EUR","actualPaymentAmount":152.7,"paymentCurrency":376,
+       "merchantName":"MONOPRIX PARIS","planName":"רגילה","categoryId":7,"dealData":{"arn":"E1"}},
+      {"shortCardNumber":"4580","paymentDate":"2026-11-02T00:00:00","purchaseDate":"2026-10-06T00:00:00",
+       "originalAmount":20,"originalCurrency":"ILS","actualPaymentAmount":20,"paymentCurrency":376,
+       "merchantName":"Aroma","planName":"רגילה","categoryId":7,"dealData":{"arn":"E2"}}
+    ]}}
+    """
+    let txns = try MaxParser.parseMonth(Data(json.utf8))
+    // Charged in shekels by Max, exact: not an estimate.
+    #expect(txns[0].chargedAmount == -152.7 && txns[0].chargedCurrency == "ILS")
+    #expect(txns[0].originalAmount == -42.3 && txns[0].originalCurrency == "EUR")
+    #expect(txns[0].isForeignPurchase && !txns[0].isConvertedEstimate)
+    #expect(!txns[1].isForeignPurchase && txns[1].originalAmount == nil)
+}

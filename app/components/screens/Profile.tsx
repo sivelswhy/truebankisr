@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { LANGS, type Lang } from '@/lib/i18n.ts';
+import { CURRENCIES, LANGS, type Lang } from '@/lib/i18n.ts';
 import { useNav, useStore } from '../App.tsx';
 import { useI18n } from '../I18n.tsx';
 import { Avatar, Labeled, Section, Sheet, Switch } from '../ui.tsx';
@@ -11,11 +11,20 @@ export function Profile() {
   const { setProfile } = useNav();
   const { data, prefs, setPrefs, signOut } = useStore();
   const i = useI18n();
-  const { t, ilsWhole } = i;
+  const { t, shekels } = i;
   const [name, setName] = useState(prefs.firstName);
   const [confirming, setConfirming] = useState(false);
   const [busy, setBusy] = useState(false);
   const [permission, setPermission] = useState<NotificationPermission | 'unsupported'>('default');
+
+  const rate = prefs.currency ? data?.fxRates?.[prefs.currency] : undefined;
+  const currencyName = (code: string) => {
+    try {
+      return `${new Intl.DisplayNames(i.lang, { type: 'currency' }).of(code)} (${code})`;
+    } catch {
+      return code;
+    }
+  };
 
   useEffect(() => setPermission(typeof Notification === 'undefined' ? 'unsupported' : Notification.permission), []);
 
@@ -68,7 +77,7 @@ export function Profile() {
       >
         <div className="row labeled">
           <span className="label">{t('Alert me below')}</span>
-          <span className="value tight num">{ilsWhole(prefs.alertThreshold)}</span>
+          <span className="value tight num">{shekels(prefs.alertThreshold, true)}</span>
           <span className="stepper">
             <button type="button" onClick={() => step(-100)} disabled={prefs.alertThreshold === 0} aria-label="−100">−</button>
             <button type="button" onClick={() => step(100)} aria-label="+100">+</button>
@@ -81,6 +90,34 @@ export function Profile() {
           <span className="label">{t('Hide amounts')}</span>
           <Switch checked={prefs.hideAmounts} onChange={(hideAmounts) => setPrefs({ hideAmounts })} label={t('Hide amounts')} />
         </div>
+      </Section>
+
+      <Section
+        header={t('Currency')}
+        small
+        plain
+        footer={
+          prefs.currency && !rate
+            ? t('No %@ rate yet: refresh to get it.', prefs.currency)
+            : t('For an idea of prices in the currency you’re used to. Converted at the Bank of Israel rate of the last refresh, so marked ≈. A purchase paid in another currency keeps its exact amount, with a globe.')
+        }
+      >
+        <label className="row labeled">
+          <span className="label">{t('Also show amounts in')}</span>
+          <select value={prefs.currency} onChange={(e) => setPrefs({ currency: e.target.value })}>
+            <option value="">{t('Shekels only')}</option>
+            {CURRENCIES.map((c) => <option key={c} value={c}>{currencyName(c)}</option>)}
+          </select>
+        </label>
+        {prefs.currency && (
+          <>
+            {rate && <Labeled label={t('Rate')}><span className="num">1 {prefs.currency} = {i.shekels(rate)}</span></Labeled>}
+            <div className="row labeled">
+              <span className="label">{t('Show %@ first', prefs.currency)}</span>
+              <Switch checked={prefs.currencyFirst} onChange={(currencyFirst) => setPrefs({ currencyFirst })} label={t('Show %@ first', prefs.currency)} />
+            </div>
+          </>
+        )}
       </Section>
 
       <Section plain>

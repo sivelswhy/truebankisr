@@ -6,7 +6,7 @@ import { addDays, addMonths, buckets, csv, monthStart, purchases, total } from '
 import { useStore } from '../App.tsx';
 import { useI18n } from '../I18n.tsx';
 import { Icon } from '../icons.tsx';
-import { Amt, Chips, Curve, Empty, HeroCard, Labeled, Page, Section, TxnRow, useTitle } from '../ui.tsx';
+import { Amt, Chips, Curve, Empty, HeroCard, Labeled, Page, Section, TxnRow, useTitle, Money } from '../ui.tsx';
 import { CategoryBreakdown } from './Charges.tsx';
 import { NoData } from './Home.tsx';
 
@@ -84,7 +84,7 @@ export function Spending() {
       <section className="section" style={{ marginTop: 16 }}>
         <HeroCard>
           <div className="caption"><span>{t('Card spending')}</span></div>
-          <div className="amount medium"><Amt>{ils(sum)}</Amt></div>
+          <div className="amount medium"><Money n={sum} /></div>
           <div className="meta">
             <span>{t('%lld purchase(s)', txns.length)}</span>
             <span>·</span>

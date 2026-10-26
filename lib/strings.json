@@ -2123,5 +2123,59 @@
   "he": "·",
   "ru": "·",
   "ar": "·"
+ },
+ "Currency": {
+  "fr": "Devise",
+  "he": "מטבע",
+  "ru": "Валюта",
+  "ar": "العملة"
+ },
+ "Also show amounts in": {
+  "fr": "Afficher aussi les montants en",
+  "he": "להציג סכומים גם ב",
+  "ru": "Показывать суммы также в",
+  "ar": "عرض المبالغ أيضًا بـ"
+ },
+ "Shekels only": {
+  "fr": "Shekels uniquement",
+  "he": "שקלים בלבד",
+  "ru": "Только шекели",
+  "ar": "الشيكل فقط"
+ },
+ "Rate": {
+  "fr": "Taux",
+  "he": "שער",
+  "ru": "Курс",
+  "ar": "سعر الصرف"
+ },
+ "Show %@ first": {
+  "fr": "Afficher en %@ d’abord",
+  "he": "להציג קודם ב-%@",
+  "ru": "Сначала в %@",
+  "ar": "عرض %@ أولًا"
+ },
+ "No %@ rate yet: refresh to get it.": {
+  "fr": "Pas encore de taux pour %@ : actualise pour l’obtenir.",
+  "he": "אין עדיין שער ל-%@: יש לרענן כדי לקבל אותו.",
+  "ru": "Курса %@ пока нет: обновите, чтобы получить его.",
+  "ar": "لا يوجد سعر لـ%@ بعد: حدّث للحصول عليه."
+ },
+ "For an idea of prices in the currency you’re used to. Converted at the Bank of Israel rate of the last refresh, so marked ≈. A purchase paid in another currency keeps its exact amount, with a globe.": {
+  "fr": "Pour te faire une idée des prix dans la devise dont tu as l’habitude. Converti au taux de la Banque d’Israël de la dernière actualisation, donc marqué ≈. Un achat payé dans une autre devise garde son montant exact, avec un globe.",
+  "he": "כדי לקבל מושג על המחירים במטבע שאליו התרגלת. מומר לפי השער של בנק ישראל מהרענון האחרון, ולכן מסומן ≈. רכישה ששולמה במטבע אחר שומרת על הסכום המדויק, עם סמל גלובוס.",
+  "ru": "Чтобы понимать цены в привычной валюте. Пересчёт по курсу Банка Израиля на момент последнего обновления, поэтому со знаком ≈. Покупка, оплаченная в другой валюте, показывает точную сумму со значком глобуса.",
+  "ar": "لتكوين فكرة عن الأسعار بالعملة التي اعتدت عليها. يُحوَّل بسعر بنك إسرائيل عند آخر تحديث، لذا يُعلَّم بـ≈. والمشتريات المدفوعة بعملة أخرى تحتفظ بمبلغها الدقيق، مع رمز الكرة الأرضية."
+ },
+ "Paid in %@": {
+  "fr": "Payé en %@",
+  "he": "שולם ב-%@",
+  "ru": "Оплачено в %@",
+  "ar": "مدفوع بـ%@"
+ },
+ "Paid %@ in the shop’s currency": {
+  "fr": "Payé %@ dans la devise du magasin",
+  "he": "שולם %@ במטבע של בית העסק",
+  "ru": "Оплачено %@ в валюте магазина",
+  "ar": "دُفع %@ بعملة المتجر"
  }
 }

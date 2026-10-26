@@ -7,25 +7,35 @@ import { israelDay } from '@/lib/compute.ts';
 import { useNav, useStore } from '../App.tsx';
 import { useI18n } from '../I18n.tsx';
 import { Icon } from '../icons.tsx';
-import { Amt, CategoryTile, Labeled, LinkRow, Page, Section, TxnRow, useTitle } from '../ui.tsx';
+import { Amt, CategoryTile, Labeled, LinkRow, Money, originalOf, Page, Section, TxnRow, useTitle } from '../ui.tsx';
 import { NoData } from './Home.tsx';
 
 export function PurchaseDetail({ id }: { id: string }) {
   const { data } = useStore();
   const { push } = useNav();
-  const { t, ils, money, fullDate, longDay, category } = useI18n();
+  const { t, ils, primary, secondary, money, fx, fullDate, longDay, category } = useI18n();
   const txn = data?.upcoming.flatMap((u) => u.txns).find((x) => x.id === id) ?? data?.history.find((x) => x.id === id);
   useTitle(txn?.description ?? '');
   if (!txn) return <Page title=""><NoData /></Page>;
   const others = atMerchant(merchantKey(txn), data!.history);
-  const converted = txn.originalCurrency && txn.originalCurrency !== (txn.chargedCurrency ?? 'ILS') && txn.originalAmount != null;
+  const original = originalOf(txn);
+  const other = secondary(-txn.chargedAmount, false, original);
   return (
     <Page title={txn.description}>
       <div className="detail-head">
         <CategoryTile k={txn.category} big />
         <h2>{txn.description}</h2>
-        <div className="big-amount"><Amt>{(converted ? '≈ ' : '') + ils(-txn.chargedAmount)}</Amt></div>
-        {converted && <div className="secondary"><Amt>{t('%@ at the Bank of Israel rate', money(-txn.originalAmount!, txn.originalCurrency!))}</Amt></div>}
+        <div className="big-amount"><Amt>{(txn.fxEstimate && !fx?.first ? '≈ ' : '') + primary(-txn.chargedAmount, false, original)}</Amt></div>
+        {/* The grey line, unless it's the exact amount paid, just below. */}
+        {other != null && !(original && !fx?.first && original.currency === fx?.code) && <div className="secondary alt-amount"><Amt>{other}</Amt></div>}
+        {original && (
+          <div className="secondary foreign-note">
+            <Icon name="globe" />
+            <Amt>{txn.fxEstimate
+              ? t('%@ at the Bank of Israel rate', money(original.amount, original.currency))
+              : t('Paid %@ in the shop’s currency', money(original.amount, original.currency))}</Amt>
+          </div>
+        )}
         <div className="when">
           {fullDate(txn.date)}
           {txn.status === 'pending' && <span className="badge pending">{t('Pending')}</span>}
@@ -136,7 +146,7 @@ export function Merchant({ k, name }: { k: string; name: string }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
             <div>
               <div className="secondary" style={{ fontSize: 15 }}>{t('Total')}</div>
-              <Amt className="change" >{ils(sum)}</Amt>
+              <Money n={sum} className="change" />
             </div>
             <div style={{ textAlign: 'end', fontSize: 15 }}>
               <div className="secondary">{t('%lld purchase(s)', txns.length)}</div>

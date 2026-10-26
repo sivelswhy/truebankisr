@@ -12,6 +12,7 @@ struct SettingsView: View {
     @AppStorage("firstName") private var firstName = ""
 
     var body: some View {
+        @Bindable var display = DisplayCurrency.shared
         NavigationStack {
             Form {
                 Section {
@@ -76,6 +77,31 @@ struct SettingsView: View {
                         .onChange(of: hideAmounts) { model.updateWidgets() }
                 } header: {
                     Text("Privacy")
+                }
+
+                Section {
+                    Picker("Also show amounts in", selection: $display.code) {
+                        Text("Shekels only").tag("")
+                        ForEach(DisplayCurrency.choices, id: \.self) { code in
+                            Text(verbatim: "\(Locale.current.localizedString(forCurrencyCode: code) ?? code) (\(code))").tag(code)
+                        }
+                    }
+                    if !display.code.isEmpty {
+                        if let rate = display.rate {
+                            LabeledContent("Rate") {
+                                Text(verbatim: "1 \(display.code) = \(rate.ils)").monospacedDigit()
+                            }
+                        }
+                        Toggle("Show \(display.code) first", isOn: $display.first)
+                    }
+                } header: {
+                    Text("Currency")
+                } footer: {
+                    if !display.code.isEmpty && display.rate == nil {
+                        Text("No \(display.code) rate yet: refresh to get it.")
+                    } else {
+                        Text("For an idea of prices in the currency you’re used to. Converted at the Bank of Israel rate of the last refresh, so marked ≈. A purchase paid in another currency keeps its exact amount, with a globe.")
+                    }
                 }
 
                 Section {

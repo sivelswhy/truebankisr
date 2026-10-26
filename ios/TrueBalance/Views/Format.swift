@@ -1,8 +1,110 @@
+import Observation
 import SwiftUI
 import TrueBalanceCore
 
+/// A second currency for people used to another one (a French person in
+/// Israel thinking in euros): amounts in shekels with the converted amount in
+/// grey underneath, or the other way round. Converted at the Bank of Israel
+/// rate of the last refresh. Observable, so every amount on screen follows a
+/// change in Settings.
+@MainActor
+@Observable
+final class DisplayCurrency {
+    static let shared = DisplayCurrency()
+    /// The ones the Bank of Israel publishes, most likely first.
+    static let choices = ["EUR", "USD", "GBP", "CHF", "CAD", "AUD", "JPY", "SEK", "NOK", "DKK", "JOD", "EGP", "ZAR"]
+
+    /// "" = shekels only.
+    var code: String = UserDefaults.standard.string(forKey: "displayCurrency") ?? "" {
+        didSet { UserDefaults.standard.set(code, forKey: "displayCurrency") }
+    }
+    /// The other currency on top, shekels in grey underneath.
+    var first: Bool = UserDefaults.standard.bool(forKey: "displayCurrencyFirst") {
+        didSet { UserDefaults.standard.set(first, forKey: "displayCurrencyFirst") }
+    }
+    /// Shekels per unit, from the last snapshot.
+    var rates: [String: Double] = [:]
+
+    /// Shekels per unit of `code`, when there's one to convert with.
+    var rate: Double? { code.isEmpty ? nil : rates[code].flatMap { $0 > 0 ? $0 : nil } }
+    /// The main line is in the other currency.
+    var otherFirst: Bool { first && rate != nil }
+
+    static func format(_ value: Double, _ currency: String, whole: Bool = false) -> String {
+        let v = value == 0 ? 0 : value // also catches −0
+        return whole
+            ? v.formatted(.currency(code: currency).precision(.fractionLength(0)))
+            : v.formatted(.currency(code: currency))
+    }
+
+    /// A converted amount starts with ≈: it's an estimate, unlike a purchase
+    /// actually paid in that currency (`original`), shown exactly.
+    func format(_ shekels: Double, whole: Bool, inOther: Bool, original: (amount: Double, currency: String)? = nil) -> String {
+        guard inOther else { return Self.format(shekels, "ILS", whole: whole) }
+        if let original, original.currency == code { return Self.format(original.amount, code, whole: whole) }
+        return "≈ " + Self.format(shekels / (rate ?? 1), code, whole: whole)
+    }
+
+    func primary(_ shekels: Double, whole: Bool = false, original: (amount: Double, currency: String)? = nil) -> String {
+        format(shekels, whole: whole, inOther: otherFirst, original: original)
+    }
+
+    /// The grey line, nil when no second currency is set.
+    func secondary(_ shekels: Double, whole: Bool = false, original: (amount: Double, currency: String)? = nil) -> String? {
+        rate == nil ? nil : format(shekels, whole: whole, inOther: !first, original: original)
+    }
+}
+
+extension Txn {
+    /// What a purchase paid in a foreign currency cost there, as an expense.
+    var original: (amount: Double, currency: String)? {
+        isForeignPurchase ? (-(originalAmount ?? 0), originalCurrency ?? "") : nil
+    }
+}
+
 extension Double {
-    var shekels: String { (self == 0 ? 0 : self).formatted(.currency(code: "ILS")) } // also catches −0
+    /// In the display currency: shekels unless the other currency comes first.
+    @MainActor var shekels: String { DisplayCurrency.shared.primary(self) }
+    /// "₪1,500" without agorot, for budgets and summaries.
+    @MainActor var wholeShekels: String { DisplayCurrency.shared.primary(self, whole: true) }
+    /// Always in shekels, for amounts typed in shekels (alert threshold, budgets).
+    var ils: String { (self == 0 ? 0 : self).formatted(.currency(code: "ILS")) }
+}
+
+/// An amount with the other currency in grey underneath when one is set.
+/// Style it like a Text: font and colour apply to the main line.
+struct Money: View {
+    var amount: Double
+    var prefix: String = ""
+    var whole = false
+    var alignment: HorizontalAlignment = .trailing
+    var secondaryFont: Font = .caption
+    /// What a purchase in a foreign currency actually cost there.
+    var original: (amount: Double, currency: String)?
+
+    init(_ amount: Double, prefix: String = "", whole: Bool = false, alignment: HorizontalAlignment = .trailing,
+         secondaryFont: Font = .caption, original: (amount: Double, currency: String)? = nil) {
+        self.amount = amount
+        self.prefix = prefix
+        self.whole = whole
+        self.alignment = alignment
+        self.secondaryFont = secondaryFont
+        self.original = original
+    }
+
+    var body: some View {
+        let display = DisplayCurrency.shared
+        VStack(alignment: alignment, spacing: 1) {
+            Text(prefix + display.primary(amount, whole: whole, original: original))
+            if let other = display.secondary(amount, whole: whole, original: original) {
+                Text(prefix + other)
+                    .font(secondaryFont.weight(.regular))
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .monospacedDigit()
+        .privacySensitive()
+    }
 }
 
 enum Format {

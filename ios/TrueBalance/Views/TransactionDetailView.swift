@@ -142,12 +142,27 @@ struct TransactionDetailView: View {
                     Text(txn.description)
                         .font(.title2.bold())
                         .multilineTextAlignment(.center)
-                    Text((txn.isConvertedEstimate ? "≈ " : "") + (-txn.chargedAmount).formatted(.currency(code: txn.chargedCurrency)))
+                    let display = DisplayCurrency.shared
+                    let original = txn.original
+                    Text(txn.chargedCurrency != "ILS"
+                        ? (-txn.chargedAmount).formatted(.currency(code: txn.chargedCurrency))
+                        : (txn.isConvertedEstimate && !display.otherFirst ? "≈ " : "") + display.primary(-txn.chargedAmount, original: original))
                         .font(.system(.largeTitle, design: .rounded, weight: .bold))
                         .monospacedDigit()
                         .privacySensitive()
-                    if let original = txn.originalAmount, let currency = txn.originalCurrency {
-                        Text("\((-original).formatted(.currency(code: currency))) at the Bank of Israel rate")
+                    // The grey line, unless it's the exact amount paid, just below.
+                    if txn.chargedCurrency == "ILS", let other = display.secondary(-txn.chargedAmount, original: original),
+                       !(original?.currency == display.code && !display.otherFirst) {
+                        Text(other)
+                            .font(.title3.weight(.medium))
+                            .foregroundStyle(.secondary)
+                            .monospacedDigit()
+                            .privacySensitive()
+                    }
+                    if let original {
+                        let paid = DisplayCurrency.format(original.amount, original.currency)
+                        Label(txn.isConvertedEstimate ? "\(paid) at the Bank of Israel rate" : "Paid \(paid) in the shop’s currency",
+                              systemImage: "globe")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .privacySensitive()
@@ -275,16 +290,14 @@ struct MerchantHistoryView: View {
                 HStack(alignment: .firstTextBaseline) {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Total").font(.subheadline).foregroundStyle(.secondary)
-                        Text(total.shekels)
+                        Money(total, alignment: .leading, secondaryFont: .subheadline)
                             .font(.title.bold())
-                            .monospacedDigit()
-                            .privacySensitive()
                     }
                     Spacer()
                     VStack(alignment: .trailing, spacing: 2) {
                         Text("\(txns.count) purchase(s)").font(.subheadline).foregroundStyle(.secondary)
                         if !txns.isEmpty {
-                            Text("about \((total / Double(txns.count)).formatted(.currency(code: "ILS").precision(.fractionLength(0)))) each")
+                            Text("about \((total / Double(txns.count)).wholeShekels) each")
                                 .font(.subheadline)
                                 .privacySensitive()
                         }

@@ -195,10 +195,34 @@ function hasTime(iso: string): boolean {
   return t !== '00:00';
 }
 
-export function formatters(lang: Lang) {
+/** The ones the Bank of Israel publishes, most likely first. */
+export const CURRENCIES = ['EUR', 'USD', 'GBP', 'CHF', 'CAD', 'AUD', 'JPY', 'SEK', 'NOK', 'DKK', 'JOD', 'EGP', 'ZAR'];
+
+/**
+ * A second currency for people used to another one: `code` with its rate
+ * (shekels per unit), and whether it comes first, shekels in grey underneath.
+ */
+export interface Fx {
+  code: string;
+  rate: number;
+  first: boolean;
+}
+
+/** What a purchase in a foreign currency actually cost there. */
+export type Original = { amount: number; currency: string };
+
+export function formatters(lang: Lang, fx?: Fx) {
   const loc = locales[lang];
   const shekel = new Intl.NumberFormat(loc, { style: 'currency', currency: 'ILS' });
   const whole = new Intl.NumberFormat(loc, { style: 'currency', currency: 'ILS', maximumFractionDigits: 0 });
+  const money = (n: number, currency: string, round = false) =>
+    new Intl.NumberFormat(loc, { style: 'currency', currency, ...(round ? { maximumFractionDigits: 0 } : {}) }).format(n === 0 ? 0 : n).replace('-', '−');
+  const shekels = (n: number, round = false) => (round ? whole : shekel).format(n === 0 ? 0 : n).replace('-', '−'); // n === 0 also catches −0
+  // Converted amounts start with ≈: an estimate, unlike a purchase actually
+  // paid in that currency, shown exactly.
+  const other = (n: number, round = false, original?: Original) =>
+    original?.currency === fx!.code ? money(original.amount, fx!.code, round) : '≈ ' + money(n / fx!.rate, fx!.code, round);
+  const primary = (n: number, round = false, original?: Original) => (fx?.first ? other(n, round, original) : shekels(n, round));
   const percent = new Intl.NumberFormat(loc, { style: 'percent', maximumFractionDigits: 0 });
   const rtf = new Intl.RelativeTimeFormat(lang, { numeric: 'auto' });
   // A YYYY-MM-DD day stays that day whatever the visitor's time zone.
@@ -207,11 +231,18 @@ export function formatters(lang: Lang) {
   const fmt = (iso: string, o: Intl.DateTimeFormatOptions) => at(iso).toLocaleString(loc, { timeZone: zone(iso), ...o });
   const time = { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' } as const;
   return {
-    // Typographic minus, and never split the sign from the amount.
-    ils: (n: number) => shekel.format(n === 0 ? 0 : n).replace('-', '−'), // n === 0 also catches −0
-    ilsWhole: (n: number) => whole.format(n === 0 ? 0 : n).replace('-', '−'),
-    money: (n: number, currency: string) =>
-      new Intl.NumberFormat(loc, { style: 'currency', currency }).format(n).replace('-', '−'),
+    fx,
+    // In the display currency (shekels unless another one comes first), with
+    // a typographic minus.
+    ils: (n: number) => primary(n),
+    ilsWhole: (n: number) => primary(n, true),
+    /** The main line of an amount, exact for a purchase paid in the display currency. */
+    primary,
+    /** The grey line under an amount, when a second currency is set. */
+    secondary: (n: number, round = false, original?: Original) => (!fx ? null : fx.first ? shekels(n, round) : other(n, round, original)),
+    /** Always shekels: amounts typed in shekels (alert threshold, budgets). */
+    shekels,
+    money: (n: number, currency: string) => money(n, currency),
     percent: (n: number) => percent.format(n),
     /** "2 Nov" */
     day: (iso: string) => fmt(iso, { day: 'numeric', month: 'short' }),

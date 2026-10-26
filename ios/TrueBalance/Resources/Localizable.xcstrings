@@ -10011,6 +10011,258 @@
           }
         }
       }
+    },
+    "Currency": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Devise"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מטבע"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Валюта"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العملة"
+          }
+        }
+      }
+    },
+    "Also show amounts in": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher aussi les montants en"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "להציג סכומים גם ב"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показывать суммы также в"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض المبالغ أيضًا بـ"
+          }
+        }
+      }
+    },
+    "Shekels only": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shekels uniquement"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שקלים בלבד"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Только шекели"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشيكل فقط"
+          }
+        }
+      }
+    },
+    "Rate": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taux"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שער"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Курс"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر الصرف"
+          }
+        }
+      }
+    },
+    "Show %@ first": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher en %@ d’abord"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "להציג קודם ב-%@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сначала в %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض %@ أولًا"
+          }
+        }
+      }
+    },
+    "No %@ rate yet: refresh to get it.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas encore de taux pour %@ : actualise pour l’obtenir."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אין עדיין שער ל-%@: יש לרענן כדי לקבל אותו."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Курса %@ пока нет: обновите, чтобы получить его."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد سعر لـ%@ بعد: حدّث للحصول عليه."
+          }
+        }
+      }
+    },
+    "For an idea of prices in the currency you’re used to. Converted at the Bank of Israel rate of the last refresh, so marked ≈. A purchase paid in another currency keeps its exact amount, with a globe.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour te faire une idée des prix dans la devise dont tu as l’habitude. Converti au taux de la Banque d’Israël de la dernière actualisation, donc marqué ≈. Un achat payé dans une autre devise garde son montant exact, avec un globe."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כדי לקבל מושג על המחירים במטבע שאליו התרגלת. מומר לפי השער של בנק ישראל מהרענון האחרון, ולכן מסומן ≈. רכישה ששולמה במטבע אחר שומרת על הסכום המדויק, עם סמל גלובוס."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чтобы понимать цены в привычной валюте. Пересчёт по курсу Банка Израиля на момент последнего обновления, поэтому со знаком ≈. Покупка, оплаченная в другой валюте, показывает точную сумму со значком глобуса."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لتكوين فكرة عن الأسعار بالعملة التي اعتدت عليها. يُحوَّل بسعر بنك إسرائيل عند آخر تحديث، لذا يُعلَّم بـ≈. والمشتريات المدفوعة بعملة أخرى تحتفظ بمبلغها الدقيق، مع رمز الكرة الأرضية."
+          }
+        }
+      }
+    },
+    "Paid in %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Payé en %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שולם ב-%@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оплачено в %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مدفوع بـ%@"
+          }
+        }
+      }
+    },
+    "Paid %@ in the shop’s currency": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Payé %@ dans la devise du magasin"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "שולם %@ במטבע של בית העסק"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оплачено %@ в валюте магазина"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دُفع %@ بعملة المتجر"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { computeTrueBalance, dailyBudget, daysUntil, type Txn } from './compute.ts';
+import { computeTrueBalance, dailyBudget, daysUntil, isForeignPurchase, type Txn } from './compute.ts';
 
 let n = 0;
 const card = (processedDate: string, amount: number, extra: Partial<Txn> = {}): Txn => ({
@@ -121,4 +121,17 @@ test('daily budget spreads the true balance until the debit', () => {
   );
   assert.equal(daysUntil('2026-11-02', now), 14);
   assert.equal(dailyBudget(r, now), 85.71);
+});
+
+test('a purchase paid in euros is told apart from our estimate', () => {
+  const paid = card('2026-11-02T06:00:00.000Z', 152.7, { originalAmount: -42.3, originalCurrency: 'EUR' });
+  const r = computeTrueBalance(
+    { accountNumber: 'b', balance: 1000, txns: [] },
+    [{ accountNumber: 'c', txns: [paid, card('2026-11-02T06:00:00.000Z', 10, { chargedCurrency: 'USD' })] }],
+    { now, fxRates: { USD: 3.5 } },
+  );
+  const [eur, usd] = [r.nextCharge!.txns.find((t) => t.originalCurrency === 'EUR')!, r.nextCharge!.txns.find((t) => t.originalCurrency === 'USD')!];
+  assert.ok(isForeignPurchase(eur) && !eur.fxEstimate);
+  assert.ok(isForeignPurchase(usd) && usd.fxEstimate);
+  assert.ok(!isForeignPurchase(card('2026-11-02T06:00:00.000Z', 5, { originalAmount: -5, originalCurrency: 'ILS' })));
 });

@@ -2,9 +2,9 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { categoryColor } from '@/lib/categories.ts';
-import { detectLang, errorText, formatters, isRTL, L, type Lang } from '@/lib/i18n.ts';
+import { detectLang, errorText, formatters, isRTL, L, type Fx, type Lang } from '@/lib/i18n.ts';
 
-function build(lang: Lang, setLang: (l: Lang) => void) {
+function build(lang: Lang, setLang: (l: Lang) => void, fx?: Fx) {
   return {
     lang,
     setLang,
@@ -14,7 +14,7 @@ function build(lang: Lang, setLang: (l: Lang) => void) {
     error: (code: string | undefined, name = '') => errorText(lang, code, name),
     category: (key: string | undefined) => L(lang, `category.${key ?? 'uncategorized'}`),
     categoryColor,
-    ...formatters(lang),
+    ...formatters(lang, fx),
   };
 }
 
@@ -40,6 +40,17 @@ export function I18nProvider({ children }: { children: ReactNode }) {
         } catch {}
       }),
     [lang],
+  );
+  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
+}
+
+/** Amounts below also in a second currency (see `Fx`), once its rate is known. */
+export function CurrencyProvider({ fx, children }: { fx?: Fx; children: ReactNode }) {
+  const outer = useI18n();
+  const { code, rate, first } = fx ?? {};
+  const value = useMemo(
+    () => build(outer.lang, outer.setLang, code && rate ? { code, rate, first: !!first } : undefined),
+    [outer.lang, outer.setLang, code, rate, first],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

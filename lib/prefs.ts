@@ -10,9 +10,12 @@ export interface Prefs {
   alertThreshold: number;
   budgets: Record<string, number>;
   notes: Record<string, PurchaseNote>;
+  /** Second currency ('' = shekels only), and whether it comes first. */
+  currency: string;
+  currencyFirst: boolean;
 }
 
-export const DEFAULT_PREFS: Prefs = { firstName: '', hideAmounts: false, alertThreshold: 0, budgets: {}, notes: {} };
+export const DEFAULT_PREFS: Prefs = { firstName: '', hideAmounts: false, alertThreshold: 0, budgets: {}, notes: {}, currency: '', currencyFirst: false };
 
 const FILE = path.join(process.cwd(), 'data', 'prefs.json');
 
@@ -31,6 +34,8 @@ export function sanitize(input: unknown): Partial<Prefs> {
   if (typeof v.firstName === 'string') out.firstName = v.firstName.slice(0, 40);
   if (typeof v.hideAmounts === 'boolean') out.hideAmounts = v.hideAmounts;
   if (typeof v.alertThreshold === 'number' && v.alertThreshold >= 0) out.alertThreshold = Math.min(v.alertThreshold, 1_000_000);
+  if (typeof v.currency === 'string' && /^([A-Z]{3})?$/.test(v.currency)) out.currency = v.currency;
+  if (typeof v.currencyFirst === 'boolean') out.currencyFirst = v.currencyFirst;
   if (v.budgets && typeof v.budgets === 'object') {
     out.budgets = Object.fromEntries(
       Object.entries(v.budgets as Record<string, unknown>).filter(([, n]) => typeof n === 'number' && n > 0) as [string, number][],

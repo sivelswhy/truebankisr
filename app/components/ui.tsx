@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { categoryColor } from '@/lib/categories.ts';
-import type { Txn } from '@/lib/compute.ts';
+import { isForeignPurchase, type Txn } from '@/lib/compute.ts';
+import type { Original } from '@/lib/i18n.ts';
 import { movementKind, transferParty, type MovementKind } from '@/lib/insights.ts';
 import { useNav, useStore } from './App.tsx';
 import { useI18n } from './I18n.tsx';
@@ -163,6 +164,29 @@ export const Amt = ({ children, className = '' }: { children: ReactNode; classNa
   <span className={`amt num ${className}`}>{children}</span>
 );
 
+/**
+ * An amount in the display currency, with the other one in grey underneath
+ * when a second currency is set. `original`: what a purchase paid in a
+ * foreign currency cost there, shown exactly instead of converted.
+ */
+export function Money({ n, plus, whole, original, className = '' }: { n: number; plus?: boolean; whole?: boolean; original?: Original; className?: string }) {
+  const { primary, secondary } = useI18n();
+  const sign = plus && n > 0 ? '+' : '';
+  const other = secondary(n, whole, original);
+  const main = <Amt className={className}>{sign + primary(n, whole, original)}</Amt>;
+  if (other == null) return main;
+  return (
+    <span className="money">
+      {main}
+      <small className="amt alt">{sign + other}</small>
+    </span>
+  );
+}
+
+/** What a card purchase paid in a foreign currency cost there, as an expense. */
+export const originalOf = (txn: Txn): Original | undefined =>
+  isForeignPurchase(txn) ? { amount: -txn.originalAmount!, currency: txn.originalCurrency! } : undefined;
+
 // ---------- Icons ----------
 
 export function CategoryTile({ k, big }: { k: string | undefined; big?: boolean }) {
@@ -196,11 +220,12 @@ export function KindTile({ txn, big }: { txn: Txn; big?: boolean }) {
 export function TxnRow({ txn, debitDay }: { txn: Txn; debitDay?: string }) {
   const { push } = useNav();
   const { prefs } = useStore();
-  const { t, category, dayTime, day, ils, money } = useI18n();
+  const { t, category, dayTime, day, primary, secondary, money, fx } = useI18n();
   const parts = [dayTime(txn.date), category(txn.category)];
   if (txn.installments) parts.push(t('%lld of %lld', txn.installments.number, txn.installments.total));
   if (debitDay) parts.push(t('Debited %@', day(debitDay)));
-  const converted = txn.originalCurrency && txn.originalCurrency !== (txn.chargedCurrency ?? 'ILS') && txn.originalAmount != null;
+  const original = originalOf(txn);
+  const other = secondary(-txn.chargedAmount, false, original);
   return (
     <LinkRow onClick={() => push({ s: 'txn', id: txn.id })}>
       <CategoryTile k={txn.category} />
@@ -212,8 +237,11 @@ export function TxnRow({ txn, debitDay }: { txn: Txn; debitDay?: string }) {
         <span className="sub">{parts.join(' · ')}</span>
       </span>
       <span className="end">
-        <Amt>{(converted ? '≈ ' : '') + ils(-txn.chargedAmount)}</Amt>
-        {converted ? <small className="amt">{money(-txn.originalAmount!, txn.originalCurrency!)}</small>
+        <Amt>{(txn.fxEstimate && !fx?.first ? '≈ ' : '') + primary(-txn.chargedAmount, false, original)}</Amt>
+        {original ? (
+          // Paid in that currency: the exact amount, with a globe.
+          <small className="amt foreign" title={t('Paid in %@', original.currency)}><Icon name="globe" />{money(original.amount, original.currency)}</small>
+        ) : other != null ? <small className="amt">{other}</small>
           : txn.status === 'pending' && <span className="pending">{t('Pending')}</span>}
       </span>
     </LinkRow>
@@ -232,7 +260,7 @@ export function MovementRow({ txn }: { txn: Txn }) {
         <span className="sub">{[day(txn.date), t(kindInfo(txn).label)].join(' · ')}</span>
       </span>
       <span className="end">
-        <Amt className={txn.chargedAmount > 0 ? 'pos' : ''}>{(txn.chargedAmount > 0 ? '+' : '') + ils(txn.chargedAmount)}</Amt>
+        <Money n={txn.chargedAmount} plus className={txn.chargedAmount > 0 ? 'pos' : ''} />
         {txn.runningBalance != null && <small className="amt">{t('Balance %@', ils(txn.runningBalance))}</small>}
       </span>
     </LinkRow>

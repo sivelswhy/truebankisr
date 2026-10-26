@@ -135,7 +135,7 @@ public enum MaxParser {
         let amount = pendingWithoutAmount ? original! : actual
         let currencyCode = pendingWithoutAmount ? (raw.originalCurrency ?? "ILS") : currency(raw.paymentCurrency?.value.map { Int($0) })
         let arn = raw.dealData?.arn ?? "\(raw.merchantName ?? "")-\(raw.purchaseDate ?? "")-\(actual)"
-        return Txn(
+        var txn = Txn(
             id: installments.map { "\(arn)_\($0.number)" } ?? arn,
             date: purchase,
             processedDate: payment ?? purchase,
@@ -147,6 +147,15 @@ public enum MaxParser {
             category: Category.key(forMaxId: raw.categoryId?.value.map { Int($0) }),
             cardLast4: raw.shortCardNumber.flatMap { $0.isEmpty ? nil : String($0.suffix(4)) }
         )
+        // Paid in euros (or dollars…) and charged in shekels by Max: keep what
+        // it cost at the shop, exact.
+        if !pendingWithoutAmount, let original, original != 0, let shop = raw.originalCurrency,
+           shop.count == 3, shop != "ILS", shop != currencyCode {
+            txn.originalAmount = -original
+            txn.originalCurrency = shop
+            txn.fxEstimate = false
+        }
+        return txn
     }
 
     /// "תשלום 2 מתוך 3" → 2 of 3.

@@ -71,10 +71,8 @@ struct BankMovementRow: View {
             }
             Spacer(minLength: 8)
             VStack(alignment: .trailing, spacing: 2) {
-                Text((txn.chargedAmount > 0 ? "+" : "") + txn.chargedAmount.shekels)
-                    .monospacedDigit()
+                Money(txn.chargedAmount, prefix: txn.chargedAmount > 0 ? "+" : "", secondaryFont: .caption2)
                     .foregroundStyle(txn.chargedAmount > 0 ? .green : .primary)
-                    .privacySensitive()
                 if txn.status == .pending {
                     Text("Today")
                         .font(.caption2.weight(.semibold))
@@ -158,12 +156,12 @@ struct BankMovementsView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("In").font(.caption).foregroundStyle(.secondary)
-                        Text("+" + totals.in.shekels).foregroundStyle(.green)
+                        Money(totals.in, prefix: "+", alignment: .leading).foregroundStyle(.green)
                     }
                     Spacer()
                     VStack(alignment: .trailing, spacing: 2) {
                         Text("Out").font(.caption).foregroundStyle(.secondary)
-                        Text((-totals.out).shekels)
+                        Money(-totals.out)
                     }
                 }
                 .font(.headline)
@@ -216,11 +214,9 @@ struct BankMovementDetailView: View {
                     Text(party?.name ?? txn.description)
                         .font(.title2.bold())
                         .multilineTextAlignment(.center)
-                    Text((txn.chargedAmount > 0 ? "+" : "") + txn.chargedAmount.shekels)
+                    Money(txn.chargedAmount, prefix: txn.chargedAmount > 0 ? "+" : "", alignment: .center, secondaryFont: .title3)
                         .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                        .monospacedDigit()
                         .foregroundStyle(txn.chargedAmount > 0 ? .green : .primary)
-                        .privacySensitive()
                     Text(kind.label)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
@@ -266,9 +262,7 @@ struct BankMovementDetailView: View {
                     }
                 }
                 if let balance = txn.runningBalance {
-                    LabeledContent("Balance after", value: balance.shekels)
-                        .monospacedDigit()
-                        .privacySensitive()
+                    LabeledContent("Balance after") { Money(balance) }
                 }
                 LabeledContent("Reference") {
                     Text(verbatim: txn.id).monospacedDigit().textSelection(.enabled)

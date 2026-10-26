@@ -269,12 +269,12 @@ struct CalculationView: View {
     private func breakdown(_ s: Snapshot) -> some View {
         Section {
             LabeledContent {
-                Text(s.bankBalance.shekels).privacySensitive()
+                Money(s.bankBalance)
             } label: {
                 Label("Leumi balance", systemImage: "building.columns")
             }
             LabeledContent {
-                Text((-(s.nextCharge?.total ?? 0)).shekels).privacySensitive()
+                Money(-(s.nextCharge?.total ?? 0))
             } label: {
                 if let next = s.nextCharge {
                     Label("Max · \(Format.day(next.chargeDate))", systemImage: "creditcard")
@@ -283,9 +283,8 @@ struct CalculationView: View {
                 }
             }
             LabeledContent {
-                Text(s.trueBalance.shekels)
+                Money(s.trueBalance)
                     .foregroundStyle(s.trueBalance < 0 ? .red : .primary)
-                    .privacySensitive()
             } label: {
                 Label("Available", systemImage: "equal.circle")
             }
@@ -429,7 +428,7 @@ private struct HeroView: View {
                             .font(.footnote.weight(.semibold))
                             .foregroundStyle(.tertiary)
                     }
-                    Text(snapshot.trueBalance.shekels)
+                    Money(snapshot.trueBalance, alignment: .leading, secondaryFont: .title3)
                         .font(.system(size: amountSize, weight: .bold, design: .rounded))
                         .monospacedDigit()
                         .minimumScaleFactor(0.5)
@@ -487,7 +486,7 @@ private struct HeroView: View {
                 }
                 Spacer()
                 if let budget = TrueBalance.dailyBudget(snapshot) {
-                    Text("about \(budget.formatted(.currency(code: "ILS").precision(.fractionLength(0))))/day")
+                    Text("about \(budget.wholeShekels)/day")
                         .privacySensitive()
                 }
             }
@@ -509,7 +508,7 @@ private struct NextDebitCard: View {
                 Text("Next Max debit")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(.secondary)
-                Text(charge.total.shekels)
+                Money(charge.total, alignment: .leading, secondaryFont: .title3)
                     .font(.system(size: amountSize, weight: .bold, design: .rounded))
                     .monospacedDigit()
                     .minimumScaleFactor(0.5)
@@ -553,7 +552,7 @@ private struct UpcomingDebitsChart: View {
                 .foregroundStyle(c.id == upcoming.first?.id ? Color.accentColor.gradient : Color.secondary.opacity(0.5).gradient)
                 .cornerRadius(6)
                 .annotation(position: .top) {
-                    Text(c.total.formatted(.currency(code: "ILS").precision(.fractionLength(0))))
+                    Text(c.total.wholeShekels)
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(.secondary)
                         .privacySensitive()
@@ -595,11 +594,23 @@ struct TransactionRow: View {
             }
             Spacer(minLength: 8)
             VStack(alignment: .trailing, spacing: 2) {
-                Text((txn.isConvertedEstimate ? "≈ " : "") + (-txn.chargedAmount).shekels)
+                let display = DisplayCurrency.shared
+                Text((txn.isConvertedEstimate && !display.otherFirst ? "≈ " : "") + display.primary(-txn.chargedAmount, original: txn.original))
                     .monospacedDigit()
                     .privacySensitive()
-                if let original = txn.originalAmount, let currency = txn.originalCurrency {
-                    Text((-original).formatted(.currency(code: currency)))
+                if let original = txn.original {
+                    // Paid in that currency: the exact amount, with a globe.
+                    HStack(spacing: 2) {
+                        Image(systemName: "globe")
+                        Text(DisplayCurrency.format(original.amount, original.currency))
+                    }
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .monospacedDigit()
+                    .privacySensitive()
+                    .accessibilityLabel(Text("Paid in \(original.currency)"))
+                } else if let other = display.secondary(-txn.chargedAmount) {
+                    Text(other)
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                         .monospacedDigit()

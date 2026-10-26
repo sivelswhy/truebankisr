@@ -3,13 +3,13 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { Prefs } from '@/lib/prefs.ts';
 import type { Snapshot } from '@/lib/service.ts';
-import { useI18n } from './I18n.tsx';
+import { CurrencyProvider, useI18n } from './I18n.tsx';
 import { Icon, type IconName } from './icons.tsx';
 
 export type Data = Snapshot;
 
 // Same as DEFAULT_PREFS in lib/prefs.ts (that module reads files, so it stays on the server).
-const DEFAULT_PREFS: Prefs = { firstName: '', hideAmounts: false, alertThreshold: 0, budgets: {}, notes: {} };
+const DEFAULT_PREFS: Prefs = { firstName: '', hideAmounts: false, alertThreshold: 0, budgets: {}, notes: {}, currency: '', currencyFirst: false };
 
 // ---------- Data: snapshot, refresh, preferences ----------
 
@@ -114,7 +114,12 @@ export function StoreProvider({ initial, onSignOut, children }: { initial: Data 
   }, [onSignOut]);
 
   const value = useMemo(() => ({ data, loading, errors, refresh, prefs, setPrefs, signOut }), [data, loading, errors, refresh, prefs, setPrefs, signOut]);
-  return <StoreCtx.Provider value={value}>{children}</StoreCtx.Provider>;
+  const rate = prefs.currency ? data?.fxRates?.[prefs.currency] : undefined;
+  return (
+    <StoreCtx.Provider value={value}>
+      <CurrencyProvider fx={rate ? { code: prefs.currency, rate, first: prefs.currencyFirst } : undefined}>{children}</CurrencyProvider>
+    </StoreCtx.Provider>
+  );
 }
 
 // ---------- Navigation: a stack per tab, like a NavigationStack in each Tab ----------

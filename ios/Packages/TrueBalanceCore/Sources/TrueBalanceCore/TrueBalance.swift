@@ -86,6 +86,7 @@ public enum TrueBalance {
         var c = t
         c.originalAmount = t.chargedAmount
         c.originalCurrency = t.chargedCurrency
+        c.fxEstimate = true
         c.chargedAmount = round2(t.chargedAmount * rate)
         c.chargedCurrency = "ILS"
         return c

@@ -42,6 +42,8 @@ export function demoData(now = new Date()): { bank: Account; cards: Account[] } 
     t(9, 249.9, 'IKEA Rishon', 'home', { month: 2, installments: { number: 2, total: 3 } }),
     t(9, 249.9, 'IKEA Rishon', 'home', { month: 3, installments: { number: 3, total: 3 } }),
     t(6, 54, 'Aroma Espresso Bar', 'restaurants', { card: second }),
+    // Paid in euros on a trip, charged in shekels by Max.
+    { ...t(5, 152.7, 'Monoprix Paris', 'groceries'), originalAmount: -42.3, originalCurrency: 'EUR' },
     t(3, 119.9, 'Partner Communications', 'telecom'),
     t(2, 64, 'Super-Pharm', 'health', { card: second }),
     // Pending purchases carry the time of day, like Max gives it.
@@ -104,7 +106,7 @@ export function demoData(now = new Date()): { bank: Account; cards: Account[] } 
 
 /** What the demo also shows on the iPhone: savings and a dollar account. */
 export const DEMO_EXTRAS = {
-  fxRates: { USD: 3.11, EUR: 3.49 },
+  fxRates: { USD: 3.11, EUR: 3.49, GBP: 4.13, CHF: 3.88 },
   savings: [{ name: 'פיקדון קצר מועד', balance: 25_000 }],
   foreignAccounts: [{ currency: 'USD', balance: 1_250 }],
 };

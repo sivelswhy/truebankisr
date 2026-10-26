@@ -7,9 +7,12 @@ export interface Txn {
   processedDate: string; // for card txns: the day it is debited from the bank (ISO)
   chargedAmount: number; // negative = expense
   chargedCurrency?: string;
-  // For a foreign-currency charge converted to ILS: the original amount and currency.
+  // For a purchase in a foreign currency: what it cost in that currency. The
+  // ILS amount is then Max's conversion, or our estimate (fxEstimate).
   originalAmount?: number;
   originalCurrency?: string;
+  // The ILS amount is our estimate at the Bank of Israel rate, not Max's.
+  fxEstimate?: boolean;
   description: string;
   status: 'completed' | 'pending';
   installments?: { number: number; total: number };
@@ -143,6 +146,10 @@ export function computeTrueBalance(
   };
 }
 
+// Paid in another currency than shekels: originalAmount is exact in originalCurrency.
+export const isForeignPurchase = (t: Txn) =>
+  t.originalAmount != null && t.originalAmount !== 0 && /^[A-Z]{3}$/.test(t.originalCurrency ?? '') && t.originalCurrency !== 'ILS';
+
 export const newestFirst = (a: Txn, b: Txn) => b.date.localeCompare(a.date);
 
 // Max reports pending purchases with a charged amount of 0 until they are
@@ -154,7 +161,7 @@ function withPendingAmount(txn: Txn): Txn {
 
 // ILS estimate of a foreign-currency charge, keeping the original amount.
 function converted(t: Txn, rate: number): Txn {
-  return { ...t, originalAmount: t.chargedAmount, originalCurrency: t.chargedCurrency, chargedAmount: round(t.chargedAmount * rate), chargedCurrency: 'ILS' };
+  return { ...t, originalAmount: t.chargedAmount, originalCurrency: t.chargedCurrency, chargedAmount: round(t.chargedAmount * rate), chargedCurrency: 'ILS', fxEstimate: true };
 }
 
 export function round(n: number): number {

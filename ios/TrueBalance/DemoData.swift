@@ -16,6 +16,11 @@ enum DemoData {
 
         let main = "4580", second = "1127"
         func with(_ t: Txn, card: String) -> Txn { var t = t; t.cardLast4 = card; return t }
+        func paidInEuros(_ t: Txn, _ euros: Double) -> Txn {
+            var t = t
+            (t.originalAmount, t.originalCurrency, t.fxEstimate) = (-euros, "EUR", false)
+            return t
+        }
         var txns = [
             with(t(14, 412.9, "Shufersal Deal", "groceries"), card: main),
             with(t(11, 89, "Paz Yellow", "energy"), card: main),
@@ -23,6 +28,8 @@ enum DemoData {
             with(t(9, 249.9, "IKEA Rishon", "home", month: 2, installments: .init(number: 2, total: 3)), card: main),
             with(t(9, 249.9, "IKEA Rishon", "home", month: 3, installments: .init(number: 3, total: 3)), card: main),
             with(t(6, 54, "Aroma Espresso Bar", "restaurants"), card: second),
+            // Paid in euros on a trip, charged in shekels by Max.
+            with(paidInEuros(t(5, 152.7, "Monoprix Paris", "groceries"), 42.3), card: main),
             with(t(3, 119.9, "Partner Communications", "telecom"), card: main),
             with(t(2, 64, "Super-Pharm", "health"), card: second),
             with(t(0, 38.5, "Rami Levy", "groceries", status: .pending), card: main),
@@ -78,7 +85,7 @@ enum DemoData {
         var snapshot = try! TrueBalance.compute(
             bank: Account(accountNumber: "812-123456", balance: 163, txns: bank),
             cards: [Account(accountNumber: "max", txns: txns)],
-            now: now, fxRates: ["USD": 3.11, "EUR": 3.49])
+            now: now, fxRates: ["USD": 3.11, "EUR": 3.49, "GBP": 4.13, "CHF": 3.88])
         snapshot.cards = [CardInfo(last4: main, creditLimit: 15_000, available: 12_480),
                           CardInfo(last4: second, creditLimit: 5_000, available: 4_620)]
         snapshot.savings = [SavingsAccount(name: "פיקדון קצר מועד", balance: 25_000)]

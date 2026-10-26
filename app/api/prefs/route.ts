@@ -2,7 +2,7 @@ import { readPrefs, updatePrefs } from '@/lib/prefs.ts';
 
 export const dynamic = 'force-dynamic';
 
-// First name, hidden amounts, alert threshold, budgets and purchase notes.
+// First name, hidden amounts, alert threshold, budgets, purchase notes and second currency.
 export async function GET() {
   return Response.json(await readPrefs());
 }

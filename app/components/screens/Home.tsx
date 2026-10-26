@@ -7,7 +7,7 @@ import { isCardDebit } from '@/lib/compute.ts';
 import { useNav, useStore, type Data } from '../App.tsx';
 import { useI18n } from '../I18n.tsx';
 import { Icon } from '../icons.tsx';
-import { Amt, Empty, HeroCard, kindInfo, KindTile, Labeled, LinkRow, MovementRow, Page, Section, Segmented, TxnRow, useTitle } from '../ui.tsx';
+import { Amt, Empty, HeroCard, kindInfo, KindTile, Labeled, LinkRow, MovementRow, Page, Section, Segmented, TxnRow, useTitle, Money } from '../ui.tsx';
 
 /** Calm blue, orange under the alert threshold, red when overdrawn. */
 export function mood(s: Data, threshold: number): string {
@@ -82,7 +82,7 @@ function Hero({ s }: { s: Data }) {
         </span>
         <Icon name="chevron" className="chev" />
       </div>
-      <div className={`amount${s.trueBalance < 0 ? ' neg' : ''}`}><Amt>{ils(s.trueBalance)}</Amt></div>
+      <div className={`amount${s.trueBalance < 0 ? ' neg' : ''}`}><Money n={s.trueBalance} /></div>
       {s.trueBalance < 0 && <p className="warning">{t('You’ll be overdrawn on the debit date unless money comes in first.')}</p>}
       {next && (
         <>
@@ -116,7 +116,7 @@ function ForecastRow() {
             <span className="title">{t('Expected on %@', day(f.until))}</span>
             <span className="sub">{f.income.length ? t('Salary and regular debits included') : t('Including regular debits')}</span>
           </span>
-          <span className="end"><Amt className={f.projectedBalance < 0 ? 'neg' : ''}>{ils(f.projectedBalance)}</Amt></span>
+          <span className="end"><Money n={f.projectedBalance} className={f.projectedBalance < 0 ? 'neg' : ''} /></span>
         </LinkRow>
       </div>
     </section>
@@ -144,14 +144,14 @@ export function Calculation() {
           </>
         }
       >
-        <Labeled icon="bank" label={t('Leumi balance')}><Amt>{ils(data.bankBalance)}</Amt></Labeled>
+        <Labeled icon="bank" label={t('Leumi balance')}><Money n={data.bankBalance} /></Labeled>
         <Labeled icon="card" label={data.nextCharge ? t('Max · %@', day(data.nextCharge.chargeDate)) : t('Max')}>
-          <Amt>{ils(-(data.nextCharge?.total ?? 0))}</Amt>
+          <Money n={-(data.nextCharge?.total ?? 0)} />
         </Labeled>
         <div className="row labeled emphasis">
           <Icon name="equal" className="row-icon" />
           <span className="label">{t('Available')}</span>
-          <Amt className={data.trueBalance < 0 ? 'neg' : ''}>{ils(data.trueBalance)}</Amt>
+          <Money n={data.trueBalance} className={data.trueBalance < 0 ? 'neg' : ''} />
         </div>
       </Section>
     </Page>
@@ -170,12 +170,12 @@ export function ForecastScreen() {
   return (
     <Page title={t('Forecast')}>
       <Section plain footer={t('Regular Leumi movements expected before the debit, detected from the last months: same payer or payee, about the same amount, every month.')}>
-        <Labeled label={t('Available after Max')}><Amt>{ils(data.trueBalance)}</Amt></Labeled>
-        {f.income.map((r) => <Labeled key={r.name} label={r.name}><Amt className="pos">{'+' + ils(r.amount)}</Amt></Labeled>)}
-        {f.debits.map((r) => <Labeled key={r.name} label={r.name}><Amt>{ils(r.amount)}</Amt></Labeled>)}
+        <Labeled label={t('Available after Max')}><Money n={data.trueBalance} /></Labeled>
+        {f.income.map((r) => <Labeled key={r.name} label={r.name}><Money n={r.amount} plus className="pos" /></Labeled>)}
+        {f.debits.map((r) => <Labeled key={r.name} label={r.name}><Money n={r.amount} /></Labeled>)}
         <div className="row labeled emphasis">
           <span className="label">{t('Expected on %@', day(f.until))}</span>
-          <Amt className={f.projectedBalance < 0 ? 'neg' : ''}>{ils(f.projectedBalance)}</Amt>
+          <Money n={f.projectedBalance} className={f.projectedBalance < 0 ? 'neg' : ''} />
         </div>
       </Section>
       {all.length > 0 && (
@@ -199,7 +199,7 @@ export function RecurringRow({ name, next, amount, onClick }: { name: string; ne
         <span className="title">{name}</span>
         <span className="sub">{t('Next around %@', day(next))}</span>
       </span>
-      <span className="end"><Amt className={amount > 0 ? 'pos' : ''}>{amount > 0 ? '+' + ils(amount) : ils(-amount)}</Amt></span>
+      <span className="end"><Money n={amount > 0 ? amount : -amount} plus className={amount > 0 ? 'pos' : ''} /></span>
     </>
   );
   return onClick ? <LinkRow onClick={onClick}>{body}</LinkRow> : <div className="row">{body}</div>;
@@ -215,7 +215,7 @@ export function RecentPurchases() {
   return (
     <Page title={t('Latest payments')}>
       {days.map(([d, list]) => (
-        <Section key={d} small header={weekday(d)} side={<Amt>{ils(total(list))}</Amt>}>
+        <Section key={d} small header={weekday(d)} side={<Money n={total(list)} />}>
           {list.map((x) => <TxnRow key={x.id} txn={x} />)}
         </Section>
       ))}
@@ -269,8 +269,8 @@ export function Movements() {
       <section className="section" style={{ marginTop: 14 }}>
         <div className="group">
           <div className="row" style={{ fontWeight: 600, fontSize: 18 }}>
-            <span className="main"><span className="sub">{t('In')}</span><Amt className="pos">{'+' + ils(totals.in)}</Amt></span>
-            <span className="end"><small>{t('Out')}</small><Amt>{ils(-totals.out)}</Amt></span>
+            <span className="main"><span className="sub">{t('In')}</span><Money n={totals.in} plus className="pos" /></span>
+            <span className="end"><small>{t('Out')}</small><Money n={-totals.out} /></span>
           </div>
         </div>
         {oldest && <p className="footer">{t('Leumi movements since %@.', day(oldest))}</p>}
@@ -299,7 +299,7 @@ export function MovementDetail({ id }: { id: string }) {
       <div className="detail-head">
         <KindTile txn={txn} big />
         <h2>{title}</h2>
-        <div className={`big-amount${txn.chargedAmount > 0 ? ' pos' : ''}`}><Amt>{(txn.chargedAmount > 0 ? '+' : '') + ils(txn.chargedAmount)}</Amt></div>
+        <div className={`big-amount${txn.chargedAmount > 0 ? ' pos' : ''}`}><Money n={txn.chargedAmount} plus /></div>
         <div className="when">{t(kindInfo(txn).label)}</div>
       </div>
       {party && (
@@ -320,7 +320,7 @@ export function MovementDetail({ id }: { id: string }) {
         {txn.valueDate && <Labeled label={t('Value date')}>{longDay(txn.valueDate)}</Labeled>}
         <Labeled label={t('Description')}>{txn.description}</Labeled>
         {txn.memo && <Labeled label={t('Details')}>{txn.memo}</Labeled>}
-        {txn.runningBalance != null && <Labeled label={t('Balance after')}><Amt>{ils(txn.runningBalance)}</Amt></Labeled>}
+        {txn.runningBalance != null && <Labeled label={t('Balance after')}><Money n={txn.runningBalance} /></Labeled>}
         <Labeled label={t('Reference')}><span className="num">{txn.id}</span></Labeled>
       </Section>
     </Page>

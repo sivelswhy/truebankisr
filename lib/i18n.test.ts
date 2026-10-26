@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { errorText, L } from './i18n.ts';
+import { errorText, formatters, L } from './i18n.ts';
 
 test("uses the iPhone app's translations, plurals included", () => {
   assert.equal(L('fr', 'Calculation'), 'Calcul');
@@ -18,4 +18,21 @@ test('every scraper error has a sentence in every language', () => {
       assert.ok(!/%@|[A-Z_]{6,}/.test(s), `${lang} ${code}: ${s}`);
     }
   }
+});
+
+test('a second currency: converted amounts marked ≈, an amount paid in it exact', () => {
+  const plain = formatters('en');
+  assert.equal(plain.ils(349), '₪349.00');
+  assert.equal(plain.secondary(349), null);
+
+  const below = formatters('en', { code: 'EUR', rate: 3.49, first: false });
+  assert.equal(below.ils(349), '₪349.00');
+  assert.equal(below.secondary(349), '≈ €100.00');
+  assert.equal(below.secondary(152.7, false, { amount: 42.3, currency: 'EUR' }), '€42.30');
+
+  const first = formatters('en', { code: 'EUR', rate: 3.49, first: true });
+  assert.equal(first.ils(-349), '≈ −€100.00');
+  assert.equal(first.ilsWhole(349), '≈ €100');
+  assert.equal(first.secondary(349), '₪349.00');
+  assert.equal(first.shekels(349), '₪349.00');
 });

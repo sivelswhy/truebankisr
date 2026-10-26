@@ -34,17 +34,27 @@ public struct Txn: Codable, Hashable, Identifiable, Sendable {
     public var logoURL: String?
     /// Merchant address or city, when the card company provides one.
     public var merchantAddress: String?
-    /// For a foreign-currency charge converted to ILS: the original amount
-    /// (negative = expense) and currency. The ILS amount is then an estimate.
+    /// For a purchase in a foreign currency: what it cost in that currency
+    /// (negative = expense). The ILS amount is then either Max's own
+    /// conversion, or our estimate at the Bank of Israel rate (`fxEstimate`).
     public var originalAmount: Double?
     public var originalCurrency: String?
+    /// The ILS amount is our estimate, not what Max charged. Nil in data saved
+    /// before it existed, when only estimates had an original amount.
+    public var fxEstimate: Bool?
     /// Bank movements: Leumi's detail line (e.g. "העברה מאת: …"), the balance
     /// right after the movement, and the value date when it differs.
     public var memo: String?
     public var runningBalance: Double?
     public var valueDate: Date?
 
-    public var isConvertedEstimate: Bool { originalCurrency != nil && originalCurrency != chargedCurrency }
+    public var isConvertedEstimate: Bool { fxEstimate ?? (originalCurrency != nil && originalCurrency != chargedCurrency) }
+
+    /// Paid in another currency than shekels (a shop abroad, a site in euros):
+    /// `originalAmount` is then exact, in `originalCurrency`.
+    public var isForeignPurchase: Bool {
+        originalAmount != nil && originalCurrency.map { $0 != "ILS" && $0.count == 3 } == true
+    }
 
     /// Groups purchases from the same merchant ("  SHUFERSAL " = "shufersal").
     public var merchantKey: String {

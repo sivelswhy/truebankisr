@@ -145,7 +145,7 @@ struct SpendingTab: View {
                     Text("Card spending")
                         .font(.subheadline.weight(.medium))
                         .foregroundStyle(.secondary)
-                    Text(total.shekels)
+                    Money(total, alignment: .leading, secondaryFont: .title3)
                         .font(.system(.largeTitle, design: .rounded, weight: .bold))
                         .monospacedDigit()
                         .minimumScaleFactor(0.5)
@@ -155,7 +155,7 @@ struct SpendingTab: View {
                     HStack(spacing: 6) {
                         Text("\(txns.count) purchase(s)")
                         Text(verbatim: "·")
-                        Text("about \((total / Double(days)).formatted(.currency(code: "ILS").precision(.fractionLength(0))))/day")
+                        Text("about \((total / Double(days)).wholeShekels)/day")
                             .privacySensitive()
                     }
                     .font(.footnote)

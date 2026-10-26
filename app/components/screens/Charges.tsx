@@ -6,7 +6,7 @@ import { daysUntil, type Txn } from '@/lib/compute.ts';
 import { useNav, useStore } from '../App.tsx';
 import { useI18n } from '../I18n.tsx';
 import { Icon } from '../icons.tsx';
-import { Amt, CategoryTile, Donut, Empty, HeroCard, LinkRow, Page, Section, TxnRow, useTitle } from '../ui.tsx';
+import { Amt, CategoryTile, Donut, Empty, HeroCard, LinkRow, Page, Section, TxnRow, useTitle, Money } from '../ui.tsx';
 import { NoData } from './Home.tsx';
 
 export function Charges() {
@@ -45,7 +45,7 @@ export function Charges() {
           {next && (
             <HeroCard tint="var(--indigo)">
               <div className="caption"><span>{t('Next Max debit')}</span></div>
-              <div className="amount medium"><Amt>{ils(next.total)}</Amt></div>
+              <div className="amount medium"><Money n={next.total} /></div>
               <div className="meta">
                 <Icon name="calendar" />
                 <span>{weekday(next.chargeDate)}</span>
@@ -75,7 +75,7 @@ export function Charges() {
           {next && <CategoryBreakdown txns={next.txns} caption={t('Debited %@', day(next.chargeDate))} />}
 
           {data.upcoming.map((c) => (
-            <Section key={c.chargeDate} header={t('Debited %@', day(c.chargeDate))} side={<Amt>{ils(c.total)}</Amt>}>
+            <Section key={c.chargeDate} header={t('Debited %@', day(c.chargeDate))} side={<Money n={c.total} />}>
               {c.txns.map((x) => <TxnRow key={x.id} txn={x} />)}
             </Section>
           ))}
@@ -101,7 +101,7 @@ export function CategoryBreakdown({ txns, caption }: { txns: Txn[]; caption: str
           <CategoryTile k={c.key} />
           <span className="main"><span className="title">{category(c.key)}</span></span>
           <span className="end">
-            <Amt>{ils(c.total)}</Amt>
+            <Money n={c.total} />
             <small>{percent(c.total / sum)}</small>
           </span>
         </LinkRow>
@@ -120,7 +120,7 @@ export function CategoryDetail({ k, ids, caption }: { k: string; ids: string[]; 
   const txns = all.filter((x) => wanted.has(x.id) && (x.category ?? 'uncategorized') === k && !seen.has(x.id) && (seen.add(x.id), true));
   return (
     <Page title={category(k)}>
-      <Section footer={caption} header={category(k)} side={<Amt>{ils(txns.reduce((s, x) => s - x.chargedAmount, 0))}</Amt>}>
+      <Section footer={caption} header={category(k)} side={<Money n={txns.reduce((s, x) => s - x.chargedAmount, 0)} />}>
         {txns.map((x) => <TxnRow key={x.id} txn={x} />)}
       </Section>
     </Page>

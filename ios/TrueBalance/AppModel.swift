@@ -15,7 +15,9 @@ final class AppModel {
     static let staleAfter: TimeInterval = 15 * 60
 
     private(set) var phase: Phase
-    private(set) var snapshot: Snapshot?
+    private(set) var snapshot: Snapshot? {
+        didSet { DisplayCurrency.shared.rates = Self.rates(snapshot) }
+    }
     private(set) var isRefreshing = false
     private(set) var refreshErrors: [Provider: BankError] = [:]
     private(set) var isDemo: Bool
@@ -44,6 +46,7 @@ final class AppModel {
         isDemo = demo
         phase = signedIn ? .signedIn : .signedOut
         snapshot = signedIn ? (demo ? DemoData.snapshot() : SnapshotStore.load()) : nil
+        DisplayCurrency.shared.rates = Self.rates(snapshot)
         WebDriver.onStep = { [weak self] step in self?.progressStep = step }
         // Back online after a refresh failed for lack of network: try again.
         Connectivity.shared.onReconnect = { [weak self] in
@@ -52,6 +55,11 @@ final class AppModel {
             Task { await self.refresh(manual: false) }
         }
         updateWidgets()
+    }
+
+    /// Bank of Israel rates for the second currency: the snapshot's, else the last fetched.
+    private static func rates(_ snapshot: Snapshot?) -> [String: Double] {
+        snapshot?.fxRates ?? UserDefaults.standard.dictionary(forKey: "fxRates") as? [String: Double] ?? [:]
     }
 
     // MARK: Notes and budgets

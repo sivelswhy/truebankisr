@@ -387,3 +387,16 @@ textarea.note::placeholder { color: var(--tertiary); }
 @media (min-width: 700px) {
   .page { padding-top: 12px; }
 }
+
+/* ---------- Second currency (Money) ---------- */
+.money { display: inline-flex; flex-direction: column; align-items: flex-end; gap: 1px; vertical-align: top; }
+.money .alt { font-size: 13px; font-weight: 400; line-height: 1.25; color: var(--secondary); letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.hero .money, .main .money { align-items: flex-start; }
+.hero .money .alt { font-size: 17px; font-weight: 500; }
+.detail-head .money { align-items: center; }
+.detail-head .money .alt { font-size: 17px; font-weight: 500; }
+.row .end .foreign { display: inline-flex; align-items: center; gap: 3px; }
+.row .end .foreign svg { width: 11px; height: 11px; }
+.detail-head .alt-amount { font-size: 17px; font-weight: 500; font-variant-numeric: tabular-nums; margin-top: -4px; }
+.detail-head .foreign-note { display: inline-flex; align-items: center; gap: 5px; }
+.detail-head .foreign-note svg { width: 15px; height: 15px; }

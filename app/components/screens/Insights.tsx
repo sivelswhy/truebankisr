@@ -6,7 +6,7 @@ import { budgetProgress, compareMonths, forecast, monthlyTotal, subscriptions, w
 import { useNav, useStore } from '../App.tsx';
 import { useI18n } from '../I18n.tsx';
 import { Icon, type IconName } from '../icons.tsx';
-import { Amt, CategoryTile, ChangeBadge, HeroCard, Labeled, LinkRow, Page, Section, Sheet, useTitle } from '../ui.tsx';
+import { Amt, CategoryTile, ChangeBadge, HeroCard, Labeled, LinkRow, Page, Section, Sheet, useTitle, Money } from '../ui.tsx';
 import { NoData, RecurringRow } from './Home.tsx';
 
 /** Month to month, budgets, subscriptions, regular bank movements, net worth. */
@@ -32,7 +32,7 @@ export function Insights() {
           <Icon name="chevron" className="chev" />
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
-          <div className="amount medium"><Amt>{ilsWhole(c.thisMonth)}</Amt></div>
+          <div className="amount medium"><Money n={c.thisMonth} whole /></div>
           {c.change != null && <ChangeBadge change={c.change} />}
         </div>
         <div className="meta"><Amt>{t('Last month at the same date: %@', ilsWhole(c.lastMonthSamePeriod))}</Amt></div>
@@ -77,7 +77,7 @@ export function Insights() {
           <LinkRow onClick={() => push({ s: 'wealth' })}>
             <Icon name="bank" className="row-icon" />
             <span className="main">{t('Current account, savings and foreign currency')}</span>
-            <span className="end" style={{ fontWeight: 600 }}><Amt>{ilsWhole(w.total)}</Amt></span>
+            <span className="end" style={{ fontWeight: 600 }}><Money n={w.total} whole /></span>
           </LinkRow>
         </Section>
       )}
@@ -154,9 +154,9 @@ export function MonthComparison() {
   return (
     <Page title={t('Month to month')}>
       <Section plain>
-        <Labeled label={t('This month')}><Amt>{ils(c.thisMonth)}</Amt></Labeled>
-        <Labeled label={t('Last month, same days')}><Amt>{ils(c.lastMonthSamePeriod)}</Amt></Labeled>
-        <Labeled label={<span className="secondary">{t('Last month, whole')}</span>}><Amt>{ils(c.lastMonthTotal)}</Amt></Labeled>
+        <Labeled label={t('This month')}><Money n={c.thisMonth} /></Labeled>
+        <Labeled label={t('Last month, same days')}><Money n={c.lastMonthSamePeriod} /></Labeled>
+        <Labeled label={<span className="secondary">{t('Last month, whole')}</span>}><Money n={c.lastMonthTotal} /></Labeled>
         {c.change != null && <Labeled label={t('Change')}><ChangeBadge change={c.change} /></Labeled>}
       </Section>
       {rows.length > 0 && (
@@ -167,7 +167,7 @@ export function MonthComparison() {
               <span className="main">{category(k)}</span>
               <span className="end" style={{ flexDirection: 'row', gap: 4, alignItems: 'center', color: delta > 0 ? 'var(--red)' : 'var(--green)' }}>
                 <Icon name={delta > 0 ? 'out' : 'in'} className="row-icon flip" />
-                <Amt>{(delta > 0 ? '+' : '') + ilsWhole(delta)}</Amt>
+                <Money n={delta} plus whole />
               </span>
             </div>
           ))}
@@ -195,7 +195,7 @@ export function Subscriptions() {
             <br />
             <small className="secondary amt">{t('%@ a year', ilsWhole(perMonth * 12))}</small>
           </span>
-          <Amt className="change">{ils(perMonth)}</Amt>
+          <Money n={perMonth} className="change" />
         </div>
       </Section>
       <Section footer={t('Max charges from the same merchant, for the same amount, every month. Installment plans aren’t included.')}>
@@ -222,7 +222,7 @@ export function Wealth() {
   return (
     <Page title={t('Net worth')}>
       <Section small header={t('Total')} plain footer={t('Current account after the Max debits already known, savings and foreign-currency accounts at today’s Bank of Israel rate.')}>
-        <div className="row"><span className="amount medium" style={{ font: '700 34px var(--rounded)' }}><Amt>{ils(w.total)}</Amt></span></div>
+        <div className="row"><span className="amount medium" style={{ font: '700 34px var(--rounded)' }}><Money n={w.total} /></span></div>
       </Section>
       <Section inset={50}>
         {w.lines.map((l) => (
@@ -230,7 +230,7 @@ export function Wealth() {
             <Icon name={WEALTH_ICON[l.kind]} className="row-icon" />
             <span className="main">{title(l)}</span>
             <span className="end">
-              <Amt>{ils(l.amount)}</Amt>
+              {l.original != null ? <Amt>{ils(l.amount)}</Amt> : <Money n={l.amount} />}
               {l.original != null && l.currency && <small className="amt">{money(l.original, l.currency)}</small>}
             </span>
           </div>
