@@ -204,6 +204,8 @@ struct TransactionDetailView: View {
 
             NoteSection(txnID: txn.id)
 
+            SubscriptionToggleSection(txn: txn)
+
             if let item = location.item {
                 LocationSection(item: item, source: location.source, address: txn.merchantAddress)
             }

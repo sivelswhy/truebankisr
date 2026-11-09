@@ -330,6 +330,7 @@ struct ChargesTab: View {
                     } else {
                         if let next = s.nextCharge {
                             Section { NextDebitCard(charge: next).cardRow() }
+                            SubscriptionsDueSection(chargeDate: next.chargeDate)
                         }
                         if s.upcoming.count > 1 {
                             UpcomingDebitsChart(upcoming: s.upcoming)

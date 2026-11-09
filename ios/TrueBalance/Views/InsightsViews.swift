@@ -166,44 +166,6 @@ private struct CardSummaryRow: View {
     }
 }
 
-// MARK: - Subscriptions
-
-struct SubscriptionsView: View {
-    var subscriptions: [Recurring]
-
-    var body: some View {
-        List {
-            Section {
-                LabeledContent {
-                    Money(Subscriptions.monthlyTotal(subscriptions))
-                        .font(.title2.bold())
-                } label: {
-                    VStack(alignment: .leading) {
-                        Text("Per month")
-                        Text("\((Subscriptions.monthlyTotal(subscriptions) * 12).wholeShekels) a year")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .privacySensitive()
-                    }
-                }
-            }
-            Section {
-                ForEach(subscriptions) { s in
-                    NavigationLink(value: MerchantRoute(key: s.name.lowercased(), name: s.name)) {
-                        RecurringRow(item: s)
-                    }
-                }
-            } footer: {
-                Text("Max charges from the same merchant, for the same amount, every month. Installment plans aren’t included.")
-            }
-        }
-        .navigationTitle("Subscriptions")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar(.visible, for: .navigationBar)
-        .appBackground()
-    }
-}
-
 // MARK: - Wealth
 
 struct WealthView: View {
@@ -470,7 +432,7 @@ struct InsightsTab: View {
                     let history = model.allPurchases
                     monthSection(Spending.compareMonths(history))
                     budgetsSection(model.budgetProgress)
-                    subscriptionsSection(Subscriptions.detect(history))
+                    subscriptionsSection(model.subscriptions)
                     if let f = Forecaster.forecast(s) {
                         Section {
                             NavigationLink {
@@ -558,22 +520,18 @@ struct InsightsTab: View {
     }
 
     @ViewBuilder
-    private func subscriptionsSection(_ subs: [Recurring]) -> some View {
-        if !subs.isEmpty {
-            Section {
-                ForEach(subs.prefix(4)) { sub in
-                    NavigationLink(value: MerchantRoute(key: sub.name.lowercased(), name: sub.name)) {
-                        RecurringRow(item: sub)
-                    }
-                }
-                if subs.count > 4 {
-                    NavigationLink("See all \(subs.count)") { SubscriptionsView(subscriptions: subs) }
-                }
-            } header: {
-                HStack {
-                    Text("Subscriptions")
-                    Spacer()
-                    Text("\(Subscriptions.monthlyTotal(subs).wholeShekels)/month")
+    private func subscriptionsSection(_ subs: [Subscription]) -> some View {
+        Section {
+            ForEach(subs.prefix(4)) { sub in
+                SubscriptionRow(sub: sub)
+            }
+            NavigationLink(subs.count > 4 ? "See all \(subs.count)" : "Manage subscriptions") { SubscriptionsView() }
+        } header: {
+            HStack {
+                Text("Subscriptions")
+                Spacer()
+                if !subs.isEmpty {
+                    Text("\(Subscriptions.monthlyTotal(subs.map(\.recurring)).wholeShekels)/month")
                         .monospacedDigit()
                         .privacySensitive()
                 }

@@ -111,6 +111,27 @@ enum NotesStore {
     }
 }
 
+/// Which purchases the user flagged (or cleared) as subscriptions, and the ones typed in by hand.
+enum SubscriptionStore {
+    private static var url: URL {
+        URL.applicationSupportDirectory.appending(path: "subscriptions.json")
+    }
+
+    static func load() -> SubscriptionSettings {
+        guard let data = try? Data(contentsOf: url) else { return SubscriptionSettings() }
+        return (try? JSONDecoder().decode(SubscriptionSettings.self, from: data)) ?? SubscriptionSettings()
+    }
+
+    static func save(_ settings: SubscriptionSettings) {
+        try? FileManager.default.createDirectory(at: .applicationSupportDirectory, withIntermediateDirectories: true)
+        try? JSONEncoder().encode(settings).write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+    }
+
+    static func delete() {
+        try? FileManager.default.removeItem(at: url)
+    }
+}
+
 /// Monthly budget per category key, in ILS.
 enum BudgetStore {
     static func load() -> [String: Double] {

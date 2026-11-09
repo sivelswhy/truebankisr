@@ -25,6 +25,7 @@ final class AppModel {
     private(set) var progressStep: String?
     /// Notes and tags on purchases, by purchase id.
     private(set) var notes: [String: PurchaseNote] = NotesStore.load()
+    private(set) var subscriptionSettings = SubscriptionStore.load()
     /// Monthly budget per category key.
     private(set) var budgets: [String: Double] = BudgetStore.load()
 
@@ -75,6 +76,48 @@ final class AppModel {
         return counts.keys.sorted { counts[$0]! != counts[$1]! ? counts[$0]! > counts[$1]! : $0 < $1 }
     }
 
+    // MARK: Subscriptions
+
+    /// Detected, flagged and hand-typed subscriptions.
+    var subscriptions: [Subscription] {
+        Subscriptions.resolve(history: allPurchases, settings: subscriptionSettings)
+    }
+
+    /// What should be charged before the next card debit.
+    var subscriptionsDueBeforeNextDebit: [Subscription] {
+        Subscriptions.dueBeforeNextDebit(subscriptions, nextCharge: snapshot?.nextCharge)
+    }
+
+    func isSubscription(merchantKey: String) -> Bool {
+        subscriptions.contains { $0.source != .manual && $0.key == merchantKey }
+    }
+
+    /// From a purchase: this merchant is (or is not) a subscription.
+    func setSubscription(_ on: Bool, merchantKey: String) {
+        if on {
+            subscriptionSettings.dismissed.remove(merchantKey)
+            subscriptionSettings.marked.insert(merchantKey)
+        } else {
+            subscriptionSettings.marked.remove(merchantKey)
+            subscriptionSettings.dismissed.insert(merchantKey)
+        }
+        SubscriptionStore.save(subscriptionSettings)
+    }
+
+    func addSubscription(name: String, amount: Double, dayOfMonth: Int) {
+        subscriptionSettings.manual.append(ManualSubscription(name: name, amount: amount, dayOfMonth: dayOfMonth))
+        SubscriptionStore.save(subscriptionSettings)
+    }
+
+    /// Removes it from the list: forgets a hand-typed one, hides a detected one.
+    func removeSubscription(_ sub: Subscription) {
+        switch sub.source {
+        case .manual: subscriptionSettings.manual.removeAll { $0.id == sub.key }
+        case .detected, .marked: setSubscription(false, merchantKey: sub.key)
+        }
+        SubscriptionStore.save(subscriptionSettings)
+    }
+
     func setBudget(_ limit: Double, for category: String) {
         budgets[category] = limit > 0 ? limit : nil
         BudgetStore.save(budgets)
@@ -118,6 +161,8 @@ final class AppModel {
         PurchaseCacheStore.delete()
         NotesStore.delete()
         notes = [:]
+        SubscriptionStore.delete()
+        subscriptionSettings = SubscriptionSettings()
         EuroStore.deleteAll()
         euroKey = nil
         euroConnections = []
