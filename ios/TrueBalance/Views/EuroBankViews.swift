@@ -112,7 +112,7 @@ struct EuroBalanceCard: View {
                             .contentTransition(.numericText(value: balance))
                             .privacySensitive()
                         if account.ref.currency != "ILS", let rate = rates[account.ref.currency] {
-                            Text("≈ \((balance * rate).shekels)")
+                            Text("≈ \((balance * rate).ils)")
                                 .font(.footnote)
                                 .foregroundStyle(.secondary)
                                 .monospacedDigit()
@@ -134,18 +134,17 @@ struct EuroBalanceCard: View {
 
 struct EuroTxnRow: View {
     var txn: EuroTxn
+    /// Set when the list mixes several apps: marks this one on the icon.
+    var source: TxnSource?
     @ScaledMetric(relativeTo: .body) private var size = 30
 
     var body: some View {
         let incoming = txn.amount > 0
         HStack(spacing: 12) {
-            Image(systemName: incoming ? "arrow.down.left" : "arrow.up.right")
-                .font(.system(size: size * 0.45, weight: .bold))
-                .foregroundStyle(.white)
-                .frame(width: size, height: size)
-                .background((incoming ? Color.green : Color.indigo).gradient,
-                            in: .rect(cornerRadius: size * 0.26, style: .continuous))
-                .accessibilityHidden(true)
+            CategoryIcon(key: MovementCategory.key(txn))
+                .overlay(alignment: .bottomTrailing) {
+                    if let source { SourceBadge(source: source).offset(x: 5, y: 5) }
+                }
             VStack(alignment: .leading, spacing: 2) {
                 Text(txn.title).lineLimit(1)
                 Text(txn.party != nil && txn.details != nil

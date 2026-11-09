@@ -1587,6 +1587,34 @@
         }
       }
     },
+    "Accounts left out, no balance or rate: %lld": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comptes exclus, sans solde ni taux : %lld"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "חשבונות שהושמטו, ללא יתרה או שער: %lld"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Исключены счета без баланса или курса: %lld"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حسابات مستبعدة بلا رصيد أو سعر: %lld"
+          }
+        }
+      }
+    },
     "Add": {
       "localizations": {
         "fr": {
@@ -1819,6 +1847,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "الكل"
+          }
+        }
+      }
+    },
+    "All banks together": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les banques ensemble"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כל הבנקים יחד"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Все банки вместе"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل البنوك معًا"
           }
         }
       }
@@ -2608,6 +2664,34 @@
         }
       }
     },
+    "Charged on": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prélevé sur"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מחויב ב"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Списывается с"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُخصم من"
+          }
+        }
+      }
+    },
     "Charges": {
       "localizations": {
         "fr": {
@@ -2689,6 +2773,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "مسح السجل"
+          }
+        }
+      }
+    },
+    "Combined": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combiné"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "משולב"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вместе"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مجمّع"
           }
         }
       }
@@ -4814,6 +4926,34 @@
         }
       }
     },
+    "Leumi, really available": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leumi, vraiment disponible"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "לאומי, זמין באמת"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Леуми, реально доступно"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لئومي، المتاح فعليًا"
+          }
+        }
+      }
+    },
     "Loading banks…": {
       "localizations": {
         "fr": {
@@ -6018,6 +6158,34 @@
         }
       }
     },
+    "Other banks are converted at the Bank of Israel rate, so their share is approximate.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les autres banques sont converties au taux de la Banque d’Israël : leur part est approximative."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הבנקים האחרים מומרים לפי שער בנק ישראל, לכן חלקם משוער."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Другие банки пересчитаны по курсу Банка Израиля, поэтому их доля приблизительна."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُحوَّل البنوك الأخرى بسعر بنك إسرائيل، لذا فحصتها تقريبية."
+          }
+        }
+      }
+    },
     "Out": {
       "localizations": {
         "fr": {
@@ -6182,6 +6350,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "الخصوصية"
+          }
+        }
+      }
+    },
+    "Probable location, found by the merchant’s name on OpenStreetMap (© OpenStreetMap contributors). It may be another branch.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lieu probable, trouvé grâce au nom du commerçant sur OpenStreetMap (© contributeurs OpenStreetMap). Ça peut être une autre succursale."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מיקום משוער לפי שם בית העסק ב-OpenStreetMap (© תורמי OpenStreetMap). ייתכן שזה סניף אחר."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вероятное место, найденное по названию продавца в OpenStreetMap (© участники OpenStreetMap). Это может быть другой филиал."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "موقع مرجّح، عُثر عليه من اسم التاجر في OpenStreetMap (© مساهمو OpenStreetMap). قد يكون فرعًا آخر."
           }
         }
       }
@@ -7387,6 +7583,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "حدث خطأ ما"
+          }
+        }
+      }
+    },
+    "Source": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מקור"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Источник"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المصدر"
           }
         }
       }
@@ -8621,6 +8845,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "مع الأقساط اللاحقة الملتزم بها: %@"
+          }
+        }
+      }
+    },
+    "With other banks: %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec les autres banques : %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עם הבנקים האחרים: %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "С другими банками: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع البنوك الأخرى: %@"
           }
         }
       }

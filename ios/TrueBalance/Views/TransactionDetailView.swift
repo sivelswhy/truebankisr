@@ -11,6 +11,7 @@ extension View {
     func purchaseDestinations() -> some View {
         navigationDestination(for: TxnRoute.self) { TransactionDetailView(txn: $0.txn) }
             .navigationDestination(for: MerchantRoute.self) { MerchantHistoryView(route: $0) }
+            .navigationDestination(for: SubscriptionRoute.self) { SubscriptionDetailView(route: $0) }
             .navigationDestination(for: BankRoute.self) { BankMovementDetailView(txn: $0.txn) }
     }
 }
@@ -23,39 +24,39 @@ extension AppModel {
     }
 }
 
-/// Big merchant badge: the card company's logo when it sends one, otherwise
-/// the merchant's initials in its category colour.
+/// A purchase's icon, the same in a list and on its page: the category glyph in
+/// its colour, with the merchant's logo as a small badge when the card company
+/// sends one. `size` nil follows Dynamic Type like the list rows.
 struct MerchantLogo: View {
     var txn: Txn
-    var size: CGFloat
+    var size: CGFloat?
+    /// Off where another badge takes the corner (the bank of a subscription).
+    var showLogo = true
+    @ScaledMetric(relativeTo: .body) private var scaled = 30
 
     var body: some View {
-        Group {
-            if let url = txn.logoURL.flatMap(URL.init(string:)) {
-                AsyncImage(url: url) { image in
-                    image.resizable().scaledToFit().padding(size * 0.12).background(.white)
-                } placeholder: {
-                    monogram
+        let s = size ?? scaled
+        Image(systemName: Format.categorySymbol(txn.category))
+            .font(.system(size: s * 0.5, weight: .semibold))
+            .foregroundStyle(.white)
+            .frame(width: s, height: s)
+            .background(Format.categoryColor(txn.category).gradient, in: .rect(cornerRadius: s * 0.26, style: .continuous))
+            .shadow(color: s > 60 ? Format.categoryColor(txn.category).opacity(0.35) : .clear, radius: s * 0.12, y: s * 0.05)
+            .overlay(alignment: .bottomTrailing) {
+                if showLogo, let url = txn.logoURL.flatMap(URL.init(string:)) {
+                    let badge = max(s * 0.42, 14)
+                    AsyncImage(url: url) { image in
+                        image.resizable().scaledToFit().padding(badge * 0.1).background(.white)
+                            .frame(width: badge, height: badge)
+                            .clipShape(.circle)
+                            .overlay(Circle().strokeBorder(Color(.systemBackground), lineWidth: 1.5))
+                            .offset(x: badge * 0.25, y: badge * 0.25)
+                    } placeholder: {
+                        EmptyView()
+                    }
                 }
-            } else {
-                monogram
             }
-        }
-        .frame(width: size, height: size)
-        .clipShape(.rect(cornerRadius: size * 0.26, style: .continuous))
-        .shadow(color: Format.categoryColor(txn.category).opacity(0.35), radius: size * 0.12, y: size * 0.05)
-        .accessibilityHidden(true)
-    }
-
-    private var monogram: some View {
-        Rectangle()
-            .fill(Format.categoryColor(txn.category).gradient)
-            .overlay {
-                Text(Self.initials(txn.description))
-                    .font(.system(size: size * 0.38, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
-                    .minimumScaleFactor(0.5)
-            }
+            .accessibilityHidden(true)
     }
 
     /// "Aroma Espresso Bar" → "AE", "שופרסל דיל" → "שד".
@@ -89,9 +90,10 @@ struct CardRow: View {
 @MainActor
 @Observable
 final class PurchaseLocation {
-    enum Source { case provided, guessed }
+    enum Source { case provided, guessed, openStreetMap }
 
     private(set) var item: MKMapItem?
+    private(set) var foundAddress: String?
     private(set) var source: Source = .guessed
     private(set) var searched = false
 
@@ -106,10 +108,19 @@ final class PurchaseLocation {
         // Israel; results outside it are dropped below.
         request.region = MKCoordinateRegion(center: .init(latitude: 31.6, longitude: 34.9),
                                             span: .init(latitudeDelta: 4, longitudeDelta: 3))
-        guard let found = try? await MKLocalSearch(request: request).start().mapItems.first,
-              Self.isInIsrael(Self.coordinate(of: found)) else { return }
-        item = found
-        source = txn.merchantAddress == nil ? .guessed : .provided
+        if let found = try? await MKLocalSearch(request: request).start().mapItems.first,
+           Self.isInIsrael(Self.coordinate(of: found)) {
+            item = found
+            source = txn.merchantAddress == nil ? .guessed : .provided
+            return
+        }
+
+        // Apple Maps found nothing: OpenStreetMap, free and often better covered in Israel.
+        if let place = await OSMPlaceFinder.find(key: txn.merchantKey, name: txn.description, address: txn.merchantAddress) {
+            item = OSMPlaceFinder.mapItem(for: place)
+            foundAddress = place.address
+            source = .openStreetMap
+        }
     }
 
     /// Online shops and payment platforms have no meaningful place.
@@ -207,7 +218,7 @@ struct TransactionDetailView: View {
             SubscriptionToggleSection(txn: txn)
 
             if let item = location.item {
-                LocationSection(item: item, source: location.source, address: txn.merchantAddress)
+                LocationSection(item: item, source: location.source, address: txn.merchantAddress ?? location.foundAddress)
             }
 
             // Only worth a link when there is more than this one purchase.
@@ -264,9 +275,11 @@ private struct LocationSection: View {
         } header: {
             Text("Location")
         } footer: {
-            Text(source == .provided
-                ? "Address given by Max."
-                : "Probable location, found by the merchant’s name. It may be another branch.")
+            switch source {
+            case .provided: Text("Address given by Max.")
+            case .guessed: Text("Probable location, found by the merchant’s name. It may be another branch.")
+            case .openStreetMap: Text("Probable location, found by the merchant’s name on OpenStreetMap (© OpenStreetMap contributors). It may be another branch.")
+            }
         }
     }
 

@@ -83,9 +83,29 @@ final class AppModel {
         Subscriptions.resolve(history: allPurchases, settings: subscriptionSettings)
     }
 
-    /// What should be charged before the next card debit.
+    /// What should be charged before the next card debit. Only the ones on
+    /// Leumi count: that is the account the debit leaves.
     var subscriptionsDueBeforeNextDebit: [Subscription] {
         Subscriptions.dueBeforeNextDebit(subscriptions, nextCharge: snapshot?.nextCharge)
+            .filter { subscriptionBank($0.key) == .leumi }
+    }
+
+    /// Leumi, then the connected European banks: where a subscription can be charged.
+    var subscriptionBanks: [TxnSource] { [.leumi] + euroConnections.map { .euro($0.bank) } }
+
+    /// Choosing a bank only makes sense with more than one.
+    var hasSeveralBanks: Bool { !euroConnections.isEmpty }
+
+    /// Leumi unless the user picked a bank that is still connected.
+    func subscriptionBank(_ key: String) -> TxnSource {
+        guard let id = subscriptionSettings.banks[key],
+              let connection = euroConnections.first(where: { $0.id == id }) else { return .leumi }
+        return .euro(connection.bank)
+    }
+
+    func setSubscriptionBank(_ bankID: String, key: String) {
+        subscriptionSettings.banks[key] = bankID == TxnSource.leumi.bankID ? nil : bankID
+        SubscriptionStore.save(subscriptionSettings)
     }
 
     func isSubscription(merchantKey: String) -> Bool {
@@ -104,8 +124,10 @@ final class AppModel {
         SubscriptionStore.save(subscriptionSettings)
     }
 
-    func addSubscription(name: String, amount: Double, dayOfMonth: Int) {
-        subscriptionSettings.manual.append(ManualSubscription(name: name, amount: amount, dayOfMonth: dayOfMonth))
+    func addSubscription(name: String, amount: Double, dayOfMonth: Int, bankID: String = TxnSource.leumi.bankID) {
+        let sub = ManualSubscription(name: name, amount: amount, dayOfMonth: dayOfMonth)
+        subscriptionSettings.manual.append(sub)
+        if bankID != TxnSource.leumi.bankID { subscriptionSettings.banks[sub.id] = bankID }
         SubscriptionStore.save(subscriptionSettings)
     }
 
@@ -115,6 +137,7 @@ final class AppModel {
         case .manual: subscriptionSettings.manual.removeAll { $0.id == sub.key }
         case .detected, .marked: setSubscription(false, merchantKey: sub.key)
         }
+        subscriptionSettings.banks[sub.key] = nil
         SubscriptionStore.save(subscriptionSettings)
     }
 

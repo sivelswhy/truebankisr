@@ -5,7 +5,7 @@ import TrueBalanceCore
 /// Signed in: one tab per question. What's really available, what leaves on
 /// the 2nd, what was spent, and the analysis on top of it.
 struct DashboardView: View {
-    enum TabID: Hashable { case balance, charges, spending, insights }
+    enum TabID: Hashable { case balance, charges, spending, subscriptions, insights }
     @State private var tab: TabID = .balance
 
     var body: some View {
@@ -13,8 +13,16 @@ struct DashboardView: View {
             Tab("Home", systemImage: "house", value: .balance) { BalanceTab() }
             Tab("Charges", systemImage: "creditcard", value: .charges) { ChargesTab() }
             Tab("Spending", systemImage: "chart.bar.xaxis", value: .spending) { SpendingTab() }
+            Tab("Subscriptions", systemImage: "repeat", value: .subscriptions) { SubscriptionsTab() }
             Tab("Insights", systemImage: "lightbulb", value: .insights) { InsightsTab() }
         }
+    }
+}
+
+/// Every recurring card charge in one place.
+struct SubscriptionsTab: View {
+    var body: some View {
+        TabScreen(title: String(localized: "Subscriptions")) { SubscriptionsView() }
     }
 }
 
@@ -221,7 +229,10 @@ struct RecentPurchasesView: View {
 
     /// One row per purchase: later installments of the same purchase are left out.
     static func purchases(_ all: [Txn]) -> [Txn] {
-        all.filter { ($0.installments?.number ?? 1) <= 1 }.sorted { $0.date > $1.date }
+        // One row per id: duplicated ids make a List jump back when a row is tapped.
+        var seen = Set<String>()
+        return all.filter { ($0.installments?.number ?? 1) <= 1 && seen.insert($0.id).inserted }
+            .sorted { $0.date > $1.date }
     }
 
     var body: some View {
@@ -230,7 +241,9 @@ struct RecentPurchasesView: View {
             ForEach(days.keys.sorted(by: >), id: \.self) { day in
                 Section {
                     ForEach(days[day]!) { t in
-                        NavigationLink(value: TxnRoute(txn: t)) { TransactionRow(txn: t) }
+                        // Direct destination: this page is itself pushed, so it does not
+                        // depend on the destination registered on the tab's root.
+                        NavigationLink { TransactionDetailView(txn: t) } label: { TransactionRow(txn: t) }
                     }
                 } header: {
                     HStack {
@@ -256,6 +269,19 @@ struct CalculationView: View {
         List {
             if let s = model.snapshot {
                 breakdown(s)
+                if !model.euroData.isEmpty, let total = model.combinedTotal {
+                    Section {
+                        NavigationLink {
+                            CombinedView()
+                        } label: {
+                            LabeledContent {
+                                Money(total)
+                            } label: {
+                                Label("All banks together", systemImage: "globe.europe.africa.fill")
+                            }
+                        }
+                    }
+                }
                 CardsSection(snapshot: s)
             }
         }
@@ -402,6 +428,7 @@ extension Snapshot {
 /// under the alert threshold, red when overdrawn), with the time left until
 /// the debit. Tap for the calculation (Leumi − Max).
 private struct HeroView: View {
+    @Environment(AppModel.self) private var model
     var snapshot: Snapshot
     var isDemo: Bool
     /// The one number the app is for: big, and growing with Dynamic Type.
@@ -437,6 +464,14 @@ private struct HeroView: View {
                         .foregroundStyle(snapshot.trueBalance < 0 ? .red : .primary)
                         .contentTransition(.numericText(value: snapshot.trueBalance))
                         .privacySensitive()
+                    // One line, not a second card: the foreign banks are listed further down.
+                    if !model.euroData.isEmpty, let total = model.combinedTotal {
+                        Label("With other banks: \(total.shekels)", systemImage: "globe.europe.africa.fill")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .monospacedDigit()
+                            .privacySensitive()
+                    }
                     if snapshot.trueBalance < 0 {
                         Text("You’ll be overdrawn on the debit date unless money comes in first.")
                             .font(.subheadline)
@@ -576,7 +611,7 @@ struct TransactionRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            CategoryIcon(key: txn.category)
+            MerchantLogo(txn: txn)
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 4) {
                     Text(txn.description)

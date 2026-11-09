@@ -56,11 +56,16 @@ struct BankKindIcon: View {
 
 struct BankMovementRow: View {
     var txn: Txn
+    /// Only set when the list mixes several banks: marks this one on the icon.
+    var source: TxnSource?
 
     var body: some View {
         let kind = BankMovement.kind(txn)
         HStack(spacing: 12) {
-            BankKindIcon(kind: kind)
+            CategoryIcon(key: MovementCategory.key(txn))
+                .overlay(alignment: .bottomTrailing) {
+                    if let source { SourceBadge(source: source).offset(x: 5, y: 5) }
+                }
             VStack(alignment: .leading, spacing: 2) {
                 Text(BankMovement.party(txn)?.name ?? txn.description)
                     .lineLimit(1)

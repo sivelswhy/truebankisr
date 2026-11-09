@@ -26,11 +26,23 @@ public struct SubscriptionSettings: Codable, Hashable, Sendable {
     /// Merchant keys the user says are not subscriptions, although they look like one.
     public var dismissed: Set<String> = []
     public var manual: [ManualSubscription] = []
+    /// Subscription key → the bank it is charged on. Missing means Leumi.
+    public var banks: [String: String] = [:]
 
-    public init(marked: Set<String> = [], dismissed: Set<String> = [], manual: [ManualSubscription] = []) {
+    public init(marked: Set<String> = [], dismissed: Set<String> = [], manual: [ManualSubscription] = [], banks: [String: String] = [:]) {
         self.marked = marked
         self.dismissed = dismissed
         self.manual = manual
+        self.banks = banks
+    }
+
+    // Files saved before `banks` existed have no such key.
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        marked = try c.decodeIfPresent(Set<String>.self, forKey: .marked) ?? []
+        dismissed = try c.decodeIfPresent(Set<String>.self, forKey: .dismissed) ?? []
+        manual = try c.decodeIfPresent([ManualSubscription].self, forKey: .manual) ?? []
+        banks = try c.decodeIfPresent([String: String].self, forKey: .banks) ?? [:]
     }
 }
 
