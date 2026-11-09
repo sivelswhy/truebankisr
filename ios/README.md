@@ -122,6 +122,25 @@ cd ios/Packages/TrueBalanceCore && swift test
   update as upstream `israeli-bank-scrapers` (check its recent commits).
 - If Max asks for an extra step (ID number, SMS code), the app says so; sign in
   once on max.co.il, then retry.
+- Max is read first with direct HTTP calls (login, then the transactions
+  endpoint), about 5× faster than the page: ~5 s against ~43 s in a side by
+  side test. The calls were found by recording max.co.il's own traffic with
+  [`reverse-api-engineer`](https://github.com/kalil0321/reverse-api-engineer)
+  (`MaxDirect.swift`). If anything unexpected happens (HTTP error, non-JSON
+  answer), the app falls back to the page flow in `BankScrapers.swift`. If Max
+  explicitly refuses the login, it does not retry, to avoid a second failed
+  attempt on the account. The visible-pages troubleshooting mode always uses
+  the page.
+- Leumi cannot be logged into without a browser: its login is a token signed
+  by Transmit Security's JavaScript SDK. The login still goes through the page;
+  afterwards the balance and transactions are read with the site's own data
+  calls (`Broker.svc`, `directAccount` in `BankScrapers.swift`) instead of
+  opening the transactions screen and using the search form, with the old
+  clicking flow as a fallback.
+- Max is quicker than Leumi, so on a refresh its purchases are shown as soon as
+  they arrive (with the last known Leumi balance), and the full result replaces
+  them when Leumi is done. Not on the first sign-in, when there is no previous
+  balance.
 - Only the first Leumi account is read.
 - Leumi is moving accounts to a new site ("digitalfront"). The app logs in
   through the new gate-keeper page (resending the form once if it stalls), but

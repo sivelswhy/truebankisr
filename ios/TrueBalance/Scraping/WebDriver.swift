@@ -267,6 +267,20 @@ final class WebDriver: NSObject, WKNavigationDelegate {
         return (status, Data(text.utf8))
     }
 
+    /// POST of a JSON body from inside the page (its cookies apply).
+    func postJSON(_ url: String, _ body: String) async throws -> (status: Int, body: Data) {
+        let result = try await eval("""
+            const r = await fetch(u, { method: 'POST', credentials: 'include',
+                headers: { 'Content-Type': 'application/json; charset=UTF-8' }, body: b,
+                signal: AbortSignal.timeout(45000) });
+            return [r.status, await r.text()];
+            """, ["u": url, "b": body], timeout: 60) as? [Any]
+        guard let result, let status = result.first as? Int, let text = result.last as? String else {
+            throw ScriptError(message: "post returned nothing for \(url)")
+        }
+        return (status, Data(text.utf8))
+    }
+
     func clearCaptures() async {
         _ = try? await eval("window.__tbCaptures = []")
     }

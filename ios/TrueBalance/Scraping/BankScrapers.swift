@@ -84,6 +84,19 @@ enum MaxScraper {
 
     /// A year back gives the profile and merchant pages their history.
     static func scrape(_ credentials: Credentials, visible: Bool = false, monthsBack: Int = 12, monthsAhead: Int = 3) async throws(BankError) -> MaxData {
+        // Direct HTTP first (fast). The visible mode is for doing the login by
+        // hand, so it always uses the page.
+        if !visible {
+            do {
+                driverStep("Max: direct connection")
+                return try await MaxDirect.scrape(credentials, monthsBack: monthsBack, monthsAhead: monthsAhead)
+            } catch MaxDirect.Failure.bank(let e) {
+                Log.add("[error] Max direct: \(e)")
+                throw e
+            } catch {
+                Log.add("[fallback] Max direct failed, using the page: \(error)")
+            }
+        }
         let driver = WebDriver(visible: visible)
         defer { driver.close() }
         do {
@@ -95,6 +108,11 @@ enum MaxScraper {
             Log.add("[error] Max: \(e) (from \(error))")
             throw e
         }
+    }
+
+    private static func driverStep(_ name: String) {
+        WebDriver.onStep?(name)
+        Log.add("[step] \(name)")
     }
 
     private static func scrapePages(_ driver: WebDriver, _ credentials: Credentials, monthsBack: Int, monthsAhead: Int) async throws -> MaxData {
@@ -189,7 +207,15 @@ enum LeumiScraper {
         do {
             return try await withDeadline(visible ? 900 : 300, "\(driver.currentStep) (gave up after 5 min)") {
                 try await login(driver, credentials)
-                var result = try await account(driver, since: since)
+                // Fast path: the site's own data calls, no clicking. Anything
+                // unexpected falls back to driving the page.
+                var result: Account
+                do {
+                    result = try await directAccount(driver, since: since)
+                } catch {
+                    Log.add("[fallback] Leumi direct failed, using the page: \(error)")
+                    result = try await account(driver, since: since)
+                }
                 result.holderName = await holderName(driver)
                 // Extras: a failure or a hang here never fails the refresh.
                 let savings = try? await withDeadline(45, "savings") { await self.savings(driver) }
@@ -335,6 +361,65 @@ enum LeumiScraper {
         return out
     }
 
+    /// The data calls the transactions page makes (found with
+    /// reverse-api-engineer), sent from the logged-in page: balance and
+    /// transactions without opening the screen or using the search form.
+    private static func directAccount(_ d: WebDriver, since: Date) async throws -> Account {
+        d.step("Leumi: reading the account")
+        struct Direct: Error { var what: String }
+        // The SessionID the page embeds is needed in every call's body.
+        let (pageStatus, page) = try await d.fetch("\(base)/eBanking/SO/SPA.aspx")
+        let html = String(decoding: page, as: UTF8.self)
+        guard pageStatus == 200,
+              let match = html.range(of: #""SessionID"\s*:\s*"([A-Za-z0-9]+)""#, options: .regularExpression),
+              let id = html[match].split(separator: "\"").dropLast().last else { throw Direct(what: "no SessionID (HTTP \(pageStatus))") }
+
+        func broker(_ module: String, _ fields: [String: Any]) async throws -> Data {
+            var obj = fields
+            obj["StateName"] = "BusinessAccountTrx"
+            obj["ModuleName"] = module
+            obj["SessionHeader"] = ["SessionID": String(id), "FIID": "Leumi"]
+            let reqObj = String(decoding: try JSONSerialization.data(withJSONObject: obj), as: UTF8.self)
+            let payload = String(decoding: try JSONSerialization.data(withJSONObject:
+                ["moduleName": module, "reqObj": reqObj, "version": "Infra_V2.0"]), as: UTF8.self)
+            let (status, body) = try await d.postJSON("\(base)/ChannelWCF/Broker.svc/ProcessRequest?moduleName=\(module)", payload)
+            guard status == 200 else { throw Direct(what: "\(module) HTTP \(status)") }
+            return body
+        }
+        func inner(_ body: Data) -> [String: Any]? {
+            guard let outer = try? JSONSerialization.jsonObject(with: body) as? [String: Any],
+                  let text = outer["jsonResp"] as? String else { return nil }
+            return try? JSONSerialization.jsonObject(with: Data(text.utf8)) as? [String: Any]
+        }
+        let accountFields: [String: Any] = [
+            "ComboMethod": "true", "RequestedAccountTypes": "CHECKING",
+            "ExtAccountPermissions": "General", "AccountSegments": "",
+        ]
+        // The server needs this pair first to know which account is meant.
+        _ = try await broker("UC_SO_010_02_GetDefaultAccountIndex", accountFields.merging(["AccountIndex": 1]) { $1 })
+        let accounts = inner(try await broker("UC_SO_GetAccounts", accountFields))
+        let masked = ((accounts?["AccountsItems"] as? [[String: Any]])?.first?["MaskedNumber"] as? String) ?? ""
+        let number = masked.replacingOccurrences(of: "/", with: "_").filter { $0.isNumber || $0 == "-" || $0 == "_" }
+        guard !number.isEmpty else { throw Direct(what: "no account number") }
+
+        // Same window as the search form: from the start of `since` to the end of today (Israel time).
+        let cal = Israel.calendar
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.timeZone = TimeZone(identifier: "GMT")
+        f.dateFormat = "EEE, dd MMM yyyy HH:mm:ss 'GMT'"
+        let from = cal.startOfDay(for: since)
+        let to = cal.date(byAdding: .day, value: 1, to: cal.startOfDay(for: .now))!
+        let body = try await broker("UC_SO_27_GetBusinessAccountTrx", [
+            "RequestType": "OpersB", "FromDateUTC": f.string(from: from), "ToDateUTC": f.string(from: to),
+            "OperationsNumber": "40", "Amount": 0, "AmountType1": 0, "AmountType2": 0, "TrxType": "1",
+            "ReferenceNumber": "0", "BeneficiaryName": "0", "BeneficiaryBankCode": "0", "BeneficiaryBranch": "0",
+            "BeneficiaryAccountNumber": "0", "InvoiceNumber": "0", "PeriodType": "0", "AccountIndex": 1,
+        ])
+        // Same parser as the captured page response (same envelope).
+        return try LeumiParser.parse(body, accountNumber: number)
+    }
+
     /// Opens the transactions screen and filters from `since`; the balance comes
     /// with the filtered transactions response.
     private static func account(_ d: WebDriver, since: Date) async throws -> Account {
@@ -372,7 +457,11 @@ enum LeumiScraper {
 @MainActor
 enum Banks {
     /// Logs into both sites and computes the true balance.
-    static func fetchSnapshot(leumi: Credentials, max: Credentials, billingDay: Int = 2) async throws -> Snapshot {
+    /// `previous` + `onMaxReady`: Max is quick, so once its purchases are in,
+    /// a first snapshot is handed out right away (last known bank side, fresh
+    /// card side) while Leumi is still loading.
+    static func fetchSnapshot(leumi: Credentials, max: Credentials, billingDay: Int = 2,
+                              previous: Snapshot? = nil, onMaxReady: ((Snapshot) -> Void)? = nil) async throws -> Snapshot {
         let since = Calendar.current.date(byAdding: .month, value: -2, to: .now)!
         let visible = UserDefaults.standard.bool(forKey: "showBankPages")
         // With older purchases cached, only the recent months need downloading.
@@ -391,7 +480,21 @@ enum Banks {
             // sites, so they still overlap.
             let bank = Task { await capture { () async throws(BankError) in try await LeumiScraper.scrape(leumi, since: since) } }
             let card = Task { await capture { () async throws(BankError) in try await MaxScraper.scrape(max, monthsBack: monthsBack) } }
-            (b, c) = (await bank.value, await card.value)
+            let maxResult = await card.value
+            if let previous, let onMaxReady, case .success(let m) = maxResult {
+                let purchases = PurchaseCache.merge(cached: cached ?? [], fresh: m.account.txns,
+                                                    refetchedFrom: MaxScraper.months(back: monthsBack, ahead: 0).first!)
+                let bankSide = Account(accountNumber: "leumi", balance: previous.bankBalance, txns: previous.bankTxns ?? [])
+                if var interim = try? TrueBalance.compute(bank: bankSide, cards: [Account(accountNumber: m.account.accountNumber, txns: purchases)],
+                                                          billingDay: billingDay, fxRates: previous.fxRates ?? [:]) {
+                    interim.holderFirstName = previous.holderFirstName
+                    interim.cards = m.cards.isEmpty ? previous.cards : m.cards
+                    interim.savings = previous.savings
+                    interim.foreignAccounts = previous.foreignAccounts
+                    onMaxReady(interim)
+                }
+            }
+            (b, c) = (await bank.value, maxResult)
         }
 
         var errors: [Provider: BankError] = [:]

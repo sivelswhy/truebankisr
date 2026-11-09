@@ -160,7 +160,8 @@ final class AppModel {
         }
         let euro = Task { await refreshEuro(manual: manual) }
         do {
-            apply(try await Banks.fetchSnapshot(leumi: stored.leumi, max: stored.max))
+            apply(try await Banks.fetchSnapshot(leumi: stored.leumi, max: stored.max, previous: snapshot,
+                                                onMaxReady: { [weak self] in self?.applyInterim($0) }))
             refreshErrors = [:]
         } catch let failure as ScrapeFailure {
             refreshErrors = failure.errors
@@ -174,6 +175,13 @@ final class AppModel {
         guard phase == .signedIn else { return }
         if let at = snapshot?.computedAt, Date.now.timeIntervalSince(at) < Self.staleAfter { return }
         await refresh(manual: false)
+    }
+
+    /// Max's purchases arrived before Leumi's balance: show them now. Shown
+    /// only, never saved, no alerts and no widget update, until the full
+    /// snapshot replaces it.
+    private func applyInterim(_ interim: Snapshot) {
+        snapshot = interim
     }
 
     private func apply(_ new: Snapshot) {

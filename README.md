@@ -133,3 +133,7 @@ Copyright 2026 sivelswhy.
 
 Built on [`israeli-bank-scrapers`](https://github.com/eshaham/israeli-bank-scrapers)
 (MIT); the iPhone login flows are ports of its Leumi and Max scrapers.
+
+The iPhone app's direct Max connection (plain HTTP, no browser) was found by
+recording the site's own traffic with
+[`reverse-api-engineer`](https://github.com/kalil0321/reverse-api-engineer).
