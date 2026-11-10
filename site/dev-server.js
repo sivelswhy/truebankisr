@@ -1,22 +1,27 @@
-// Local test server: serves this folder and routes /api/max to the relay.
-// Listens on 127.0.0.1 only. Run: node dev-server.js
+// Local test server: serves this folder and routes /api/max and /api/leumi
+// to their relays. Listens on 127.0.0.1 only. Run: node dev-server.js
 import http from "node:http";
 import { readFile } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
-import { POST, GET } from "./api/max.js";
+import * as max from "./api/max.js";
+import * as leumi from "./api/leumi.js";
 
 const root = fileURLToPath(new URL(".", import.meta.url));
 const port = Number(process.env.PORT ?? 3100);
 const types = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css", ".png": "image/png" };
+const relays = { "/api/max": max, "/api/leumi": leumi };
 
 http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
-  if (url.pathname === "/api/max") {
+  const relay = relays[url.pathname];
+  if (relay) {
     const chunks = [];
     for await (const c of req) chunks.push(c);
     const request = new Request(url, { method: req.method, headers: req.headers, body: req.method === "POST" ? Buffer.concat(chunks) : undefined });
-    const answer = req.method === "POST" ? await POST(request) : GET();
+    const handler = { POST: relay.POST, GET: relay.GET, OPTIONS: relay.OPTIONS }[req.method];
+    if (!handler) { res.writeHead(405).end(); return; }
+    const answer = await handler(request);
     res.writeHead(answer.status, Object.fromEntries(answer.headers));
     res.end(Buffer.from(await answer.arrayBuffer()));
     return;

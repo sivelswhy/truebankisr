@@ -1,11 +1,17 @@
-# Vercel is the API only (api/*.js). The page lives on GitHub Pages
+# Vercel is the API only (api/*.js). The pages live on GitHub Pages
 # (docs/webapp/, see sync-pages.sh): these files stay in this folder for
 # local testing (dev-server.js) and as the source sync-pages.sh copies from,
 # but are not uploaded, so Vercel doesn't serve them. Anchored with a leading
 # "/" so these patterns only match this folder's own files, not api/*.js
 # (api/leumi.js would otherwise be caught by a bare "leumi.js").
 /index.html
+/max.html
+/leumi.html
+/style.css
+/shared.js
 /app.js
+/max-login.js
+/leumi-login.js
 /lib.js
 /demo.js
 /leumi.js

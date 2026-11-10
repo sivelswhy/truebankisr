@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>True Balance — Max</title>
+<meta name="description" content="Connect your Max account. Nothing is stored.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101A36" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <p class="note"><a id="back-link" href="index.html" style="color: inherit;"></a></p>
+  <h1 id="title">Max</h1>
+  <p class="lead" id="lead"></p>
+
+  <section id="login">
+    <form class="card pad" id="form" autocomplete="on">
+      <label for="u" id="l-user"></label>
+      <input id="u" name="username" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required>
+      <label for="p" id="l-pass"></label>
+      <input id="p" name="password" type="password" autocomplete="current-password" required>
+      <button class="full" id="go" type="submit"></button>
+      <p class="error" id="err" role="alert" hidden></p>
+    </form>
+    <p class="note" id="privacy"></p>
+    <p class="note" id="test-hint"></p>
+    <p class="note"><button class="plain" id="demo" type="button"></button></p>
+  </section>
+</main>
+<script type="module" src="max-login.js"></script>
+</body>
+</html>

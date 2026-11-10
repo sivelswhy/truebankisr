@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>True Balance — Leumi</title>
+<meta name="description" content="Connect your Leumi account. Nothing is stored.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101A36" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <p class="note"><a id="back-link" href="index.html" style="color: inherit;"></a></p>
+  <h1 id="title">Leumi</h1>
+  <p class="lead" id="lead"></p>
+
+  <section id="login">
+    <form class="card pad" id="leumi-form" autocomplete="on">
+      <label for="lu" id="l-user"></label>
+      <input id="lu" name="username" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required>
+      <label for="lp" id="l-pass"></label>
+      <input id="lp" name="password" type="password" autocomplete="current-password" required>
+      <button class="full" id="lgo" type="submit"></button>
+      <p class="error" id="lerr" role="alert" hidden></p>
+    </form>
+    <div id="advanced-box"></div>
+    <p class="note" id="privacy"></p>
+  </section>
+</main>
+<script type="module" src="leumi-login.js"></script>
+</body>
+</html>
