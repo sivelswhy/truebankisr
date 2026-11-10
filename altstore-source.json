@@ -20,6 +20,15 @@
       "screenshotURLs": [],
       "versions": [
         {
+          "version": "1.0.45",
+          "buildVersion": "45",
+          "date": "2026-11-10T11:58:11.289Z",
+          "localizedDescription": "Web app: encrypt relay responses, add a session token, host the page on",
+          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-45/TrueBalance.ipa",
+          "size": 2080685,
+          "minOSVersion": "18.0"
+        },
+        {
           "version": "1.0.44",
           "buildVersion": "44",
           "date": "2026-11-09T21:48:45.661Z",
@@ -98,15 +107,6 @@
           "localizedDescription": "iOS: on-device log of refresh steps and errors, exportable from settings and the status popover",
           "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-32/TrueBalance.ipa",
           "size": 1753141,
-          "minOSVersion": "18.0"
-        },
-        {
-          "version": "1.0.30",
-          "buildVersion": "30",
-          "date": "2026-10-20T16:46:33.437Z",
-          "localizedDescription": "iOS: connect any European bank Enable Banking supports, with a setup guide",
-          "downloadURL": "https://github.com/sivelswhy/truebankisr/releases/download/build-30/TrueBalance.ipa",
-          "size": 1704837,
           "minOSVersion": "18.0"
         }
       ]
