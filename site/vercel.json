@@ -1,5 +1,5 @@
 {
-  "functions": { "api/max.js": { "maxDuration": 60 } },
+  "functions": { "api/max.js": { "maxDuration": 60 }, "api/leumi.js": { "maxDuration": 180, "memory": 2048 } },
   "redirects": [
     { "source": "/", "destination": "https://sivelswhy.github.io/truebankisr/webapp/", "permanent": false }
   ],

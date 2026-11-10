@@ -2,6 +2,10 @@
   "name": "true-balance-site",
   "private": true,
   "type": "module",
-  "description": "True Balance, web version for Max only: static page + stateless relay to Max.",
-  "scripts": { "test": "node --test" }
+  "description": "True Balance, web version: static page + stateless relays to Max (plain HTTP) and Leumi (headless Chromium).",
+  "scripts": { "test": "node --test" },
+  "dependencies": {
+    "@sparticuz/chromium": "153.0.0",
+    "puppeteer-core": "25.16.0"
+  }
 }

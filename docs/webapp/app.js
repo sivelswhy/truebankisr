@@ -12,7 +12,12 @@ document.documentElement.lang = lang;
 const T = fr ? {
   lead: "Ton prochain débit Max et tes dépenses, lus depuis ton compte Max.",
   user: "Identifiant Max", pass: "Mot de passe Max", go: "Lire mon compte Max", busy: "Lecture en cours…",
-  leumiTitle: "Leumi", leumiLead: "Leumi ne se lit pas avec un mot de passe ici : sa connexion exige un vrai navigateur. Tu te connectes sur le site de Leumi lui-même, puis tu utilises un favori. Ton mot de passe Leumi ne quitte jamais Leumi.",
+  leumiTitle: "Leumi", leumiUser: "Identifiant Leumi", leumiPass: "Mot de passe Leumi", leumiGo: "Lire mon compte Leumi", leumiBusy: "Connexion à Leumi (jusqu’à une minute)…",
+  leumiPrivacy: "Comme pour Max : ton mot de passe Leumi passe par un relais qui lance un vrai navigateur (Leumi ne se connecte pas avec un simple formulaire), chiffré dans les deux sens, jamais enregistré. Leumi vérifie que c’est un vrai navigateur, ce qui prend un peu de temps.",
+  leumiRefused: "Leumi a refusé cette connexion. Vérifie ton identifiant et ton mot de passe.",
+  leumiBlocked: "Cet abonnement Leumi est bloqué.", leumiChangePassword: "Leumi demande de changer le mot de passe : fais-le sur leumi.co.il, puis réessaie ici.",
+  leumiDown: "Leumi n’a pas répondu comme prévu. Réessaie plus tard.", leumiSessionLost: "La session Leumi a expiré, reconnecte-toi.", refreshLeumi: "Actualiser Leumi",
+  advancedLeumi: "Autre méthode : un favori (aucun serveur ne voit alors ton mot de passe Leumi)",
   step1: "1. Glisse ce bouton dans ta barre de favoris :", bookmarkName: "Leumi → True Balance", dragOnly: "Un clic ici ne fait rien : glisse-le dans la barre de favoris.",
   step2: "2. Ouvre Leumi depuis ici et connecte-toi :", openLeumi: "Ouvrir Leumi", step3: "3. Sur la page de Leumi, une fois connecté, clique sur le favori.",
   leumiBad: "La réponse de Leumi n’a pas pu être lue.", leumiBalance: "Solde Leumi", really: "Vraiment disponible", leumiMovements: "Compte Leumi",
@@ -41,7 +46,12 @@ const T = fr ? {
 } : {
   lead: "Your next Max debit and what you spent, read from your own Max account.",
   user: "Max username", pass: "Max password", go: "Read my Max account", busy: "Reading…",
-  leumiTitle: "Leumi", leumiLead: "Leumi cannot be read with a password here: its sign-in needs a real browser. You sign in on Leumi's own site, then use a bookmark. Your Leumi password never leaves Leumi.",
+  leumiTitle: "Leumi", leumiUser: "Leumi username", leumiPass: "Leumi password", leumiGo: "Read my Leumi account", leumiBusy: "Signing in to Leumi (up to a minute)…",
+  leumiPrivacy: "Like Max: your Leumi password goes through a relay that runs a real browser (Leumi doesn't accept a plain form), encrypted both ways, never stored. Leumi checks it's a real browser, which takes a little time.",
+  leumiRefused: "Leumi refused this sign-in. Check your username and password.",
+  leumiBlocked: "This Leumi subscription is blocked.", leumiChangePassword: "Leumi is asking for a password change: do it on leumi.co.il, then try again here.",
+  leumiDown: "Leumi did not answer as expected. Try again later.", leumiSessionLost: "The Leumi session expired, sign in again.", refreshLeumi: "Refresh Leumi",
+  advancedLeumi: "Another way: a bookmark (then no server ever sees your Leumi password)",
   step1: "1. Drag this button to your bookmarks bar:", bookmarkName: "Leumi → True Balance", dragOnly: "Clicking it here does nothing: drag it to the bookmarks bar.",
   step2: "2. Open Leumi from here and sign in:", openLeumi: "Open Leumi", step3: "3. On Leumi's page, once signed in, click the bookmark.",
   leumiBad: "The Leumi answer could not be read.", leumiBalance: "Leumi balance", really: "Really available", leumiMovements: "Leumi account",
@@ -102,7 +112,7 @@ $("back").addEventListener("click", () => state && render());
 $("test-hint").textContent = T.testHint;
 
 let state = null; // in memory only, nothing is saved
-const newState = () => ({ txns: [], max: false, leumi: null, hidden: false, demo: false });
+const newState = () => ({ txns: [], max: false, leumi: null, leumiSession: null, hidden: false, demo: false });
 
 const b64 = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes)));
 const unb64 = (str) => Uint8Array.from(atob(str), (c) => c.charCodeAt(0));
@@ -151,21 +161,63 @@ async function callRelay(url, fields) {
 }
 
 
-// ---- Leumi: bookmark on Leumi's page -> postMessage -> here ----
+// ---- Leumi: the headless-browser relay (/api/leumi), or a bookmark as a
+// no-server-ever-sees-the-password alternative via postMessage ----
 
 function buildLeumiPanel() {
   const box = $("leumi-card");
+  const form = el("form", { id: "leumi-form" },
+    el("label", { for: "lu", text: T.leumiUser }),
+    el("input", { id: "lu", name: "username", autocomplete: "username", autocapitalize: "none", autocorrect: "off", spellcheck: "false", required: "" }),
+    el("label", { for: "lp", text: T.leumiPass }),
+    el("input", { id: "lp", name: "password", type: "password", autocomplete: "current-password", required: "" }),
+    el("button", { class: "full", id: "lgo", type: "submit", text: T.leumiGo }),
+    el("p", { class: "error", id: "lerr", role: "alert", hidden: "" }));
+
   const link = el("a", { class: "bm", href: bookmarkletHref(location.origin), title: T.dragOnly, draggable: "true" }, icon("Bank", { size: 18 }), el("span", { text: T.bookmarkName }));
   link.addEventListener("click", (e) => { e.preventDefault(); alert(T.dragOnly); });
-  const open = iconButton("Bank", T.openLeumi);
-  open.addEventListener("click", () => window.open(LEUMI_URL, OPENER_NAME));
+  const openBtn = iconButton("Bank", T.openLeumi);
+  openBtn.addEventListener("click", () => window.open(LEUMI_URL, OPENER_NAME));
+  const advanced = el("details", {},
+    el("summary", { text: T.advancedLeumi }),
+    el("p", { class: "step", text: T.step1 }), el("p", {}, link),
+    el("p", { class: "step", text: T.step2 }), el("p", {}, openBtn),
+    el("p", { class: "step", text: T.step3 }));
+
   box.replaceChildren(
     el("h2", { text: T.leumiTitle }),
-    el("div", { class: "card pad" },
-      el("p", { class: "lead small", text: T.leumiLead }),
-      el("p", { class: "step", text: T.step1 }), el("p", {}, link),
-      el("p", { class: "step", text: T.step2 }), el("p", {}, open),
-      el("p", { class: "step", text: T.step3 })));
+    el("div", { class: "card pad" }, form, advanced),
+    el("p", { class: "note" }, icon("Lock", { size: 16 }), el("span", { text: T.leumiPrivacy })));
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const username = $("lu").value.trim();
+    const password = $("lp").value;
+    $("lp").value = "";
+    const err = $("lerr");
+    err.hidden = true;
+    $("lgo").disabled = true;
+    $("lgo").textContent = T.leumiBusy;
+    try {
+      const r = await callRelay(`${RELAY}/api/leumi`, { mode: "login", username, password });
+      if (!r.ok) {
+        err.textContent = { refused: T.leumiRefused, blocked: T.leumiBlocked, changePassword: T.leumiChangePassword, "rate limited": T.rate }[r.error] ?? T.leumiDown;
+        err.hidden = false;
+        return;
+      }
+      state ??= newState();
+      state.leumi = parseLeumi(String(r.body.body), String(r.body.number ?? ""));
+      state.leumiSession = r.body.session;
+      $("lu").value = "";
+      render();
+    } catch {
+      err.textContent = navigator.onLine ? T.leumiDown : T.offline;
+      err.hidden = false;
+    } finally {
+      $("lgo").disabled = false;
+      $("lgo").textContent = T.leumiGo;
+    }
+  });
 }
 buildLeumiPanel();
 
@@ -398,11 +450,27 @@ function render() {
       refreshMax.disabled = false;
     }
   });
+  const refreshLeumi = state.leumiSession ? iconButton("Repeat", T.refreshLeumi) : null;
+  refreshLeumi?.addEventListener("click", async () => {
+    refreshLeumi.disabled = true;
+    try {
+      const r = await callRelay(`${RELAY}/api/leumi`, { mode: "refresh", token: state.leumiSession });
+      if (!r.ok) {
+        if (r.error === "session") { state.leumiSession = null; showLogin(); showError(T.leumiSessionLost); return; }
+        return;
+      }
+      state.leumi = parseLeumi(String(r.body.body), String(r.body.number ?? ""));
+      state.leumiSession = r.body.session;
+      render();
+    } finally {
+      refreshLeumi.disabled = false;
+    }
+  });
   const sources = [state.max ? "Max" : null, state.leumi ? "Leumi" : null].filter(Boolean).join(" + ");
   const bar = el("div", { class: "bar-top" },
     el("div", { class: "grow" }, el("h1", { text: "True Balance" }),
       el("div", { class: "sub", text: `${state.demo ? T.demoNote : sources} · ${T.updated} ${new Date().toLocaleTimeString(lang, { hour: "2-digit", minute: "2-digit" })}` })),
-    state.max && state.leumi ? null : connect, refreshMax, toggle, forget);
+    state.max && state.leumi ? null : connect, refreshMax, refreshLeumi, toggle, forget);
 
   // Side column
   const side = el("div", { class: "side" });

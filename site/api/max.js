@@ -6,7 +6,7 @@
 // Max does not allow calls from other websites (CORS), which is why a page
 // alone cannot do this.
 
-import { allowedOrigin, corsHeaders, json, makeLoginLimiter, openEnvelope, publicKeyJWK, sealAnswer, sealSession, openSession } from "./_crypto.js";
+import { corsHeaders, json, makeLoginLimiter, openEnvelope, originGuard, preflight, publicKeyJWK, sealAnswer, sealSession, openSession } from "./_crypto.js";
 
 const BASE = "https://www.max.co.il";
 const VERSION = "V4.224-RC.10.260";
@@ -102,22 +102,10 @@ async function fetchData(jar) {
   return { home, months };
 }
 
-/** Same-origin (the relay serving its own page) or one of `ALLOWED_ORIGINS` (the static page elsewhere, e.g. GitHub Pages). */
-function originOf(request) {
-  const origin = request.headers.get("origin");
-  if (!origin) return { origin: null, ok: true }; // no Origin header: not a browser cross-origin call
-  const sameHost = new URL(origin).host === new URL(request.url).host;
-  return { origin, ok: sameHost || allowedOrigin(origin) };
-}
-
-/** Preflight for the cross-origin POST (its JSON content type makes the browser send one first). */
-export function OPTIONS(request) {
-  const { origin, ok } = originOf(request);
-  return new Response(null, { status: ok ? 204 : 403, headers: corsHeaders(origin) });
-}
+export const OPTIONS = preflight;
 
 export async function POST(request) {
-  const { origin, ok } = originOf(request);
+  const { origin, ok } = originGuard(request);
   if (!ok) return json({ error: "forbidden" }, 403, origin);
   if (!(request.headers.get("content-type") ?? "").includes("application/json")) return json({ error: "bad request" }, 400, origin);
 
@@ -163,7 +151,7 @@ export async function POST(request) {
 
 /** The public key the page encrypts with. */
 export function GET(request) {
-  const { origin, ok } = originOf(request);
+  const { origin, ok } = originGuard(request);
   if (!ok) return json({ error: "forbidden" }, 403, origin);
   try {
     return json({ publicKey: publicKeyJWK() }, 200, origin);

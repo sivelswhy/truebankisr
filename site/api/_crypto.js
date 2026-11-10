@@ -157,3 +157,17 @@ export function json(body, status = 200, origin = null) {
     headers: { "Content-Type": "application/json", "Cache-Control": "no-store", ...corsHeaders(origin) },
   });
 }
+
+/** Same-origin (this relay serving its own page) or one of `ALLOWED_ORIGINS` (the page elsewhere, e.g. GitHub Pages). */
+export function originGuard(request) {
+  const origin = request.headers.get("origin");
+  if (!origin) return { origin: null, ok: true }; // no Origin header: not a browser cross-origin call
+  const sameHost = new URL(origin).host === new URL(request.url).host;
+  return { origin, ok: sameHost || allowedOrigin(origin) };
+}
+
+/** Preflight for a cross-origin POST (its JSON content type makes the browser send one first). */
+export function preflight(request) {
+  const { origin, ok } = originGuard(request);
+  return new Response(null, { status: ok ? 204 : 403, headers: corsHeaders(origin) });
+}
