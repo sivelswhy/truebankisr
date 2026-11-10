@@ -1,5 +1,8 @@
 {
   "functions": { "api/max.js": { "maxDuration": 60 } },
+  "redirects": [
+    { "source": "/", "destination": "https://sivelswhy.github.io/truebankisr/webapp/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",
