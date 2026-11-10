@@ -73,6 +73,10 @@ export async function POST(request, { launch = launchBrowser, open = openDriver,
       } else {
         await driver.load(`https://hb2.bankleumi.co.il/eBanking/SO/SPA.aspx`);
       }
+      // The account page can still be settling (Leumi's SPA does its own
+      // client-side redirects right after this) — a short wait here is
+      // cheaper than hitting the same navigation race in readAccount.
+      await new Promise((r) => setTimeout(r, loginOptions.settleMs === 0 ? 0 : 1500));
       const { number, body } = await readAccount(driver);
       const cookies = await driver.cookies();
       const session = sealSession({ cookies, scope: "leumi" }, SESSION_TTL_MS);
