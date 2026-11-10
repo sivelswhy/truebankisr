@@ -1,6 +1,49 @@
+import CryptoKit
 import Foundation
 import Security
 import TrueBalanceCore
+
+/// Encrypts the cache files below (balance, purchases, notes, subscriptions)
+/// with a key that never leaves this device's Keychain, on top of Apple's own
+/// file protection. Defense in depth: unreadable even if something ever read
+/// the sandboxed file directly, not just while the device is locked.
+enum LocalEncryption {
+    private static let item = KeychainItem<Data>(account: "storage-key")
+
+    /// 256-bit, made once; same Keychain tier as the bank credentials, so a
+    /// background refresh can still decrypt and re-encrypt while the phone is locked.
+    private static func key() -> SymmetricKey {
+        if let existing = item.load(), existing.count == 32 { return SymmetricKey(data: existing) }
+        var bytes = Data(count: 32)
+        _ = bytes.withUnsafeMutableBytes { SecRandomCopyBytes(kSecRandomDefault, 32, $0.baseAddress!) }
+        item.save(bytes)
+        return SymmetricKey(data: bytes)
+    }
+
+    static func seal(_ data: Data) -> Data? {
+        try? AES.GCM.seal(data, using: key()).combined
+    }
+
+    static func open(_ data: Data) -> Data? {
+        guard let box = try? AES.GCM.SealedBox(combined: data) else { return nil }
+        return try? AES.GCM.open(box, using: key())
+    }
+
+    /// Encrypts `data` and writes it, atomically, with the usual file protection.
+    static func write(_ data: Data, to url: URL) {
+        guard let sealed = seal(data) else { return }
+        try? FileManager.default.createDirectory(at: .applicationSupportDirectory, withIntermediateDirectories: true)
+        try? sealed.write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+    }
+
+    /// Decrypts the file; falls back to it as plain data, so updating from a
+    /// version that wrote these files unencrypted doesn't lose anything (the
+    /// next `write` re-saves it encrypted).
+    static func read(_ url: URL) -> Data? {
+        guard let raw = try? Data(contentsOf: url) else { return nil }
+        return open(raw) ?? raw
+    }
+}
 
 /// Bank credentials in the iOS Keychain, this device only. Readable after the
 /// first unlock so background refresh can sign in while the phone is locked.
@@ -47,14 +90,14 @@ enum SnapshotStore {
     }
 
     static func save(_ snapshot: Snapshot) {
-        try? FileManager.default.createDirectory(at: .applicationSupportDirectory, withIntermediateDirectories: true)
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        try? encoder.encode(snapshot).write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+        guard let data = try? encoder.encode(snapshot) else { return }
+        LocalEncryption.write(data, to: url)
     }
 
     static func load() -> Snapshot? {
-        guard let data = try? Data(contentsOf: url) else { return nil }
+        guard let data = LocalEncryption.read(url) else { return nil }
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return try? decoder.decode(Snapshot.self, from: data)
@@ -72,17 +115,17 @@ enum PurchaseCacheStore {
     }
 
     static func load() -> [Txn]? {
-        guard let data = try? Data(contentsOf: url) else { return nil }
+        guard let data = LocalEncryption.read(url) else { return nil }
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return try? decoder.decode([Txn].self, from: data)
     }
 
     static func save(_ txns: [Txn]) {
-        try? FileManager.default.createDirectory(at: .applicationSupportDirectory, withIntermediateDirectories: true)
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        try? encoder.encode(txns).write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+        guard let data = try? encoder.encode(txns) else { return }
+        LocalEncryption.write(data, to: url)
     }
 
     static func delete() {
@@ -97,13 +140,13 @@ enum NotesStore {
     }
 
     static func load() -> [String: PurchaseNote] {
-        guard let data = try? Data(contentsOf: url) else { return [:] }
+        guard let data = LocalEncryption.read(url) else { return [:] }
         return (try? JSONDecoder().decode([String: PurchaseNote].self, from: data)) ?? [:]
     }
 
     static func save(_ notes: [String: PurchaseNote]) {
-        try? FileManager.default.createDirectory(at: .applicationSupportDirectory, withIntermediateDirectories: true)
-        try? JSONEncoder().encode(notes).write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+        guard let data = try? JSONEncoder().encode(notes) else { return }
+        LocalEncryption.write(data, to: url)
     }
 
     static func delete() {
@@ -118,13 +161,13 @@ enum SubscriptionStore {
     }
 
     static func load() -> SubscriptionSettings {
-        guard let data = try? Data(contentsOf: url) else { return SubscriptionSettings() }
+        guard let data = LocalEncryption.read(url) else { return SubscriptionSettings() }
         return (try? JSONDecoder().decode(SubscriptionSettings.self, from: data)) ?? SubscriptionSettings()
     }
 
     static func save(_ settings: SubscriptionSettings) {
-        try? FileManager.default.createDirectory(at: .applicationSupportDirectory, withIntermediateDirectories: true)
-        try? JSONEncoder().encode(settings).write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+        guard let data = try? JSONEncoder().encode(settings) else { return }
+        LocalEncryption.write(data, to: url)
     }
 
     static func delete() {
@@ -187,17 +230,17 @@ enum EuroStore {
     }
 
     static func loadData() -> [EuroBankData] {
-        guard let data = try? Data(contentsOf: url) else { return [] }
+        guard let data = LocalEncryption.read(url) else { return [] }
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return (try? decoder.decode([EuroBankData].self, from: data)) ?? []
     }
 
     static func saveData(_ banks: [EuroBankData]) {
-        try? FileManager.default.createDirectory(at: .applicationSupportDirectory, withIntermediateDirectories: true)
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        try? encoder.encode(banks).write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+        guard let data = try? encoder.encode(banks) else { return }
+        LocalEncryption.write(data, to: url)
     }
 
     static func deleteAll() {
