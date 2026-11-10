@@ -32,7 +32,7 @@ const STATUS_BY_CODE = {
 
 export const OPTIONS = preflight;
 
-export async function POST(request, { launch = launchBrowser, open = openDriver, loginOptions = {} } = {}) {
+export async function POST(request, { launch = launchBrowser, open = openDriver, loginOptions = {}, accountOptions = {} } = {}) {
   const { origin, ok } = originGuard(request);
   if (!ok) return json({ error: "forbidden" }, 403, origin);
   if (!(request.headers.get("content-type") ?? "").includes("application/json")) return json({ error: "bad request" }, 400, origin);
@@ -77,7 +77,7 @@ export async function POST(request, { launch = launchBrowser, open = openDriver,
       // client-side redirects right after this) — a short wait here is
       // cheaper than hitting the same navigation race in readAccount.
       await new Promise((r) => setTimeout(r, loginOptions.settleMs === 0 ? 0 : 1500));
-      const { number, body } = await readAccount(driver);
+      const { number, body } = await readAccount(driver, accountOptions);
       const cookies = await driver.cookies();
       const session = sealSession({ cookies, scope: "leumi" }, SESSION_TTL_MS);
       return new Response(sealAnswer(responseKey, { number, body, session }), {

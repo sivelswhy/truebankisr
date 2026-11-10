@@ -65,13 +65,13 @@ const accountPages = (txns = []) => [
 // the real (75s default) timeout.
 const fast = () => ({ settleMs: 0, sleep: async () => {}, now: (() => { let t = 0; return () => (t += 1000); })(), timeoutMs: 30_000 });
 
-const call = async (fields, { headers = {}, ip = "1.1.1.1", loginOptions = fast(), ...deps } = {}) => {
+const call = async (fields, { headers = {}, ip = "1.1.1.1", loginOptions = fast(), accountOptions = { sleep: async () => {} }, ...deps } = {}) => {
   const sealed = await seal(fields);
   const res = await POST(new Request("https://site.example/api/leumi", {
     method: "POST",
     headers: { "content-type": "application/json", origin: "https://site.example", "x-forwarded-for": ip, ...headers },
     body: sealed.body,
-  }), { ...deps, loginOptions });
+  }), { ...deps, loginOptions, accountOptions });
   return { res, responseKey: sealed.responseKey };
 };
 

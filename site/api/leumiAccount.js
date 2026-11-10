@@ -8,11 +8,27 @@ import { BASE } from "./leumiLogin.js";
 
 export class LeumiAccountError extends Error {}
 
-/** The `SessionID` the page embeds, needed in every data call's body. */
+/** The `SessionID` a fetch of the account page embeds, or null when this answer doesn't have one. */
 function sessionIdFrom(html) {
-  const m = html.match(/"SessionID"\s*:\s*"([A-Za-z0-9]+)"/);
-  if (!m) throw new LeumiAccountError(`no SessionID in the account page`);
-  return m[1];
+  return html.match(/"SessionID"\s*:\s*"([A-Za-z0-9]+)"/)?.[1] ?? null;
+}
+
+/**
+ * Fetches the account page and reads its SessionID, retrying a few times:
+ * Leumi's own SPA can still be settling right after login (or right after
+ * restoring a session), and a fetch sent a moment too soon gets a page
+ * without it yet — seen in production, not just a theoretical race.
+ */
+async function fetchSessionId(driver, { attempts = 4, sleep = (ms) => new Promise((r) => setTimeout(r, ms)) } = {}) {
+  let lastHtmlLength = null;
+  for (let i = 0; i < attempts; i++) {
+    if (i > 0) await sleep(1500);
+    const html = await driver.fetchText(`${BASE}/eBanking/SO/SPA.aspx`);
+    const id = sessionIdFrom(html);
+    if (id) return id;
+    lastHtmlLength = html.length;
+  }
+  throw new LeumiAccountError(`no SessionID in the account page after ${attempts} tries (last answer: ${lastHtmlLength} bytes)`);
 }
 
 function brokerBody(module, sessionId, fields) {
@@ -31,9 +47,8 @@ function accountNumber(masked) {
  * `{ number, body }`: `body` is the raw transactions answer, parsed on the
  * page itself with the same `parseLeumi` the bookmark already uses.
  */
-export async function readAccount(driver) {
-  const html = await driver.fetchText(`${BASE}/eBanking/SO/SPA.aspx`);
-  const sessionId = sessionIdFrom(html);
+export async function readAccount(driver, options) {
+  const sessionId = await fetchSessionId(driver, options);
 
   const broker = async (module, fields) => {
     const text = await driver.postJSON(`${BASE}/ChannelWCF/Broker.svc/ProcessRequest?moduleName=${module}`, brokerBody(module, sessionId, fields));
