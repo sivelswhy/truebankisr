@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>True Balance, Max</title>
+<meta name="description" content="Your next Max debit and what you spent, read from your own Max account. Nothing is stored.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101A36" media="(prefers-color-scheme: dark)">
+<style>
+  :root {
+    color-scheme: light dark;
+    --accent: #007AFF; --indigo: #5856D6; --green: #34C759; --orange: #FF9500; --red: #FF3B30;
+    --bg: #F2F2F7; --cell: #FFFFFF; --label: #000; --secondary: rgba(60,60,67,.6);
+    --fill: rgba(118,118,128,.12); --separator: rgba(60,60,67,.18); --hover: rgba(0,0,0,.035);
+    --rounded: ui-rounded, "SF Pro Rounded", -apple-system, system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --accent: #0A84FF; --indigo: #5E5CE6; --green: #30D158; --bg: #101A36; --cell: rgba(255,255,255,.08);
+            --label: #fff; --secondary: rgba(235,235,245,.6); --fill: rgba(120,120,128,.24);
+            --separator: rgba(255,255,255,.12); --hover: rgba(255,255,255,.05); }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--label);
+         font: 16px/1.4 -apple-system, system-ui, "Segoe UI", sans-serif; min-height: 100vh; }
+  main { max-width: 1240px; margin: 0 auto; padding: 24px 20px calc(40px + env(safe-area-inset-bottom)); }
+  h1 { font: 700 28px var(--rounded); margin: 0; }
+  h2 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em;
+       color: var(--secondary); margin: 0 0 8px 4px; }
+  .lead { color: var(--secondary); margin: 4px 0 20px; }
+  .card { background: var(--cell); border-radius: 16px; overflow: hidden; }
+  .pad { padding: 16px; }
+  button, input, select { font: inherit; }
+  label { display: block; font-size: 13px; color: var(--secondary); margin: 12px 0 4px; }
+  label:first-child { margin-top: 0; }
+  input, select { width: 100%; color: inherit; background: var(--fill); border: 0; border-radius: 10px; padding: 10px 12px; }
+  input:focus-visible, select:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  button { font-weight: 600; border: 0; border-radius: 10px; padding: 10px 16px; background: var(--accent);
+           color: #fff; cursor: pointer; }
+  button.plain { background: var(--fill); color: var(--label); font-weight: 500; }
+  button:disabled { opacity: .5; cursor: default; }
+  .full { width: 100%; margin-top: 16px; }
+  .note { font-size: 13px; color: var(--secondary); margin: 12px 4px 0; }
+  .error { color: var(--red); margin: 12px 0 0; font-size: 15px; }
+
+  /* Sign-in: a centred card on a big screen. */
+  #login { max-width: 440px; margin: 8vh auto 0; }
+
+  /* Dashboard: a bar on top, then a side column and the purchases. */
+  .bar-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .bar-top .grow { flex: 1; min-width: 200px; }
+  .bar-top .sub { color: var(--secondary); font-size: 14px; }
+  .layout { display: grid; gap: 24px; align-items: start; }
+  @media (min-width: 960px) { .layout { grid-template-columns: 380px minmax(0, 1fr); } .side { position: sticky; top: 20px; } }
+  .side > * + *, .stack > * + * { margin-top: 24px; }
+  .hero { padding: 22px 20px; }
+  .hero .k { color: var(--secondary); font-size: 15px; }
+  .hero .v { font: 700 46px var(--rounded); letter-spacing: -.01em; line-height: 1.1; }
+  .hero .s { color: var(--secondary); font-size: 15px; margin-top: 4px; }
+  .row { display: flex; align-items: center; gap: 12px; padding: 10px 16px; width: 100%; text-align: start;
+         background: none; color: inherit; border-radius: 0; font-weight: 400; }
+  .row + .row { border-top: 1px solid var(--separator); }
+  button.row:hover { background: var(--hover); }
+  button.row[aria-pressed="true"] { background: var(--fill); }
+  .grow { flex: 1; min-width: 0; }
+  .t { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .d { font-size: 13px; color: var(--secondary); }
+  .amt { font-variant-numeric: tabular-nums; white-space: nowrap; text-align: end; }
+  .amt small { display: block; font-size: 12px; color: var(--secondary); }
+
+  /* Purchases: a real table. Columns drop out as the window narrows. */
+  .tools { display: flex; gap: 10px; flex-wrap: wrap; padding: 12px; border-bottom: 1px solid var(--separator); }
+  .tools input { width: 100%; }
+  .tools select { flex: 0 1 190px; width: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: start; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+       color: var(--secondary); padding: 10px 12px; position: sticky; top: 0; background: var(--cell); }
+  td { padding: 9px 12px; border-top: 1px solid var(--separator); vertical-align: middle; }
+  tbody tr:hover { background: var(--hover); }
+  td.num, th.num { text-align: end; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-inline-end: 8px; }
+  .pill { font-size: 11px; font-weight: 600; color: var(--orange); margin-inline-start: 8px; }
+  .more { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px;
+          border-top: 1px solid var(--separator); color: var(--secondary); font-size: 14px; }
+  @media (max-width: 760px) { .col-card, .col-cat { display: none; } main { padding: 16px 12px 40px; } }
+  .th { background: none; color: inherit; font: inherit; text-transform: inherit; letter-spacing: inherit;
+        padding: 0; border-radius: 4px; cursor: pointer; }
+  .th:hover { color: var(--label); }
+  /* Months chart */
+  .chart { width: 100%; height: auto; max-height: 260px; display: block; overflow: visible; }
+  .chart .grid { stroke: var(--separator); stroke-width: 1; }
+  .chart .axis, .chart .lab { fill: var(--secondary); font-size: 12px; }
+  .chart .val { fill: var(--secondary); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .chart .fill { opacity: .38; transition: opacity .15s, transform .15s; transform-box: fill-box; transform-origin: bottom; }
+  .chart .bar { cursor: pointer; outline: none; }
+  .chart .bar:hover .fill { opacity: .7; }
+  .chart .bar.on .fill { opacity: 1; }
+  .chart .bar.on .val, .chart .bar:hover .val { fill: var(--label); }
+  .chart .bar.on .lab { fill: var(--label); font-weight: 600; }
+  .chart .bar.partial .fill { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .chart .bar:focus-visible .fill { stroke: var(--label); stroke-width: 2; stroke-dasharray: none; }
+  .chart .avg { stroke: var(--orange); stroke-width: 1.5; stroke-dasharray: 5 4; opacity: .85; }
+  .chart .avgl { fill: var(--orange); font-size: 11px; font-weight: 600; }
+
+  /* Category rows */
+  .row.cat { align-items: flex-start; padding: 11px 16px; }
+  .row.cat .ico { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-size: 17px; }
+  .row.cat .line { display: flex; align-items: center; gap: 10px; }
+  .row.cat .line + .line { margin-top: 7px; }
+  .row.cat .line .t { flex: 1; }
+  .track { flex: 1; height: 8px; border-radius: 4px; background: var(--fill); overflow: hidden; }
+  .track .meter { height: 100%; margin: 0; border-radius: 4px; transition: width .35s cubic-bezier(.2,.8,.2,1); }
+  .pct { flex: none; width: 40px; text-align: end; font-size: 12px; color: var(--secondary); font-variant-numeric: tabular-nums; }
+  .hide .chart .val { filter: blur(6px); }
+  .lead.small { font-size: 14px; margin: 0 0 12px; }
+  .step { margin: 14px 0 6px; font-size: 14px; }
+  .step + p { margin: 0; }
+  a.bm { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 10px; background: var(--accent);
+         color: #fff; text-decoration: none; font-weight: 600; cursor: grab; }
+  .ico-svg { display: block; flex: none; }
+  .btn-i { display: inline-flex; align-items: center; gap: 8px; }
+  .th { display: inline-flex; align-items: center; gap: 4px; }
+  .row .ico { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; }
+  .field { position: relative; flex: 1 1 220px; }
+  .field .ico-svg { position: absolute; inset-inline-start: 12px; top: 50%; transform: translateY(-50%); color: var(--secondary); pointer-events: none; }
+  .field input { padding-inline-start: 38px; }
+  #privacy { display: flex; gap: 8px; align-items: flex-start; }
+  #privacy .ico-svg { margin-top: 2px; }
+  .hide .amt, .hide .hero .v { filter: blur(9px); }
+  kbd { font: 12px ui-monospace, monospace; background: var(--fill); border-radius: 5px; padding: 1px 6px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="title">True Balance</h1>
+  <p class="lead" id="lead"></p>
+
+  <section id="login">
+    <form class="card pad" id="form" autocomplete="on">
+      <label for="u" id="l-user"></label>
+      <input id="u" name="username" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required>
+      <label for="p" id="l-pass"></label>
+      <input id="p" name="password" type="password" autocomplete="current-password" required>
+      <button class="full" id="go" type="submit"></button>
+      <p class="error" id="err" role="alert" hidden></p>
+    </form>
+    <p class="note" id="privacy"></p>
+    <p class="note" id="back-wrap" hidden><button class="plain" id="back" type="button"></button></p>
+    <div id="leumi-card" style="margin-top: 24px"></div>
+    <p class="note" id="test-hint"></p>
+    <p class="note"><button class="plain" id="demo" type="button"></button></p>
+  </section>
+
+  <section id="dash" hidden></section>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>

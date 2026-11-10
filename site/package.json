@@ -1,0 +1,7 @@
+{
+  "name": "true-balance-site",
+  "private": true,
+  "type": "module",
+  "description": "True Balance, web version for Max only: static page + stateless relay to Max.",
+  "scripts": { "test": "node --test" }
+}
