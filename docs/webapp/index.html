@@ -46,6 +46,13 @@
 
   /* Sign-in: a centred card on a big screen. */
   #login { max-width: 440px; margin: 8vh auto 0; }
+  /* Adding a second bank once one already answered: its results stay visible
+     behind this as a dimmed backdrop, instead of being hidden. */
+  body.overlay { overflow: hidden; }
+  body.overlay #login { position: fixed; inset: 0; z-index: 10; margin: 0; max-width: none;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    overflow-y: auto; padding: 8vh 16px 40px; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(6px); }
+  body.overlay #login > * { max-width: 440px; width: 100%; }
 
   /* Dashboard: a bar on top, then a side column and the purchases. */
   .bar-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }

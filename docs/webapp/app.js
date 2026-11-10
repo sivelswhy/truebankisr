@@ -13,10 +13,11 @@ const T = fr ? {
   lead: "Ton prochain débit Max et tes dépenses, lus depuis ton compte Max.",
   user: "Identifiant Max", pass: "Mot de passe Max", go: "Lire mon compte Max", busy: "Lecture en cours…",
   leumiTitle: "Leumi", leumiUser: "Identifiant Leumi", leumiPass: "Mot de passe Leumi", leumiGo: "Lire mon compte Leumi", leumiBusy: "Connexion à Leumi (jusqu’à une minute)…",
-  leumiPrivacy: "Comme pour Max : ton mot de passe Leumi passe par un relais qui lance un vrai navigateur (Leumi ne se connecte pas avec un simple formulaire), chiffré dans les deux sens, jamais enregistré. Leumi vérifie que c’est un vrai navigateur, ce qui prend un peu de temps.",
+  leumiPrivacy: "Comme pour Max : ton mot de passe Leumi passe par un relais qui lance un vrai navigateur (Leumi ne se connecte pas avec un simple formulaire), chiffré dans les deux sens, jamais enregistré. Un jeton de session reste 20 minutes sur cet appareil, pas ton mot de passe. Leumi vérifie que c’est un vrai navigateur, ce qui prend un peu de temps.",
   leumiRefused: "Leumi a refusé cette connexion. Vérifie ton identifiant et ton mot de passe.",
   leumiBlocked: "Cet abonnement Leumi est bloqué.", leumiChangePassword: "Leumi demande de changer le mot de passe : fais-le sur leumi.co.il, puis réessaie ici.",
-  leumiDown: "Leumi n’a pas répondu comme prévu. Réessaie plus tard.", leumiSessionLost: "La session Leumi a expiré, reconnecte-toi.", refreshLeumi: "Actualiser Leumi",
+  leumiDown: "Leumi n’a pas répondu comme prévu. Réessaie plus tard.", leumiTimeout: "La page de connexion Leumi n’a jamais abouti (peut-être une vérification anti-robot). Réessaie, ou utilise le favori plus bas.", leumiFirewall: "Le pare-feu de Leumi a rejeté cette connexion. Réessaie, ou utilise le favori plus bas.",
+  leumiSessionLost: "La session Leumi a expiré, reconnecte-toi.", refreshLeumi: "Actualiser Leumi",
   advancedLeumi: "Autre méthode : un favori (aucun serveur ne voit alors ton mot de passe Leumi)",
   step1: "1. Glisse ce bouton dans ta barre de favoris :", bookmarkName: "Leumi → True Balance", dragOnly: "Un clic ici ne fait rien : glisse-le dans la barre de favoris.",
   step2: "2. Ouvre Leumi depuis ici et connecte-toi :", openLeumi: "Ouvrir Leumi", step3: "3. Sur la page de Leumi, une fois connecté, clique sur le favori.",
@@ -25,7 +26,7 @@ const T = fr ? {
   afterMax: (leumi, max) => `Leumi ${leumi} − Max ${max}`,
   testHint: "Compte test : identifiant test, mot de passe test (données d’exemple, rien n’est envoyé).",
   demo: "Essayer avec des données d’exemple", demoNote: "Données d’exemple, rien n’est lu depuis Max.",
-  privacy: "Ton mot de passe est envoyé à un relais sans état, uniquement pour ouvrir ta session chez Max. Il n’est ni enregistré ni journalisé, et ce site ne garde rien : tout disparaît quand tu fermes la page. Leumi n’est pas lu ici, seulement Max.",
+  privacy: "Ton mot de passe est envoyé à un relais sans état, uniquement pour ouvrir ta session chez Max. Il n’est ni enregistré ni journalisé. Un jeton de session (jamais ton mot de passe, jamais tes données) reste sur cet appareil 20 minutes, pour ne pas redemander le mot de passe à chaque réouverture ; « Oublier » l’efface tout de suite.",
   refused: "Max a refusé cette connexion. Vérifie ton identifiant et ton mot de passe.",
   rate: "Trop d’essais. Attends une minute.",
   down: "Max n’a pas répondu comme prévu. Réessaie plus tard.",
@@ -47,10 +48,11 @@ const T = fr ? {
   lead: "Your next Max debit and what you spent, read from your own Max account.",
   user: "Max username", pass: "Max password", go: "Read my Max account", busy: "Reading…",
   leumiTitle: "Leumi", leumiUser: "Leumi username", leumiPass: "Leumi password", leumiGo: "Read my Leumi account", leumiBusy: "Signing in to Leumi (up to a minute)…",
-  leumiPrivacy: "Like Max: your Leumi password goes through a relay that runs a real browser (Leumi doesn't accept a plain form), encrypted both ways, never stored. Leumi checks it's a real browser, which takes a little time.",
+  leumiPrivacy: "Like Max: your Leumi password goes through a relay that runs a real browser (Leumi doesn't accept a plain form), encrypted both ways, never stored. A session token stays on this device for 20 minutes, not your password. Leumi checks it's a real browser, which takes a little time.",
   leumiRefused: "Leumi refused this sign-in. Check your username and password.",
   leumiBlocked: "This Leumi subscription is blocked.", leumiChangePassword: "Leumi is asking for a password change: do it on leumi.co.il, then try again here.",
-  leumiDown: "Leumi did not answer as expected. Try again later.", leumiSessionLost: "The Leumi session expired, sign in again.", refreshLeumi: "Refresh Leumi",
+  leumiDown: "Leumi did not answer as expected. Try again later.", leumiTimeout: "Leumi's sign-in page never went through (possibly an anti-bot check). Try again, or use the bookmark below.", leumiFirewall: "Leumi's firewall rejected this sign-in. Try again, or use the bookmark below.",
+  leumiSessionLost: "The Leumi session expired, sign in again.", refreshLeumi: "Refresh Leumi",
   advancedLeumi: "Another way: a bookmark (then no server ever sees your Leumi password)",
   step1: "1. Drag this button to your bookmarks bar:", bookmarkName: "Leumi → True Balance", dragOnly: "Clicking it here does nothing: drag it to the bookmarks bar.",
   step2: "2. Open Leumi from here and sign in:", openLeumi: "Open Leumi", step3: "3. On Leumi's page, once signed in, click the bookmark.",
@@ -59,7 +61,7 @@ const T = fr ? {
   afterMax: (leumi, max) => `Leumi ${leumi} − Max ${max}`,
   testHint: "Test account: username test, password test (sample data, nothing is sent).",
   demo: "Try it with sample data", demoNote: "Sample data, nothing is read from Max.",
-  privacy: "Your password goes to a stateless relay, only to open your session at Max. It is neither stored nor logged, and this site keeps nothing: everything is gone when you close the page. Leumi is not read here, only Max.",
+  privacy: "Your password goes to a stateless relay, only to open your session at Max. It is neither stored nor logged. A session token (never your password, never your data) stays on this device for 20 minutes, so reopening the page doesn't ask for it again right away; \"Forget\" erases it at once.",
   refused: "Max refused this sign-in. Check your username and password.",
   rate: "Too many attempts. Wait a minute.",
   down: "Max did not answer as expected. Try again later.",
@@ -111,7 +113,27 @@ $("back").textContent = T.back;
 $("back").addEventListener("click", () => state && render());
 $("test-hint").textContent = T.testHint;
 
-let state = null; // in memory only, nothing is saved
+let state = null; // txns/balances: in memory only, never saved
+
+// The session tokens (never the password, never account data) are kept in
+// this browser's own localStorage, so reopening the page doesn't ask for the
+// password again right away — only this device holds them, and each one is
+// useless on its own after its 20-minute expiry (the relay checks that; a
+// copy sitting in storage past then is inert). "Forget" erases them at once.
+const STORAGE_KEY = "tb-session";
+function loadSaved() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? {}; } catch { return {}; }
+}
+function saveSaved(patch) {
+  try {
+    const next = { ...loadSaved(), ...patch };
+    if (!next.max && !next.leumi) localStorage.removeItem(STORAGE_KEY);
+    else localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+  } catch { /* private browsing or storage blocked: just skip saving */ }
+}
+function clearSaved() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+}
 const newState = () => ({ txns: [], max: false, leumi: null, leumiSession: null, hidden: false, demo: false });
 
 const b64 = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes)));
@@ -201,13 +223,14 @@ function buildLeumiPanel() {
     try {
       const r = await callRelay(`${RELAY}/api/leumi`, { mode: "login", username, password });
       if (!r.ok) {
-        err.textContent = { refused: T.leumiRefused, blocked: T.leumiBlocked, changePassword: T.leumiChangePassword, "rate limited": T.rate }[r.error] ?? T.leumiDown;
+        err.textContent = { refused: T.leumiRefused, blocked: T.leumiBlocked, changePassword: T.leumiChangePassword, timeout: T.leumiTimeout, firewall: T.leumiFirewall, "rate limited": T.rate }[r.error] ?? T.leumiDown;
         err.hidden = false;
         return;
       }
       state ??= newState();
       state.leumi = parseLeumi(String(r.body.body), String(r.body.number ?? ""));
       state.leumiSession = r.body.session;
+      saveSaved({ leumi: state.leumiSession });
       $("lu").value = "";
       render();
     } catch {
@@ -270,6 +293,7 @@ $("form").addEventListener("submit", async (event) => {
     const r = await callRelay(`${RELAY}/api/max`, { mode: "login", username, password });
     if (!r.ok) return showError(r.status === 401 ? T.refused : r.status === 429 ? T.rate : T.down);
     state = Object.assign(state ?? newState(), { txns: parseAll(r.body), max: true, maxSession: r.body.session });
+    saveSaved({ max: state.maxSession });
     $("u").value = "";
     render();
   } catch {
@@ -395,13 +419,20 @@ function setIconButton(b, name, label) {
   b.replaceChildren(icon(name, { size: 18 }), el("span", { text: label }));
 }
 
-/** Back to the connect screen, keeping what is already loaded. */
+/** Opens the connect screen. If a bank already answered (e.g. Max loaded,
+ * Leumi still loading or not started), its results stay on screen behind an
+ * overlay instead of being hidden — only the form(s) for what's still
+ * missing are offered. */
 function showLogin() {
-  $("dash").hidden = true;
+  const already = !!(state && (state.max || state.leumi));
+  $("dash").hidden = !already;
+  document.body.classList.toggle("overlay", already);
   $("login").hidden = false;
   $("title").hidden = false;
   $("lead").hidden = false;
   $("back-wrap").hidden = !state;
+  $("form").hidden = !!state?.max;
+  $("leumi-card").hidden = !!state?.leumi;
 }
 
 function render() {
@@ -424,12 +455,15 @@ function render() {
   const forget = iconButton("Logout", T.forget);
   forget.addEventListener("click", () => {
     state = null;
-    document.body.classList.remove("hide");
+    clearSaved();
+    document.body.classList.remove("hide", "overlay");
     dash.replaceChildren();
     dash.hidden = true;
     $("login").hidden = false;
     $("title").hidden = false;
     $("lead").hidden = false;
+    $("form").hidden = false;
+    $("leumi-card").hidden = false;
     $("u").focus();
   });
   const connect = iconButton("Plug", T.connect);
@@ -440,11 +474,12 @@ function render() {
     try {
       const r = await callRelay(`${RELAY}/api/max`, { mode: "refresh", token: state.maxSession });
       if (!r.ok) {
-        if (r.error === "session") { state.maxSession = null; showLogin(); showError(T.sessionLost); return; }
+        if (r.error === "session") { state.maxSession = null; saveSaved({ max: null }); showLogin(); showError(T.sessionLost); return; }
         return;
       }
       state.txns = parseAll(r.body);
       state.maxSession = r.body.session;
+      saveSaved({ max: state.maxSession });
       render();
     } finally {
       refreshMax.disabled = false;
@@ -456,11 +491,12 @@ function render() {
     try {
       const r = await callRelay(`${RELAY}/api/leumi`, { mode: "refresh", token: state.leumiSession });
       if (!r.ok) {
-        if (r.error === "session") { state.leumiSession = null; showLogin(); showError(T.leumiSessionLost); return; }
+        if (r.error === "session") { state.leumiSession = null; saveSaved({ leumi: null }); showLogin(); showError(T.leumiSessionLost); return; }
         return;
       }
       state.leumi = parseLeumi(String(r.body.body), String(r.body.number ?? ""));
       state.leumiSession = r.body.session;
+      saveSaved({ leumi: state.leumiSession });
       render();
     } finally {
       refreshLeumi.disabled = false;
@@ -625,6 +661,7 @@ function render() {
   $("login").hidden = true;
   $("title").hidden = true;
   $("lead").hidden = true;
+  document.body.classList.remove("overlay");
   refresh();
   window.scrollTo(0, 0);
 }
@@ -641,3 +678,49 @@ $("demo").addEventListener("click", () => {
   render();
 });
 if (new URLSearchParams(location.search).has("demo")) $("demo").click();
+
+// A saved token from an earlier visit: try it silently instead of asking for
+// the password again. Each bank restores independently and renders as soon
+// as it answers, so one slow bank (Leumi) never holds up the other (Max).
+(() => {
+  const saved = loadSaved();
+  if (!saved.max && !saved.leumi) return;
+
+  const settle = (ok) => { if (state && (state.max || state.leumi)) render(); };
+
+  if (saved.max) {
+    $("go").disabled = true;
+    $("go").textContent = T.busy;
+    callRelay(`${RELAY}/api/max`, { mode: "refresh", token: saved.max }).then((r) => {
+      if (r.ok) {
+        state = Object.assign(state ?? newState(), { txns: parseAll(r.body), max: true, maxSession: r.body.session });
+        saveSaved({ max: state.maxSession });
+      } else {
+        saveSaved({ max: null });
+      }
+    }).catch(() => {}).finally(() => {
+      $("go").disabled = false;
+      $("go").textContent = T.go;
+      settle();
+    });
+  }
+
+  if (saved.leumi) {
+    $("lgo").disabled = true;
+    $("lgo").textContent = T.leumiBusy;
+    callRelay(`${RELAY}/api/leumi`, { mode: "refresh", token: saved.leumi }).then((r) => {
+      if (r.ok) {
+        state ??= newState();
+        state.leumi = parseLeumi(String(r.body.body), String(r.body.number ?? ""));
+        state.leumiSession = r.body.session;
+        saveSaved({ leumi: state.leumiSession });
+      } else {
+        saveSaved({ leumi: null });
+      }
+    }).catch(() => {}).finally(() => {
+      $("lgo").disabled = false;
+      $("lgo").textContent = T.leumiGo;
+      settle();
+    });
+  }
+})();

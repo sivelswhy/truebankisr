@@ -85,8 +85,11 @@ export async function POST(request, { launch = launchBrowser, open = openDriver,
     }
   } catch (error) {
     if (error instanceof LeumiLoginError) {
+      // Safe to log: a code and a message about the page/flow, never credentials, cookies or tokens.
+      console.error(`[leumi] ${error.code}: ${error.message}`);
       return json({ error: error.code }, STATUS_BY_CODE[error.code] ?? 502, origin);
     }
+    console.error(`[leumi] unexpected: ${error?.name ?? "error"}: ${error?.message ?? ""}`);
     return json({ error: "unavailable", detail: String(error?.name ?? "error") }, 502, origin);
   } finally {
     await browser?.close();
